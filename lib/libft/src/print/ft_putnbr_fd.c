@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:32:58 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/10/04 11:19:34 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/08 15:46:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "../../include/libft.h"
 
-int	check_path(char *path)
+int	ft_putnbr_fd(long long int n, int fd)
 {
-	int		start;
-	char	*extension;
+	int				rec;
+	long long int	nb_size;	
 
-	start = ft_strlen(path) - 3;
-	extension = ft_substr(path, start, 3);
-	if (ft_strncmp(extension, ".rt", 3) != 0)
+	nb_size = 0;
+	if (n == -2147483648)
 	{
-		free(extension);
-		return (1);
+		write(fd, "-2147483648", 11);
+		nb_size = 11;
 	}
-	free(extension);
-	return (0);
+	else
+	{
+		if (n < 0)
+		{
+			write(fd, "-", 1);
+			n = -n;
+			nb_size++;
+		}
+		nb_size++;
+		rec = (n % 10) + 48;
+		if (n > 9)
+			nb_size += ft_putnbr_fd((n / 10), fd);
+		write(fd, &rec, 1);
+	}
+	return (nb_size);
 }

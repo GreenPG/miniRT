@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/09/26 14:39:11 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/10/10 17:12:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
-
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	c = c % 256;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == c)
+		return ((char *)&s[i]);
+	return (0);
 }

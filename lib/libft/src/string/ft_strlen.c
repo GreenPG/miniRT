@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/09/26 13:33:51 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/03 17:28:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#include "../../include/libft.h"
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
 
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

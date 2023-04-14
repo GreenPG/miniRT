@@ -1,16 +1,19 @@
 NAME	=	miniRT
 
-CFLAGS	=	-Wextra -Wall -Werror
+CFLAGS	=	-Wextra -Wall -Werror -g
 
 LIBMLX	=	./lib/MLX42
 
-HEADERS	=	-I ./includes -I $(LIBMLX)/include
+LIBFT	=	./lib/libft
 
-LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+HEADERS	=	-I ./includes -I $(LIBMLX)/include -I $(LIBFT)/include
+
+LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRCS	=	main.c	\
 			utils.c \
-			parsing.c 
+			parsing.c \
+			structs_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -52,10 +55,13 @@ define HEADER
 endef
 export HEADER
 
-all: libmlx $(NAME)
+all: libmlx libft $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+libft:
+	@make -C $(LIBFT)
 
 %.o: ./src/%.c
 	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS)
@@ -75,3 +81,5 @@ fclean: clean
 re: clean all
 
 .PHONY: all, clean, fclean, re, libmlx
+
+-include test.mk

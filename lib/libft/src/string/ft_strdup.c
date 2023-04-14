@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/09/28 13:21:18 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/03 17:25:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#include "../../include/libft.h"
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+char	*ft_strdup(const char *s)
+{
+	int		len;
+	int		i;
+	char	*new_s;
 
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	len = ft_strlen(s);
+	new_s = malloc(sizeof(char) * (len + 1));
+	if (new_s == 0)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		new_s[i] = s[i];
+		i++;
+	}
+	new_s[i] = 0;
+	return (new_s);
 }

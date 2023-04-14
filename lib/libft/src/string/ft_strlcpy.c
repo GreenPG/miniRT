@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/09/28 10:31:48 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/03 17:25:48 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#include "../../include/libft.h"
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	len_src;
 
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	i = 0;
+	len_src = ft_strlen(src);
+	if (size == 0)
+		return (len_src);
+	if (size == 1)
+	{
+		dst[0] = 0;
+		return (len_src);
+	}	
+	else
+	{	
+		while (src[i] && i < size -1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (len_src);
 }

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/10/06 17:47:44 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/03 17:17:04 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#include "../../include/libft.h"
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new_elt;
 
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	new_elt = malloc(sizeof(t_list));
+	if (!new_elt)
+		return (0);
+	new_elt->content = content;
+	new_elt->next = NULL;
+	return (new_elt);
 }

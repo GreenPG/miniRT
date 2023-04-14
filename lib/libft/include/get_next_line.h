@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/10/13 18:42:54 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/12/16 10:55:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+# include <stdlib.h>
+# include <unistd.h>
+# include "libft.h"
 
-GREATEST_MAIN_DEFS();
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
+char	*get_next_line(int fd);
+void	clean_filled_buffer(char *buf, int buf_pos);
+char	*ft_gnl_strjoin(char *s1, char const *s2, int len);
+void	ft_strjoin_cat(char *dst, const char *src, size_t len, size_t dst_end);
 
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
-}
+#endif

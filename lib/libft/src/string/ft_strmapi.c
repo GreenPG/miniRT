@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   runner.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:04:39 by gpasquet         ###   ########.fr       */
+/*   Created: 2022/10/03 18:42:15 by gpasquet          #+#    #+#             */
+/*   Updated: 2022/11/03 17:26:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../greatest/greatest.h"
+#include "../../include/libft.h"
 
-extern	SUITE(check_path_suite);
-extern	SUITE(test_init_coords);
-extern	SUITE(test_init_vector);
-extern	SUITE(test_init_color);
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
+{
+	int		i;
+	int		s_len;
+	char	*new_s;
 
-GREATEST_MAIN_DEFS();
-
-int	main(int argc, char **argv) {
-	GREATEST_MAIN_BEGIN();
-
-	RUN_SUITE(check_path_suite);
-	RUN_SUITE(test_init_coords);
-	RUN_SUITE(test_init_vector);
-	RUN_SUITE(test_init_color);
-	GREATEST_MAIN_END();
+	if (s == 0)
+		return (0);
+	s_len = ft_strlen(s);
+	new_s = malloc(sizeof(char) * (s_len + 1));
+	if (!new_s)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		new_s[i] = (*f)(i, s[i]);
+		i++;
+	}
+	new_s[i] = '\0';
+	return (new_s);
 }

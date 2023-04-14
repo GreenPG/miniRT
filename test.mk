@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:03:28 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/10 13:38:08 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/04/14 12:16:10 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,20 +18,24 @@ TRUNNER =	run_tests
 
 TOBJS =	$(TSRCS:%.c=%.o)
 
+BOBJS = $(addprefix ./obj/, $(OBJS))
 
 ##########################	CMDS	############################################
 
-test: VALGRIND :=	valgrind \
+VALGRIND :=	valgrind \
 									--quiet					\
 									--leak-check=full		\
 									--show-leak-kinds=all	\
 									--error-exitcode=1 	\
 
 test: test.build
-	$(VALGRIND) ./run_tests
+	./run_tests
 
 test.build:
 	$(MAKE) -s --jobs=8 $(TRUNNER)
+
+test.leak: test.build
+	$(VALGRIND) ./run_tests
 
 test.clean:
 	@n=1; \
@@ -53,13 +57,10 @@ test.re: test.clean test
 
 .PHONY:	test test.build test.clean test.re
 
-$(TRUNNER):	OBJS	:=	$(filter-out %/main.o, $(OBJS))
+$(TRUNNER):	BOBJS	:=	$(filter-out %/main.o, $(BOBJS))
 
 $(TRUNNER): $(OBJS) $(TOBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(TOBJS) -o $(TRUNNER)
+	$(CC) $(CFLAGS) $(HEADERS) $(BOBJS) $(TOBJS) $(LIBS) -o $(TRUNNER)
 
-#$(TOBJS):	
-#	$(CC) $(CFLAGS) -c $(TSRCS) -o $(TOBJS)
-
-
-
+$(TOBJS): %.o: %.c
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
