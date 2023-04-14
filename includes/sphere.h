@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   sphere.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 07:19:39 by gtouzali         ###   ########.fr       */
+/*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
+/*   Updated: 2023/04/14 07:12:24 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef SPHERE_H
+# define SPHERE_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "minirt.h"
 
-#include "./config.h"
-#include "structs_utils.h"
-#include "sphere.h"
+typedef struct	s_sphere t_sphere;
 
-int	ft_error(char *str);
-
+struct	s_sphere {
+	t_coords	*pos;
+	int			diameter;
+	t_color		*color;
+};
 #endif

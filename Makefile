@@ -1,16 +1,16 @@
-NAME	= miniRT
+NAME	=	miniRT
 
-CFLAGS	= -Wextra -Wall -Werror
+CFLAGS	=	-Wextra -Wall -Werror
 
-LIBMLX	= ./lib/MLX42
+LIBMLX	=	./lib/MLX42
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+HEADERS	=	-I ./include -I $(LIBMLX)/include
 
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRCS	:= main.c
-
-OBJS	:= ${SRCS:.c=.o}
+SRCS	=	main.c	\
+			utils.c
+OBJS	= ${SRCS:.c=.o}
 
 CC	:= cc
 
@@ -59,9 +59,9 @@ libmlx:
 	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
+	@$(CC) $(addprefix ./obj/,$(OBJS)) $(LIBS) $(HEADERS) -o $(NAME)
 	@clear
 	@echo "$$HEADER"
-	@$(CC) ./obj/$(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
