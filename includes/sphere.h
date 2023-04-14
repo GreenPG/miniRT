@@ -6,16 +6,16 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 07:12:24 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:19:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPHERE_H
 # define SPHERE_H
 
-#include "minirt.h"
+# include <minirt.h>
 
-typedef struct	s_sphere t_sphere;
+typedef struct s_sphere	t_sphere;
 
 struct	s_sphere {
 	t_coords	*pos;

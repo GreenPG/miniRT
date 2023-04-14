@@ -4,12 +4,14 @@ CFLAGS	=	-Wextra -Wall -Werror
 
 LIBMLX	=	./lib/MLX42
 
-HEADERS	=	-I ./include -I $(LIBMLX)/include
+HEADERS	=	-I ./includes -I $(LIBMLX)/include
 
 LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRCS	=	main.c	\
-			utils.c
+			utils.c \
+			parsing.c 
+
 OBJS	= ${SRCS:.c=.o}
 
 CC	:= cc

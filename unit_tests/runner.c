@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   runner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 07:14:51 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 10:17:57 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/04/14 09:02:04 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "../greatest/greatest.h"
 
-int	ft_error(char *str)
-{
-	int	i;
+GREATEST_MAIN_DEFS();
 
-	i = 0;
-	while (str[i])
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
-	return (i);
+int	main(void) {
+	GREATEST_MAIN_BEGIN();
+
+	GREATEST_MAIN_END();
 }
