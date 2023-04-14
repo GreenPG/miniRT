@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 07:14:51 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 10:17:57 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/04/14 10:18:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#ifndef CYLINDER_H
+# define CYLINDER_H
 
-int	ft_error(char *str)
-{
-	int	i;
+# include <minirt.h>
 
-	i = 0;
-	while (str[i])
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
-	return (i);
-}
+typedef struct s_cylinder	t_cylinder;
+
+struct s_cylinder	{
+	t_coords	*origin;
+	t_vector	*axis_vector;
+	float		diameter;
+	float		height;
+	t_color		*colors;
+};
+
+#endif

@@ -6,16 +6,16 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 07:56:24 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:17:30 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include <minirt.h>
 
-static mlx_t *ft_mlx_create(void)
+static mlx_t	*ft_mlx_create(void)
 {
-	mlx_t*			mlx;
-	mlx_texture_t*	icon;
+	mlx_t			*mlx;
+	mlx_texture_t	*icon;
 
 	mlx_set_setting(0, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
@@ -23,14 +23,13 @@ static mlx_t *ft_mlx_create(void)
 		exit(ft_error("MLX: ERROR\n"));
 	icon = mlx_load_png("./src/gpasquet.png");
 	(void)icon;
-    mlx_set_icon(mlx, icon);
+	mlx_set_icon(mlx, icon);
 	mlx_delete_texture(icon);
-    return (mlx);
+	return (mlx);
 }
 
-static void ft_hook(void* img)
+static void	ft_hook(void *img)
 {
-	
 	int	x;
 	int	y;
 
@@ -47,21 +46,21 @@ static void ft_hook(void* img)
 	}	
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    mlx_t		*mlx;
+	mlx_t		*mlx;
 	mlx_image_t	*img;
 
 	if (argc != 2)
 		return (ft_error("Error: expected usage is ./miniRT <path to .rt file>\n"));
-    (void)argv;
-    mlx = ft_mlx_create();
+	(void)argv;
+	mlx = ft_mlx_create();
 	//parsing
 	//rendering
 	img = mlx_new_image(mlx, mlx->width, mlx->height);
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop_hook(mlx, ft_hook, img);
-    mlx_loop(mlx);
+	mlx_loop(mlx);
 	mlx_terminate(mlx);
-    return (0);
+	return (0);
 }

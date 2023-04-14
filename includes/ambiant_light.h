@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ambiant_light.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 07:14:51 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 10:17:57 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/04/14 09:33:22 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/04/14 10:18:13 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#ifndef AMBIANT_LIGHT_H
+# define AMBIANT_LIGHT_H
 
-int	ft_error(char *str)
-{
-	int	i;
+# include <minirt.h>
 
-	i = 0;
-	while (str[i])
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
-	return (i);
-}
+typedef struct s_ambiant_l	t_ambiant_l;
+
+struct s_ambiant_l {
+	float	light_ratio;
+	t_color	*colors;
+};
+
+#endif
