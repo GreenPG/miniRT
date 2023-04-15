@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 13:46:03 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:06:06 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	main(int argc, char **argv)
 	t_camera camera;
 	
 	camera.fov = 90;
-	camera.vector.x_o = 0;
-	camera.vector.y_o = 0;
-	camera.vector.z_o = 0;
-	camera.vector.x_d = 1;
-	camera.vector.y_d = 0;
-	camera.vector.z_d = 0;
+	camera.pos.x_o = 0;
+	camera.pos.y_o = 0;
+	camera.pos.z_o = 0;
+	camera.pos.x_d = 1;
+	camera.pos.y_d = 0;
+	camera.pos.z_d = 0;
 	//
 	ray_launcher(mlx, img, camera);
 	mlx_loop_hook(mlx, ft_hook, img);

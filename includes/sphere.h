@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 10:19:05 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:05:43 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_sphere	t_sphere;
 
 struct	s_sphere {
-	t_coords	*pos;
+	t_vector	*pos;
 	int			diameter;
 	t_color		*color;
 };

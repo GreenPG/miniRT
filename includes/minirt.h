@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 13:42:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:08:16 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 
 int	ft_error(char *str);
 int get_rgba(int r, int g, int b, int a);
-int	ray_launcher(mlx_t *mlx, t_camera *camera);
+int	ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
 
 #endif

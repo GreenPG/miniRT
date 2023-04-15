@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 13:30:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:04:11 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_color	t_color;
 typedef struct s_vector	t_vector;
-
+ 
 
 struct s_color {
 	int	r;

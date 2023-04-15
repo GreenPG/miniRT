@@ -10,7 +10,8 @@ LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRCS	=	main.c	\
 			utils.c \
-			parsing.c 
+			parsing.c \
+			camera.c
 
 OBJS	= ${SRCS:.c=.o}
 
