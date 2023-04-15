@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 15:06:06 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/15 09:46:59 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,35 @@ static mlx_t	*ft_mlx_create(void)
 	return (mlx);
 }
 
-static void	ft_hook(void *img)
+static void	ft_hook(void *img_v)
 {
-	(void)img;
+	mlx_image_t	*img;
+
+	img = (mlx_image_t *)img_v;
+	unsigned int	x;
+	unsigned int	y;
+	static unsigned int k;
+	unsigned int g;
+
+	x = 0;
+	k++;
+	if (k == 512)
+		k = 0;
+	if (k > 255)
+		g = 511 - k;
+	else
+		g = k;
+	
+	while(x < img->width)
+	{
+		y = 0;
+		while (y < img->height)
+		{
+			mlx_put_pixel(img, x, y, get_rgba(x / (img->width / 240), y / (img->height / 200), g, 255));
+			y++;
+		}
+		x++;
+	}
 }
 
 int	main(int argc, char **argv)

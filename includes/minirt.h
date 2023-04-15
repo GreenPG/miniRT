@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/14 15:08:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/15 09:39:39 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 #include <unistd.h>
+#include <math.h>
 #include <stdlib.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 

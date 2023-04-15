@@ -8,10 +8,11 @@ HEADERS	=	-I ./includes -I $(LIBMLX)/include
 
 LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRCS	=	main.c	\
-			utils.c \
-			parsing.c \
-			camera.c
+SRCS	=	main.c		\
+			utils.c		\
+			parsing.c	\
+			camera.c	\
+			colors.c
 
 OBJS	= ${SRCS:.c=.o}
 
