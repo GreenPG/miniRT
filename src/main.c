@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/17 15:46:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:20:25 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int	main(int argc, char **argv)
 	pos.y_o = 0;
 	pos.z_o = 0;
 	pos.x_d = 0;
-	pos.y_d = 0;
-	pos.z_d = 1;
-	camera.fov = 2.2;
+	pos.y_d = 1;
+	pos.z_d = 0;
+	camera.fov = 3.14;
 	camera.pos = pos;
 	//
 	img = mlx_new_image(mlx, mlx->width, mlx->height);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:37:52 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/17 15:49:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:16:16 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_vector	calculate_ray_direction(t_camera camera, unsigned int x, unsigned int y
 	double	height_fov;
 
 	height_fov = camera.fov * (9. / 16.);
-	alpha = (-camera.fov / 2) + (double)x * (camera.fov / (double)(WIDTH - 1));
-	beta = (height_fov / 2) - (double)y * (height_fov / (double)(HEIGHT - 1));
+	alpha = (-camera.fov / 2) + (double)x * (camera.fov / (double)(WIDTH - 1)) - asin(camera.pos.x_d / cos(asin(-camera.pos.y_d)));
+	beta = (height_fov / 2) - (double)y * (height_fov / (double)(HEIGHT - 1)) - asin(-camera.pos.y_d);
 	ray.x_o = camera.pos.x_o;
 	ray.y_o = camera.pos.y_o;
 	ray.z_o = camera.pos.z_o;
@@ -36,7 +36,7 @@ int	get_pixel_color(t_vector ray)
 {
 	double t;
 
-	t = (ray.y_d); //bon c style mais prend pas en compte la position orig
+	t = (ray.y_d); //bon c style mais prend pas en compte la position orig + la rotation ca marche mais pas trop quoi
 	if (t > 0)
 		return(get_rgba((255 * (1 - t) + t * 160),	(255 * (1 - t) + t * 150), (255 * (1 - t) + t * 240), 255));
 	t = -t;
