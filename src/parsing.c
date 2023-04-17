@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:32:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:03:04 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,21 @@ int	check_path(char *path)
 	}
 	free(extension);
 	return (0);
+}
+
+t_ambiant_l	*init_ambiant_l(char *input)
+{
+	t_ambiant_l	*ambiant_l;
+	int			i;
+
+	ambiant_l = malloc(sizeof(t_ambiant_l));
+	if (!ambiant_l)
+	{
+		ft_error("Error: fatal\n");
+		return (NULL);
+	}
+	i = 1;
+	while (input[i])
+		i++;
+	return (NULL);
 }
