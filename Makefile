@@ -13,7 +13,8 @@ LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	=	main.c	\
 			utils.c \
 			parsing.c \
-			structs_utils.c
+			structs_utils.c \
+			parsing_utils.c 
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -72,8 +73,9 @@ $(NAME): $(OBJS)
 	@echo "$$HEADER"
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(addprefix ./obj/,$(OBJS))
 	@rm -rf $(LIBMLX)/build
+	@make clean -C $(LIBFT)
 
 fclean: clean
 	@rm -f $(NAME)

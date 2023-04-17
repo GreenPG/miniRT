@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 10:18:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:17:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_cylinder	{
 	t_vector	*axis_vector;
 	float		diameter;
 	float		height;
-	t_color		*colors;
+	int			colors;
 };
 
 #endif

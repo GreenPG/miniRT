@@ -6,11 +6,43 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:14:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:15:59 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_coords	*get_coords(char *str)
+{
+	t_coords	*coords;
+	int			i;
+	float		x;
+	float		y;
+	float		z;
+
+	if (!str)
+		return (NULL);
+	x = ft_atof(str);
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
+		i++;
+	i++;
+	y = ft_atof(str + i);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
+		i++;
+	i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	z = ft_atof(str + i);
+	coords = init_coords(x, y, z);
+	if (!coords)
+		return (NULL);
+	return (coords);
+}
 
 t_coords	*init_coords(float x, float y, float z)
 {
@@ -26,6 +58,32 @@ t_coords	*init_coords(float x, float y, float z)
 	coords->y = y;
 	coords->z = z;
 	return (coords);
+}
+
+t_vector	*get_vector(char *str)
+{	
+	t_vector	*vector;
+	int			i;
+	float		x;
+	float		y;
+	float		z;
+
+	if (!str)
+		return (NULL);
+	x = ft_atof(str);
+	i = 0;
+	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
+		i++;
+	i++;
+	y = ft_atof(str + i);
+	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
+		i++;
+	i++;
+	z = ft_atof(str + i);
+	vector = init_vector(x, y, z);
+	if (!vector)
+		return (NULL);
+	return (vector);
 }
 
 t_vector	*init_vector(float x, float y, float z)
@@ -50,23 +108,28 @@ t_vector	*init_vector(float x, float y, float z)
 	return (vector);
 }
 
-t_color	*init_color(int r, int g, int b)
+int	get_color(char	*str)
 {
-	t_color	*color;
+	int		r;
+	int		g;
+	int		b;
+	int		i;
 
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-	{
-		ft_error("Color values must within the range of 0 and 255\n");
-		return (NULL);
-	}
-	color = malloc(sizeof(t_color));
-	if (!color)
-	{
-		ft_error("Error: fatal\n");
-		return (NULL);
-	}
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	return (color);
+	i = 0;
+	r = ft_atoi(str);
+	while (str[i] && ft_isdigit(str[i]) == 1)
+		i++;
+	if (str[i] == ',')
+		i++;
+	else
+		return (-1);
+	g = ft_atoi(str + i);
+	while (str[i] && ft_isdigit(str[i]) == 1)
+		i++;
+	if (str[i] == ',')
+		i++;
+	else
+		return (-1);
+	b = ft_atoi(str + i);
+	return (get_rgba(r, g, b, 255));
 }

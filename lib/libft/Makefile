@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                  +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 13:38:40 by gpasquet          #+#    #+#              #
-#    Updated: 2022/12/16 10:54:21 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/04/17 11:16:26 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS	=	./src/string/ft_split.c	\
 			./src/char/ft_isascii.c		\
 			./src/char/ft_tolower.c		\
 			./src/char/ft_isprint.c		\
+			./src/char/ft_isspace.c		\
 			./src/list/ft_lstnew.c		\
  			./src/list/ft_lstadd_front.c\
 			./src/list/ft_lstsize.c		\

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:25:15 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:41:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:19:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 TEST	ASSERT_AMB_L_EQ(t_ambiant_l	*actual, t_ambiant_l *expected)
 {
 	ASSERT_EQ_FMT(expected->light_ratio, actual->light_ratio, "%f");
-	ASSERT_EQ_FMT(expected->colors->r, actual->colors->r, "%i");
-	ASSERT_EQ_FMT(expected->colors->g, actual->colors->g, "%i");
-	ASSERT_EQ_FMT(expected->colors->b, actual->colors->b, "%i");
+	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
 	PASS();
 }
 
@@ -27,7 +25,7 @@ TEST	correct_input(void) {
 
 	t_ambiant_l	*expected = malloc(sizeof(t_ambiant_l));
 	expected->light_ratio = 0.2;
-	expected->colors = init_color(255, 255, 255);
+	expected->colors = get_rgba(255, 255, 255, 255);
 
 	ASSERT_AMB_L_EQ(amb_l1, expected);
 

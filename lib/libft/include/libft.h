@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:51:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2022/12/16 11:01:11 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:16:55 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
+int				ft_isspace(int c);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_toupper(int c);
 int				ft_tolower(int c);

@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.h                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 09:29:17 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:17:47 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/04/17 17:13:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
+#include <minirt.h>
 
-# include <minirt.h>
+int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
 
-typedef struct s_light	t_light;
+int	get_r(int rgba)
+{
+	return ((rgba >> 24) & 0xFF);
+}
 
-struct	s_light {
-	t_coords	*pos;
-	float		brightness;
-	int			colors;
-};
+int	get_g(int rgba)
+{
+	return ((rgba >> 16) & 0xFF);
+}
 
-#endif
+int	get_b(int rgba)
+{
+	return ((rgba >> 8) & 0xFF);
+}
+
+int	get_a(int rgba)
+{
+	return (rgba & 0xFF);
+}
