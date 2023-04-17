@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:25:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 15:05:27 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:38:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_camera	t_camera;
 
 struct s_camera	{
 	t_vector	pos;
-	int			fov;
+	double		fov;
 };
 
 #endif

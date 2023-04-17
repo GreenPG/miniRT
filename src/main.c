@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/15 15:04:30 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:46:29 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static mlx_t	*ft_mlx_create(void)
 	mlx_texture_t	*icon;
 
 	mlx_set_setting(0, true);
-	mlx = mlx_init(1700, 900, "MiniRT", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
 	icon = mlx_load_png("./src/gpasquet.png");
@@ -71,8 +71,12 @@ int	main(int argc, char **argv)
 	//rendering
 	//
 	pos.x_o = 0;
-	pos.y_o = 8;
+	pos.y_o = 0;
 	pos.z_o = 0;
+	pos.x_d = 0;
+	pos.y_d = 0;
+	pos.z_d = 1;
+	camera.fov = 2.2;
 	camera.pos = pos;
 	//
 	img = mlx_new_image(mlx, mlx->width, mlx->height);
