@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 16:55:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:08:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:04:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 TEST	ASSERT_SPHERE_EQ(t_sphere *actual, t_sphere *expected)
 {
 	ASSERT_EQ_FMT(expected->pos->x, actual->pos->x, "%f");
-	ASSERT_EQ_FMT(expected->pos->y, actual->pos->z, "%f");
-	ASSERT_EQ_FMT(expected->pos->y, actual->pos->z, "%f");
-	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%i");
+	ASSERT_EQ_FMT(expected->pos->y, actual->pos->y, "%f");
+	ASSERT_EQ_FMT(expected->pos->z, actual->pos->z, "%f");
+	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
 	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
 	PASS();
 }
@@ -29,7 +29,7 @@ TEST	correct_input(void)
 	t_sphere	*expected = malloc(sizeof(t_sphere));
 	expected->diameter = 12.6;
 	expected->pos = init_coords(0.0, 0.0, 20.6);
-	expected->color = get_color("10,0,255");
+	expected->color = get_rgba(10,0,255, 255);
 
 	ASSERT_SPHERE_EQ(sphere, expected);
 

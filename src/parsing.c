@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:16:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:24:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,121 +28,130 @@ int	check_path(char *path)
 	return (0);
 }
 
-static int	check_ambiant_l_def(char *str)
+void	add_obj(char *line, t_obj_list **list_ptr, t_type type)
+{
+	t_obj_list	*tmp;
+	t_obj_list	*prev;
+	t_obj_list	*obj;
+
+	if (!line)
+		return ;
+	obj = malloc(sizeof(t_obj_list));
+	if (!obj)
+	{
+		*list_ptr = NULL;
+		return ;
+	}
+	obj->type = type;
+	if (type == sphere)
+		obj->obj = init_sphere(line);
+	obj->next = NULL;
+	if (*list_ptr)
+	{
+		tmp = *list_ptr;
+		while (*list_ptr) 
+		{	
+			prev = tmp;
+			tmp = tmp->next;
+		}
+		*list_ptr = obj;
+		tmp->next = obj;
+	}
+	else
+		*list_ptr = obj;
+	return ;
+}		
+
+static void	choose_component(char *line, t_scene *scene)
 {
 	int	i;
 
+	if (!line || !scene)
+		return ;
 	i = 0;
-	while (str[i] && ft_isspace(str[i]) == 1)
+	while (line[i] && ft_isspace(line[i]) == 1)
 		i++;
-	if (check_float(str, &i) == 1)
-		return (1);
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	if (check_triple_int(str, &i) == 1)
-		return (1);
-	return (0);
+	if (ft_strncmp(line + i, "A ", 2) == 0)
+	{
+		if (scene->ambiant_l)
+		{
+			ft_error("Scene must have only one ambiant light\n");
+			scene = NULL;
+			return ;
+		}
+		scene->ambiant_l = init_ambiant_l(line + i);
+	}
+	else if (ft_strncmp(line + i, "C ", 2) == 0)
+	{	
+		if (scene->camera)
+		{
+			ft_error("Scene must have only one ambiant light\n");
+			scene = NULL;
+			return ;
+		}
+		scene->camera = init_camera(line  + i);
+	}
+	else if (ft_strncmp(line + i, "sp ", 2) == 0)
+	{	
+		add_obj(line + i, &scene->obj_list, sphere);
+		if (!scene->obj_list)
+		{
+			ft_error("Error when adding an object\n");
+			free(scene);
+			scene = NULL;
+			return ;
+		}
+	}
+	return ;
 }
 
-t_ambiant_l	*init_ambiant_l(char *input)
+t_scene	*parsing(char *path)
 {
-	t_ambiant_l	*ambiant_l;
-	int			i;
-	int			start;
+	char	*line;
+	int		fd;
+	t_scene	*scene;
 
-	if (!input || check_ambiant_l_def(input + 1) == 1)
+	if (!path || check_path(path) == 1)
 		return (NULL);
-	ambiant_l = malloc(sizeof(t_ambiant_l));
-	if (!ambiant_l)
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\n");
 		return (NULL);
 	}
-	i = 1;
-	while (ft_isspace(input[i == 1]))
-		i++;
-	start = i;
-	while (ft_isspace(input[i]) == 0)
-		i++;
-	ambiant_l->light_ratio = ft_atof(ft_substr(input, start, i));
-	if (ambiant_l->light_ratio < 0 || ambiant_l->light_ratio > 1)
+	scene = malloc(sizeof(scene));
+	if (!scene)
 	{
-		ft_error("Light ratio should be within the range of 0 to 1");
-		free(ambiant_l);
+		ft_error("Error\n");
 		return (NULL);
 	}
-	while (ft_isspace(input[i]))
-		i++;
-	ambiant_l->colors = get_color(input + i);
-	if (ambiant_l->colors == -1)
+	scene->camera = NULL;
+	scene->ambiant_l = NULL;
+	//	scene->light = NULL;
+	scene->obj_list = NULL;
+	line = get_next_line(fd);
+	while (line)
 	{
-		free(ambiant_l);
+		if (!line)
+		{
+			ft_error("Error\n");
+			return (NULL);
+		}
+		line[ft_strlen(line) - 1] = '\0';
+		choose_component(line, scene);
+		free(line);
+		if (!scene)
+		{
+			return (NULL);
+		}
+		line = get_next_line(fd);
+	}
+	close(fd);
+	if (!scene->camera || !scene->ambiant_l/* || !scene->light*/)
+	{
+		ft_error("Scene must have one camera, one ambiant light and one light\n");
+		free(scene);
 		return (NULL);
 	}
-	return (ambiant_l);
-}
-
-static int	check_cam(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (1);
-	i = 1;
-	while (str[i] && ft_isspace(str[i]))
-		i++;
-	if (check_triple_float(str, &i) == 1)
-		return (1);
-	while (str[i] && ft_isspace(str[i]))
-		i++;
-	if (check_triple_int(str, &i))
-		return (1);
-	while (str[i] && ft_isspace(str[i]))
-		i++;
-	if (check_int(str, &i))
-		return (1);
-	return (0);
-}
-
-t_camera	*init_camera(char *input)
-{
-	t_camera	*camera;
-	int			i;
-
-	if (!input || check_cam(input) == 1)
-		return (NULL);
-	camera = malloc(sizeof(t_camera));
-	if (!camera)
-		return (NULL);
-	i = 1;
-	while (ft_isspace(input[i]))
-		i++;
-	camera->pos = get_coords(input + i);
-	if (!camera->pos)
-	{
-		free(camera);
-		return (NULL);
-	}
-	while (ft_isspace(input[i]) == 0)
-		i++;
-	while (ft_isspace(input[i]) == 1)
-		i++;
-	camera->orientation_vector = get_vector(input + i);
-	if (!camera->orientation_vector)
-	{
-		free(camera);
-		return (NULL);
-	}
-	while (ft_isspace(input[i]) == 0)
-		i++;
-	while (ft_isspace(input[i]) == 1)
-		i++;
-	camera->fov = ft_atoi(input + i);
-	if (camera->fov < 0 || camera->fov > 180)
-	{
-		free(camera);
-		return (NULL);
-	}
-	camera->fov *= (M_PI / 180);
-	return (camera);
+	return (scene);
 }

@@ -6,11 +6,12 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:18:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:06:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../greatest/greatest.h"
+#include "../includes/minirt.h"
 
 extern	SUITE(check_path_suite);
 extern	SUITE(test_init_coords);
@@ -19,6 +20,7 @@ extern	SUITE(test_atof);
 extern	SUITE(test_init_ambiant);
 extern	SUITE(test_init_camera);
 extern	SUITE(test_init_sphere);
+extern	SUITE(test_parsing);
 
 GREATEST_MAIN_DEFS();
 
@@ -32,5 +34,6 @@ int	main(int argc, char **argv) {
 	RUN_SUITE(test_init_ambiant);
 	RUN_SUITE(test_init_camera);
 	RUN_SUITE(test_init_sphere);
+	RUN_SUITE(test_parsing);
 	GREATEST_MAIN_END();
 }

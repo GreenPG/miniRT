@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/18 11:22:08 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/04/18 13:26:46 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/04/18 14:46:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#ifndef SCENE_H
+# define SCENE_H
 
-int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+# include <minirt.h>
 
-int	get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
+typedef struct s_scene	t_scene;
 
-int	get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
+struct s_scene {
+	t_ambiant_l	*ambiant_l;
+	t_camera	*camera;
+	//t_light	*light;
+	
+	t_obj_list	*obj_list;
+};
 
-int	get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	get_a(int rgba)
-{
-	return (rgba & 0xFF);
-}
+#endif

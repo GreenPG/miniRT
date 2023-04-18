@@ -14,11 +14,15 @@ SRCS	=	main.c	\
 			utils.c \
 			parsing.c \
 			structs_utils.c \
-			parsing_utils.c 
+			parsing_utils.c \
+			color.c \
+			camera.c \
+			ambiant_light.c \
+			sphere.c 
 
 OBJS	= ${SRCS:.c=.o}
 
-CC	:= cc
+CC	:= clang
 
 define HEADER
 ██████████████████████████████████████████████████████

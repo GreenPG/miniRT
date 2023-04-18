@@ -18,6 +18,7 @@
 # include <limits.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {

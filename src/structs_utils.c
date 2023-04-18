@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:15:59 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:47:34 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,28 +108,29 @@ t_vector	*init_vector(float x, float y, float z)
 	return (vector);
 }
 
-int	get_color(char	*str)
+int	*get_color_values(char	*str)
 {
-	int		r;
-	int		g;
-	int		b;
+	int		*rgb;
 	int		i;
 
+	rgb = malloc(sizeof(int) * 3);
+	if (!rgb)
+		return (NULL);
 	i = 0;
-	r = ft_atoi(str);
+	rgb[0] = ft_atoi(str);
 	while (str[i] && ft_isdigit(str[i]) == 1)
 		i++;
 	if (str[i] == ',')
 		i++;
 	else
-		return (-1);
-	g = ft_atoi(str + i);
+		return (NULL);
+	rgb[1] = ft_atoi(str + i);
 	while (str[i] && ft_isdigit(str[i]) == 1)
 		i++;
 	if (str[i] == ',')
 		i++;
 	else
-		return (-1);
-	b = ft_atoi(str + i);
-	return (get_rgba(r, g, b, 255));
+		return (NULL);
+	rgb[2] = ft_atoi(str + i);
+	return (rgb);
 }
