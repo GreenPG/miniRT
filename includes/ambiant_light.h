@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:33:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 10:18:13 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:16:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_ambiant_l	t_ambiant_l;
 
 struct s_ambiant_l {
 	float	light_ratio;
-	t_color	*colors;
+	int		colors;
 };
 
 #endif

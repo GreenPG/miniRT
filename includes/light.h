@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:29:17 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/14 10:18:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:17:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_light	t_light;
 struct	s_light {
 	t_coords	*pos;
 	float		brightness;
-	t_color		*colors;
+	int			colors;
 };
 
 #endif
