@@ -12,7 +12,8 @@ SRCS	=	main.c		\
 			utils.c		\
 			parsing.c	\
 			camera.c	\
-			colors.c
+			colors.c	\
+			vector.c
 
 OBJS	= ${SRCS:.c=.o}
 

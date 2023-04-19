@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:49:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 11:40:44 by gtouzali         ###   ########.fr       */
+/*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
+/*   Updated: 2023/04/19 09:08:42 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include <minirt.h>
 
-# define WIDTH 1700
-# define ASPECT_RATIO 1/2
-# define HEIGHT  WIDTH * ASPECT_RATIO
-
-#endif
+double	dot_product(t_vector v, t_vector u)
+{
+	return (v.x_d * u.x_d + v.y_d * u.y_d + v.z_d * u.z_d);
+}

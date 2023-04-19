@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:37:52 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/17 17:16:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:41:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,62 @@
 t_vector	calculate_ray_direction(t_camera camera, unsigned int x, unsigned int y)
 {
 	t_vector ray;
-	double	alpha; //width [-fov/2, fov/2]
-	double	beta; //height [-const/2, const/2]
-	double	height_fov;
 
-	height_fov = camera.fov * (9. / 16.);
-	alpha = (-camera.fov / 2) + (double)x * (camera.fov / (double)(WIDTH - 1)) - asin(camera.pos.x_d / cos(asin(-camera.pos.y_d)));
-	beta = (height_fov / 2) - (double)y * (height_fov / (double)(HEIGHT - 1)) - asin(-camera.pos.y_d);
 	ray.x_o = camera.pos.x_o;
 	ray.y_o = camera.pos.y_o;
 	ray.z_o = camera.pos.z_o;
-	ray.x_d = camera.pos.x_o + sin(alpha) * cos(beta);
-	ray.y_d = camera.pos.y_o - sin(beta);
-	ray.z_d = camera.pos.z_o + cos(alpha) * cos(beta);
-
+	ray.x_d = - 2. + (4. * (double)x)/ (double)(WIDTH - 1);
+	ray.z_d = 1;
+	ray.y_d = 1. - (2. * (double)y )/ (double)(HEIGHT - 1);
+	y++;
 	return (ray);
 } 
+
+double	hit_sphere1(t_vector r)
+{
+	t_vector oc;
+	oc.z_d = -1;
+	oc.y_d = 0;
+	oc.x_d = 0;
+
+
+    double a = dot_product(r, r);
+    double b = 2.0 * dot_product(oc, r);
+    double c = dot_product(oc, oc) - 0.25;
+    double discriminant = b*b - 4*a*c;
+    if (discriminant > 0)
+		return (-b - sqrt(discriminant) ) / (2.0*a);
+	return -1;
+	
+}
+
+double	hit_sphere2(t_vector r)
+{
+	t_vector oc;
+	oc.z_d = -0.7;
+	oc.y_d = 0;
+	oc.x_d = 0.6;
+
+
+    double a = dot_product(r, r);
+    double b = 2.0 * dot_product(oc, r);
+    double c = dot_product(oc, oc) - 0.05;
+    double discriminant = b*b - 4*a*c;
+    if (discriminant > 0)
+		return (-b - sqrt(discriminant) ) / (2.0*a);
+	return -1;
+	
+}
 
 int	get_pixel_color(t_vector ray)
 {
 	double t;
-
-	t = (ray.y_d); //bon c style mais prend pas en compte la position orig + la rotation ca marche mais pas trop quoi
+	t = (hit_sphere1(ray));
 	if (t > 0)
-		return(get_rgba((255 * (1 - t) + t * 160),	(255 * (1 - t) + t * 150), (255 * (1 - t) + t * 240), 255));
+		return(get_rgba(205 * ((t*ray.x_d/2) + 1), 205 * ((t*ray.y_d/2) + 1), 255 * (((t*ray.z_d - 1)/2) + 1), 255));
+	t = (hit_sphere2(ray));
+	if (t > 0)
+		return(get_rgba(205 * ((t*ray.x_d/2) + 1), 205 * ((t*ray.y_d/2) + 1), 255 * (((t*ray.z_d - 1)/2) + 1), 255));
 	t = -t;
 	return(get_rgba((255 * (1 - t) + t * 229),	(255 * (1 - t) + t * 190), (255 * (1 - t) + t * 236), 255));
 }
