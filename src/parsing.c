@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 14:15:38 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:48:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ static void	choose_component(char *line, t_scene *scene)
 		}
 		scene->camera = init_camera(line  + i);
 	}
+	else if (ft_strncmp(line + i, "L ", 2) == 0)
+	{
+		if (scene->light)
+		{
+			ft_error("Scene must have only one light\n");
+			scene = NULL;
+			return ;
+		}
+		scene->light = init_light(line + i);
+	}
 	else if (ft_strncmp(line + i, "sp ", 2) == 0)
 	{	
 		add_obj(line + i, &scene->obj_list, sphere);
@@ -119,7 +129,7 @@ t_scene	*parsing(char *path)
 		ft_error("Error\n");
 		return (NULL);
 	}
-	scene = malloc(sizeof(scene));
+	scene = malloc(sizeof(t_scene));
 	if (!scene)
 	{
 		ft_error("Error\n");
@@ -127,7 +137,7 @@ t_scene	*parsing(char *path)
 	}
 	scene->camera = NULL;
 	scene->ambiant_l = NULL;
-	//	scene->light = NULL;
+	scene->light = NULL;
 	scene->obj_list = NULL;
 	line = get_next_line(fd);
 	while (line)
@@ -147,7 +157,7 @@ t_scene	*parsing(char *path)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!scene->camera || !scene->ambiant_l/* || !scene->light*/)
+	if (!scene->camera || !scene->ambiant_l || !scene->light)
 	{
 		ft_error("Scene must have one camera, one ambiant light and one light\n");
 		free(scene);

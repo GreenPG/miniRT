@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 15:22:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:54:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 	while (actual->obj_list)
 	{
 	//	if (obj_list->type == sphere)
-			CHECK_CALL(ASSERT_SPHERE_EQ(actual->obj_list->obj, expected->obj_list->obj));
+			CHECK_CALL(ASSERT_SPHERE_EQ((t_sphere *)actual->obj_list->obj, expected->obj_list->obj));
 			actual->obj_list = actual->obj_list->next;
 	}
 	PASS();
@@ -97,18 +97,18 @@ TEST	no_ambiant(void) {
 	ASSERT_EQ_FMT(NULL, scene1, "%p");
 	PASS();
 }
-/*
+
 TEST	no_light(void) {
-	t_scene	*scene1 = parsing("no_light.rt");
+	t_scene	*scene1 = parsing("scenes/wrong_scenes/no_light.rt");
 
 	ASSERT_EQ_FMT(NULL, scene1, "%p");
 	PASS();
 }
-*/
+
 SUITE(test_parsing) {
 	RUN_TEST(correct_input);
 	RUN_TEST(wrong_path);
 	RUN_TEST(no_cam);
 	RUN_TEST(no_ambiant);
-//	RUN_TEST(no_light);
+	RUN_TEST(no_light);
 }

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:00:37 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/18 16:06:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:05:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ extern	SUITE(test_atof);
 extern	SUITE(test_init_ambiant);
 extern	SUITE(test_init_camera);
 extern	SUITE(test_init_sphere);
+extern	SUITE(test_init_light);
 extern	SUITE(test_parsing);
 
 GREATEST_MAIN_DEFS();
@@ -34,6 +35,7 @@ int	main(int argc, char **argv) {
 	RUN_SUITE(test_init_ambiant);
 	RUN_SUITE(test_init_camera);
 	RUN_SUITE(test_init_sphere);
+	RUN_SUITE(test_init_light);
 	RUN_SUITE(test_parsing);
 	GREATEST_MAIN_END();
 }

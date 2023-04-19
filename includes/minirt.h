@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 15:14:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:25:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ t_camera	*init_camera(char *input);
 /*	sphere.c	*/
 
 t_sphere	*init_sphere(char *input);
+
+/*	light.h	*/
+
+t_light		*init_light(char *str);
 
 /*	structs_utils.c	*/
 

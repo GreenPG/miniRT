@@ -17,6 +17,7 @@ SRCS	=	main.c	\
 			parsing_utils.c \
 			camera.c \
 			ambiant_light.c \
+			light.c \
 			sphere.c 	\
 			color.c	\
 			vector.c	\
