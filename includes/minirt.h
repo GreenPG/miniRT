@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 16:25:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:44:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
 # include "ambiant_light.h"
 # include "light.h"
 # include "cylinder.h"
+# include "plane.h"
 # include "scene.h"
 
 /*	utils.c	*/
@@ -68,6 +69,10 @@ t_sphere	*init_sphere(char *input);
 /*	light.h	*/
 
 t_light		*init_light(char *str);
+
+/*	plane.h	*/
+
+t_plane		*init_plane(char *str);
 
 /*	structs_utils.c	*/
 

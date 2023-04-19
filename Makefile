@@ -21,6 +21,7 @@ SRCS	=	main.c	\
 			sphere.c 	\
 			color.c	\
 			vector.c	\
+			plane.c	
 
 OBJS	= ${SRCS:.c=.o}
 

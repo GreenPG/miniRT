@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 16:48:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:17:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ void	add_obj(char *line, t_obj_list **list_ptr, t_type type)
 	obj->type = type;
 	if (type == sphere)
 		obj->obj = init_sphere(line);
+	else if (type == plane)
+		obj->obj = init_plane(line);
 	obj->next = NULL;
 	if (*list_ptr)
 	{
 		tmp = *list_ptr;
-		while (*list_ptr) 
+		while (tmp) 
 		{	
 			prev = tmp;
 			tmp = tmp->next;
 		}
 		*list_ptr = obj;
-		tmp->next = obj;
+		prev->next = obj;
 	}
 	else
 		*list_ptr = obj;
@@ -104,6 +106,17 @@ static void	choose_component(char *line, t_scene *scene)
 	else if (ft_strncmp(line + i, "sp ", 2) == 0)
 	{	
 		add_obj(line + i, &scene->obj_list, sphere);
+		if (!scene->obj_list)
+		{
+			ft_error("Error when adding an object\n");
+			free(scene);
+			scene = NULL;
+			return ;
+		}
+	}
+	else if (ft_strncmp(line + i, "pl ", 2) == 0)
+	{	
+		add_obj(line + i, &scene->obj_list, plane);
 		if (!scene->obj_list)
 		{
 			ft_error("Error when adding an object\n");

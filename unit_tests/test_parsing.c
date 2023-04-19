@@ -6,22 +6,28 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 16:54:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:12:30 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../greatest/greatest.h"
 #include "../includes/minirt.h"
 
+TEST	ASSERT_VECTOR_EQ(t_vector *actual, t_vector *expected)
+{
+	ASSERT_EQ_FMT(expected->x_o, actual->x_o, "%f");
+	ASSERT_EQ_FMT(expected->y_o, actual->y_o, "%f");
+	ASSERT_EQ_FMT(expected->z_o, actual->z_o, "%f");
+	ASSERT_EQ_FMT(expected->x_d, actual->x_d, "%f");
+	ASSERT_EQ_FMT(expected->y_d, actual->y_d, "%f");
+	ASSERT_EQ_FMT(expected->z_d, actual->z_d, "%f");
+	PASS();
+}
+
 TEST	ASSERT_CAM_EQ(t_camera *actual, t_camera *expected)
 {
 	ASSERT_EQ_FMT(expected->fov, actual->fov, "%f");
-	ASSERT_EQ_FMT(expected->vector->x_o, actual->vector->x_o, "%f");
-	ASSERT_EQ_FMT(expected->vector->y_o, actual->vector->y_o, "%f");
-	ASSERT_EQ_FMT(expected->vector->z_o, actual->vector->z_o, "%f");
-	ASSERT_EQ_FMT(expected->vector->x_d, actual->vector->x_d, "%f");
-	ASSERT_EQ_FMT(expected->vector->y_d, actual->vector->y_d, "%f");
-	ASSERT_EQ_FMT(expected->vector->z_d, actual->vector->z_d, "%f");
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
 	PASS();
 }
 
@@ -32,6 +38,13 @@ TEST	ASSERT_SPHERE_EQ(t_sphere *actual, t_sphere *expected)
 	ASSERT_EQ_FMT(expected->pos->z, actual->pos->z, "%f");
 	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
 	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
+	PASS();
+}
+
+TEST	ASSERT_PLANE_EQ(t_plane *actual, t_plane *expected)
+{
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
 	PASS();
 }
 
@@ -48,9 +61,12 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 	CHECK_CALL(ASSERT_CAM_EQ(actual->camera, expected->camera));
 	while (actual->obj_list)
 	{
-	//	if (obj_list->type == sphere)
-			CHECK_CALL(ASSERT_SPHERE_EQ((t_sphere *)actual->obj_list->obj, expected->obj_list->obj));
-			actual->obj_list = actual->obj_list->next;
+		ASSERT_EQ_FMT(expected->obj_list->type, actual->obj_list->type, "%i");
+		if (actual->obj_list->type == sphere)
+			CHECK_CALL(ASSERT_SPHERE_EQ((t_sphere *)actual->obj_list->obj, (t_sphere *)expected->obj_list->obj));
+		else if (actual->obj_list->type == plane)
+			CHECK_CALL(ASSERT_PLANE_EQ((t_plane *)actual->obj_list->obj, (t_plane *)expected->obj_list->obj));
+		actual->obj_list = actual->obj_list->next;
 	}
 	PASS();
 }

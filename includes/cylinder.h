@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:17:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:24:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 typedef struct s_cylinder	t_cylinder;
 
 struct s_cylinder	{
-	t_coords	*origin;
-	t_vector	*axis_vector;
+	t_vector	*vector;
 	float		diameter;
 	float		height;
-	int			colors;
+	int			color;
 };
 
 #endif

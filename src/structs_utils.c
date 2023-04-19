@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 15:37:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:05:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,21 @@ static void	get_o_vector(t_vector *vector, float x, float y, float z)
 	return ;
 }
 
-static void	get_d_vector(t_vector *vector, float x, float y, float z)
+static void	get_d_vector(t_vector **vector_ptr, float x, float y, float z)
 {
+	t_vector	*vector;
+
 	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0)
 	{
 		ft_error("Vector components should be within the range of \
 				-1.0 to 1.0\n");
-		free(vector);
-		vector = NULL;
+		free(*vector_ptr);
+		*vector_ptr = NULL;
 		return ;
 	}
+	if (!vector_ptr || !*vector_ptr)
+		return ;
+	vector = *vector_ptr;
 	vector->x_d = x;
 	vector->y_d = y;
 	vector->z_d = z;
@@ -113,7 +118,7 @@ t_vector	*init_vector(char *str)
 	get_o_vector(vector, x, y, z);
 	if (!vector)
 		return (NULL);
-	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
+	while (ft_isdigit(str[i]) == 1 || str[i] == '.' || str[i] == '-' || str[i] == '+')
 		i++;
 	while (ft_isspace(str[i]) == 1)
 		i++;
@@ -126,7 +131,7 @@ t_vector	*init_vector(char *str)
 		i++;
 	i++;
 	z = ft_atof(str + i);
-	get_d_vector(vector, x, y, z);
+	get_d_vector(&vector, x, y, z);
 	return (vector);
 }
 
