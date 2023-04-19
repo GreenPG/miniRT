@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/18 12:47:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:19:51 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ t_vector	*init_vector(float x, float y, float z)
 		ft_error("Error: fatal\n");
 		return (NULL);
 	}
-	vector->x = x;
-	vector->y = y;
-	vector->z = z;
+	vector->x_d = x;
+	vector->y_d = y;
+	vector->z_d = z;
 	return (vector);
 }
 

@@ -15,11 +15,10 @@ SRCS	=	main.c	\
 			parsing.c \
 			structs_utils.c \
 			parsing_utils.c \
-			color.c \
 			camera.c \
 			ambiant_light.c \
 			sphere.c 	\
-			colors.c	\
+			color.c	\
 			vector.c	\
 
 OBJS	= ${SRCS:.c=.o}
@@ -75,7 +74,7 @@ libft:
 
 $(NAME): $(OBJS)
 	@$(CC) $(addprefix ./obj/,$(OBJS)) $(LIBS) $(HEADERS) -o $(NAME)
-	@clear
+	# @clear
 	@echo "$$HEADER"
 
 clean:

@@ -6,10 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:03:37 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:12:53 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STRUCTS_UTILS_H
 # define STRUCTS_UTILS_H
 
 # include "minirt.h"
@@ -42,10 +43,5 @@ struct	s_obj_list {
 	t_obj_list	*next;
 };
 
-struct	s_obj_list {
-	t_type		type;
-	void		*obj;
-	t_obj_list	*next;
-};
 
 #endif
