@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 14:20:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:18:20 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_camera	*init_camera(char *input)
 	i = 1;
 	while (ft_isspace(input[i]))
 		i++;
-	camera->pos = get_coords(input + i);
-	if (!camera->pos)
+	camera->vector = init_vector(input + i);
+	if (!camera->vector)
 	{
 		free(camera);
 		return (NULL);
@@ -57,12 +57,6 @@ t_camera	*init_camera(char *input)
 		i++;
 	while (ft_isspace(input[i]) == 1)
 		i++;
-	camera->orientation_vector = get_vector(input + i);
-	if (!camera->orientation_vector)
-	{
-		free(camera);
-		return (NULL);
-	}
 	while (ft_isspace(input[i]) == 0)
 		i++;
 	while (ft_isspace(input[i]) == 1)

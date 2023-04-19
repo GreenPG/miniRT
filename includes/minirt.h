@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:25:00 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:14:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_sphere	*init_sphere(char *input);
 
 t_coords	*init_coords(float x, float y, float z);
 t_coords	*get_coords(char *str);
-t_vector	*init_vector(float x, float y, float z);
+t_vector	*init_vector(char *str);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
 

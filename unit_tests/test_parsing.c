@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/18 16:38:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:22:16 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 TEST	ASSERT_CAM_EQ(t_camera *actual, t_camera *expected)
 {
 	ASSERT_EQ_FMT(expected->fov, actual->fov, "%f");
-	ASSERT_EQ_FMT(expected->pos->x, actual->pos->x, "%f");
-	ASSERT_EQ_FMT(expected->pos->y, actual->pos->y, "%f");
-	ASSERT_EQ_FMT(expected->pos->z, actual->pos->z, "%f");
-	ASSERT_EQ_FMT(expected->orientation_vector->x, actual->orientation_vector->x, "%f");
-	ASSERT_EQ_FMT(expected->orientation_vector->y, actual->orientation_vector->y, "%f");
-	ASSERT_EQ_FMT(expected->orientation_vector->z, actual->orientation_vector->z, "%f");
+	ASSERT_EQ_FMT(expected->vector->x_o, actual->vector->x_o, "%f");
+	ASSERT_EQ_FMT(expected->vector->y_o, actual->vector->y_o, "%f");
+	ASSERT_EQ_FMT(expected->vector->z_o, actual->vector->z_o, "%f");
+	ASSERT_EQ_FMT(expected->vector->x_d, actual->vector->x_d, "%f");
+	ASSERT_EQ_FMT(expected->vector->y_d, actual->vector->y_d, "%f");
+	ASSERT_EQ_FMT(expected->vector->z_d, actual->vector->z_d, "%f");
 	PASS();
 }
 

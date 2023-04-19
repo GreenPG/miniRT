@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:25:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:04:46 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_camera	camera;
+//	t_camera	camera;
 	
 	if (argc != 2)
 		return (ft_error("Error: expected usage is ./miniRT <path to .rt file>\n"));
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	//parsing
 	//rendering
 	//
-	camera.pos->z = 1;
+//	camera.pos->z = 1;
 
 	//
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
