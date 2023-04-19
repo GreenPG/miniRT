@@ -18,7 +18,9 @@ SRCS	=	main.c	\
 			color.c \
 			camera.c \
 			ambiant_light.c \
-			sphere.c 
+			sphere.c 	\
+			colors.c	\
+			vector.c	\
 
 OBJS	= ${SRCS:.c=.o}
 

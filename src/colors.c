@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:04:20 by gtouzali         ###   ########.fr       */
+/*   Created: 2023/04/14 10:29:42 by gtouzali          #+#    #+#             */
+/*   Updated: 2023/04/18 11:30:29 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define MINIRT_H
+#include <minirt.h>
 
-#include <stdio.h>
-
-#include <unistd.h>
-#include <stdlib.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
-
-#include "./config.h"
-#include "structs_utils.h"
-#include "sphere.h"
-
-int	ft_error(char *str);
-double	dot_product(const t_vector v, const t_vector u);
-int get_rgba(int r, int g, int b, int a);
-int	ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
-
-#endif
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}

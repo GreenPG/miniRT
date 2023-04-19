@@ -6,11 +6,10 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/17 17:10:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:03:37 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_UTILS_H
 # define STRUCTS_UTILS_H
 
 # include "minirt.h"
@@ -29,9 +28,18 @@ struct s_coords {
 };
 
 struct	s_vector {
-	float	x;
-	float	y;
-	float	z;
+	float	x_o;
+	float	y_o;
+	float	z_o;
+	float	x_d;
+	float	y_d;
+	float	z_d;
+};
+
+struct	s_obj_list {
+	t_type		type;
+	void		*obj;
+	t_obj_list	*next;
 };
 
 struct	s_obj_list {

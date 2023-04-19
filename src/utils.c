@@ -6,11 +6,10 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:14:51 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/17 10:48:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:02:03 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
 
 int	ft_error(char *str)
 {
