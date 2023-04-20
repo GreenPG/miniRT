@@ -13,6 +13,8 @@ LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	=	main.c	\
 			utils.c \
 			parsing.c \
+			obj.c \
+			choose_component.c \
 			structs_utils.c \
 			parsing_utils.c \
 			camera.c \

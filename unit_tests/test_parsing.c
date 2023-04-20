@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 09:52:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:37:58 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 		else if (actual->obj_list->type == cylinder)
 			CHECK_CALL(ASSERT_CYLINDER_EQ((t_cylinder *)actual->obj_list->obj, (t_cylinder *)expected->obj_list->obj));
 		actual->obj_list = actual->obj_list->next;
+		expected->obj_list = expected->obj_list->next;
 	}
 	PASS();
 }
@@ -89,11 +90,31 @@ TEST	correct_input(void) {
 	expected->ambiant_l = init_ambiant_l("A 0.2 255,255,255");
 	expected->camera = init_camera("C -50,0,20 0,0,0 70");
 	expected->obj_list = malloc(sizeof(t_obj_list));
-	expected->obj_list->type = sphere;
-	expected->obj_list->obj = init_sphere("sp 0,0,20 20 255,0,0");
-	expected->obj_list->next = NULL;
+	expected->obj_list->type = plane;
+	expected->obj_list->obj = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
+	t_obj_list *tmp1 = malloc(sizeof(t_obj_list));
+	tmp1->type = sphere;
+	tmp1->obj = init_sphere("sp 0,0,20 20 255,0,0");
+	expected->obj_list->next = tmp1;
+	t_obj_list *tmp2 = malloc(sizeof(t_obj_list));
+	tmp2->type = cylinder;
+	tmp2->obj = init_cylinder("cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255");
+	tmp2->next = NULL;
+	tmp1->next = tmp2;
+
 
 	CHECK_CALL(ASSERT_SCENE_EQ(scene1, expected));
+	
+	expected->obj_list = malloc(sizeof(t_obj_list));
+	expected->obj_list->type = plane;
+	expected->obj_list->obj = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
+	tmp1->type = sphere;
+	tmp1->obj = init_sphere("sp 0,0,20 20 255,0,0");
+	expected->obj_list->next = tmp1;
+	tmp2->type = cylinder;
+	tmp2->obj = init_cylinder("cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255");
+	tmp2->next = NULL;
+	tmp1->next = tmp2;
 	CHECK_CALL(ASSERT_SCENE_EQ(scene2, expected));
 	PASS();
 }

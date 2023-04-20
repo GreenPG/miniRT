@@ -6,11 +6,19 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:38:05 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 16:28:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:13:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	pass_to_next_element(char *str, int *i)
+{
+	while (ft_isspace(str[*i]) == 0)
+		(*i)++;
+	while (ft_isspace(str[*i]))
+		(*i)++;
+}
 
 int	check_float(char *str, int *i)
 {
@@ -20,7 +28,8 @@ int	check_float(char *str, int *i)
 		(*i)++;
 	while (ft_isdigit(str[*i]) == 1)
 		(*i)++;
-	if (str[*i] == '\0' || ft_isspace(str[*i]) == 1 || str[*i] == ',' || str[*i] == ',')
+	if (str[*i] == '\0' || ft_isspace(str[*i]) == 1 || str[*i] == ','
+		|| str[*i] == ',')
 		return (0);
 	if (str[*i] != '.' || ft_isdigit(str[*i + 1]) == 0)
 		return (1);

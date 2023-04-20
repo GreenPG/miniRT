@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:12:53 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:09:03 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ struct	s_obj_list {
 	void		*obj;
 	t_obj_list	*next;
 };
-
 
 #endif

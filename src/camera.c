@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 15:18:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:15:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,10 @@ t_camera	*init_camera(char *input)
 	while (ft_isspace(input[i]))
 		i++;
 	camera->vector = init_vector(input + i);
-	if (!camera->vector)
-	{
-		free(camera);
-		return (NULL);
-	}
-	while (ft_isspace(input[i]) == 0)
-		i++;
-	while (ft_isspace(input[i]) == 1)
-		i++;
-	while (ft_isspace(input[i]) == 0)
-		i++;
-	while (ft_isspace(input[i]) == 1)
-		i++;
+	pass_to_next_element(input, &i);
+	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
-	if (camera->fov < 0 || camera->fov > 180)
+	if (!camera->vector || camera->fov < 0 || camera->fov > 180)
 	{
 		free(camera);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/20 09:48:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:02:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,18 @@ double		ft_atof(char *str);
 int			check_path(char *path);
 t_scene		*parsing(char *path);
 
+/*	obj.c	*/
+
+void		choose_component(char *line, t_scene *scene);
+
+/*	choose_component.c	*/
+
+void		init_obj(char *line, t_obj_list **list_ptr, t_type type);
+void		add_obj_error(t_scene *scene);
+
 /*	parsing_utils.c	*/
+
+void		pass_to_next_element(char *str, int *i);
 int			check_triple_int(char *str, int *i);
 int			check_int(char *str, int *i);
 int			check_float(char *str, int *i);

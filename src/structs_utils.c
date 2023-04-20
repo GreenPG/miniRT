@@ -6,11 +6,20 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 18:05:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:30:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+static void	get_to_next_int(char *str, int *i)
+{
+	if (str[*i] == '-' || str[*i] == '+')
+		(*i)++;
+	while (ft_isdigit(str[*i]) == 1 || str[*i] == '.')
+		(*i)++;
+	(*i)++;
+}
 
 t_coords	*get_coords(char *str)
 {
@@ -22,21 +31,11 @@ t_coords	*get_coords(char *str)
 
 	if (!str)
 		return (NULL);
-	x = ft_atof(str);
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
-		i++;
-	i++;
+	x = ft_atof(str);
+	get_to_next_int(str, &i);
 	y = ft_atof(str + i);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (ft_isdigit(str[i]) == 1 || str[i] == '.')
-		i++;
-	i++;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
+	get_to_next_int(str, &i);
 	z = ft_atof(str + i);
 	coords = init_coords(x, y, z);
 	if (!coords)
@@ -58,81 +57,6 @@ t_coords	*init_coords(float x, float y, float z)
 	coords->y = y;
 	coords->z = z;
 	return (coords);
-}
-
-static void	get_o_vector(t_vector *vector, float x, float y, float z)
-{
-	vector->x_o = x;
-	vector->y_o = y;
-	vector->z_o = z;
-	return ;
-}
-
-static void	get_d_vector(t_vector **vector_ptr, float x, float y, float z)
-{
-	t_vector	*vector;
-
-	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0)
-	{
-		ft_error("Vector components should be within the range of \
-				-1.0 to 1.0\n");
-		free(*vector_ptr);
-		*vector_ptr = NULL;
-		return ;
-	}
-	if (!vector_ptr || !*vector_ptr)
-		return ;
-	vector = *vector_ptr;
-	vector->x_d = x;
-	vector->y_d = y;
-	vector->z_d = z;
-	return ;
-}
-
-t_vector	*init_vector(char *str)
-{	
-	t_vector	*vector;
-	int			i;
-	float		x;
-	float		y;
-	float		z;
-
-	if (!str)
-		return (NULL);
-	vector = malloc(sizeof(t_vector));
-	if (!vector)
-	{
-		ft_error("Error: fatal\n");
-		return (NULL);
-	}
-	x = ft_atof(str);
-	i = 0;
-	while (str[i] != ',')
-		i++;
-	i++;
-	y = ft_atof(str + i);
-	while (str[i] != ',')
-		i++;
-	i++;
-	z = ft_atof(str + i);
-	get_o_vector(vector, x, y, z);
-	if (!vector)
-		return (NULL);
-	while (ft_isdigit(str[i]) == 1 || str[i] == '.' || str[i] == '-' || str[i] == '+')
-		i++;
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	x = ft_atof(str + i);
-	while (str[i] != ',')
-		i++;
-	i++;
-	y = ft_atof(str + i);
-	while (str[i] != ',')
-		i++;
-	i++;
-	z = ft_atof(str + i);
-	get_d_vector(&vector, x, y, z);
-	return (vector);
 }
 
 int	*get_color_values(char	*str)
