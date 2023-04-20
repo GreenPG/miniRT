@@ -6,11 +6,22 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:37:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:30:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_light(t_light **light)
+{
+	if (!light || !*light)
+		return ;
+	if (((*light)->pos))
+		free((*light)->pos);
+	free(*light);
+	*light = NULL;
+	return ;
+}
 
 static int	check_light(char *str)
 {
@@ -43,7 +54,7 @@ t_light	*init_light_part2(t_light *light, char *str, int i)
 	if (light->brightness < 0 || light->brightness > 1)
 	{
 		ft_error("Light brightness must be within the range of 0 to 1\n");
-		free(light);
+		free_light(&light);
 		return (NULL);
 	}
 	pass_to_next_element(str, &i);
@@ -52,7 +63,7 @@ t_light	*init_light_part2(t_light *light, char *str, int i)
 		|| rgb[2] > 255)
 	{
 		free(rgb);
-		free(light);
+		free_light(&light);
 		return (NULL);
 	}
 	light->colors = get_rgba(rgb[0], rgb[1], rgb[2], 255);
@@ -79,7 +90,7 @@ t_light	*init_light(char *str)
 	light->pos = get_coords(str + i);
 	if (!light->pos)
 	{
-		free(light);
+		free_light(&light);
 		return (NULL);
 	}
 	light = init_light_part2(light, str, i);

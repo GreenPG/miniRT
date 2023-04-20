@@ -6,11 +6,22 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 10:37:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:39:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_cylinder(t_cylinder **cylinder)
+{
+	if (!cylinder || !*cylinder)
+		return ;
+	if ((*cylinder)->vector)
+		free((*cylinder)->vector);
+	free(*cylinder);
+	*cylinder = NULL;
+	return ;
+}
 
 static int	check_cylinder(char *str)
 {

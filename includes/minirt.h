@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/20 14:02:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:51:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,27 @@ t_ambiant_l	*init_ambiant_l(char *input);
 /*	camera.c	*/
 
 t_camera	*init_camera(char *input);
+void		free_camera(t_camera **camera);
 
 /*	sphere.c	*/
 
 t_sphere	*init_sphere(char *input);
+void		free_sphere(t_sphere **sphere);
 
 /*	light.c	*/
 
 t_light		*init_light(char *str);
+void		free_light(t_light **light);
 
 /*	plane.c	*/
 
 t_plane		*init_plane(char *str);
+void		free_plane(t_plane **plane);
 
 /*	cylinder.c */
 
 t_cylinder	*init_cylinder(char *str);
+void		free_cylinder(t_cylinder **cylinder);
 
 /*	structs_utils.c	*/
 
@@ -97,5 +102,9 @@ t_coords	*get_coords(char *str);
 t_vector	*init_vector(char *str);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
+
+/*	free_scene.c	*/
+
+void		free_scene(t_scene **scene);
 
 #endif

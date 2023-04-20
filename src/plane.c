@@ -6,11 +6,22 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:03:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:22:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_plane(t_plane **plane)
+{
+	if (!plane || !*plane)
+		return ;
+	if ((*plane)->vector)
+		free((*plane)->vector);
+	free(*plane);
+	*plane = NULL;
+	return ;
+}
 
 static int	check_plane(char *str)
 {
@@ -43,10 +54,11 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 		|| rgb[2] > 255)
 	{
 		free(rgb);
-		free(plane);
+		free_plane(&plane);
 		return (NULL);
 	}
 	plane->colors = get_rgba(rgb[0], rgb[1], rgb[2], 255);
+	free(rgb);
 	return (plane);
 }
 

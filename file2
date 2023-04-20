@@ -1,0 +1,9 @@
+unit_tests/test_init_plane.c:42:13: error: incompatible pointer types passing 't_plane *' (aka 'struct s_plane *') to parameter of type 't_plane **' (aka 'struct s_plane **') [-Werror,-Wincompatible-pointer-types]
+        free_plane(&expected);
+                   ^~~~~~~~~
+./includes/minirt.h:91:28: note: passing argument to parameter 'plane' here
+void            free_plane(t_plane **plane);
+                                     ^
+1 error generated.
+make[1]: *** [test.mk:66: unit_tests/test_init_plane.o] Error 1
+make: *** [test.mk:35: test.build] Error 2

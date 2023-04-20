@@ -6,12 +6,13 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:25:15 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:19:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:21:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../greatest/greatest.h"
 #include "../includes/minirt.h"
+#include <math.h>
 
 TEST	ASSERT_AMB_L_EQ(t_ambiant_l	*actual, t_ambiant_l *expected)
 {
@@ -28,7 +29,8 @@ TEST	correct_input(void) {
 	expected->colors = get_rgba(255, 255, 255, 255);
 
 	ASSERT_AMB_L_EQ(amb_l1, expected);
-
+	free(amb_l1);
+	free(expected);
 	PASS();
 }
 

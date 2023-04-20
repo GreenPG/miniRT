@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 14:00:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:01:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_scene	*parsing(char *path)
 	{
 		ft_error("Scene must have one camera, one ambiant light \
 				and one light\n");
-		free(scene);
+		free_scene(&scene);
 		return (NULL);
 	}
 	return (scene);

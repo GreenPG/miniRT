@@ -6,11 +6,22 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:40:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:19:18 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_sphere(t_sphere **sphere)
+{
+	if (!sphere || !*sphere)
+		return ;
+	if ((*sphere)->pos)
+		free((*sphere)->pos);
+	free(*sphere);
+	*sphere = NULL;
+	return ;
+}
 
 static int	check_sphere(char *input)
 {
@@ -42,7 +53,7 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	sphere->diameter = ft_atof(input + i);
 	if (sphere->diameter <= 0)
 	{
-		free(sphere);
+		free_sphere(&sphere);
 		return (NULL);
 	}
 	pass_to_next_element(input, &i);
@@ -51,7 +62,7 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 		|| rgb[2] > 255)
 	{
 		free(rgb);
-		free(sphere);
+		free_sphere(&sphere);
 		return (NULL);
 	}
 	sphere->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
