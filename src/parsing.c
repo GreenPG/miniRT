@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 18:17:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:57:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	add_obj(char *line, t_obj_list **list_ptr, t_type type)
 		obj->obj = init_sphere(line);
 	else if (type == plane)
 		obj->obj = init_plane(line);
+	else if (type == cylinder)
+		obj->obj = init_cylinder(line);
 	obj->next = NULL;
 	if (*list_ptr)
 	{

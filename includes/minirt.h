@@ -6,39 +6,40 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 17:44:24 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:48:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include <stdio.h>
+# include <stdio.h>
 
-#include <unistd.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
+# include <unistd.h>
+# include <math.h>
+# include <string.h>
+# include <stdlib.h>
+# include <libft.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "../lib/MLX42/include/MLX42/MLX42.h"
 
-#include "./config.h"
-#include "structs_utils.h"
-#include "sphere.h"
-#include "camera.h"
+# include "./config.h"
+# include "structs_utils.h"
+# include "sphere.h"
+# include "camera.h"
 
-int	ft_error(char *str);
-double	dot_product(const t_vector v, const t_vector u);
-int get_rgba(int r, int g, int b, int a);
-int	ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
 # include "ambiant_light.h"
 # include "light.h"
 # include "cylinder.h"
 # include "plane.h"
 # include "scene.h"
+
+int			ft_error(char *str);
+double		dot_product(const t_vector v, const t_vector u);
+int			get_rgba(int r, int g, int b, int a);
+int			ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
 
 /*	utils.c	*/
 
@@ -66,13 +67,17 @@ t_camera	*init_camera(char *input);
 
 t_sphere	*init_sphere(char *input);
 
-/*	light.h	*/
+/*	light.c	*/
 
 t_light		*init_light(char *str);
 
-/*	plane.h	*/
+/*	plane.c	*/
 
 t_plane		*init_plane(char *str);
+
+/*	cylinder.c */
+
+t_cylinder	*init_cylinder(char *str);
 
 /*	structs_utils.c	*/
 

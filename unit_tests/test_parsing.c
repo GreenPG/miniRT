@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 18:12:30 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:52:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ TEST	ASSERT_AMB_L_EQ(t_ambiant_l	*actual, t_ambiant_l *expected)
 	PASS();
 }
 
+TEST	ASSERT_CYLINDER_EQ(t_cylinder *actual, t_cylinder *expected)
+{
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
+	ASSERT_EQ_FMT(expected->height, actual->height, "%f");
+	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
+	PASS();
+}
+
 TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 {
 	CHECK_CALL(ASSERT_AMB_L_EQ(actual->ambiant_l, expected->ambiant_l));
@@ -66,6 +75,8 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 			CHECK_CALL(ASSERT_SPHERE_EQ((t_sphere *)actual->obj_list->obj, (t_sphere *)expected->obj_list->obj));
 		else if (actual->obj_list->type == plane)
 			CHECK_CALL(ASSERT_PLANE_EQ((t_plane *)actual->obj_list->obj, (t_plane *)expected->obj_list->obj));
+		else if (actual->obj_list->type == cylinder)
+			CHECK_CALL(ASSERT_CYLINDER_EQ((t_cylinder *)actual->obj_list->obj, (t_cylinder *)expected->obj_list->obj));
 		actual->obj_list = actual->obj_list->next;
 	}
 	PASS();

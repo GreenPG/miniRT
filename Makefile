@@ -20,8 +20,9 @@ SRCS	=	main.c	\
 			light.c \
 			sphere.c 	\
 			color.c	\
-			vector.c	\
-			plane.c	
+			vector.c \
+			plane.c	\
+			cylinder.c
 
 OBJS	= ${SRCS:.c=.o}
 
