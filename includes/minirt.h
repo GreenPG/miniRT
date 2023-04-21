@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:25:00 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:32:40 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 int	ft_error(char *str);
 double	dot_product(const t_vector v, const t_vector u);
 int get_rgba(int r, int g, int b, int a);
-int	ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
+
 # include "ambiant_light.h"
 # include "light.h"
 # include "cylinder.h"
@@ -72,5 +72,9 @@ t_coords	*get_coords(char *str);
 t_vector	*init_vector(float x, float y, float z);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
+
+/*	render.c	*/
+
+int	render();
 
 #endif
