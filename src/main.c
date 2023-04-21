@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 15:04:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:04:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,24 @@ int	main(int argc, char **argv)
 		return (ft_error("Error: expected usage is ./miniRT <path to .rt file>\n"));
 	(void)argv;
 	mlx = ft_mlx_create();
-	//parsing
-	//rendering
-	//
-//	camera.pos->z = 1;
-
-	//
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(mlx, img, 0, 0);
+
+	//
+	t_camera camera;
+	camera.orientation_vector->x_d = 0;
+	camera.orientation_vector->y_d = 1;
+	camera.orientation_vector->z_d = 0;
+	camera.orientation_vector->x_o = 0;
+	camera.orientation_vector->y_o = 0;
+	camera.orientation_vector->z_o = 0;
+	camera.fov = 180 * 1 * (M_PI / 180.);
+	//
+
+	render(img, camera);
 	mlx_loop_hook(mlx, ft_hook, img);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
 }
+ 

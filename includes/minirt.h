@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/20 14:02:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:06:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # include "structs_utils.h"
 # include "sphere.h"
 # include "camera.h"
+
+int	ft_error(char *str);
+double	dot_product(const t_vector v, const t_vector u);
+int get_rgba(int r, int g, int b, int a);
 
 # include "ambiant_light.h"
 # include "light.h"
@@ -97,5 +101,9 @@ t_coords	*get_coords(char *str);
 t_vector	*init_vector(char *str);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
+
+/*	render.c	*/
+
+int	render();
 
 #endif

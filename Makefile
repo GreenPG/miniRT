@@ -25,6 +25,7 @@ SRCS	=	main.c	\
 			vector.c \
 			plane.c	\
 			cylinder.c
+			render.c	\
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -79,7 +80,7 @@ libft:
 
 $(NAME): $(OBJS)
 	@$(CC) $(addprefix ./obj/,$(OBJS)) $(LIBS) $(HEADERS) -o $(NAME)
-	# @clear
+	@clear
 	@echo "$$HEADER"
 
 clean:
