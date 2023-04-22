@@ -24,8 +24,8 @@ SRCS	=	main.c	\
 			color.c	\
 			vector.c \
 			plane.c	\
-			cylinder.c
-			render.c	\
+			cylinder.c	\
+			render.c
 
 OBJS	= ${SRCS:.c=.o}
 

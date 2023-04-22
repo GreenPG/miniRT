@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:40:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:22:39 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+double	sphere_hit(void *sphere, t_vector ray)
+{
+	t_sphere *obj;
+	t_vector oc;
+	double a;
+	double b;
+	double c;
+	double d;
+
+	obj = (t_sphere *)sphere;
+	oc.x_d = -obj->pos->x;
+	oc.y_d = -obj->pos->y;
+	oc.z_d = -obj->pos->z;
+	oc.x_o = 0;
+	oc.y_o = 0;
+	oc.z_o = 0;
+	d = 0;
+
+
+    a = dot_product(ray, ray);
+    b = 2.0 * dot_product(oc, ray);
+    c = dot_product(oc, oc) - ((obj->diameter / 2) * (obj->diameter / 2));
+    d = (b * b) - (4. * a * c);
+    if (d > 0)
+		return (obj->pos->y);
+	return (INFINITY);
+}
 
 static int	check_sphere(char *input)
 {

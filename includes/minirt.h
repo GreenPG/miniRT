@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/21 09:06:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:23:34 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@
 # include "sphere.h"
 # include "camera.h"
 
-int	ft_error(char *str);
-double	dot_product(const t_vector v, const t_vector u);
-int get_rgba(int r, int g, int b, int a);
-
 # include "ambiant_light.h"
 # include "light.h"
 # include "cylinder.h"
@@ -43,7 +39,7 @@ int get_rgba(int r, int g, int b, int a);
 int			ft_error(char *str);
 double		dot_product(const t_vector v, const t_vector u);
 int			get_rgba(int r, int g, int b, int a);
-int			ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
+int	get_obj_color(t_obj_list *nearest, t_vector ray);
 
 /*	utils.c	*/
 
@@ -81,6 +77,7 @@ t_camera	*init_camera(char *input);
 /*	sphere.c	*/
 
 t_sphere	*init_sphere(char *input);
+double	sphere_hit(void	*obj, t_vector ray);
 
 /*	light.c	*/
 
@@ -104,6 +101,6 @@ int			*get_color_values(char	*str);
 
 /*	render.c	*/
 
-int	render();
+int	render(mlx_image_t *img, t_scene *scene);
 
 #endif
