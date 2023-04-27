@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:03:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:21:52 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+double	plane_hit(void *plane, t_vector ray)
+{
+	t_plane	*obj;
+	double	is_hitted;
+	double	t;
+	obj = plane;
+	is_hitted = dot_product(*obj->vector, ray);	
+	if (is_hitted > 1e-6 || is_hitted < 1e-6)
+	{
+		t = obj->vector->x_o * obj->vector->x_d + obj->vector->y_o * obj->vector->y_d + obj->vector->z_o * obj->vector->z_d;
+		t = t / is_hitted;
+		if (t >= 0)// peut etre t < view_distance
+			return (t);
+		else 
+			return (INFINITY);
+	}
+	return (INFINITY);
+}
 
 static int	check_plane(char *str)
 {

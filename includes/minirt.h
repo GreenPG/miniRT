@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/22 13:23:34 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/25 10:32:57 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_light		*init_light(char *str);
 /*	plane.c	*/
 
 t_plane		*init_plane(char *str);
+double	plane_hit(void	*obj, t_vector ray);
 
 /*	cylinder.c */
 

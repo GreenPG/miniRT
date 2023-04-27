@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/22 14:34:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:19:07 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	get_background_color(t_vector ray, t_scene *scene)
 		current_distance = INFINITY;
 		if (cursor->type == sphere)
 			current_distance = sphere_hit(cursor->obj, ray);
-		// else if (cursor->type == cylinder)
-		// 	current_distance = cylinder_hit(cursor->obj, ray);
-		// else if (cursor->type == plane)
-		// 	current_distance = plane_hit(cursor->obj, ray);
+			// else if (cursor->type == cylinder)
+			// 	current_distance = cylinder_hit(cursor->obj, ray);
+			else if (cursor->type == plane)
+				current_distance = plane_hit(cursor->obj, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;
@@ -57,16 +57,6 @@ int	get_background_color(t_vector ray, t_scene *scene)
 		cursor = cursor->next;
 	}
 	return (get_obj_color(nearest, ray));
-
-	// t = (hit_sphere1(ray));
-	// if (t > 0)
-	// 	return(get_rgba(205 * ((t*ray.x_d/2) + 1), 205 * ((t*ray.y_d/2) + 1), 205 * (((t*ray.z_d )/2) + 1), 255));
-	// if (ray.y_d > 0.8)
-	// 	return(get_rgba(255, 0, 0, 255));
-	// if (ray.z_d > 0.8)
-	// 	return(get_rgba(0, 0, 255, 255));
-	// if (ray.x_d > 0.8)
-	// 	return(get_rgba(0, 255, 0, 255));
 }
 
 int	render(mlx_image_t *img, t_scene *scene)
@@ -75,6 +65,7 @@ int	render(mlx_image_t *img, t_scene *scene)
 	unsigned int	y;
 	t_vector		ray;
 	int				color;
+	
 	x = 0;
 	while (x < WIDTH)
 	{
