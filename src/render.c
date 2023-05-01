@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/27 14:19:07 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 11:08:22 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_vector	ray_direction(unsigned int x, unsigned int y, t_camera camera)
 
 	alpha = (camera.fov / 2.) - x * (camera.fov / (WIDTH - 1));
 	beta = (camera.fov / 2.) * (9. / 16.) - y * (camera.fov / (WIDTH - 1));
-	//beta = (camera.fov / 2.) * (9. / 16.) - y * ((camera.fov * (9. / 16.)) / (HEIGHT - 1));
 	ray.x_o = 0;
 	ray.y_o = 0;
 	ray.z_o = 0;
@@ -63,21 +62,45 @@ int	render(mlx_image_t *img, t_scene *scene)
 {
 	unsigned int	x;
 	unsigned int	y;
-	t_vector		ray;
 	int				color;
 	
 	x = 0;
+
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGHT)
 		{
-			ray = ray_direction(x , y, *scene->camera);
-			color = get_background_color(ray, scene);
+			color = get_background_color(scene->camera->rays->rays[x][y], scene);
 			mlx_put_pixel(img, x, y, color);
 			y++;
 		}
 		x++;
 	}
 	return (1);
+}
+
+int init_rays(t_scene *scene)
+{
+	unsigned int	x;
+	unsigned int	y;
+	t_rays	*ray_list;
+
+	ray_list = malloc(sizeof(t_rays));
+	x = 0;
+	ray_list->rays = malloc(WIDTH * sizeof(t_vector *));
+	while (x < WIDTH)
+	{
+		y = 0;
+		ray_list->rays[x] = malloc(HEIGHT * sizeof(t_vector));
+		while (y < HEIGHT)
+		{
+			ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
+			y++;
+		}
+		x++;
+	}
+	scene->camera->rays = ray_list;
+	return (1);
+
 }

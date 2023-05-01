@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/25 10:32:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 11:04:11 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,11 @@ int			*get_color_values(char	*str);
 /*	render.c	*/
 
 int	render(mlx_image_t *img, t_scene *scene);
+int init_rays(t_scene *scene);
+
+/*	rotation.c	*/
+
+void rotation_x(t_scene *scene, int direction);
+void rotation_y(t_scene *scene, int direction);
 
 #endif

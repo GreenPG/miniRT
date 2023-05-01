@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/26 11:07:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 11:10:21 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ double	sphere_hit(void *sphere, t_vector ray)
 	oc.x_d = -obj->pos->x;
 	oc.y_d = -obj->pos->y;
 	oc.z_d = -obj->pos->z;
-	oc.x_o = 0;
-	oc.y_o = 0;
-	oc.z_o = 0;
-	d = 0;
+
     a = dot_product(ray, ray);
     b = 2.0 * dot_product(oc, ray);
     c = dot_product(oc, oc) - ((obj->diameter / 2) * (obj->diameter / 2));
