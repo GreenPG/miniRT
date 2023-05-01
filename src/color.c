@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/25 10:31:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:43:32 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,27 @@ int	get_a(int rgba)
 {
 	return (rgba & 0xFF);
 }
+int	add_ambient(int color, t_ambiant_l *ambiant)
+{
+	int	r;
+	int	g;
+	int	b;
 
-int	get_obj_color(t_obj_list *nearest, t_vector ray)
+	r = (get_r(color) * get_r(ambiant->colors) / 255) * ambiant->light_ratio;
+	g = (get_g(color) * get_g(ambiant->colors) / 255) * ambiant->light_ratio;
+	b = (get_b(color) * get_b(ambiant->colors) / 255) * ambiant->light_ratio;
+	return (get_rgba(r, g, b, 255));
+}
+
+int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant)
 {
 	double t;
 	if (nearest)
 	{
 		if (nearest->type == sphere)
-			return (((t_sphere *)nearest->obj)->color);
+			return (add_ambient(((t_sphere *)nearest->obj)->color, ambiant));
 		if (nearest->type == plane)
-			return (((t_plane *)nearest->obj)->colors);
+			return (add_ambient(((t_plane *)nearest->obj)->colors, ambiant));
 	}
 	t = (ray.z_d); //bon c style mais prend pas en compte la position orig
 	if (t > 0)

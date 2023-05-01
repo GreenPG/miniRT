@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/01 11:04:11 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:16:10 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@
 int			ft_error(char *str);
 double		dot_product(const t_vector v, const t_vector u);
 int			get_rgba(int r, int g, int b, int a);
-int	get_obj_color(t_obj_list *nearest, t_vector ray);
+int	get_r(int rgba);
+int	get_g(int rgba);
+int	get_b(int rgba);
+int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
 
 /*	utils.c	*/
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/01 11:08:22 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:15:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	get_background_color(t_vector ray, t_scene *scene)
 				current_distance = plane_hit(cursor->obj, ray);
 		if (current_distance < nearest_distance)
 		{
-			nearest = cursor;
+			nearest = cursor;	
 			nearest_distance = current_distance;
 		}
 		cursor = cursor->next;
 	}
-	return (get_obj_color(nearest, ray));
+	return (get_obj_color(nearest, ray, scene->ambiant_l));
 }
 
 int	render(mlx_image_t *img, t_scene *scene)
