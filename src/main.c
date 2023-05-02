@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/21 09:04:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:43:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	main(int argc, char **argv)
 
 	//
 	t_camera camera;
-	camera.orientation_vector->x_d = 0;
-	camera.orientation_vector->y_d = 1;
-	camera.orientation_vector->z_d = 0;
-	camera.orientation_vector->x_o = 0;
-	camera.orientation_vector->y_o = 0;
-	camera.orientation_vector->z_o = 0;
+	camera.vector->x_d = 0;
+	camera.vector->y_d = 1;
+	camera.vector->z_d = 0;
+	camera.vector->x_o = 0;
+	camera.vector->y_o = 0;
+	camera.vector->z_o = 0;
 	camera.fov = 180 * 1 * (M_PI / 180.);
 	//
 
