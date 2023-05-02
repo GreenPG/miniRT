@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:53:08 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 15:38:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 08:54:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ TEST	correct_input(void) {
 	expected->vector = init_vector("-50.0,0,20 0,0,1");
 
 	ASSERT_CAM_EQ(cam1, expected);
+	free_camera(&cam1);
+	free_camera(&expected);
 	PASS();
 }
 

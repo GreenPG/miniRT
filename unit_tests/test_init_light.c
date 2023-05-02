@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:52:09 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 16:27:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:26:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ TEST	correct_input(void) {
 	expected->colors = get_rgba(10, 0, 255, 255);
 
 	CHECK_CALL(ASSERT_LIGHT_EQ(light1, expected));
+	free_light(&light1);
+	free_light(&expected);
 	PASS();
 }
 

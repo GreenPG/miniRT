@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 16:55:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/18 16:04:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:24:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ TEST	correct_input(void)
 	expected->color = get_rgba(10,0,255, 255);
 
 	ASSERT_SPHERE_EQ(sphere, expected);
-
+	free_sphere(&sphere);
+	free_sphere(&expected);
 	PASS();
 }
 
@@ -65,10 +66,12 @@ TEST	wrong_color(void)
 	t_sphere	*sphere1 = init_sphere("sp 0.0,0.0,20.6 12.6 1a0,0,255");
 	t_sphere	*sphere2 = init_sphere("sp 0.0,0.0,20.6 12.6 10,0,-255");
 	t_sphere	*sphere3 = init_sphere("sp 0.0,0.0,20.6 12.6 10,0,2521");
+	t_sphere	*sphere4 = init_sphere("sp -4,-10,-4 2.435 255,wef,234");
 
 	ASSERT_EQ_FMT(NULL, sphere1, "%p");
 	ASSERT_EQ_FMT(NULL, sphere2, "%p");
 	ASSERT_EQ_FMT(NULL, sphere3, "%p");
+	ASSERT_EQ_FMT(NULL, sphere4, "%p");
 	PASS();
 }
 

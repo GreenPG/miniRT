@@ -6,7 +6,8 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/21 09:06:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:40:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:56:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +30,6 @@
 # include "structs_utils.h"
 # include "sphere.h"
 # include "camera.h"
-
-int	ft_error(char *str);
-double	dot_product(const t_vector v, const t_vector u);
-int get_rgba(int r, int g, int b, int a);
-
 # include "ambiant_light.h"
 # include "light.h"
 # include "cylinder.h"
@@ -55,12 +51,12 @@ t_scene		*parsing(char *path);
 
 /*	obj.c	*/
 
-void		choose_component(char *line, t_scene *scene);
+void		choose_component(char *line, t_scene **scene);
 
 /*	choose_component.c	*/
 
-void		init_obj(char *line, t_obj_list **list_ptr, t_type type);
-void		add_obj_error(t_scene *scene);
+int			init_obj(char *line, t_obj_list **list_ptr, t_type type);
+void		add_obj_error(t_scene **scene);
 
 /*	parsing_utils.c	*/
 
@@ -77,22 +73,27 @@ t_ambiant_l	*init_ambiant_l(char *input);
 /*	camera.c	*/
 
 t_camera	*init_camera(char *input);
+void		free_camera(t_camera **camera);
 
 /*	sphere.c	*/
 
 t_sphere	*init_sphere(char *input);
+void		free_sphere(t_sphere **sphere);
 
 /*	light.c	*/
 
 t_light		*init_light(char *str);
+void		free_light(t_light **light);
 
 /*	plane.c	*/
 
 t_plane		*init_plane(char *str);
+void		free_plane(t_plane **plane);
 
 /*	cylinder.c */
 
 t_cylinder	*init_cylinder(char *str);
+void		free_cylinder(t_cylinder **cylinder);
 
 /*	structs_utils.c	*/
 
@@ -105,5 +106,9 @@ int			*get_color_values(char	*str);
 /*	render.c	*/
 
 int	render();
+
+/*	free_scene.c	*/
+
+void		free_scene(t_scene **scene);
 
 #endif

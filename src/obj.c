@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 14:03:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:27:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,60 @@ static void	add_obj(t_obj_list **list_ptr, t_obj_list *obj)
 		*list_ptr = obj;
 }
 
-void	init_obj(char *line, t_obj_list **list_ptr, t_type type)
+int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 {
 	t_obj_list	*obj;
 
 	if (!line)
-		return ;
+		return (1);
 	obj = malloc(sizeof(t_obj_list));
 	if (!obj)
 	{
 		*list_ptr = NULL;
-		return ;
+		return (1);
 	}
 	obj->type = type;
 	if (type == sphere)
-		obj->obj = init_sphere(line);
+	{
+		obj->plane = NULL;
+		obj->cylinder = NULL;
+		obj->sphere = init_sphere(line);
+		if (!obj->sphere)
+		{
+			free(obj);
+			return (1);
+		}
+	}
 	else if (type == plane)
-		obj->obj = init_plane(line);
+	{
+		obj->sphere = NULL;
+		obj->cylinder = NULL;
+		obj->plane = init_plane(line);
+		if (!obj->plane)
+		{
+			free(obj);
+			return (1);
+		}
+	}
 	else if (type == cylinder)
-		obj->obj = init_cylinder(line);
+	{
+		obj->plane = NULL;
+		obj->sphere = NULL;
+		obj->cylinder = init_cylinder(line);
+		if (!obj->cylinder)
+		{
+			free(obj);
+			return (1);
+		}
+	}
 	obj->next = NULL;
 	add_obj(list_ptr, obj);
-	return ;
+	return (0);
 }		
 
-void	add_obj_error(t_scene *scene)
+void	add_obj_error(t_scene **scene)
 {
 	ft_error("Error when adding an object\n");
-	free(scene);
-	scene = NULL;
+	free_scene(scene);
 	return ;
 }

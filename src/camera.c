@@ -6,11 +6,22 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:15:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 08:57:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_camera(t_camera **camera)
+{
+	if (!camera || !*camera)
+		return ;
+	if ((*camera)->vector)
+		free((*camera)->vector);
+	free(*camera);
+	*camera = (NULL);
+	return ;
+}
 
 static int	check_cam(char *str)
 {
@@ -53,7 +64,7 @@ t_camera	*init_camera(char *input)
 	camera->fov = ft_atoi(input + i);
 	if (!camera->vector || camera->fov < 0 || camera->fov > 180)
 	{
-		free(camera);
+		free_camera(&camera);
 		return (NULL);
 	}
 	camera->fov *= (M_PI / 180);
