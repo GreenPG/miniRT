@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:25:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:38:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_obj_list(t_obj_list **list)
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp);
-
 		tmp = NULL;
 	}
 	return ;
