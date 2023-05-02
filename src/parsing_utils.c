@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:38:05 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:13:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:19:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ int	check_triple_float(char *str, int *i)
 {
 	if (check_float(str, i) == 1)
 		return (1);
-	if (str[*i] != ',')
+	if (str[*i] != ',' || str[*i + 1] == ',')
 		return (1);
 	(*i)++;
 	if (check_float(str, i) == 1)
 		return (1);
-	if (str[*i] != ',')
+	if (str[*i] != ',' || str[*i + 1] == ',')
 		return (1);
 	(*i)++;
 	if (check_float(str, i) == 1)

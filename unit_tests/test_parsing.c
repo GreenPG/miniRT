@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 16:24:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:05:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 	{
 		ASSERT_EQ_FMT(tmp2->type, tmp1->type, "%i");
 		if (tmp1->type == sphere)
-			CHECK_CALL(ASSERT_SPHERE_EQ((t_sphere *)tmp1->obj, (t_sphere *)tmp2->obj));
+			CHECK_CALL(ASSERT_SPHERE_EQ(tmp1->sphere, tmp2->sphere));
 		else if (tmp1->type == plane)
-			CHECK_CALL(ASSERT_PLANE_EQ((t_plane *)tmp1->obj, (t_plane *)tmp2->obj));
+			CHECK_CALL(ASSERT_PLANE_EQ(tmp1->plane, tmp2->plane));
 		else if (tmp1->type == cylinder)
-			CHECK_CALL(ASSERT_CYLINDER_EQ((t_cylinder *)tmp1->obj, (t_cylinder *)tmp2->obj));
+			CHECK_CALL(ASSERT_CYLINDER_EQ(tmp1->cylinder, tmp2->cylinder));
 		tmp1 = tmp1->next;
 		tmp2 = tmp2->next;
 	}
@@ -97,14 +97,14 @@ TEST	correct_input(void) {
 	expected->light = init_light("L -40,0,30 0.7 255,255,255");
 	expected->obj_list = malloc(sizeof(t_obj_list));
 	expected->obj_list->type = plane;
-	expected->obj_list->obj = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
+	expected->obj_list->plane = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
 	t_obj_list *tmp1 = malloc(sizeof(t_obj_list));
 	tmp1->type = sphere;
-	tmp1->obj = init_sphere("sp 0,0,20 20 255,0,0");
+	tmp1->sphere = init_sphere("sp 0,0,20 20 255,0,0");
 	expected->obj_list->next = tmp1;
 	t_obj_list *tmp2 = malloc(sizeof(t_obj_list));
 	tmp2->type = cylinder;
-	tmp2->obj = init_cylinder("cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255");
+	tmp2->cylinder = init_cylinder("cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255");
 	tmp2->next = NULL;
 	tmp1->next = tmp2;
 
@@ -150,10 +150,22 @@ TEST	no_light(void) {
 	PASS();
 }
 
+TEST	wrong_obj(void) {
+	t_scene	*scene1	= parsing("scenes/wrong_scenes/wrong_plane.rt");
+	t_scene	*scene2	= parsing("scenes/wrong_scenes/wrong_cylinder.rt");
+	t_scene	*scene3	= parsing("scenes/wrong_scenes/wrong_sphere.rt");
+
+	ASSERT_EQ_FMT(NULL, scene1, "%p");
+	ASSERT_EQ_FMT(NULL, scene2, "%p");
+	ASSERT_EQ_FMT(NULL, scene3, "%p");
+	PASS();
+}
+
 SUITE(test_parsing) {
 	RUN_TEST(correct_input);
 	RUN_TEST(wrong_path);
 	RUN_TEST(no_cam);
 	RUN_TEST(no_ambiant);
 	RUN_TEST(no_light);
+	RUN_TEST(wrong_obj);
 }

@@ -6,20 +6,20 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 09:26:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:16:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	free_cylinder(t_cylinder *cylinder)
+void	free_cylinder(t_cylinder **cylinder)
 {
-	if (!cylinder)
+	if (!cylinder || !*cylinder)
 		return ;
-	if (cylinder->vector)
-		free(cylinder->vector);
-	free(cylinder);
-	cylinder = NULL;
+	if ((*cylinder)->vector)
+		free((*cylinder)->vector);
+	free(*cylinder);
+	*cylinder = NULL;
 	return ;
 }
 
@@ -59,7 +59,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	if (cylinder->height <= 0 || cylinder->diameter <= 0)
 	{
 		ft_error("Cylinder diameter and height must be superior to 0\n");
-		free_cylinder(cylinder);
+		free_cylinder(&cylinder);
 		return (NULL);
 	}
 	pass_to_next_element(str, &i);
@@ -68,7 +68,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 		|| rgb[2] > 255)
 	{
 		free(rgb);
-		free_cylinder(cylinder);
+		free_cylinder(&cylinder);
 		return (NULL);
 	}
 	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
@@ -92,7 +92,7 @@ t_cylinder	*init_cylinder(char *str)
 	cylinder->vector = init_vector(str + i);
 	if (!cylinder->vector)
 	{
-		free_cylinder(cylinder);
+		free_cylinder(&cylinder);
 		return (NULL);
 	}
 	pass_to_next_element(str, &i);

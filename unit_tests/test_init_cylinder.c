@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 18:20:40 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 09:36:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:18:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ TEST	correct_input(void) {
 	expected->color = get_rgba(10, 0, 255, 255);
 
 	CHECK_CALL(ASSERT_CYLINDER_EQ(cyl1, expected));
-	free_cylinder(cyl1);
-	free_cylinder(expected);
+	free_cylinder(&cyl1);
+	free_cylinder(&expected);
 	PASS();
 }
 

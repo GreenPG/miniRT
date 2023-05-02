@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 16:01:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:29:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ static t_scene	*init_scene(void)
 	return (scene);
 }
 
+static void	finish_gnl(int	fd)
+{
+	char *line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+}
+
 static t_scene	*fill_scene(t_scene *scene, int fd)
 {
 	char	*line;
@@ -58,10 +70,11 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 			return (NULL);
 		}
 		line[ft_strlen(line) - 1] = '\0';
-		choose_component(line, scene);
+		choose_component(line, &scene);
 		free(line);
 		if (!scene)
 		{
+			finish_gnl(fd);
 			return (NULL);
 		}
 		line = get_next_line(fd);

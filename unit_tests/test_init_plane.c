@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:01:20 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 09:36:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:24:20 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,27 @@ TEST	correct_input(void) {
 	expected->colors = get_rgba(0, 0, 255, 255);
 
 	CHECK_CALL(ASSERT_PLANE_EQ(plane1, expected));
-	free_plane(plane1);
-	free_plane(expected);
+	free_plane(&plane1);
+	free_plane(&expected);
 	PASS();
 }
 
 TEST	wrong_vector(void) {
 	t_plane	*plane1	= init_plane("pl 0i.0,0.0,-10.0 0.0,1.0,0.0 0,0,255");
 	t_plane	*plane2	= init_plane("pl 0.0,0.0,-+10.0 0.0,1.0,0.0 0,0,255");
-	t_plane	*plane3	= init_plane("pl 0.0,0.0,-10.0 2.0,1.0,0.0 0,0,255");
-	t_plane	*plane4	= init_plane("pl 0.0,0.0,-10.0 0.0,-1.1,0.0 0,0,255");
-	t_plane	*plane5	= init_plane("pl 0.0,0.0,-10.0 0.0,1.0,0.s0 0,0,255");
+	t_plane	*plane3	= init_plane("pl 0.0,,10.0 0.0,1.0,0.0 0,0,255");
+	t_plane	*plane4	= init_plane("pl 0.0,0.0,-10.0 2.0,1.0,0.0 0,0,255");
+	t_plane	*plane5	= init_plane("pl 0.0,0.0,-10.0 0.0,-1.1,0.0 0,0,255");
+	t_plane	*plane6	= init_plane("pl 0.0,0.0,-10.0 0.0,1.0,0.s0 0,0,255");
+	t_plane	*plane7	= init_plane("pl 0,0,-1 0,0.5-0.5 255,0,225");
 
 	ASSERT_EQ_FMT(NULL, plane1, "%p");
 	ASSERT_EQ_FMT(NULL, plane2, "%p");
 	ASSERT_EQ_FMT(NULL, plane3, "%p");
 	ASSERT_EQ_FMT(NULL, plane4, "%p");
 	ASSERT_EQ_FMT(NULL, plane5, "%p");
+	ASSERT_EQ_FMT(NULL, plane6, "%p");
+	ASSERT_EQ_FMT(NULL, plane7, "%p");
 	PASS();
 }
 
