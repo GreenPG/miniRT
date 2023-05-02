@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 18:20:40 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 09:49:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 09:36:34 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ TEST	ASSERT_CYLINDER_EQ(t_cylinder *actual, t_cylinder *expected)
 
 TEST	correct_input(void) {
 	t_cylinder *cyl1 = init_cylinder("cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255");
-	t_cylinder expected;
-	expected.vector = init_vector("50.0,0.0,20.6 0.0,0.0,1.0");
-	expected.diameter = 14.2;
-	expected.height = 21.42;
-	expected.color = get_rgba(10, 0, 255, 255);
+	t_cylinder *expected = malloc(sizeof(t_cylinder));
+	expected->vector = init_vector("50.0,0.0,20.6 0.0,0.0,1.0");
+	expected->diameter = 14.2;
+	expected->height = 21.42;
+	expected->color = get_rgba(10, 0, 255, 255);
 
-	CHECK_CALL(ASSERT_CYLINDER_EQ(cyl1, &expected));
+	CHECK_CALL(ASSERT_CYLINDER_EQ(cyl1, expected));
+	free_cylinder(cyl1);
+	free_cylinder(expected);
 	PASS();
 }
 

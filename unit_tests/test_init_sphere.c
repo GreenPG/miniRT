@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 16:55:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 15:31:30 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 09:36:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ TEST	correct_input(void)
 	expected->color = get_rgba(10,0,255, 255);
 
 	ASSERT_SPHERE_EQ(sphere, expected);
-	free_sphere(&sphere);
-	free_sphere(&expected);
+	free_sphere(sphere);
+	free_sphere(expected);
 	PASS();
 }
 

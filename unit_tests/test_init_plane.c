@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:01:20 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 16:21:08 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 09:36:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ TEST	correct_input(void) {
 	expected->colors = get_rgba(0, 0, 255, 255);
 
 	CHECK_CALL(ASSERT_PLANE_EQ(plane1, expected));
-	free_plane(&plane1);
-	free_plane(&expected);
+	free_plane(plane1);
+	free_plane(expected);
 	PASS();
 }
 

@@ -6,20 +6,20 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 16:22:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 09:25:59 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	free_plane(t_plane **plane)
+void	free_plane(t_plane *plane)
 {
-	if (!plane || !*plane)
+	if (!plane)
 		return ;
-	if ((*plane)->vector)
-		free((*plane)->vector);
-	free(*plane);
-	*plane = NULL;
+	if (plane->vector)
+		free(plane->vector);
+	free(plane);
+	plane = NULL;
 	return ;
 }
 
@@ -54,7 +54,7 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 		|| rgb[2] > 255)
 	{
 		free(rgb);
-		free_plane(&plane);
+		free_plane(plane);
 		return (NULL);
 	}
 	plane->colors = get_rgba(rgb[0], rgb[1], rgb[2], 255);
@@ -81,7 +81,7 @@ t_plane	*init_plane(char *str)
 	plane->vector = init_vector(str + i);
 	if (!plane->vector)
 	{
-		free(plane);
+		free_plane(plane);
 		return (NULL);
 	}
 	plane = init_plane_part2(plane, str, i);

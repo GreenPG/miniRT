@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/20 15:51:40 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 09:25:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		free_camera(t_camera **camera);
 /*	sphere.c	*/
 
 t_sphere	*init_sphere(char *input);
-void		free_sphere(t_sphere **sphere);
+void		free_sphere(t_sphere *sphere);
 
 /*	light.c	*/
 
@@ -88,12 +88,12 @@ void		free_light(t_light **light);
 /*	plane.c	*/
 
 t_plane		*init_plane(char *str);
-void		free_plane(t_plane **plane);
+void		free_plane(t_plane *plane);
 
 /*	cylinder.c */
 
 t_cylinder	*init_cylinder(char *str);
-void		free_cylinder(t_cylinder **cylinder);
+void		free_cylinder(t_cylinder *cylinder);
 
 /*	structs_utils.c	*/
 

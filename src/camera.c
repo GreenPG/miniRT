@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 15:34:52 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 08:57:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_camera	*init_camera(char *input)
 	camera->fov = ft_atoi(input + i);
 	if (!camera->vector || camera->fov < 0 || camera->fov > 180)
 	{
-		free(camera);
+		free_camera(&camera);
 		return (NULL);
 	}
 	camera->fov *= (M_PI / 180);
