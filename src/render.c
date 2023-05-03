@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/01 15:15:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:56:54 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int init_rays(t_scene *scene)
 		ray_list->rays[x] = malloc(HEIGHT * sizeof(t_vector));
 		while (y < HEIGHT)
 		{
+			ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
 			ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
 			y++;
 		}
