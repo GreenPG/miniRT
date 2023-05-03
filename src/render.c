@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/02 10:56:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:40:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	get_background_color(t_vector ray, t_scene *scene)
 	{
 		current_distance = INFINITY;
 		if (cursor->type == sphere)
-			current_distance = sphere_hit(cursor->obj, ray);
+			current_distance = sphere_hit(cursor->sphere, ray);
 			// else if (cursor->type == cylinder)
 			// 	current_distance = cylinder_hit(cursor->obj, ray);
 			else if (cursor->type == plane)
-				current_distance = plane_hit(cursor->obj, ray);
+				current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;	

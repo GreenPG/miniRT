@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/02 10:38:08 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:40:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void rotation_x(t_scene *scene, int direction)
     while (cursor)
     {
         if (cursor->type == sphere)
-			sphere_rot_x(cursor->obj, direction);
+			sphere_rot_x(cursor->sphere, direction);
         if (cursor->type == plane)
-			plane_rot_x(cursor->obj, direction);
+			plane_rot_x(cursor->plane, direction);
         cursor = cursor->next;
     }
 }
@@ -77,9 +77,9 @@ void rotation_y(t_scene *scene, int direction)
     while (cursor)
     {
         if (cursor->type == sphere)
-			sphere_rot_y(cursor->obj, direction);
+			sphere_rot_y(cursor->sphere, direction);
         if (cursor->type == plane)
-			plane_rot_y(cursor->obj, direction);
+			plane_rot_y(cursor->plane, direction);
         cursor = cursor->next;
     }
 }
