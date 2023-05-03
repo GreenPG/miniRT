@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/02 10:32:25 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:13:05 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 	t_scene	*scene;
 
 	scene = ptr;
-	if (keydata.key == MLX_KEY_PAGE_UP && keydata.action == MLX_PRESS)
-		scene->camera->fov -= 10 * (M_PI / 180);
-	// If we RELEASE the 'K' key, print "World".
-	if (keydata.key == MLX_KEY_PAGE_DOWN && keydata.action == MLX_RELEASE)
-		scene->camera->fov += 10 * (M_PI / 180);
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
 		rotation_x(scene, -1);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
