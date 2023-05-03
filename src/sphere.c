@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 13:14:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:37:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,39 @@ void	free_sphere(t_sphere **sphere)
 	free(*sphere);
 	*sphere = NULL;
 	return ;
+}
+
+double	sphere_hit(void *sphere, t_vector ray)
+{
+	t_sphere *obj;
+	t_vector oc;
+	double a;
+	double b;
+	double c;
+	double d;
+
+	obj = sphere;
+	oc.x_d = -obj->pos->x;
+	oc.y_d = -obj->pos->y;
+	oc.z_d = -obj->pos->z;
+
+    a = dot_product(ray, ray);
+    b = 2.0 * dot_product(oc, ray);
+    c = dot_product(oc, oc) - ((obj->diameter / 2) * (obj->diameter / 2));
+    d = (b * b) - (4. * a * c);
+    if (d > 0)
+	{
+		double r0;
+		double r1;
+
+		r0 = (-b - sqrt(d)) / (2 * a);
+		r1 = (-b - sqrt(d)) / (2 * a);
+		if (r0 > r1 && r1 >= 0)
+			return (r1);
+		else if (r1 >= r0 && r0 >= 0)
+			return (r0);
+	}
+	return (INFINITY);
 }
 
 static int	check_sphere(char *input)

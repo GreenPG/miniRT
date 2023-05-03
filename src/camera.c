@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 08:57:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:44:42 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ t_camera	*init_camera(char *input)
 	pass_to_next_element(input, &i);
 	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
+	camera->alpha = 0; //en vrai faudrai gerer pour avoir les bon trucs avec le vecteur normalise mais flemme pour  l instant
+	camera->beta  = 0;
 	if (!camera->vector || camera->fov < 0 || camera->fov > 180)
 	{
 		free_camera(&camera);

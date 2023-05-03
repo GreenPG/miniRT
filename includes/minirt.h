@@ -6,8 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/02 14:40:04 by gpasquet         ###   ########.fr       */
-/*   Updated: 2023/05/02 13:56:50 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:35:50 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +38,10 @@
 int			ft_error(char *str);
 double		dot_product(const t_vector v, const t_vector u);
 int			get_rgba(int r, int g, int b, int a);
-int			ray_launcher(mlx_t *mlx, mlx_image_t *img, t_camera camera);
+int	get_r(int rgba);
+int	get_g(int rgba);
+int	get_b(int rgba);
+int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
 
 /*	utils.c	*/
 
@@ -79,6 +81,7 @@ void		free_camera(t_camera **camera);
 
 t_sphere	*init_sphere(char *input);
 void		free_sphere(t_sphere **sphere);
+double	sphere_hit(void	*obj, t_vector ray);
 
 /*	light.c	*/
 
@@ -89,6 +92,7 @@ void		free_light(t_light **light);
 
 t_plane		*init_plane(char *str);
 void		free_plane(t_plane **plane);
+double	plane_hit(void	*obj, t_vector ray);
 
 /*	cylinder.c */
 
@@ -105,7 +109,13 @@ int			*get_color_values(char	*str);
 
 /*	render.c	*/
 
-int	render();
+int	render(mlx_image_t *img, t_scene *scene);
+int init_rays(t_scene *scene);
+
+/*	rotation.c	*/
+
+void rotation_x(t_scene *scene, int direction);
+void rotation_y(t_scene *scene, int direction);
 
 /*	free_scene.c	*/
 

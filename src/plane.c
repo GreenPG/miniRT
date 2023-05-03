@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 13:15:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:36:58 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ void	free_plane(t_plane **plane)
 	free(*plane);
 	*plane = NULL;
 	return ;
+}
+double	plane_hit(void *plane, t_vector ray)
+{
+	t_plane	*obj;
+	double	is_hitted;
+	double	t;
+	
+	obj = plane;
+	is_hitted = dot_product(*obj->vector, ray);	
+	if (is_hitted > 1e-50)
+	{
+		t = obj->vector->x_o * obj->vector->x_d + obj->vector->y_o * obj->vector->y_d + obj->vector->z_o * obj->vector->z_d;
+		t = t / is_hitted;
+		if (t >= 0)// peut etre t < view_distance
+			return (t);
+		else 
+			return (INFINITY);
+	}
+	return (INFINITY);
 }
 
 static int	check_plane(char *str)
