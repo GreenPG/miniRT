@@ -1,6 +1,6 @@
 NAME	=	miniRT
 
-CFLAGS	=	-Wextra -Wall -Werror -g
+CFLAGS	=	-Wextra -Wall -Werror -Ofast -g
 
 LIBMLX	=	./lib/MLX42
 
@@ -24,13 +24,10 @@ SRCS	=	main.c	\
 			color.c	\
 			vector.c \
 			plane.c	\
-<<<<<<< HEAD
 			cylinder.c
 			render.c	\
-=======
-			cylinder.c \
 			free_scene.c
->>>>>>> free
+			rotation.c
 
 OBJS	= ${SRCS:.c=.o}
 
