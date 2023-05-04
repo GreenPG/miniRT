@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/03 10:35:50 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:17:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 # include "cylinder.h"
 # include "plane.h"
 # include "scene.h"
+
+typedef	struct 	s_data {
+	mlx_t	*mlx;
+	t_scene	*scene;
+}	t_data;
 
 int			ft_error(char *str);
 double		dot_product(const t_vector v, const t_vector u);

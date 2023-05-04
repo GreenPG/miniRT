@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:44:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:10:36 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	check_cam(char *str)
 		return (1);
 	while (str[i] && ft_isspace(str[i]))
 		i++;
-	if (check_triple_int(str, &i) == 1)
+	if (check_triple_float(str, &i) == 1)
 		return (1);
 	while (str[i] && ft_isspace(str[i]))
 		i++;
