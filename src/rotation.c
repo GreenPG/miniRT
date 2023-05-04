@@ -6,19 +6,16 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/03 10:40:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:47:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void    sphere_rot_x(void *obj, int direction)
+void    sphere_rot_x(t_sphere *sphere, int direction)
 {
-    t_sphere *sphere;
-
-    sphere = obj;
-    sphere->pos->x = sphere->pos->x * cos (10. * (M_PI / 180.) * direction) - sphere->pos->y * sin (10. * (M_PI / 180.) * direction);
-    sphere->pos->y = sphere->pos->y * cos (10. * (M_PI / 180.) * direction) + sphere->pos->x * sin (10. * (M_PI / 180.) * direction);
+    sphere->pos->x = sphere->pos->x * cos (10. * (M_PI / 180.) * (double)direction) - sphere->pos->y * sin (10. * (M_PI / 180.) * (double)direction);
+    sphere->pos->y = sphere->pos->y * cos (10. * (M_PI / 180.) * (double)direction) + sphere->pos->x * sin (10. * (M_PI / 180.) * (double)direction);
 
 }
 

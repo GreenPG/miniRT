@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/03 10:40:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:25:53 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ int	render(mlx_image_t *img, t_scene *scene)
 	}
 	return (1);
 }
+t_vector	calculate_ray_direction(unsigned int x, unsigned int y)
+{
+	t_vector ray;
+
+	ray.x_d = -2. +  4. * (x / ((double)WIDTH - 1));
+	ray.z_d = 1. - 2. * (y / ((double)HEIGHT - 1));
+	ray.y_d = 1.;
+
+	return (ray);
+}
 
 int init_rays(t_scene *scene)
 {
@@ -95,8 +105,8 @@ int init_rays(t_scene *scene)
 		ray_list->rays[x] = malloc(HEIGHT * sizeof(t_vector));
 		while (y < HEIGHT)
 		{
-			ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
-			ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
+			// ray_list->rays[x][y] = ray_direction(x , y, *scene->camera);
+			ray_list->rays[x][y] = calculate_ray_direction(x, y);
 			y++;
 		}
 		x++;
