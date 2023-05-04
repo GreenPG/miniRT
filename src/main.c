@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/03 13:17:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:53:28 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 
 	scene = ptr;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		rotation_x(scene, -1);
+		rotation_x(scene, -10);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		rotation_x(scene, 1);
+		rotation_x(scene, 10);
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_RELEASE)
-		rotation_y(scene, -1);
+		rotation_y(scene, -10);
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_RELEASE)
-		rotation_y(scene, 1);
+		rotation_y(scene, 10);
 	render(scene->img, scene);
 }
 
@@ -90,6 +90,8 @@ int	main(int argc, char **argv)
 	mlx = ft_mlx_create();
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
+	rotation_x(scene, scene->camera->alpha);
+	rotation_y(scene, scene->camera->beta);
 	render(img, scene);
 	scene->img = img;
 	mlx_image_to_window(mlx, img, 0, 0);

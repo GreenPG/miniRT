@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/03 10:35:50 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:55:06 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int init_rays(t_scene *scene);
 
 /*	rotation.c	*/
 
-void rotation_x(t_scene *scene, int direction);
-void rotation_y(t_scene *scene, int direction);
+void rotation_x(t_scene *scene, double angle);
+void rotation_y(t_scene *scene, double angle);
 
 /*	free_scene.c	*/
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:44:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:54:04 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ static int	check_cam(char *str)
 	return (0);
 }
 
+double	get_alpha(t_vector vec)
+{
+	return (atan2(vec.x_d, vec.z_d));
+}
+
+double	get_beta(t_vector vec)
+{
+	return (atan2(vec.z_d, vec.y_d));
+}
+
 t_camera	*init_camera(char *input)
 {
 	t_camera	*camera;
@@ -62,13 +72,13 @@ t_camera	*init_camera(char *input)
 	pass_to_next_element(input, &i);
 	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
-	camera->alpha = 0; //en vrai faudrai gerer pour avoir les bon trucs avec le vecteur normalise mais flemme pour  l instant
-	camera->beta  = 0;
 	if (!camera->vector || camera->fov < 0 || camera->fov > 180)
 	{
 		free_camera(&camera);
 		return (NULL);
 	}
+	camera->alpha = get_alpha(*camera->vector);
+	camera->beta  = get_beta(*camera->vector);
 	camera->fov *= (M_PI / 180);
 	return (camera);
 }
