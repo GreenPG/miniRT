@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:05:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:59:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 }
 
 TEST	correct_input(void) {
-	t_scene	*scene1 = parsing("scenes/basic.rt");
+	t_scene	*scene1 = parsing("scenes/test.rt");
 	t_scene	*scene2 = parsing("scenes/unnecessary_lines.rt");
 	
 	t_scene	*expected = malloc(sizeof(t_scene));

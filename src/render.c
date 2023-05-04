@@ -6,11 +6,30 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 10:22:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:03:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+double	quadratic(double a, double b, double c)
+{
+	double	d;
+	double	r0;
+	double	r1;
+
+    d = (b * b) - (4.0 * a * c);
+    if (d > 0)
+	{
+		r0 = 1 * (-b - sqrt(d)) / (2 * a);
+		r1 = 1 * (-b + sqrt(d)) / (2 * a);
+		if (r0 > r1 && r1 >= 0)
+			return (r1);
+		else if (r1 >= r0 && r0 >= 0)
+			return (r0);
+	}
+	return (INFINITY);
+}
 
 t_vector	calculate_ray_direction(unsigned int x, unsigned int y, t_camera *camera)
 {
@@ -55,10 +74,10 @@ int	get_background_color(t_vector ray, t_scene *scene)
 		current_distance = INFINITY;
 		if (cursor->type == sphere)
 			current_distance = sphere_hit(cursor->sphere, ray);
-			// else if (cursor->type == cylinder)
-			// 	current_distance = cylinder_hit(cursor->obj, ray);
-			else if (cursor->type == plane)
-				current_distance = plane_hit(cursor->plane, ray);
+		else if (cursor->type == cylinder)
+			current_distance = cylinder_hit(cursor->cylinder, ray);
+		else if (cursor->type == plane)
+			current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;	

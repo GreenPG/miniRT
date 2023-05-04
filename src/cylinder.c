@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 13:16:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:26:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ void	free_cylinder(t_cylinder **cylinder)
 	free(*cylinder);
 	*cylinder = NULL;
 	return ;
+}
+
+double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
+{
+	t_vector	oc;
+	t_vector	tmp1;
+	t_vector	tmp2;
+	double		a;
+	double		b;
+	double		c;
+
+	oc.x_o = 0;
+	oc.y_o = 0;
+	oc.z_o = 0;
+	oc.x_d = -cylinder->vector->x_o;
+	oc.y_d = -cylinder->vector->y_o;
+	oc.z_d = -cylinder->vector->z_o;
+	tmp1 = vector_cross(ray, *cylinder->vector);
+	a = dot_product(tmp1, tmp1);
+	tmp2 = vector_cross(oc, *cylinder->vector);
+	b = 2 * dot_product(tmp1, tmp2); 
+	c = dot_product(tmp1, tmp2) - pow((cylinder->diameter / 2), 2);
+	return (quadratic(a, b, c));
 }
 
 static int	check_cylinder(char *str)

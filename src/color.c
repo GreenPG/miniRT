@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:40:04 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:38:45 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant)
 			return (add_ambient(nearest->sphere->color, ambiant));
 		if (nearest->type == plane)
 			return (add_ambient(nearest->plane->colors, ambiant));
+		if (nearest->type == cylinder)
+			return (add_ambient(nearest->cylinder->color, ambiant));
 	}
 	t = (ray.z_d); //bon c style mais prend pas en compte la position orig
 	if (t > 0)

@@ -6,11 +6,24 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/22 12:33:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:03:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_vector	vector_cross(t_vector a, t_vector b)
+{
+	t_vector	result;
+
+	result.x_o = 0;
+	result.y_o = 0;
+	result.z_o = 0;
+	result.x_d = (a.y_d * b.z_d) - (a.z_d * b.y_d);
+	result.y_d = (a.x_d * b.z_d) - (a.z_d * b.x_d);
+	result.z_d = (a.x_d * b.y_d) - (a.y_d * b.x_d);
+	return (result);
+}
 
 double	dot_product(t_vector v, t_vector u)
 {
