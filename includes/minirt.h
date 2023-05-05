@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 17:48:51 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:03:19 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ typedef	struct 	s_data {
 	t_scene	*scene;
 }	t_data;
 
+double		*ft_swap(double *pair);
 int			ft_error(char *str);
-double		dot_product(const t_vector v, const t_vector u);
 int			get_rgba(int r, int g, int b, int a);
-int	get_r(int rgba);
-int	get_g(int rgba);
-int	get_b(int rgba);
-int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
+int			get_r(int rgba);
+int			get_g(int rgba);
+int			get_b(int rgba);
+int			get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
 
 /*	utils.c	*/
 
@@ -103,31 +103,40 @@ double	plane_hit(t_plane	*obj, t_vector ray);
 
 t_cylinder	*init_cylinder(char *str);
 void		free_cylinder(t_cylinder **cylinder);
+double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 /*	structs_utils.c	*/
 
 t_coords	*init_coords(float x, float y, float z);
 t_coords	*get_coords(char *str);
-t_vector	*init_vector(char *str);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
 
-/*	render.c	*/
+/*	vector.c	*/
 
-int	render(mlx_image_t *img, t_scene *scene);
-int init_rays(t_scene *scene);
+t_vector	scalar_multiplication(t_vector *vector, double scalar);
+t_vector	vector_cross(t_vector a, t_vector b);
+double		dot_product(const t_vector v, const t_vector u);
+t_vector	*init_vector(char *str);
 
-/*	rotation.c	*/
+	/*	render.c	*/
+
+double		*cyl_quadratic(double a, double b, double c);
+double		quadratic(double a, double b, double c);
+int			render(mlx_image_t *img, t_scene *scene);
+int		 	init_rays(t_scene *scene);
+
+	/*	rotation.c	*/
 
 void rotation_x(t_scene *scene, double angle);
 void rotation_y(t_scene *scene, double angle);
 void    world_rotate(t_scene *scene, double alpha, double beta);
 
-/*	translate.c	*/
+	/*	translate.c	*/
 
 void    world_translate(t_scene *scene, double x, double y, double z);
 
-/*	free_scene.c	*/
+	/*	free_scene.c	*/
 
 void		free_scene(t_scene **scene);
 

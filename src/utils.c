@@ -6,11 +6,21 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:14:51 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/04/19 14:15:20 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:39:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+double	*ft_swap(double *pair)
+{
+	int	tmp;
+
+	tmp = pair[1];
+	pair[1] = pair[0];
+	pair[0] = tmp;
+	return (pair);
+}
 
 int	ft_error(char *str)
 {
