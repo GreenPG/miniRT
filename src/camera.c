@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/04 14:21:39 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:27:43 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,12 @@ static int	check_cam(char *str)
 
 double	get_alpha(t_vector vec)
 {
-	printf("%f\n", atan2(vec.x_d, vec.y_d) * (180 / M_PI));
-	return (atan2(vec.x_d, vec.y_d) * (180 / M_PI));
+	return (atan2(vec.x_d, vec.y_d));
 }
 
 double	get_beta(t_vector vec)
 {
-	//return (atan2(vec.y_d, vec.z_d));
-	(void)vec;
-	return (0);
+	return (-atan2(vec.z_d, fabs(vec.y_d)));
 }
 
 t_camera	*init_camera(char *input)

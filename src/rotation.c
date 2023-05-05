@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 10:56:38 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:27:29 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 void    sphere_rot_x(t_sphere *sphere, double angle)
 {
-    sphere->pos->x = sphere->pos->x * cos ((M_PI / 180.) * angle) - sphere->pos->y * sin ((M_PI / 180.) * angle);
-    sphere->pos->y = sphere->pos->y * cos ((M_PI / 180.) * angle) + sphere->pos->x * sin ((M_PI / 180.) * angle);
+    double  tmp;
+
+    tmp = sphere->pos->x;
+    sphere->pos->x = sphere->pos->x * cos(angle) - sphere->pos->y * sin(angle);
+    sphere->pos->y = sphere->pos->y * cos(angle) + tmp * sin(angle);
 }
 
-void    plane_rot_x(void *obj, double angle)
+void    plane_rot_x(t_plane *plane, double angle)
 {
-    t_plane *plane;
+    double  tmp;
 
-    plane = obj;
-    plane->vector->x_o = plane->vector->x_o * cos ((M_PI / 180.) * angle) - plane->vector->y_o * sin ((M_PI / 180.) * angle);
-    plane->vector->y_o = plane->vector->y_o * cos ((M_PI / 180.) * angle) + plane->vector->x_o * sin ((M_PI / 180.) * angle);
-    plane->vector->x_d = plane->vector->x_d * cos ((M_PI / 180.) * angle) - plane->vector->y_d * sin ((M_PI / 180.) * angle);
-    plane->vector->y_d = plane->vector->y_d * cos ((M_PI / 180.) * angle) + plane->vector->x_d * sin ((M_PI / 180.) * angle);
+    tmp = plane->vector->x_o;
+    plane->vector->x_o = plane->vector->x_o * cos (angle) - plane->vector->y_o * sin (angle);
+    plane->vector->y_o = plane->vector->y_o * cos (angle) + tmp * sin (angle);
+    tmp = plane->vector->x_d;
+    plane->vector->x_d = plane->vector->x_d * cos (angle) - plane->vector->y_d * sin (angle);
+    plane->vector->y_d = plane->vector->y_d * cos (angle) + tmp * sin (angle);
 
 }
 
@@ -45,24 +49,25 @@ void rotation_x(t_scene *scene, double angle)
     }
 }
 
-void    sphere_rot_y(void *obj, double angle)
+void    sphere_rot_y(t_sphere *sphere, double angle)
 {
-    t_sphere *sphere;
+    double  tmp;
 
-    sphere = obj;
-    sphere->pos->y = sphere->pos->y * cos ((M_PI / 180) * angle) - sphere->pos->z * sin ((M_PI / 180) * angle);
-    sphere->pos->z = sphere->pos->z * cos ((M_PI / 180) * angle) + sphere->pos->y * sin ((M_PI / 180) * angle);
+    tmp = sphere->pos->y;
+    sphere->pos->y = sphere->pos->y * cos (angle) - sphere->pos->z * sin (angle);
+    sphere->pos->z = sphere->pos->z * cos (angle) + tmp * sin (angle);
 }
 
-void    plane_rot_y(void *obj, double angle)
+void    plane_rot_y(t_plane *plane, double angle)
 {
-    t_plane *plane;
+    double  tmp;
 
-    plane = obj;
-    plane->vector->y_o = plane->vector->y_o * cos ((M_PI / 180) * angle) - plane->vector->z_o * sin ((M_PI / 180) * angle);
-    plane->vector->z_o = plane->vector->z_o * cos ((M_PI / 180) * angle) + plane->vector->y_o * sin ((M_PI / 180) * angle);
-    plane->vector->y_d = plane->vector->y_d * cos ((M_PI / 180) * angle) - plane->vector->z_d * sin ((M_PI / 180) * angle);
-    plane->vector->z_d = plane->vector->z_d * cos ((M_PI / 180) * angle) + plane->vector->y_d * sin ((M_PI / 180) * angle);
+    tmp =  plane->vector->y_o;
+    plane->vector->y_o = plane->vector->y_o * cos (angle) - plane->vector->z_o * sin (angle);
+    plane->vector->z_o = plane->vector->z_o * cos (angle) + tmp * sin (angle);
+    tmp =  plane->vector->y_d;
+    plane->vector->y_d = plane->vector->y_d * cos (angle) - plane->vector->z_d * sin (angle);
+    plane->vector->z_d = plane->vector->z_d * cos (angle) + tmp * sin (angle);
 }
 
 void rotation_y(t_scene *scene, double angle)
