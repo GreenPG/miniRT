@@ -6,11 +6,24 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 17:03:24 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:02:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_vector	scalar_multiplication(t_vector *vector, double scalar)
+{
+	t_vector	result;
+
+	result.x_o = vector->x_o;
+	result.y_o = vector->y_o;
+	result.z_o = vector->z_o;
+	result.x_d = (vector->x_o + vector->x_d) * scalar;
+	result.x_d = (vector->y_o + vector->y_d) * scalar;
+	result.x_d = (vector->z_o + vector->z_d) * scalar;
+	return (result);
+}
 
 t_vector	vector_cross(t_vector a, t_vector b)
 {
@@ -20,7 +33,7 @@ t_vector	vector_cross(t_vector a, t_vector b)
 	result.y_o = 0;
 	result.z_o = 0;
 	result.x_d = (a.y_d * b.z_d) - (a.z_d * b.y_d);
-	result.y_d = (a.x_d * b.z_d) - (a.z_d * b.x_d);
+	result.y_d = (a.x_d * b.z_d) + (a.z_d * b.x_d);
 	result.z_d = (a.x_d * b.y_d) - (a.y_d * b.x_d);
 	return (result);
 }

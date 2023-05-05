@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/04 15:39:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 08:44:43 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ double	sphere_hit(void *sphere, t_vector ray)
 			return (r1);
 		else if (r1 >= r0 && r0 >= 0)
 			return (r0);
+		else if (r0 > 0)
+			return (r0);
+		else if (r1 > 0)
+			return (r1);
 	}
 	return (INFINITY);
 }

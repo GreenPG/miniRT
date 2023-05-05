@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 15:06:40 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:39:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ typedef	struct 	s_data {
 	t_scene	*scene;
 }	t_data;
 
+double		*ft_swap(double *pair);
 int			ft_error(char *str);
 int			get_rgba(int r, int g, int b, int a);
-int	get_r(int rgba);
-int	get_g(int rgba);
-int	get_b(int rgba);
-int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
+int			get_r(int rgba);
+int			get_g(int rgba);
+int			get_b(int rgba);
+int			get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
 
 /*	utils.c	*/
 
@@ -113,12 +114,14 @@ int			*get_color_values(char	*str);
 
 /*	vector.c	*/
 
+t_vector	scalar_multiplication(t_vector *vector, double scalar);
 t_vector	vector_cross(t_vector a, t_vector b);
 double		dot_product(const t_vector v, const t_vector u);
 t_vector	*init_vector(char *str);
 
 	/*	render.c	*/
 
+double		*cyl_quadratic(double a, double b, double c);
 double		quadratic(double a, double b, double c);
 int			render(mlx_image_t *img, t_scene *scene);
 int		 	init_rays(t_scene *scene);

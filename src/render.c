@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 17:03:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:41:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,29 @@ double	quadratic(double a, double b, double c)
 			return (r1);
 		else if (r1 >= r0 && r0 >= 0)
 			return (r0);
+		else if (r0 > 0)
+			return (r0);
+		else if (r1 > 0)
+			return (r1);
 	}
 	return (INFINITY);
+}
+
+double	*cyl_quadratic(double a, double b, double c)
+{
+	double	d;
+	double	*r;
+
+	r = malloc(sizeof(double) * 2);
+	if (!r)
+	{
+		ft_error("Error\n");
+		return (NULL);
+	}
+    d = (b * b) - (4.0 * a * c);
+	r[0] = 1 * (-b - sqrt(d)) / (2 * a);
+	r[1] = 1 * (-b + sqrt(d)) / (2 * a);
+	return (r);
 }
 
 t_vector	calculate_ray_direction(unsigned int x, unsigned int y, t_camera *camera)
