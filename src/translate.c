@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   translate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 15:23:39 by gtouzali          #+#    #+#             */
+/*   Updated: 2023/05/05 17:42:44 by gtouzali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minirt.h>
+
+void    sphere_translate(t_sphere *sphere, double x, double y, double z)
+{
+    sphere->pos->x += x;
+    sphere->pos->y += y;
+    sphere->pos->z += z;
+}
+
+void    plane_translate(t_plane *plane, double x, double y, double z)
+{
+    plane->vector->x_o += x;
+    plane->vector->y_o += y;
+    plane->vector->z_o += z;
+}
+
+void    world_translate(t_scene *scene, double x, double y, double z)
+{
+    t_obj_list	*cursor;
+
+    cursor = scene->obj_list;
+    while (cursor)
+    {
+        if (cursor->type == sphere)
+			sphere_translate(cursor->sphere, x, y, z);
+        if (cursor->type == plane)
+			plane_translate(cursor->plane, x, y, z);
+        cursor = cursor->next;
+    }
+}

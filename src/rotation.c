@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 13:27:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:37:04 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,14 @@ void rotation_y(t_scene *scene, double angle)
 			plane_rot_y(cursor->plane, angle);
         cursor = cursor->next;
     }
+}
+
+void    world_rotate(t_scene *scene, double alpha, double beta)
+{
+    rotation_y(scene, scene->camera->beta);
+    rotation_x(scene, -scene->camera->alpha);
+    scene->camera->alpha += alpha;
+    scene->camera->beta += beta;
+    rotation_x(scene, scene->camera->alpha);
+    rotation_y(scene, -scene->camera->beta);
 }
