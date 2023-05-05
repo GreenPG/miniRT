@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 13:00:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:03:52 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 
 	data = ptr;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		rotation_x(scene, -10);
+		rotation_x(data->scene, -10);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		rotation_x(scene, 10);
+		rotation_x(data->scene, 10);
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_RELEASE)
-		rotation_y(scene, -10);
+		rotation_y(data->scene, -10);
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_RELEASE)
-		rotation_y(scene, 10);
+		rotation_y(data->scene, 10);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(data->mlx);
 	render(data->scene->img, data->scene);
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
 	rotation_x(scene, scene->camera->alpha);
-	rotation_y(scene, scene->camera->beta);
+	//rotation_y(scene, scene->camera->beta);
 	render(img, scene);
 	scene->img = img;
 	data = malloc(sizeof(t_data));
