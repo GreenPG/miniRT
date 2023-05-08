@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/08 10:12:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:24:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static double	*hit_body(t_cylinder *cylinder, t_vector ray)
 	c = dot_product(tmp2, tmp2) - pow((cylinder->diameter / 2.0), 2);
 	return (cyl_quadratic(a, b, c));
 }
-
+/*
 static t_vector	get_mid_point(t_vector cylinder_vect, t_vector mid_vect)
 {
 	t_vector	mid_point;
@@ -71,15 +71,15 @@ static double	*caps_hit(t_cylinder *cylinder, t_vector ray)
 	r[1] = (tmp1 - (cylinder->height / 2)) / tmp2;
 	return (r);
 }
-
+*/
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
 	double	*t1;
-	double	*t2;
-	double	intersection;
+	//double	*t2;
+//	double	intersection;
 
 	t1 = hit_body(cylinder, ray);
-	t2 = caps_hit(cylinder, ray);
+	/*t2 = caps_hit(cylinder, ray);
 	if (t1[0] > t1[1])
 		ft_swap(t1);
 	if (t2[0] > t2[1])
@@ -91,7 +91,12 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 		intersection = fmin(t1[1], t2[1]);
 	if (intersection <= 0)
 		return (INFINITY);
-	return (intersection);
+	return (intersection);*/
+	if (t1[0] > 0 && (t1[1] < 0 || t1[0] < t1[1]))
+		return (t1[0]);
+	if (t1[1] > 0)
+		return (t1[1]);
+	return (INFINITY);
 }
 
 static int	check_cylinder(char *str)
