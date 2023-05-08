@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/04 11:18:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:33:14 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,25 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 
 	data = ptr;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		rotation_x(data->scene, -1);
+		world_rotate(data->scene, -7.2 * (M_PI / 180), 0);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		rotation_x(data->scene, 1);
+		world_rotate(data->scene, 7.2 * (M_PI / 180), 0);
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_RELEASE)
-		rotation_y(data->scene, -1);
+		world_rotate(data->scene, 0, 7.2 * (M_PI / 180));
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_RELEASE)
-		rotation_y(data->scene, 1);
+		world_rotate(data->scene, 0, -7.2 * (M_PI / 180));
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, 0, -1, 0);
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, 1, 0, 0);
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, 0, 1, 0);
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, -1, 0, 0);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, 0, 0, -1);
+	if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_RELEASE)
+		world_translate(data->scene, 0, 0, 1);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(data->mlx);
 	render(data->scene->img, data->scene);
@@ -92,6 +104,7 @@ int	main(int argc, char **argv)
 	mlx = ft_mlx_create();
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
+	world_rotate(scene, scene->camera->alpha, scene->camera->beta);
 	render(img, scene);
 	scene->img = img;
 	data = malloc(sizeof(t_data));

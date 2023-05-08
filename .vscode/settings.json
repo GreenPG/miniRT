@@ -4,7 +4,8 @@
 		"minirt.h": "c",
 		"config.h": "c",
 		"random": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"cmath": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

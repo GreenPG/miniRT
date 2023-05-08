@@ -14,6 +14,7 @@ SRCS	=	main.c	\
 			utils.c \
 			parsing.c \
 			obj.c \
+			translate.c \
 			choose_component.c \
 			structs_utils.c \
 			parsing_utils.c \

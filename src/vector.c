@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/08 09:15:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:23:20 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_vector	scalar_multiplication(t_vector *vector, double scalar)
 {
 	t_vector	result;
 
-	result.x_o = vector->x_o;
-	result.y_o = vector->y_o;
-	result.z_o = vector->z_o;
+	result.x_o = 0;
+	result.y_o = 0;
+	result.z_o = 0;
 	result.x_d = (vector->x_o + vector->x_d) * scalar;
 	result.x_d = (vector->y_o + vector->y_d) * scalar;
 	result.x_d = (vector->z_o + vector->z_d) * scalar;

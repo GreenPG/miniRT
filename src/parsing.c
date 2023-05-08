@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:38:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:20:01 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 			ft_error("Error\n");
 			return (NULL);
 		}
-		line[ft_strlen(line) - 1] = '\0';
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 		choose_component(line, &scene);
 		free(line);
 		if (!scene)

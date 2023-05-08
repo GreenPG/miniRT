@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/08 08:48:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:20:57 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		free_light(t_light **light);
 
 t_plane		*init_plane(char *str);
 void		free_plane(t_plane **plane);
-double	plane_hit(void	*obj, t_vector ray);
+double	plane_hit(t_plane	*obj, t_vector ray);
 
 /*	cylinder.c */
 
@@ -129,8 +129,13 @@ int		 	init_rays(t_scene *scene);
 
 	/*	rotation.c	*/
 
-void		 rotation_x(t_scene *scene, int direction);
-void		 rotation_y(t_scene *scene, int direction);
+void rotation_x(t_scene *scene, double angle);
+void rotation_y(t_scene *scene, double angle);
+void    world_rotate(t_scene *scene, double alpha, double beta);
+
+	/*	translate.c	*/
+
+void    world_translate(t_scene *scene, double x, double y, double z);
 
 	/*	free_scene.c	*/
 

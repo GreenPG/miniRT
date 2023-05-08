@@ -6,45 +6,47 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 10:06:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:17:39 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void    sphere_rot_x(t_sphere *sphere, int direction)
+void    sphere_rot_x(t_sphere *sphere, double angle)
 {
-    sphere->pos->x = sphere->pos->x * cos (10. * (M_PI / 180.) * (double)direction) - sphere->pos->y * sin (10. * (M_PI / 180.) * (double)direction);
-    sphere->pos->y = sphere->pos->y * cos (10. * (M_PI / 180.) * (double)direction) + sphere->pos->x * sin (10. * (M_PI / 180.) * (double)direction);
+    double  tmp;
+
+    tmp = sphere->pos->x;
+    sphere->pos->x = sphere->pos->x * cos(angle) - sphere->pos->y * sin(angle);
+    sphere->pos->y = sphere->pos->y * cos(angle) + tmp * sin(angle);
+}
+
+void    plane_rot_x(t_plane *plane, double angle)
+{
+    double  tmp;
+
+    tmp = plane->vector->x_o;
+    plane->vector->x_o = plane->vector->x_o * cos (angle) - plane->vector->y_o * sin (angle);
+    plane->vector->y_o = plane->vector->y_o * cos (angle) + tmp * sin (angle);
+    tmp = plane->vector->x_d;
+    plane->vector->x_d = plane->vector->x_d * cos (angle) - plane->vector->y_d * sin (angle);
+    plane->vector->y_d = plane->vector->y_d * cos (angle) + tmp * sin (angle);
 
 }
 
-void    plane_rot_x(void *obj, int direction)
+void	cylinder_rot_x(t_cylinder *cylinder, double angle)
 {
-    t_plane *plane;
+    double  tmp;
 
-    plane = obj;
-    plane->vector->x_o = plane->vector->x_o * cos (10. * (M_PI / 180.) * direction) - plane->vector->y_o * sin (10. * (M_PI / 180.) * direction);
-    plane->vector->y_o = plane->vector->y_o * cos (10. * (M_PI / 180.) * direction) + plane->vector->x_o * sin (10. * (M_PI / 180.) * direction);
-    plane->vector->x_d = plane->vector->x_d * cos (10. * (M_PI / 180.) * direction) - plane->vector->y_d * sin (10. * (M_PI / 180.) * direction);
-    plane->vector->y_d = plane->vector->y_d * cos (10. * (M_PI / 180.) * direction) + plane->vector->x_d * sin (10. * (M_PI / 180.) * direction);
-
+    tmp = cylinder->vector->x_o;
+    cylinder->vector->x_o = cylinder->vector->x_o * cos (angle) - cylinder->vector->y_o * sin (angle);
+    cylinder->vector->y_o = cylinder->vector->y_o * cos (angle) + tmp * sin (angle);
+    tmp = cylinder->vector->x_d;
+    cylinder->vector->x_d = cylinder->vector->x_d * cos (angle) - cylinder->vector->y_d * sin (angle);
+    cylinder->vector->y_d = cylinder->vector->y_d * cos (angle) + tmp * sin (angle);
 }
 
-void	cylinder_rot_x(t_cylinder *cylinder, int direction)
-{
-	double	tmp1;
-	double	tmp2;
-
-	tmp1 = cylinder->vector->y_o;
-	tmp2 = cylinder->vector->y_d;
-    cylinder->vector->x_o = cylinder->vector->x_o * cos (10. * (M_PI / 180.) * direction) - cylinder->vector->y_o * sin (10. * (M_PI / 180.) * direction);
-    cylinder->vector->y_o = tmp1 * cos (10. * (M_PI / 180.) * direction) + cylinder->vector->x_o * sin (10. * (M_PI / 180.) * direction);
-    cylinder->vector->x_d = cylinder->vector->x_d * cos (10. * (M_PI / 180.) * direction) - cylinder->vector->y_d * sin (10. * (M_PI / 180.) * direction);
-    cylinder->vector->y_d = tmp2 * cos (10. * (M_PI / 180.) * direction) + cylinder->vector->x_d * sin (10. * (M_PI / 180.) * direction);
-}
-
-void rotation_x(t_scene *scene, int direction)
+void rotation_x(t_scene *scene, double angle)
 {
     t_obj_list	*cursor;
 
@@ -52,49 +54,49 @@ void rotation_x(t_scene *scene, int direction)
     while (cursor)
     {
         if (cursor->type == sphere)
-			sphere_rot_x(cursor->sphere, direction);
+			sphere_rot_x(cursor->sphere, angle);
         if (cursor->type == plane)
-			plane_rot_x(cursor->plane, direction);
+			plane_rot_x(cursor->plane, angle);
 		if (cursor->type == cylinder)
-			cylinder_rot_x(cursor->cylinder, direction);
+			cylinder_rot_x(cursor->cylinder, angle);
         cursor = cursor->next;
     }
 }
 
-void    sphere_rot_y(void *obj, int direction)
+void    sphere_rot_y(t_sphere *sphere, double angle)
 {
-    t_sphere *sphere;
+    double  tmp;
 
-    sphere = obj;
-    sphere->pos->y = sphere->pos->y * cos (10 * (M_PI / 180) * direction) - sphere->pos->z * sin (10 * (M_PI / 180) * direction);
-    sphere->pos->z = sphere->pos->z * cos (10 * (M_PI / 180) * direction) + sphere->pos->y * sin (10 * (M_PI / 180) * direction);
+    tmp = sphere->pos->y;
+    sphere->pos->y = sphere->pos->y * cos (angle) - sphere->pos->z * sin (angle);
+    sphere->pos->z = sphere->pos->z * cos (angle) + tmp * sin (angle);
 }
 
-void    plane_rot_y(void *obj, int direction)
+void    plane_rot_y(t_plane *plane, double angle)
 {
-    t_plane *plane;
+    double  tmp;
 
-    plane = obj;
-    plane->vector->y_o = plane->vector->y_o * cos (10 * (M_PI / 180) * direction) - plane->vector->z_o * sin (10 * (M_PI / 180) * direction);
-    plane->vector->z_o = plane->vector->z_o * cos (10 * (M_PI / 180) * direction) + plane->vector->y_o * sin (10 * (M_PI / 180) * direction);
-    plane->vector->y_d = plane->vector->y_d * cos (10 * (M_PI / 180) * direction) - plane->vector->z_d * sin (10 * (M_PI / 180) * direction);
-    plane->vector->z_d = plane->vector->z_d * cos (10 * (M_PI / 180) * direction) + plane->vector->y_d * sin (10 * (M_PI / 180) * direction);
+    tmp =  plane->vector->y_o;
+    plane->vector->y_o = plane->vector->y_o * cos (angle) - plane->vector->z_o * sin (angle);
+    plane->vector->z_o = plane->vector->z_o * cos (angle) + tmp * sin (angle);
+    tmp =  plane->vector->y_d;
+    plane->vector->y_d = plane->vector->y_d * cos (angle) - plane->vector->z_d * sin (angle);
+    plane->vector->z_d = plane->vector->z_d * cos (angle) + tmp * sin (angle);
 }
 
-static void	cylinder_rot_y(t_cylinder *cylinder, int direction)
+static void	cylinder_rot_y(t_cylinder *cylinder, double angle)
 {
-	double	tmp1;
-	double	tmp2;
+    double  tmp;
 
-	tmp1 = cylinder->vector->y_o;
-	tmp2 = cylinder->vector->y_d;
-    cylinder->vector->y_o = cylinder->vector->y_o * cos (10 * (M_PI / 180) * direction) - cylinder->vector->z_o * sin (10 * (M_PI / 180) * direction);
-    cylinder->vector->z_o = cylinder->vector->z_o * cos (10 * (M_PI / 180) * direction) + tmp1 * sin (10 * (M_PI / 180) * direction);
-    cylinder->vector->y_d = cylinder->vector->y_d * cos (10 * (M_PI / 180) * direction) - cylinder->vector->z_d * sin (10 * (M_PI / 180) * direction);
-    cylinder->vector->z_d = cylinder->vector->z_d * cos (10 * (M_PI / 180) * direction) + tmp2 * sin (10 * (M_PI / 180) * direction);
+    tmp =  cylinder->vector->y_o;
+    cylinder->vector->y_o = cylinder->vector->y_o * cos (angle) - cylinder->vector->z_o * sin (angle);
+    cylinder->vector->z_o = cylinder->vector->z_o * cos (angle) + tmp * sin (angle);
+    tmp =  cylinder->vector->y_d;
+    cylinder->vector->y_d = cylinder->vector->y_d * cos (angle) - cylinder->vector->z_d * sin (angle);
+    cylinder->vector->z_d = cylinder->vector->z_d * cos (angle) + tmp * sin (angle);
 }
 
-void rotation_y(t_scene *scene, int direction)
+void rotation_y(t_scene *scene, double angle)
 {
     t_obj_list	*cursor;
 
@@ -102,11 +104,21 @@ void rotation_y(t_scene *scene, int direction)
     while (cursor)
     {
         if (cursor->type == sphere)
-			sphere_rot_y(cursor->sphere, direction);
+			sphere_rot_y(cursor->sphere, angle);
         if (cursor->type == plane)
-			plane_rot_y(cursor->plane, direction);
-		if (cursor->type == cylinder)
-			cylinder_rot_y(cursor->cylinder, direction);
+			plane_rot_y(cursor->plane, angle);
+        if (cursor->type == cylinder)
+			cylinder_rot_y(cursor->cylinder, angle);
         cursor = cursor->next;
     }
+}
+
+void    world_rotate(t_scene *scene, double alpha, double beta)
+{
+    rotation_y(scene, scene->camera->beta);
+    rotation_x(scene, -scene->camera->alpha);
+    scene->camera->alpha += alpha;
+    scene->camera->beta += beta;
+    rotation_x(scene, scene->camera->alpha);
+    rotation_y(scene, -scene->camera->beta);
 }

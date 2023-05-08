@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:36:58 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:48:28 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ void	free_plane(t_plane **plane)
 	*plane = NULL;
 	return ;
 }
-double	plane_hit(void *plane, t_vector ray)
+double	plane_hit(t_plane *obj, t_vector ray)
 {
-	t_plane	*obj;
 	double	is_hitted;
 	double	t;
 	
-	obj = plane;
 	is_hitted = dot_product(*obj->vector, ray);	
-	if (is_hitted > 1e-50)
+	if (is_hitted > 1e-6 || is_hitted < 1e-6)
 	{
 		t = obj->vector->x_o * obj->vector->x_d + obj->vector->y_o * obj->vector->y_d + obj->vector->z_o * obj->vector->z_d;
 		t = t / is_hitted;
