@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 14:39:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 08:48:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int			*get_color_values(char	*str);
 
 /*	vector.c	*/
 
+t_vector	vector_origin_addition(t_vector a, t_vector b, int sign);
 t_vector	scalar_multiplication(t_vector *vector, double scalar);
 t_vector	vector_cross(t_vector a, t_vector b);
 double		dot_product(const t_vector v, const t_vector u);

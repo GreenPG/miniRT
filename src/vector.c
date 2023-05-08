@@ -6,11 +6,24 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 18:02:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 09:15:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_vector	vector_origin_addition(t_vector a, t_vector b, int sign)
+{
+	t_vector	resultat;
+
+	resultat.x_d = a.x_o + (b.x_o * sign);
+	resultat.y_d = a.y_o + (b.y_o * sign);
+	resultat.z_d = a.z_o + (b.z_o * sign);
+	resultat.x_o = 0;
+	resultat.y_o = 0;
+	resultat.z_o = 0;
+	return (resultat);
+}
 
 t_vector	scalar_multiplication(t_vector *vector, double scalar)
 {
@@ -33,7 +46,7 @@ t_vector	vector_cross(t_vector a, t_vector b)
 	result.y_o = 0;
 	result.z_o = 0;
 	result.x_d = (a.y_d * b.z_d) - (a.z_d * b.y_d);
-	result.y_d = (a.x_d * b.z_d) + (a.z_d * b.x_d);
+	result.y_d = (a.x_d * b.z_d) - (a.z_d * b.x_d);
 	result.z_d = (a.x_d * b.y_d) - (a.y_d * b.x_d);
 	return (result);
 }
