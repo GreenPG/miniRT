@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 19:03:19 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:13:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			get_rgba(int r, int g, int b, int a);
 int			get_r(int rgba);
 int			get_g(int rgba);
 int			get_b(int rgba);
-int			get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant);
+int			get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double distance);
 
 /*	utils.c	*/
 

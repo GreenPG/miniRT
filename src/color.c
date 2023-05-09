@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/05 19:03:48 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/09 17:19:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,55 @@ int	add_ambient(int color, t_ambiant_l *ambiant)
 	return (get_rgba(r, g, b, 255));
 }
 
-int	get_obj_color(t_obj_list *nearest, t_vector ray, t_ambiant_l *ambiant)
+static int	normalized_sphere_color(t_sphere *sphere, t_vector normal)
 {
-	double t;
+	return (get_rgba(fabs(normal.x_d * get_r(sphere->color)), fabs(normal.y_d * get_g(sphere->color)), fabs(normal.z_d * get_b(sphere->color)), 255));
+}
+
+static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distance)
+{
+	t_vector	normal;
+	double		vector_len;
+
+	distance += 0.001;
+	normal.x_o = distance * ray.x_d;
+	normal.y_o = distance * ray.y_d;
+	normal.z_o = distance * ray.z_d;
+	normal.x_d = normal.x_o - sphere->pos->x;
+	normal.y_d = normal.y_o - sphere->pos->y;
+	normal.z_d = normal.z_o - sphere->pos->z;
+	vector_len = sqrt(pow(normal.x_d, 2) + pow(normal.y_d, 2) + pow(normal.z_d, 2));
+	normal.x_d /= vector_len;
+	normal.y_d /= vector_len;
+	normal.z_d /= vector_len;
+	if (dot_product(ray, normal) > 0.0)
+	{
+		normal.x_d *= -1;
+		normal.y_d *= -1;
+		normal.z_d *= -1;
+	}
+	return (normal);
+}
+
+int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double distance)
+{
+	double		t;
+	int			color;
+	t_vector	normal;
+
 	if (nearest)
 	{
 		if (nearest->type == sphere)
-			return (add_ambient(nearest->sphere->color, ambiant));
+		{
+			normal = get_sphere_normal(nearest->sphere, ray, distance);
+			color = normalized_sphere_color(nearest->sphere, normal);
+//			color = add_ambient(color, scene->ambiant_l);
+			return (color);
+		}
 		if (nearest->type == plane)
-			return (add_ambient(nearest->plane->colors, ambiant));
+			return (add_ambient(nearest->plane->colors, scene->ambiant_l));
 		if (nearest->type == cylinder)
-			return (add_ambient(nearest->cylinder->color, ambiant));
+			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
 	}
 	t = (ray.z_d); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
