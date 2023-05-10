@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/10 16:41:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:03:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	add_ambient(int color, t_ambiant_l *ambiant)
 	return (get_rgba(r, g, b, 255));
 }
 
-static int	normalized_sphere_color(t_sphere *sphere, t_vector normal, t_vector ray)
+static int	normalized_color(int color, t_vector normal, t_vector ray)
 {
 	double	ratio;
 	double	ray_len;
@@ -58,7 +58,7 @@ static int	normalized_sphere_color(t_sphere *sphere, t_vector normal, t_vector r
 	ray.y_d /= ray_len;
 	ray.z_d /= ray_len;
 	ratio = dot_product(normal, ray);
-	return (get_rgba(fabs(ratio * get_r(sphere->color)), fabs(ratio * get_g(sphere->color)), fabs(ratio * get_b(sphere->color)), 255));
+	return (get_rgba(fabs(ratio * get_r(color)), fabs(ratio * get_g(color)), fabs(ratio * get_b(color)), 255));
 }
 
 static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distance)
@@ -73,6 +73,22 @@ static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distanc
 	normal.x_d = normal.x_o - sphere->pos->x;
 	normal.y_d = normal.y_o - sphere->pos->y;
 	normal.z_d = normal.z_o - sphere->pos->z;
+	vector_len = sqrt(dot_product(normal, normal));
+	normal.x_d /= vector_len;
+	normal.y_d /= vector_len;
+	normal.z_d /= vector_len;
+	return (normal);
+}
+
+static t_vector	get_plane_normal(t_plane *plane, t_vector ray, double distance)
+{
+	t_vector	normal;
+	double		vector_len;
+
+	normal = *plane->vector;
+	normal.x_o = distance * ray.x_d;
+	normal.y_o = distance * ray.y_d;
+	normal.z_o = distance * ray.z_d;
 	vector_len = sqrt(dot_product(normal, normal));
 	normal.x_d /= vector_len;
 	normal.y_d /= vector_len;
@@ -108,13 +124,18 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 	if (nearest)
 	{
 		if (nearest->type == sphere)
+		{
 			normal = get_sphere_normal(nearest->sphere, ray, distance);
+			color = normalized_color(nearest->sphere->color, normal, ray);
+		}
 		if (nearest->type == plane)
-			return (add_ambient(nearest->plane->colors, scene->ambiant_l));
+		{
+			normal = get_plane_normal(nearest->plane, ray, distance);
+			color = normalized_color(nearest->sphere->color, normal, ray);
+		}
 		if (nearest->type == cylinder)
 			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
 		diffuse_color = get_diffuse_ratio(scene->light, normal);
-		color = normalized_sphere_color(nearest->sphere, normal, ray);
 		color = get_final_color(color, diffuse_color, scene);
 		return (color);
 	}
