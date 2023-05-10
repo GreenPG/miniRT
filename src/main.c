@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 15:33:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:00:34 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 	if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_RELEASE)
 		world_translate(data->scene, 0, 0, 1);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+	{
 		mlx_close_window(data->mlx);
+		return ;
+	}
 	render(data->scene->img, data->scene);
 }
 
@@ -121,5 +124,6 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	free_scene(&scene);
+	free(data);
 	return (0);
 }

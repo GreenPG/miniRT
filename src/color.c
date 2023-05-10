@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/10 12:48:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:41:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,43 @@ static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distanc
 	return (normal);
 }
 
+static int	get_final_color(int color, int diffuse_color, t_scene *scene)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = get_r(color) * (scene->ambiant_l->light_ratio * get_r(scene->ambiant_l->colors) + get_r(diffuse_color)) / 255;
+	if (r > 255)
+		r = 255;
+	g = get_g(color) * (scene->ambiant_l->light_ratio * get_g(scene->ambiant_l->colors) + get_r(diffuse_color)) / 255;
+	if (g > 255)
+		g = 255;
+	b = get_b(color) * (scene->ambiant_l->light_ratio * get_b(scene->ambiant_l->colors) + get_r(diffuse_color)) / 255;
+	if (b > 255)
+		b = 255;
+	return (get_rgba(r, g, b, 255));
+}
+
 int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double distance)
 {
 	double		t;
+	int			diffuse_color;
 	int			color;
 	t_vector	normal;
 
 	if (nearest)
 	{
 		if (nearest->type == sphere)
-		{
 			normal = get_sphere_normal(nearest->sphere, ray, distance);
-			color = normalized_sphere_color(nearest->sphere, normal, ray);
-			color = add_ambient(color, scene->ambiant_l);
-			return (color);
-		}
 		if (nearest->type == plane)
 			return (add_ambient(nearest->plane->colors, scene->ambiant_l));
 		if (nearest->type == cylinder)
 			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
+		diffuse_color = get_diffuse_ratio(scene->light, normal);
+		color = normalized_sphere_color(nearest->sphere, normal, ray);
+		color = get_final_color(color, diffuse_color, scene);
+		return (color);
 	}
 	t = (ray.z_d); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
