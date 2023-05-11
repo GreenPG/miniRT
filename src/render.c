@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 19:04:17 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:49:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	get_background_color(t_vector ray, t_scene *scene)
 		}
 		cursor = cursor->next;
 	}
-	return (get_obj_color(nearest, ray, scene->ambiant_l));
+	return (get_obj_color(nearest, ray, scene, nearest_distance));
 }
 
 int	render(mlx_image_t *img, t_scene *scene)
