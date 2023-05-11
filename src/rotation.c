@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 09:41:33 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:00:19 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ void    sphere_rot_x(t_sphere *sphere, double angle)
     tmp = sphere->pos->x;
     sphere->pos->x = sphere->pos->x * cos(angle) - sphere->pos->y * sin(angle);
     sphere->pos->y = sphere->pos->y * cos(angle) + tmp * sin(angle);
+}
+
+void    light_rot_x(t_light *light, double angle)
+{
+    double  tmp;
+
+    tmp = light->pos->x;
+    light->pos->x = light->pos->x * cos(angle) - light->pos->y * sin(angle);
+    light->pos->y = light->pos->y * cos(angle) + tmp * sin(angle);
 }
 
 void    plane_rot_x(t_plane *plane, double angle)
@@ -51,6 +60,7 @@ void rotation_x(t_scene *scene, double angle)
     t_obj_list	*cursor;
 
     cursor = scene->obj_list;
+    light_rot_x(scene->light, angle);
     while (cursor)
     {
         if (cursor->type == sphere)
@@ -70,6 +80,15 @@ void    sphere_rot_y(t_sphere *sphere, double angle)
     tmp = sphere->pos->y;
     sphere->pos->y = sphere->pos->y * cos (angle) - sphere->pos->z * sin (angle);
     sphere->pos->z = sphere->pos->z * cos (angle) + tmp * sin (angle);
+}
+
+void    light_rot_y(t_light *light, double angle)
+{
+    double  tmp;
+
+    tmp = light->pos->y;
+    light->pos->y = light->pos->y * cos (angle) - light->pos->z * sin (angle);
+    light->pos->z = light->pos->z * cos (angle) + tmp * sin (angle);
 }
 
 void    plane_rot_y(t_plane *plane, double angle)
@@ -101,6 +120,7 @@ void rotation_y(t_scene *scene, double angle)
     t_obj_list	*cursor;
 
     cursor = scene->obj_list;
+    light_rot_y(scene->light, angle);
     while (cursor)
     {
         if (cursor->type == sphere)
