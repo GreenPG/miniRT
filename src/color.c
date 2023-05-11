@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/10 17:03:32 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:40:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 		if (nearest->type == plane)
 		{
 			normal = get_plane_normal(nearest->plane, ray, distance);
-			color = normalized_color(nearest->sphere->color, normal, ray);
+			color = normalized_color(nearest->plane->colors, normal, ray);
 		}
 		if (nearest->type == cylinder)
 			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
