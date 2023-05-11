@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/10 10:49:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:53:14 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ double	*cyl_quadratic(double a, double b, double c)
 		return (NULL);
 	}
     d = (b * b) - (4.0 * a * c);
-	r[0] = 1 * (-b - sqrt(d)) / (2 * a);
-	r[1] = 1 * (-b + sqrt(d)) / (2 * a);
+	if (d <= 0)
+		return (NULL);
+	r[0] = (-b - sqrt(d)) / (2 * a);
+	r[1] = (-b + sqrt(d)) / (2 * a);
 	return (r);
 }
 
@@ -156,5 +158,4 @@ int init_rays(t_scene *scene)
 	}
 	scene->camera->rays = ray_list;
 	return (1);
-
 }

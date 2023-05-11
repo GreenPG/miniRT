@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 09:47:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:52:48 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,51 @@ static void	ft_hook(void *img_v)
 		x++;
 	}
 }
-void	show_main_menu(mlx_image_t *img, mlx_t *mlx)
+static void    sphere_translate(t_sphere *sphere, double x, double y, double z)
 {
-	(void)img;
-	mlx_image_t *test_img;	
-
-	test_img = mlx_put_string(mlx, "MAIN MENU", mlx->width / 2 - 100, 0);
-	mlx_resize_image(test_img, 200, 40);
+    sphere->pos->x += x;
+    sphere->pos->y += y;
+    sphere->pos->z += z;
 }
+
+static void    plane_translate(t_plane *plane, double x, double y, double z)
+{
+    plane->vector->x_o += x;
+    plane->vector->y_o += y;
+    plane->vector->z_o += z;
+}
+
+static void    cylinder_translate(t_cylinder *cylinder, double x, double y, double z)
+{
+    cylinder->vector->x_o += x;
+    cylinder->vector->y_o += y;
+    cylinder->vector->z_o += z;
+}
+
+
+void	move_one(t_obj_list nearest, double x, double y, double z)
+{
+		if (nearest.type == sphere)
+			sphere_translate(nearest.sphere, x, y, z);
+		else if (nearest.type == cylinder)
+			cylinder_translate(nearest.cylinder, x, y, z);
+		else if (nearest.type == plane)
+			plane_translate(nearest.plane, x, y, z);
+}
+
 void handle_keypress(mlx_key_data_t keydata, void* ptr)
 {
 	t_data	*data;
 
 	data = ptr;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		world_rotate(data->scene, -7.2 * (M_PI / 180), 0);
+		world_rotate(data->scene, -7.2, 0);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		world_rotate(data->scene, 7.2 * (M_PI / 180), 0);
+		world_rotate(data->scene, 7.2, 0);
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_RELEASE)
-		world_rotate(data->scene, 0, 7.2 * (M_PI / 180));
+		world_rotate(data->scene, 0, 7.2);
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_RELEASE)
-		world_rotate(data->scene, 0, -7.2 * (M_PI / 180));
+		world_rotate(data->scene, 0, -7.2);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		world_translate(data->scene, 0, -1, 0);
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
@@ -85,7 +109,62 @@ void handle_keypress(mlx_key_data_t keydata, void* ptr)
 		mlx_close_window(data->mlx);
 		return ;
 	}
+	if (keydata.key == MLX_KEY_KP_8 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 1, 0, 0);
+	if (keydata.key == MLX_KEY_KP_5 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, -1, 0, 0);
 	render(data->scene->img, data->scene);
+}
+
+t_obj_list	get_click_obj(t_vector ray, t_scene *scene)
+{
+	t_obj_list	*cursor;
+	t_obj_list	*nearest;
+	double		nearest_distance;
+	double		current_distance;
+
+	nearest = NULL;
+	nearest_distance = INFINITY;
+	cursor = scene->obj_list;
+	while (cursor)
+	{
+		current_distance = INFINITY;
+		if (cursor->type == sphere)
+			current_distance = sphere_hit(cursor->sphere, ray);
+		else if (cursor->type == cylinder)
+			current_distance = cylinder_hit(cursor->cylinder, ray);
+		else if (cursor->type == plane)
+			current_distance = plane_hit(cursor->plane, ray);
+		if (current_distance < nearest_distance)
+		{
+			nearest = cursor;	
+			nearest_distance = current_distance;
+		}
+		cursor = cursor->next;
+	}
+	if (nearest == NULL)
+		return (scene->obj_selected);
+	return (*nearest);
+}
+
+void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+{
+	int x;
+	int	y;
+	t_data	*data;
+
+	data = param;
+	if(button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
+	{
+		mlx_get_mouse_pos(data->mlx, &x, &y);
+		data->scene->obj_selected = get_click_obj(data->scene->camera->rays->rays[x][y], data->scene);
+	}
+	(void)button;
+	(void)action;
+	(void)mods;
+	(void)param;
+
+
 }
 
 int	main(int argc, char **argv)
@@ -120,6 +199,7 @@ int	main(int argc, char **argv)
 	data->scene = scene;
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop_hook(mlx, ft_hook, img);
+	mlx_mouse_hook(data->mlx, mouse_handle, data);
 	mlx_key_hook(mlx, &handle_keypress, data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
