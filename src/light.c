@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/10 15:44:11 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:09:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	get_diffuse_ratio(t_light *light, t_vector normal)
 	int			g;
 	int			b;
 
+	light_dir.x_o = normal.x_o;
+	light_dir.y_o = normal.y_o;
+	light_dir.z_o = normal.z_o;
 	light_dir.x_d = light->pos->x - normal.x_o;
 	light_dir.y_d = light->pos->y - normal.y_o;
 	light_dir.z_d = light->pos->z - normal.z_o;

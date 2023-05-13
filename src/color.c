@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/11 09:40:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:10:04 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distanc
 	t_vector	normal;
 	double		vector_len;
 
-	distance += 0.001;
+	// distance = 0.001;
 	normal.x_o = distance * ray.x_d;
 	normal.y_o = distance * ray.y_d;
 	normal.z_o = distance * ray.z_d;
@@ -85,7 +85,9 @@ static t_vector	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	t_vector	normal;
 	double		vector_len;
 
-	normal = *plane->vector;
+	normal.x_d = -plane->vector->x_d;
+	normal.y_d = -plane->vector->y_d;
+	normal.z_d = -plane->vector->z_d;
 	normal.x_o = distance * ray.x_d;
 	normal.y_o = distance * ray.y_d;
 	normal.z_o = distance * ray.z_d;
@@ -135,13 +137,14 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 		}
 		if (nearest->type == cylinder)
 			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
+
 		diffuse_color = get_diffuse_ratio(scene->light, normal);
 		color = get_final_color(color, diffuse_color, scene);
 		return (color);
 	}
-	t = (ray.z_d); //bon c style mais prend pas en compte la position orig
+	t = sin((ray.z_d) + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
-		return(get_rgba((255 * (1 - t) + t * 160),	(255 * (1 - t) + t * 150), (255 * (1 - t) + t * 240), 255));
+		return(get_rgba((255 * (1 - t) + t * 156),	(255 * (1 - t) + t * 156), (255 * (1 - t) + t * 245), 255));
 	t = -t;
-	return(get_rgba((255 * (1 - t) + t * 229),	(255 * (1 - t) + t * 190), (255 * (1 - t) + t * 236), 255));
+	return(get_rgba((255 * (1 - t) + t * 231),	(255 * (1 - t) + t * 109), (255 * (1 - t) + t * 245), 255));
 }

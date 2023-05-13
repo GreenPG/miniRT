@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/11 09:44:27 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:21:28 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,27 +106,28 @@ t_vector transform_ray(t_vector ray, t_cylinder *cylinder)
 	double beta;
 
 	alpha = atan2(cylinder->vector->x_d, cylinder->vector->y_d);
-	beta = -atan2(cylinder->vector->z_d, fabs(cylinder->vector->y_d));
+	beta = -atan2(cylinder->vector->z_d, cylinder->vector->y_d);
 
 	ray.x_o = -cylinder->vector->x_o;
 	ray.y_o = -cylinder->vector->y_o;
 	ray.z_o = -cylinder->vector->z_o;
-	 double  tmp;
+	double  tmp;
 
-	tmp = ray.x_o;
-	ray.x_o = ray.x_o * cos(alpha) - ray.y_o * sin(alpha);
-	ray.y_o = ray.y_o * cos(alpha) + tmp * sin(alpha);
 	tmp = ray.y_o;
 	ray.y_o = ray.y_o * cos (beta) - ray.z_o * sin (beta);
 	ray.z_o = ray.z_o * cos (beta) + tmp * sin (beta);
-
-    tmp = ray.x_d;
-    ray.x_d = ray.x_d * cos(alpha) - ray.y_d * sin(alpha);
-    ray.y_d = ray.y_d * cos(alpha) + tmp * sin(alpha);
+	tmp = ray.x_o;
+	ray.x_o = ray.x_o * cos(alpha) - ray.y_o * sin(alpha);
+	ray.y_o = ray.y_o * cos(alpha) + tmp * sin(alpha);
+	
 	tmp = ray.y_d;		
 	ray.y_d = ray.y_d * cos (beta) - ray.z_d * sin (beta);
     ray.z_d = ray.z_d * cos (beta) + tmp * sin (beta);
+    tmp = ray.x_d;
+    ray.x_d = ray.x_d * cos(alpha) - ray.y_d * sin(alpha);
+    ray.y_d = ray.y_d * cos(alpha) + tmp * sin(alpha);
 	return (ray);
+	
 }
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
