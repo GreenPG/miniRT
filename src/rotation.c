@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/14 11:46:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:59:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void rotation_x(t_scene *scene, double angle)
     t_obj_list	*cursor;
 
     cursor = scene->obj_list;
-    light_rot_x(scene->light, angle);
     while (cursor)
     {
         if (cursor->type == sphere)
@@ -120,7 +119,6 @@ void rotation_y(t_scene *scene, double angle)
     t_obj_list	*cursor;
 
     cursor = scene->obj_list;
-    light_rot_y(scene->light, angle);
     while (cursor)
     {
         if (cursor->type == sphere)

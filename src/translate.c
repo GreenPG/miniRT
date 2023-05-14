@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:23:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 17:40:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:00:16 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void    world_translate(t_scene *scene, double x, double y, double z)
     t_obj_list	*cursor;
 
     cursor = scene->obj_list;
-    light_translate(scene->light, x, y, z);
     while (cursor)
     {
         if (cursor->type == sphere)
