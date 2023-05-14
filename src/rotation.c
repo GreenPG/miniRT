@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 10:00:19 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/14 11:46:42 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@ void    sphere_rot_x(t_sphere *sphere, double angle)
 {
     double  tmp;
 
-    tmp = sphere->pos->x;
-    sphere->pos->x = sphere->pos->x * cos(angle) - sphere->pos->y * sin(angle);
-    sphere->pos->y = sphere->pos->y * cos(angle) + tmp * sin(angle);
+    tmp = sphere->origin->x;
+    sphere->origin->x = sphere->origin->x * cos(angle) - sphere->origin->y * sin(angle);
+    sphere->origin->y = sphere->origin->y * cos(angle) + tmp * sin(angle);
 }
 
 void    light_rot_x(t_light *light, double angle)
 {
     double  tmp;
 
-    tmp = light->pos->x;
-    light->pos->x = light->pos->x * cos(angle) - light->pos->y * sin(angle);
-    light->pos->y = light->pos->y * cos(angle) + tmp * sin(angle);
+    tmp = light->origin->x;
+    light->origin->x = light->origin->x * cos(angle) - light->origin->y * sin(angle);
+    light->origin->y = light->origin->y * cos(angle) + tmp * sin(angle);
 }
 
 void    plane_rot_x(t_plane *plane, double angle)
 {
     double  tmp;
 
-    tmp = plane->vector->x_o;
-    plane->vector->x_o = plane->vector->x_o * cos (angle) - plane->vector->y_o * sin (angle);
-    plane->vector->y_o = plane->vector->y_o * cos (angle) + tmp * sin (angle);
-    tmp = plane->vector->x_d;
-    plane->vector->x_d = plane->vector->x_d * cos (angle) - plane->vector->y_d * sin (angle);
-    plane->vector->y_d = plane->vector->y_d * cos (angle) + tmp * sin (angle);
+    tmp = plane->origin->x;
+    plane->origin->x = plane->origin->x * cos (angle) - plane->origin->y * sin (angle);
+    plane->origin->y = plane->origin->y * cos (angle) + tmp * sin (angle);
+    tmp = plane->direction->x;
+    plane->direction->x = plane->direction->x * cos (angle) - plane->direction->y * sin (angle);
+    plane->direction->y = plane->direction->y * cos (angle) + tmp * sin (angle);
 
 }
 
@@ -47,12 +47,12 @@ void	cylinder_rot_x(t_cylinder *cylinder, double angle)
 {
     double  tmp;
 
-    tmp = cylinder->vector->x_o;
-    cylinder->vector->x_o = cylinder->vector->x_o * cos (angle) - cylinder->vector->y_o * sin (angle);
-    cylinder->vector->y_o = cylinder->vector->y_o * cos (angle) + tmp * sin (angle);
-    tmp = cylinder->vector->x_d;
-    cylinder->vector->x_d = cylinder->vector->x_d * cos (angle) - cylinder->vector->y_d * sin(angle);
-    cylinder->vector->y_d = cylinder->vector->y_d * cos (angle) + tmp * sin (angle);
+    tmp = cylinder->origin->x;
+    cylinder->origin->x = cylinder->origin->x * cos (angle) - cylinder->origin->x * sin (angle);
+    cylinder->origin->x = cylinder->origin->x * cos (angle) + tmp * sin (angle);
+    tmp = cylinder->direction->x;
+    cylinder->direction->x = cylinder->direction->x * cos (angle) - cylinder->direction->x * sin(angle);
+    cylinder->direction->x = cylinder->direction->x * cos (angle) + tmp * sin (angle);
 }
 
 void rotation_x(t_scene *scene, double angle)
@@ -77,42 +77,42 @@ void    sphere_rot_y(t_sphere *sphere, double angle)
 {
     double  tmp;
 
-    tmp = sphere->pos->y;
-    sphere->pos->y = sphere->pos->y * cos (angle) - sphere->pos->z * sin (angle);
-    sphere->pos->z = sphere->pos->z * cos (angle) + tmp * sin (angle);
+    tmp = sphere->origin->y;
+    sphere->origin->y = sphere->origin->y * cos (angle) - sphere->origin->z * sin (angle);
+    sphere->origin->z = sphere->origin->z * cos (angle) + tmp * sin (angle);
 }
 
 void    light_rot_y(t_light *light, double angle)
 {
     double  tmp;
 
-    tmp = light->pos->y;
-    light->pos->y = light->pos->y * cos (angle) - light->pos->z * sin (angle);
-    light->pos->z = light->pos->z * cos (angle) + tmp * sin (angle);
+    tmp = light->origin->y;
+    light->origin->y = light->origin->y * cos (angle) - light->origin->z * sin (angle);
+    light->origin->z = light->origin->z * cos (angle) + tmp * sin (angle);
 }
 
 void    plane_rot_y(t_plane *plane, double angle)
 {
     double  tmp;
 
-    tmp =  plane->vector->y_o;
-    plane->vector->y_o = plane->vector->y_o * cos (angle) - plane->vector->z_o * sin (angle);
-    plane->vector->z_o = plane->vector->z_o * cos (angle) + tmp * sin (angle);
-    tmp =  plane->vector->y_d;
-    plane->vector->y_d = plane->vector->y_d * cos (angle) - plane->vector->z_d * sin (angle);
-    plane->vector->z_d = plane->vector->z_d * cos (angle) + tmp * sin (angle);
+    tmp =  plane->origin->y;
+    plane->origin->y = plane->origin->y * cos (angle) - plane->origin->z * sin (angle);
+    plane->origin->z = plane->origin->z * cos (angle) + tmp * sin (angle);
+    tmp =  plane->direction->y;
+    plane->direction->y = plane->direction->y * cos (angle) - plane->direction->y * sin (angle);
+    plane->direction->z = plane->direction->z * cos (angle) + tmp * sin (angle);
 }
 
 static void	cylinder_rot_y(t_cylinder *cylinder, double angle)
 {
     double  tmp;
 
-    tmp =  cylinder->vector->y_o;
-    cylinder->vector->y_o = cylinder->vector->y_o * cos (angle) - cylinder->vector->z_o * sin (angle);
-    cylinder->vector->z_o = cylinder->vector->z_o * cos (angle) + tmp * sin (angle);
-    tmp =  cylinder->vector->y_d;
-    cylinder->vector->y_d = cylinder->vector->y_d * cos (angle) - cylinder->vector->z_d * sin (angle);
-    cylinder->vector->z_d = cylinder->vector->z_d * cos (angle) + tmp * sin (angle);
+    tmp =  cylinder->origin->y;
+    cylinder->origin->y = cylinder->origin->y * cos (angle) - cylinder->origin->z * sin (angle);
+    cylinder->origin->z = cylinder->origin->z * cos (angle) + tmp * sin (angle);
+    tmp =  cylinder->direction->y;
+    cylinder->direction->y = cylinder->direction->y * cos (angle) - cylinder->direction->z * sin (angle);
+    cylinder->direction->z = cylinder->direction->z * cos (angle) + tmp * sin (angle);
 }
 
 void rotation_y(t_scene *scene, double angle)

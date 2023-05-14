@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 14:52:44 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:21:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,25 @@ static mlx_t	*ft_mlx_create(void)
 	return (mlx);
 }
 
-static void	ft_hook(void *img_v)
-{
-	mlx_image_t	*img;
-	unsigned int	x;
-	unsigned int	y;
-
-	img = (mlx_image_t *)img_v;
-	x = 0;
-	while(x < img->width)
-	{
-		y = 0;
-		while (y < img->height)
-		{
-			//mlx_put_pixel(img, x, y, get_rgba(x / (img->width / 240), y / (img->height / 200), 0, 255));
-			y++;
-		}
-		x++;
-	}
-}
 static void    sphere_translate(t_sphere *sphere, double x, double y, double z)
 {
-    sphere->pos->x += x;
-    sphere->pos->y += y;
-    sphere->pos->z += z;
+    sphere->origin->x += x;
+    sphere->origin->y += y;
+    sphere->origin->z += z;
 }
 
 static void    plane_translate(t_plane *plane, double x, double y, double z)
 {
-    plane->vector->x_o += x;
-    plane->vector->y_o += y;
-    plane->vector->z_o += z;
+    plane->origin->x += x;
+    plane->origin->y += y;
+    plane->origin->z += z;
 }
 
 static void    cylinder_translate(t_cylinder *cylinder, double x, double y, double z)
 {
-    cylinder->vector->x_o += x;
-    cylinder->vector->y_o += y;
-    cylinder->vector->z_o += z;
+    cylinder->origin->x += x;
+    cylinder->origin->y += y;
+    cylinder->origin->z += z;
 }
 
 
@@ -199,7 +180,7 @@ int	main(int argc, char **argv)
 	mlx = ft_mlx_create();
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
-	world_translate(scene, -scene->camera->vector->x_o, -scene->camera->vector->y_o, -scene->camera->vector->z_o);
+	world_translate(scene, -scene->camera->origin->x, -scene->camera->origin->y, -scene->camera->origin->z);
 	world_rotate(scene, scene->camera->alpha, scene->camera->beta);
 	render(img, scene);
 	scene->img = img;
@@ -212,7 +193,6 @@ int	main(int argc, char **argv)
 	data->mlx = mlx;
 	data->scene = scene;
 	mlx_image_to_window(mlx, img, 0, 0);
-	mlx_loop_hook(mlx, ft_hook, img);
 	mlx_mouse_hook(data->mlx, mouse_handle, data);
 	mlx_key_hook(mlx, &handle_keypress, data);
 	mlx_loop(mlx);

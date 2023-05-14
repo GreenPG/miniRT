@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:25:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:42:53 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:45:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ struct s_rays {
 };
 
 struct s_camera	{
-	t_vector	*vector;
+	t_vector	*origin;
+	t_vector	*direction;
 	double		fov;
 	t_rays		*rays;
 	double		alpha;

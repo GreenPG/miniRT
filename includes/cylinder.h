@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/19 18:24:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:45:26 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 typedef struct s_cylinder	t_cylinder;
 
 struct s_cylinder	{
-	t_vector	*vector;
+	t_vector	*origin;
+	t_vector	*direction;
 	float		diameter;
 	float		height;
 	int			color;

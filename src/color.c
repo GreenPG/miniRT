@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/11 17:10:04 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:55:25 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static int	normalized_color(int color, t_vector normal, t_vector ray)
 	double	ray_len;
 
 	ray_len = sqrt(dot_product(ray, ray));
-	ray.x_d /= ray_len;
-	ray.y_d /= ray_len;
-	ray.z_d /= ray_len;
+	ray.x /= ray_len;
+	ray.y /= ray_len;
+	ray.z /= ray_len;
 	ratio = dot_product(normal, ray);
 	return (get_rgba(fabs(ratio * get_r(color)), fabs(ratio * get_g(color)), fabs(ratio * get_b(color)), 255));
 }
@@ -67,16 +67,13 @@ static t_vector	get_sphere_normal(t_sphere *sphere, t_vector ray, double distanc
 	double		vector_len;
 
 	// distance = 0.001;
-	normal.x_o = distance * ray.x_d;
-	normal.y_o = distance * ray.y_d;
-	normal.z_o = distance * ray.z_d;
-	normal.x_d = normal.x_o - sphere->pos->x;
-	normal.y_d = normal.y_o - sphere->pos->y;
-	normal.z_d = normal.z_o - sphere->pos->z;
+	normal.x = distance * ray.x - sphere->origin->x;
+	normal.y = distance * ray.y - sphere->origin->y;
+	normal.z = distance * ray.z - sphere->origin->z;
 	vector_len = sqrt(dot_product(normal, normal));
-	normal.x_d /= vector_len;
-	normal.y_d /= vector_len;
-	normal.z_d /= vector_len;
+	normal.x /= vector_len;
+	normal.y /= vector_len;
+	normal.z /= vector_len;
 	return (normal);
 }
 
@@ -85,16 +82,14 @@ static t_vector	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	t_vector	normal;
 	double		vector_len;
 
-	normal.x_d = -plane->vector->x_d;
-	normal.y_d = -plane->vector->y_d;
-	normal.z_d = -plane->vector->z_d;
-	normal.x_o = distance * ray.x_d;
-	normal.y_o = distance * ray.y_d;
-	normal.z_o = distance * ray.z_d;
+	(void)plane;
+	normal.x = distance * ray.x;
+	normal.y = distance * ray.y;
+	normal.z = distance * ray.z;
 	vector_len = sqrt(dot_product(normal, normal));
-	normal.x_d /= vector_len;
-	normal.y_d /= vector_len;
-	normal.z_d /= vector_len;
+	normal.x /= vector_len;
+	normal.y /= vector_len;
+	normal.z /= vector_len;
 	return (normal);
 }
 
@@ -142,7 +137,7 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 		color = get_final_color(color, diffuse_color, scene);
 		return (color);
 	}
-	t = sin((ray.z_d) + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
+	t = sin((ray.z) + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
 		return(get_rgba((255 * (1 - t) + t * 156),	(255 * (1 - t) + t * 156), (255 * (1 - t) + t * 245), 255));
 	t = -t;

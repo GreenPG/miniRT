@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 09:52:17 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:49:54 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 /*	structs_utils.c	*/
 
-t_coords	*init_coords(float x, float y, float z);
-t_coords	*get_coords(char *str);
+t_vector	*init_coords(float x, float y, float z);
+t_vector	*get_coords(char *str);
 t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/11 17:09:35 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:00:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	free_light(t_light **light)
 {
 	if (!light || !*light)
 		return ;
-	if (((*light)->pos))
-		free((*light)->pos);
+	if (((*light)->origin))
+		free((*light)->origin);
 	free(*light);
 	*light = NULL;
 	return ;
@@ -32,16 +32,16 @@ int	get_diffuse_ratio(t_light *light, t_vector normal)
 	int			g;
 	int			b;
 
-	light_dir.x_o = normal.x_o;
-	light_dir.y_o = normal.y_o;
-	light_dir.z_o = normal.z_o;
-	light_dir.x_d = light->pos->x - normal.x_o;
-	light_dir.y_d = light->pos->y - normal.y_o;
-	light_dir.z_d = light->pos->z - normal.z_o;
+	light_dir.x = normal.x;
+	light_dir.y = normal.y;
+	light_dir.z = normal.z;
+	light_dir.x = light->origin->x - normal.x;
+	light_dir.y = light->origin->y - normal.y;
+	light_dir.z = light->origin->z - normal.z;
 	light_dir_len = sqrt(dot_product(light_dir, light_dir));
-	light_dir.x_d /= light_dir_len;
-	light_dir.y_d /= light_dir_len;
-	light_dir.z_d /= light_dir_len;
+	light_dir.x /= light_dir_len;
+	light_dir.y /= light_dir_len;
+	light_dir.z /= light_dir_len;
 	diffuse_ratio = dot_product(normal, light_dir);
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
 	diffuse_ratio *= light->brightness;
@@ -115,8 +115,8 @@ t_light	*init_light(char *str)
 	i = 1;
 	while (ft_isspace(str[i]))
 		i++;
-	light->pos = get_coords(str + i);
-	if (!light->pos)
+	light->origin = get_coords(str + i);
+	if (!light->origin)
 	{
 		free_light(&light);
 		return (NULL);

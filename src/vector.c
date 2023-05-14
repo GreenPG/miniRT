@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/05 18:02:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/14 11:40:48 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 t_vector	scalar_multiplication(t_vector *vector, double scalar)
 {
+	//ca jse po comment faire pour l instant je sais pas comment tu l utilise
 	t_vector	result;
 
-	result.x_o = vector->x_o;
-	result.y_o = vector->y_o;
-	result.z_o = vector->z_o;
-	result.x_d = (vector->x_o + vector->x_d) * scalar;
-	result.x_d = (vector->y_o + vector->y_d) * scalar;
-	result.x_d = (vector->z_o + vector->z_d) * scalar;
+	// result.x_o = vector->x_o;
+	// result.y_o = vector->y_o;
+	// result.z_o = vector->z_o;
+	// result.x_d = (vector->x_o + vector->x_d) * scalar;
+	// result.x_d = (vector->y_o + vector->y_d) * scalar;
+	// result.x_d = (vector->z_o + vector->z_d) * scalar;
+	result.x = vector->x;
+	result.y = vector->y;
+	result.z = vector->z;
+	result.x = (vector->x + vector->x) * scalar;
+	result.x = (vector->y + vector->y) * scalar;
+	result.x = (vector->z + vector->z) * scalar;
 	return (result);
 }
 
@@ -29,25 +36,22 @@ t_vector	vector_cross(t_vector a, t_vector b)
 {
 	t_vector	result;
 
-	result.x_o = 0;
-	result.y_o = 0;
-	result.z_o = 0;
-	result.x_d = (a.y_d * b.z_d) - (a.z_d * b.y_d);
-	result.y_d = (a.x_d * b.z_d) + (a.z_d * b.x_d);
-	result.z_d = (a.x_d * b.y_d) - (a.y_d * b.x_d);
+	result.x = (a.y * b.z) - (a.z * b.y);
+	result.y = (a.x * b.z) + (a.z * b.x);
+	result.z = (a.x * b.y) - (a.y * b.x);
 	return (result);
 }
 
 double	dot_product(t_vector v, t_vector u)
 {
-	return (v.x_d * u.x_d + v.y_d * u.y_d + v.z_d * u.z_d);
+	return (v.x * u.x + v.y * u.y + v.z * u.z);
 }
 
 static void	get_o_vector(t_vector *vector, float x, float y, float z)
 {
-	vector->x_o = x;
-	vector->y_o = y;
-	vector->z_o = z;
+	vector->x = x;
+	vector->y = y;
+	vector->z = z;
 	return ;
 }
 
@@ -66,9 +70,9 @@ static void	get_d_vector(t_vector **vector_ptr, float x, float y, float z)
 	if (!vector_ptr || !*vector_ptr)
 		return ;
 	vector = *vector_ptr;
-	vector->x_d = x;
-	vector->y_d = y;
-	vector->z_d = z;
+	vector->x = x;
+	vector->y = y;
+	vector->z = z;
 	return ;
 }
 

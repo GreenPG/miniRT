@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/11 14:57:06 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:02:38 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	free_sphere(t_sphere **sphere)
 {
 	if (!sphere || !*sphere)
 		return ;
-	if ((*sphere)->pos)
-		free((*sphere)->pos);
+	if ((*sphere)->origin)
+		free((*sphere)->origin);
 	free(*sphere);
 	*sphere = NULL;
 	return ;
@@ -33,9 +33,9 @@ double	sphere_hit(void *sphere, t_vector ray)
 	double d;
 
 	obj = sphere;
-	oc.x_d = -obj->pos->x;
-	oc.y_d = -obj->pos->y;
-	oc.z_d = -obj->pos->z;
+	oc.x = -obj->origin->x;
+	oc.y = -obj->origin->y;
+	oc.z = -obj->origin->z;
 
     a = dot_product(ray, ray);
     b = dot_product(oc, ray);
@@ -120,8 +120,8 @@ t_sphere	*init_sphere(char *input)
 	i = 2;
 	while (ft_isspace(input[i]) == 1)
 		i++;
-	sphere->pos = get_coords(input + i);
-	if (!sphere->pos)
+	sphere->origin = get_coords(input + i);
+	if (!sphere->origin)
 	{
 		free_sphere(&sphere);
 		return (NULL);

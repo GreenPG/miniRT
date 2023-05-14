@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 11:30:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:54:18 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	get_to_next_int(char *str, int *i)
 	(*i)++;
 }
 
-t_coords	*get_coords(char *str)
+t_vector	*get_coords(char *str)
 {
-	t_coords	*coords;
+	t_vector	*coords;
 	int			i;
 	float		x;
 	float		y;
@@ -43,11 +43,11 @@ t_coords	*get_coords(char *str)
 	return (coords);
 }
 
-t_coords	*init_coords(float x, float y, float z)
+t_vector	*init_coords(float x, float y, float z)
 {
-	t_coords	*coords;
+	t_vector	*coords;
 
-	coords = malloc(sizeof(t_coords));
+	coords = malloc(sizeof(t_vector));
 	if (!coords)
 	{
 		ft_error("Error: fatal\n");

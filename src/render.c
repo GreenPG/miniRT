@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/11 09:53:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/14 11:46:29 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ t_vector	calculate_ray_direction(unsigned int x, unsigned int y, t_camera *camer
 {
 	t_vector ray;
 
-	ray.x_d = -tan(camera->fov / 2) +  x * 2 * (tan(camera->fov / 2) / (WIDTH - 1));
-	ray.z_d = tan(camera->fov / 2) * (9. / 16.) - y * 2 * (tan(camera->fov / 2) / (WIDTH - 1));
-	ray.y_d = 1.;
+	ray.x = -tan(camera->fov / 2) +  x * 2 * (tan(camera->fov / 2) / (WIDTH - 1));
+	ray.z = tan(camera->fov / 2) * (9. / 16.) - y * 2 * (tan(camera->fov / 2) / (WIDTH - 1));
+	ray.y = 1.;
 
 	return (ray);
 }
@@ -73,12 +73,9 @@ t_vector	ray_direction(unsigned int x, unsigned int y, t_camera camera)
 
 	alpha = (camera.fov / 2.) - x * (camera.fov / (WIDTH - 1));
 	beta = (camera.fov / 2.) * (9. / 16.) - y * (camera.fov / (WIDTH - 1));
-	ray.x_o = 0;
-	ray.y_o = 0;
-	ray.z_o = 0;
-	ray.x_d = -sin(alpha) * cos(beta);
-	ray.y_d = cos(alpha) * cos(beta);
-	ray.z_d = sin(beta);
+	ray.x = -sin(alpha) * cos(beta);
+	ray.y = cos(alpha) * cos(beta);
+	ray.z = sin(beta);
 	return (ray);
 }
 

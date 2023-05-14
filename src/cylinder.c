@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/12 13:21:28 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/14 11:46:11 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	free_cylinder(t_cylinder **cylinder)
 {
 	if (!cylinder || !*cylinder)
 		return ;
-	if ((*cylinder)->vector)
-		free((*cylinder)->vector);
+	if ((*cylinder)->origin)
+		free((*cylinder)->origin);
+	if ((*cylinder)->direction)
+		free((*cylinder)->direction);
 	free(*cylinder);
 	*cylinder = NULL;
 	return ;
@@ -102,30 +104,34 @@ void	free_cylinder(t_cylinder **cylinder)
 
 t_vector transform_ray(t_vector ray, t_cylinder *cylinder)
 {
-	double alpha;
-	double beta;
 
-	alpha = atan2(cylinder->vector->x_d, cylinder->vector->y_d);
-	beta = -atan2(cylinder->vector->z_d, cylinder->vector->y_d);
 
-	ray.x_o = -cylinder->vector->x_o;
-	ray.y_o = -cylinder->vector->y_o;
-	ray.z_o = -cylinder->vector->z_o;
+	//la la separation en deux relou encore
+	double		alpha;
+	double		beta;
+	t_vector	rayo;
+
+	alpha = atan2(cylinder->direction->x, cylinder->direction->y);
+	beta = -atan2(cylinder->direction->z, cylinder->direction->y);
+
+	rayo.x = -cylinder->origin->x;
+	rayo.y = -cylinder->origin->y;
+	rayo.z = -cylinder->origin->z;
 	double  tmp;
 
-	tmp = ray.y_o;
-	ray.y_o = ray.y_o * cos (beta) - ray.z_o * sin (beta);
-	ray.z_o = ray.z_o * cos (beta) + tmp * sin (beta);
-	tmp = ray.x_o;
-	ray.x_o = ray.x_o * cos(alpha) - ray.y_o * sin(alpha);
-	ray.y_o = ray.y_o * cos(alpha) + tmp * sin(alpha);
+	tmp = rayo.y;
+	rayo.y = rayo.y * cos (beta) - rayo.z * sin (beta);
+	rayo.z = rayo.z * cos (beta) + tmp * sin (beta);
+	tmp = rayo.x;
+	rayo.x = rayo.x * cos(alpha) - rayo.y * sin(alpha);
+	rayo.y = rayo.y * cos(alpha) + tmp * sin(alpha);
 	
-	tmp = ray.y_d;		
-	ray.y_d = ray.y_d * cos (beta) - ray.z_d * sin (beta);
-    ray.z_d = ray.z_d * cos (beta) + tmp * sin (beta);
-    tmp = ray.x_d;
-    ray.x_d = ray.x_d * cos(alpha) - ray.y_d * sin(alpha);
-    ray.y_d = ray.y_d * cos(alpha) + tmp * sin(alpha);
+	tmp = ray.y;
+	ray.y = ray.y * cos (beta) - ray.z * sin (beta);
+    ray.z = ray.z * cos (beta) + tmp * sin (beta);
+    tmp = ray.x;
+    ray.x = ray.x * cos(alpha) - ray.y * sin(alpha);
+    ray.y = ray.y * cos(alpha) + tmp * sin(alpha);
 	return (ray);
 	
 }
@@ -136,18 +142,22 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	double		c;
 	double		*root;
 
+	// ray = transform_ray(ray, cylinder);
+	// a = ray.x_d * ray.x_d + ray.z_d * ray.z_d;
+	// b = 2 * (ray.x_o * ray.x_d + ray.z_o * ray.z_d);
+	// c = ray.x_o * ray.x_o + ray.z_o * ray.z_o - (cylinder->diameter / 2);
 	ray = transform_ray(ray, cylinder);
-	a = ray.x_d * ray.x_d + ray.z_d * ray.z_d;
-	b = 2 * (ray.x_o * ray.x_d + ray.z_o * ray.z_d);
-	c = ray.x_o * ray.x_o + ray.z_o * ray.z_o - (cylinder->diameter / 2);
+	a = ray.x * ray.x + ray.z * ray.z;
+	b = 2 * (ray.x * ray.x + ray.z * ray.z);
+	c = ray.x * ray.x + ray.z * ray.z - (cylinder->diameter / 2);
 	root = cyl_quadratic(a, b, c);
 	if (!root)
 		return (INFINITY);
 
 
-	if (root[0] > 0 && root[0] < root[1] && ray.y_o + root[0] * ray.y_d > -cylinder->height / 2 && ray.y_o + root[0] * ray.y_d < cylinder->height / 2)
+	if (root[0] > 0 && root[0] < root[1] && ray.y + root[0] * ray.y > -cylinder->height / 2 && ray.y + root[0] * ray.y < cylinder->height / 2)
 		return (root[0]);
-	else if (root[1] > 0 && ray.y_o + root[1] * ray.y_d > -cylinder->height / 2 && ray.y_o + root[1] * ray.y_d < cylinder->height / 2)
+	else if (root[1] > 0 && ray.y + root[1] * ray.y > -cylinder->height / 2 && ray.y + root[1] * ray.y < cylinder->height / 2)
 		return (root[1]);
 
 
@@ -227,8 +237,9 @@ t_cylinder	*init_cylinder(char *str)
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
-	cylinder->vector = init_vector(str + i);
-	if (!cylinder->vector)
+	cylinder->origin = get_coords(str + i);
+	cylinder->direction = get_coords(str+i);
+	if (!cylinder->origin || !cylinder->origin)
 	{
 		free_cylinder(&cylinder);
 		return (NULL);
