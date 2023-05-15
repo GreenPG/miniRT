@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 17:49:26 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:00:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ typedef enum e_type {sphere, plane, cylinder}	t_type;
 
 typedef struct s_vector		t_vector;
 typedef struct s_obj_list	t_obj_list;
-typedef struct s_plane	t_plane;
-typedef struct s_sphere	t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_sphere		t_sphere;
 typedef struct s_cylinder	t_cylinder;
+typedef struct s_normal		t_normal;
 
 struct	s_vector {
 	double	x;
@@ -37,5 +38,9 @@ struct	s_obj_list {
 	t_obj_list	*next;
 };
 
+struct	s_normal {
+	t_vector	origin;
+	t_vector	dir;
+};
 
 #endif

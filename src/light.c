@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 10:23:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:11:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_light(t_light **light)
 	return ;
 }
 
-int	get_diffuse_ratio(t_light *light, t_vector normal)
+int	get_diffuse_ratio(t_light *light, t_normal normal)
 {
 	double		diffuse_ratio;
 	double		light_dir_len;
@@ -32,17 +32,14 @@ int	get_diffuse_ratio(t_light *light, t_vector normal)
 	int			g;
 	int			b;
 
-	light_dir.x = normal.x;
-	light_dir.y = normal.y;
-	light_dir.z = normal.z;
-	light_dir.x = light->origin->x - normal.x;
-	light_dir.y = light->origin->y - normal.y;
-	light_dir.z = light->origin->z - normal.z;
+	light_dir.x = light->origin->x - normal.origin.x;
+	light_dir.y = light->origin->y - normal.origin.y;
+	light_dir.z = light->origin->z - normal.origin.z;
 	light_dir_len = sqrt(dot_product(light_dir, light_dir));
 	light_dir.x /= light_dir_len;
 	light_dir.y /= light_dir_len;
 	light_dir.z /= light_dir_len;
-	diffuse_ratio = dot_product(normal, light_dir);
+	diffuse_ratio = dot_product(normal.dir, light_dir);
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
 	diffuse_ratio *= light->brightness;
 	r = get_r(light->colors) * diffuse_ratio;
