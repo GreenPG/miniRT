@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 18:20:40 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 13:18:05 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:08:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 
 TEST	ASSERT_VECTOR_EQ(t_vector *actual, t_vector *expected)
 {
-	ASSERT_EQ_FMT(expected->x_o, actual->x_o, "%f");
-	ASSERT_EQ_FMT(expected->y_o, actual->y_o, "%f");
-	ASSERT_EQ_FMT(expected->z_o, actual->z_o, "%f");
-	ASSERT_EQ_FMT(expected->x_d, actual->x_d, "%f");
-	ASSERT_EQ_FMT(expected->y_d, actual->y_d, "%f");
-	ASSERT_EQ_FMT(expected->z_d, actual->z_d, "%f");
+	ASSERT_EQ_FMT(expected->x, actual->x, "%f");
+	ASSERT_EQ_FMT(expected->y, actual->y, "%f");
+	ASSERT_EQ_FMT(expected->z, actual->z, "%f");
 	PASS();
 }
 
 TEST	ASSERT_CYLINDER_EQ(t_cylinder *actual, t_cylinder *expected)
 {
-	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
 	ASSERT_EQ_FMT(expected->height, actual->height, "%f");
 	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
@@ -36,7 +34,8 @@ TEST	ASSERT_CYLINDER_EQ(t_cylinder *actual, t_cylinder *expected)
 TEST	correct_input(void) {
 	t_cylinder *cyl1 = init_cylinder("cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255");
 	t_cylinder *expected = malloc(sizeof(t_cylinder));
-	expected->vector = init_vector("50.0,0.0,20.6 0.0,0.0,1.0");
+	expected->origin = init_vector("50.0,0.0,20.6");
+	expected->direction = init_vector("0.0,0.0,1.0");
 	expected->diameter = 14.2;
 	expected->height = 21.42;
 	expected->color = get_rgba(10, 0, 255, 255);

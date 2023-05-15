@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/14 11:40:48 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:29:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,10 @@ double	dot_product(t_vector v, t_vector u)
 	return (v.x * u.x + v.y * u.y + v.z * u.z);
 }
 
-static void	get_o_vector(t_vector *vector, float x, float y, float z)
-{
-	vector->x = x;
-	vector->y = y;
-	vector->z = z;
-	return ;
-}
-
-static void	get_d_vector(t_vector **vector_ptr, float x, float y, float z)
+static void	get_vector(t_vector **vector_ptr, float x, float y, float z)
 {
 	t_vector	*vector;
 
-	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0)
-	{
-		ft_error("Vector components should be within the range of \
-				-1.0 to 1.0\n");
-		free(*vector_ptr);
-		*vector_ptr = NULL;
-		return ;
-	}
 	if (!vector_ptr || !*vector_ptr)
 		return ;
 	vector = *vector_ptr;
@@ -95,7 +79,6 @@ void	get_xyz(char *str, float *x, float *y, float *z)
 t_vector	*init_vector(char *str)
 {	
 	t_vector	*vector;
-	int			i;
 	float		x;
 	float		y;
 	float		z;
@@ -109,12 +92,8 @@ t_vector	*init_vector(char *str)
 		return (NULL);
 	}
 	get_xyz(str, &x, &y, &z);
-	get_o_vector(vector, x, y, z);
+	get_vector(&vector, x, y, z);
 	if (!vector)
 		return (NULL);
-	i = 0;
-	pass_to_next_element(str, &i);
-	get_xyz(str + i, &x, &y, &z);
-	get_d_vector(&vector, x, y, z);
 	return (vector);
 }

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/13 17:59:06 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:20:18 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,14 @@ t_camera	*init_camera(char *input)
 	i = 1;
 	while (ft_isspace(input[i]))
 		i++;
-	camera->origin = get_coords(input + i);
-	camera->direction = get_coords(input + i);
+	camera->origin = init_vector(input + i);
 	pass_to_next_element(input, &i);
+	camera->direction = init_vector(input + i);
 	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
-	if (!camera->origin || camera->direction || camera->fov < 0 || camera->fov > 180)
+	if (!camera->origin || !camera->direction || camera->direction->x < -1.0 || camera->direction->x > 1.0 || camera->direction->y < -1.0 || camera->direction->y > 1.0 ||  camera->direction->z < -1.0 || camera->direction->z > 1.0 || camera->fov < 0 || camera->fov > 180)
 	{
+		ft_error("Error:camera init\n");
 		free_camera(&camera);
 		return (NULL);
 	}

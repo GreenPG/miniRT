@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/04 12:59:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:19:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,25 @@
 
 TEST	ASSERT_VECTOR_EQ(t_vector *actual, t_vector *expected)
 {
-	ASSERT_EQ_FMT(expected->x_o, actual->x_o, "%f");
-	ASSERT_EQ_FMT(expected->y_o, actual->y_o, "%f");
-	ASSERT_EQ_FMT(expected->z_o, actual->z_o, "%f");
-	ASSERT_EQ_FMT(expected->x_d, actual->x_d, "%f");
-	ASSERT_EQ_FMT(expected->y_d, actual->y_d, "%f");
-	ASSERT_EQ_FMT(expected->z_d, actual->z_d, "%f");
+	ASSERT_EQ_FMT(expected->x, actual->x, "%f");
+	ASSERT_EQ_FMT(expected->y, actual->y, "%f");
+	ASSERT_EQ_FMT(expected->z, actual->z, "%f");
 	PASS();
 }
 
 TEST	ASSERT_CAM_EQ(t_camera *actual, t_camera *expected)
 {
 	ASSERT_EQ_FMT(expected->fov, actual->fov, "%f");
-	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	PASS();
 }
 
 TEST	ASSERT_SPHERE_EQ(t_sphere *actual, t_sphere *expected)
 {
-	ASSERT_EQ_FMT(expected->pos->x, actual->pos->x, "%f");
-	ASSERT_EQ_FMT(expected->pos->y, actual->pos->y, "%f");
-	ASSERT_EQ_FMT(expected->pos->z, actual->pos->z, "%f");
+	ASSERT_EQ_FMT(expected->origin->x, actual->origin->x, "%f");
+	ASSERT_EQ_FMT(expected->origin->y, actual->origin->y, "%f");
+	ASSERT_EQ_FMT(expected->origin->z, actual->origin->z, "%f");
 	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
 	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
 	PASS();
@@ -43,7 +41,8 @@ TEST	ASSERT_SPHERE_EQ(t_sphere *actual, t_sphere *expected)
 
 TEST	ASSERT_PLANE_EQ(t_plane *actual, t_plane *expected)
 {
-	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
 	PASS();
 }
@@ -57,7 +56,8 @@ TEST	ASSERT_AMB_L_EQ(t_ambiant_l	*actual, t_ambiant_l *expected)
 
 TEST	ASSERT_CYLINDER_EQ(t_cylinder *actual, t_cylinder *expected)
 {
-	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	ASSERT_EQ_FMT(expected->diameter, actual->diameter, "%f");
 	ASSERT_EQ_FMT(expected->height, actual->height, "%f");
 	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
@@ -98,7 +98,7 @@ TEST	correct_input(void) {
 	expected->obj_list = malloc(sizeof(t_obj_list));
 	expected->obj_list->type = plane;
 	expected->obj_list->plane = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
-	t_obj_list *tmp1 = malloc(sizeof(t_obj_list));
+	t_obj_list *tmp1 = malloc(sizeof(t_obj_listcy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255));
 	tmp1->type = sphere;
 	tmp1->sphere = init_sphere("sp 0,0,20 20 255,0,0");
 	expected->obj_list->next = tmp1;

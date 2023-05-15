@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/13 18:02:38 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:24:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_sphere	*init_sphere(char *input)
 	i = 2;
 	while (ft_isspace(input[i]) == 1)
 		i++;
-	sphere->origin = get_coords(input + i);
+	sphere->origin = init_vector(input + i);
 	if (!sphere->origin)
 	{
 		free_sphere(&sphere);

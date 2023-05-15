@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/13 18:00:33 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:23:58 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_light	*init_light(char *str)
 	i = 1;
 	while (ft_isspace(str[i]))
 		i++;
-	light->origin = get_coords(str + i);
+	light->origin = init_vector(str + i);
 	if (!light->origin)
 	{
 		free_light(&light);

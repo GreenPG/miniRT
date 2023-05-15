@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 17:49:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:20:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 t_vector	*init_coords(float x, float y, float z);
 t_vector	*get_coords(char *str);
-t_vector	*get_vector(char *str);
 int			*get_color_values(char	*str);
 
 /*	vector.c	*/

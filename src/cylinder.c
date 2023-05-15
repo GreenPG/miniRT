@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/14 11:46:11 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:49:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,14 +237,14 @@ t_cylinder	*init_cylinder(char *str)
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
-	cylinder->origin = get_coords(str + i);
-	cylinder->direction = get_coords(str+i);
-	if (!cylinder->origin || !cylinder->origin)
+	cylinder->origin = init_vector(str + i);
+	pass_to_next_element(str, &i);
+	cylinder->direction = init_vector(str+i);
+	if (!cylinder->origin || cylinder->direction->x < -1.0 || cylinder->direction->x > 1.0 || cylinder->direction->y < -1.0 || cylinder->direction->y > 1.0 ||  cylinder->direction->z < -1.0 || cylinder->direction->z > 1.0 || !cylinder->origin)
 	{
 		free_cylinder(&cylinder);
 		return (NULL);
 	}
-	pass_to_next_element(str, &i);
 	pass_to_next_element(str, &i);
 	cylinder = init_cylinder_part2(cylinder, str, i);
 	return (cylinder);

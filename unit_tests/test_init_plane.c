@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:01:20 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 13:24:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 09:58:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 
 TEST	ASSERT_VECTOR_EQ(t_vector *actual, t_vector *expected)
 {
-	ASSERT_EQ_FMT(expected->x_o, actual->x_o, "%f");
-	ASSERT_EQ_FMT(expected->y_o, actual->y_o, "%f");
-	ASSERT_EQ_FMT(expected->z_o, actual->z_o, "%f");
-	ASSERT_EQ_FMT(expected->x_d, actual->x_d, "%f");
-	ASSERT_EQ_FMT(expected->y_d, actual->y_d, "%f");
-	ASSERT_EQ_FMT(expected->z_d, actual->z_d, "%f");
+	ASSERT_EQ_FMT(expected->x, actual->x, "%f");
+	ASSERT_EQ_FMT(expected->y, actual->y, "%f");
+	ASSERT_EQ_FMT(expected->z, actual->z, "%f");
 	PASS();
 }
 
 TEST	ASSERT_PLANE_EQ(t_plane *actual, t_plane *expected)
 {
-	CHECK_CALL(ASSERT_VECTOR_EQ(actual->vector, expected->vector));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
 	PASS();
 }
@@ -34,7 +32,8 @@ TEST	ASSERT_PLANE_EQ(t_plane *actual, t_plane *expected)
 TEST	correct_input(void) {
 	t_plane	*plane1	= init_plane("pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,255");
 	t_plane *expected = malloc(sizeof(t_plane));
-	expected->vector = init_vector("0.0,0.0,-10.0 0.0,1.0,0.0");
+	expected->origin = init_vector("0.0,0.0,-10.0");
+	expected->direction = init_vector("0.0,1.0,0.0");
 	expected->colors = get_rgba(0, 0, 255, 255);
 
 	CHECK_CALL(ASSERT_PLANE_EQ(plane1, expected));

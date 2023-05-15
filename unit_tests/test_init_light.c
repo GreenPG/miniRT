@@ -6,14 +6,14 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:52:09 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/04/20 15:26:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:25:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../greatest/greatest.h"
 #include "../includes/minirt.h"
 
-TEST	ASSERT_COORDS_EQ(t_coords *actual, t_coords *expected)
+TEST	ASSERT_VECTOR_EQ(t_vector *actual, t_vector *expected)
 {
 	ASSERT_EQ_FMT(expected->x, actual->x, "%f");
 	ASSERT_EQ_FMT(expected->y, actual->y, "%f");
@@ -25,14 +25,14 @@ TEST	ASSERT_LIGHT_EQ(t_light *actual, t_light *expected)
 {
 	ASSERT_EQ_FMT(expected->brightness, actual->brightness, "%f");
 	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
-	ASSERT_COORDS_EQ(actual->pos, expected->pos);
+	ASSERT_VECTOR_EQ(actual->origin, expected->origin);
 	PASS();
 }
 
 TEST	correct_input(void) {
 	t_light	*light1 = init_light("L -40.0,50.0,0.0 0.6 10,0,255");
 	t_light	*expected = malloc(sizeof(t_light));
-	expected->pos = init_coords(-40.0, 50.0, 0.0);
+	expected->origin = init_vector("-40.0,50.0,0.0");
 	expected->brightness = 0.6;
 	expected->colors = get_rgba(10, 0, 255, 255);
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/14 11:43:08 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:48:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 	int		*rgb;
 
 	pass_to_next_element(str, &i);
-	pass_to_next_element(str, &i);
 	rgb = get_color_values(str + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
@@ -104,9 +103,10 @@ t_plane	*init_plane(char *str)
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
-	plane->direction = init_vector(str + i);
 	plane->origin = init_vector(str + i);
-	if (!plane->direction || !plane->origin)
+	pass_to_next_element(str, &i);
+	plane->direction = init_vector(str + i);
+	if (!plane->direction || plane->direction->x < -1.0 || plane->direction->x > 1.0 || plane->direction->y < -1.0 || plane->direction->y > 1.0 ||  plane->direction->z < -1.0 || plane->direction->z > 1.0 || !plane->origin)
 	{
 		free_plane(&plane);
 		return (NULL);
