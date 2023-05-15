@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 14:11:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:48:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,31 @@ void	free_light(t_light **light)
 	return ;
 }
 
-int	get_diffuse_ratio(t_light *light, t_normal normal)
+static int	light_intersect(t_scene *scene, t_vector ray)
+{
+	t_obj_list	*cursor;
+	t_obj_list	*nearest;
+	double		distance;
+
+	nearest = NULL;
+	cursor = scene->obj_list;
+	distance = INFINITY;
+	while (cursor)
+	{
+		if (cursor->type == sphere)
+			distance = sphere_hit(cursor->sphere, ray);
+		else if (cursor->type == cylinder)
+			distance = cylinder_hit(cursor->cylinder, ray);
+		else if (cursor->type == plane)
+			distance = plane_hit(cursor->plane, ray);
+		if (distance < INFINITY)
+			return (1);	
+		cursor = cursor->next;
+	}
+	return (0);
+}
+
+int	get_diffuse_ratio(t_scene *scene, t_vector ray, t_normal normal)
 {
 	double		diffuse_ratio;
 	double		light_dir_len;
@@ -32,19 +56,21 @@ int	get_diffuse_ratio(t_light *light, t_normal normal)
 	int			g;
 	int			b;
 
-	light_dir.x = light->origin->x - normal.origin.x;
-	light_dir.y = light->origin->y - normal.origin.y;
-	light_dir.z = light->origin->z - normal.origin.z;
+	if (light_intersect(scene, ray) == 1)
+		return (0);
+	light_dir.x = scene->light->origin->x - normal.origin.x;
+	light_dir.y = scene->light->origin->y - normal.origin.y;
+	light_dir.z = scene->light->origin->z - normal.origin.z;
 	light_dir_len = sqrt(dot_product(light_dir, light_dir));
 	light_dir.x /= light_dir_len;
 	light_dir.y /= light_dir_len;
 	light_dir.z /= light_dir_len;
 	diffuse_ratio = dot_product(normal.dir, light_dir);
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
-	diffuse_ratio *= light->brightness;
-	r = get_r(light->colors) * diffuse_ratio;
-	g = get_g(light->colors) * diffuse_ratio;
-	b = get_b(light->colors) * diffuse_ratio;
+	diffuse_ratio *= scene->light->brightness;
+	r = get_r(scene->light->colors) * diffuse_ratio;
+	g = get_g(scene->light->colors) * diffuse_ratio;
+	b = get_b(scene->light->colors) * diffuse_ratio;
 	return (get_rgba(r, g, b, 255));
 }
 

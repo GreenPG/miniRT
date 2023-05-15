@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 14:12:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:48:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ double	sphere_hit(void	*obj, t_vector ray);
 
 /*	light.c	*/
 
-int			get_diffuse_ratio(t_light *light, t_normal normal);
+int			get_diffuse_ratio(t_scene *scene, t_vector ray, t_normal normal);
 t_light		*init_light(char *str);
 void		free_light(t_light **light);
 
