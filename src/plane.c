@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 10:48:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:54:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_plane(t_plane **plane)
 	*plane = NULL;
 	return ;
 }
+
 double	plane_hit(t_plane *obj, t_vector ray)
 {
 	double	is_hitted;
