@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 14:00:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:05:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct	s_obj_list {
 	t_sphere	*sphere;
 	t_cylinder	*cylinder;
 	t_obj_list	*next;
+	int			hitted;
 };
 
 struct	s_normal {

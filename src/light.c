@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 14:48:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:14:25 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_light(t_light **light)
 	return ;
 }
 
-static int	light_intersect(t_scene *scene, t_vector ray)
+static int	light_intersect(t_scene *scene, t_vector light_dir)
 {
 	t_obj_list	*cursor;
 	t_obj_list	*nearest;
@@ -34,12 +34,15 @@ static int	light_intersect(t_scene *scene, t_vector ray)
 	distance = INFINITY;
 	while (cursor)
 	{
-		if (cursor->type == sphere)
-			distance = sphere_hit(cursor->sphere, ray);
-		else if (cursor->type == cylinder)
-			distance = cylinder_hit(cursor->cylinder, ray);
-		else if (cursor->type == plane)
-			distance = plane_hit(cursor->plane, ray);
+		if (cursor->hitted != 1)
+		{	
+			if (cursor->type == sphere)
+				distance = sphere_hit(cursor->sphere, light_dir);
+			else if (cursor->type == cylinder)
+				distance = cylinder_hit(cursor->cylinder, light_dir);
+			else if (cursor->type == plane)
+				distance = plane_hit(cursor->plane, light_dir);
+		}
 		if (distance < INFINITY)
 			return (1);	
 		cursor = cursor->next;
@@ -47,7 +50,7 @@ static int	light_intersect(t_scene *scene, t_vector ray)
 	return (0);
 }
 
-int	get_diffuse_ratio(t_scene *scene, t_vector ray, t_normal normal)
+int	get_diffuse_ratio(t_scene *scene, t_normal normal)
 {
 	double		diffuse_ratio;
 	double		light_dir_len;
@@ -56,8 +59,6 @@ int	get_diffuse_ratio(t_scene *scene, t_vector ray, t_normal normal)
 	int			g;
 	int			b;
 
-	if (light_intersect(scene, ray) == 1)
-		return (0);
 	light_dir.x = scene->light->origin->x - normal.origin.x;
 	light_dir.y = scene->light->origin->y - normal.origin.y;
 	light_dir.z = scene->light->origin->z - normal.origin.z;
@@ -65,6 +66,8 @@ int	get_diffuse_ratio(t_scene *scene, t_vector ray, t_normal normal)
 	light_dir.x /= light_dir_len;
 	light_dir.y /= light_dir_len;
 	light_dir.z /= light_dir_len;
+	if (light_intersect(scene, light_dir) == 1)
+		return (0);
 	diffuse_ratio = dot_product(normal.dir, light_dir);
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
 	diffuse_ratio *= scene->light->brightness;

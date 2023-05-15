@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:27:12 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:05:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 			return (1);
 		}
 	}
+	obj->hitted = 0;
 	obj->next = NULL;
 	add_obj(list_ptr, obj);
 	return (0);
