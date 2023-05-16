@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 15:17:58 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:46:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,29 +109,16 @@ t_vector transform_ray(t_vector ray, t_cylinder *cylinder)
 	//la la separation en deux relou encore
 	double		alpha;
 	double		beta;
-	t_vector	rayo;
 
-	alpha = atan2(cylinder->direction->x, cylinder->direction->y);
-	beta = -atan2(cylinder->direction->z, cylinder->direction->y);
+	alpha = cylinder->alpha;
+	beta = cylinder->beta;
 
-	rayo.x = -cylinder->origin->x;
-	rayo.y = -cylinder->origin->y;
-	rayo.z = -cylinder->origin->z;
-	double  tmp;
+	ray.x = -cylinder->origin->x;
+	ray.y = -cylinder->origin->y;
+	ray.z = -cylinder->origin->z;
 
-	tmp = rayo.y;
-	rayo.y = rayo.y * cos (beta) - rayo.z * sin (beta);
-	rayo.z = rayo.z * cos (beta) + tmp * sin (beta);
-	tmp = rayo.x;
-	rayo.x = rayo.x * cos(alpha) - rayo.y * sin(alpha);
-	rayo.y = rayo.y * cos(alpha) + tmp * sin(alpha);
-	
-	tmp = ray.y;
-	ray.y = ray.y * cos (beta) - ray.z * sin (beta);
-    ray.z = ray.z * cos (beta) + tmp * sin (beta);
-    tmp = ray.x;
-    ray.x = ray.x * cos(alpha) - ray.y * sin(alpha);
-    ray.y = ray.y * cos(alpha) + tmp * sin(alpha);
+	vector_rot_x(&ray, alpha);
+	vector_rot_y(&ray, beta);
 	return (ray);
 	
 }
@@ -141,23 +128,26 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	double		b;
 	double		c;
 	double		*root;
+	t_vector	rayo;
 
+	vector_rot_x(&ray, cylinder->alpha);
+	vector_rot_y(&ray, cylinder->beta);
 	// ray = transform_ray(ray, cylinder);
 	// a = ray.x_d * ray.x_d + ray.z_d * ray.z_d;
 	// b = 2 * (ray.x_o * ray.x_d + ray.z_o * ray.z_d);
 	// c = ray.x_o * ray.x_o + ray.z_o * ray.z_o - (cylinder->diameter / 2);
-	ray = transform_ray(ray, cylinder);
+	rayo = transform_ray(ray, cylinder);
 	a = ray.x * ray.x + ray.z * ray.z;
-	b = 2 * (ray.x * ray.x + ray.z * ray.z);
-	c = ray.x * ray.x + ray.z * ray.z - (cylinder->diameter / 2);
+	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
+	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2);
 	root = cyl_quadratic(a, b, c);
 	if (!root)
 		return (INFINITY);
 
 
-	if (root[0] > 0 && root[0] < root[1] && ray.y + root[0] * ray.y > -cylinder->height / 2 && ray.y + root[0] * ray.y < cylinder->height / 2)
+	if (root[0] > 0 && root[0] < root[1] && rayo.y + root[0] * ray.y > -cylinder->height / 2 && rayo.y + root[0] * ray.y < cylinder->height / 2)
 		return (root[0]);
-	else if (root[1] > 0 && ray.y + root[1] * ray.y > -cylinder->height / 2 && ray.y + root[1] * ray.y < cylinder->height / 2)
+	else if (root[1] > 0 && rayo	.y + root[1] * ray.y > -cylinder->height / 2 && rayo.y + root[1] * ray.y < cylinder->height / 2)
 		return (root[1]);
 
 
@@ -223,6 +213,15 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	free(rgb);
 	return (cylinder);
 }
+static double	get_alpha(t_vector vec)
+{
+	return (atan2(vec.x, vec.y));
+}
+
+static double	get_beta(t_vector vec)
+{
+	return (-atan2(vec.z, fabs(vec.y)));
+}
 
 t_cylinder	*init_cylinder(char *str)
 {
@@ -247,5 +246,7 @@ t_cylinder	*init_cylinder(char *str)
 	}
 	pass_to_next_element(str, &i);
 	cylinder = init_cylinder_part2(cylinder, str, i);
+	cylinder->alpha = get_alpha(*cylinder->direction);
+	cylinder->beta = get_beta(*cylinder->direction);
 	return (cylinder);
 }

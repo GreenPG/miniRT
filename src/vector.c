@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 08:57:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 10:29:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:41:44 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ double	dot_product(t_vector v, t_vector u)
 	return (v.x * u.x + v.y * u.y + v.z * u.z);
 }
 
-static void	get_vector(t_vector **vector_ptr, float x, float y, float z)
+static void	get_vector(t_vector **vector_ptr, double x, double y, double z)
 {
 	t_vector	*vector;
 
@@ -60,7 +60,7 @@ static void	get_vector(t_vector **vector_ptr, float x, float y, float z)
 	return ;
 }
 
-void	get_xyz(char *str, float *x, float *y, float *z)
+void	get_xyz(char *str, double *x, double *y, double *z)
 {
 	int	i;
 
@@ -79,9 +79,9 @@ void	get_xyz(char *str, float *x, float *y, float *z)
 t_vector	*init_vector(char *str)
 {	
 	t_vector	*vector;
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 
 	if (!str)
 		return (NULL);

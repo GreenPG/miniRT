@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 14:12:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:59:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ int		 	init_rays(t_scene *scene);
 
 	/*	rotation.c	*/
 
+void    vector_rot_x(t_vector *vec, double angle);
+void    vector_rot_y(t_vector *vec, double angle);
 void rotation_x(t_scene *scene, double angle);
 void rotation_y(t_scene *scene, double angle);
 void    world_rotate(t_scene *scene, double alpha, double beta);

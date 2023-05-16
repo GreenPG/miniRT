@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 15:10:19 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:02:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 		color = get_final_color(color, diffuse_color, scene);
 		return (color);
 	}
-	t = sin(ray.z + scene->camera->beta * (M_PI / 180)) + scene->camera->beta * (M_PI / 180); //bon c style mais prend pas en compte la position orig
+	t = sin(ray.z + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
 		return(get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 156),	scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 245), 255));
 	t = -t;
