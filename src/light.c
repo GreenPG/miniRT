@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 15:14:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:16:45 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,70 @@ void	free_light(t_light **light)
 	return ;
 }
 
+static double	sphere_shadow(t_sphere *sphere, t_vector light_dir, t_light *light)
+{
+	t_vector oc;
+	double a;
+	double b;
+	double c;
+	double d;
+
+	oc.x = light->origin->x - sphere->origin->x;
+	oc.y = light->origin->y - sphere->origin->y;
+	oc.z = light->origin->z - sphere->origin->z;
+    a = dot_product(light_dir, light_dir);
+    b = dot_product(oc, light_dir);
+    c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
+    d = (b * b) - (a * c);
+    if (d > 0)
+	{
+		double r0;
+		double r1;
+
+		r0 = (-b - sqrt(d)) / (a);
+		r1 = (-b + sqrt(d)) / (a);
+		if (r0 > r1 && r1 >= 0)
+			return (r1);
+		else if (r1 >= r0 && r0 >= 0)
+			return (r0);
+		else if (r0 > 0)
+			return (r0);
+		else if (r1 > 0)
+			return (r1);
+	}
+	return (INFINITY);
+}
+
 static int	light_intersect(t_scene *scene, t_vector light_dir)
 {
 	t_obj_list	*cursor;
 	t_obj_list	*nearest;
 	double		distance;
+	double		obj_distance;
 
+	light_dir.x *= -1;
+	light_dir.y *= -1;
+	light_dir.z *= -1;
 	nearest = NULL;
 	cursor = scene->obj_list;
 	distance = INFINITY;
+	obj_distance = -INFINITY;
 	while (cursor)
 	{
-		if (cursor->hitted != 1)
-		{	
-			if (cursor->type == sphere)
-				distance = sphere_hit(cursor->sphere, light_dir);
-			else if (cursor->type == cylinder)
-				distance = cylinder_hit(cursor->cylinder, light_dir);
-			else if (cursor->type == plane)
+		if (cursor->type == sphere)
+			distance = sphere_shadow(cursor->sphere, light_dir, scene->light);
+/*		else if (cursor->type == cylinder)
+			distance = cylinder_hit(cursor->cylinder, light_dir);
+		else if (cursor->type == plane)
 				distance = plane_hit(cursor->plane, light_dir);
-		}
-		if (distance < INFINITY)
-			return (1);	
+*/		if (cursor->hitted == 1)
+			obj_distance = distance;
+		else if (distance < obj_distance)
+			return (1);
 		cursor = cursor->next;
 	}
+	if (distance < obj_distance)
+		return (1);
 	return (0);
 }
 

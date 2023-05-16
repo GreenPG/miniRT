@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 15:14:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:42:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		free_camera(t_camera **camera);
 
 t_sphere	*init_sphere(char *input);
 void		free_sphere(t_sphere **sphere);
-double	sphere_hit(void	*obj, t_vector ray);
+double		sphere_hit(t_sphere *sphere, t_vector ray);
 
 /*	light.c	*/
 

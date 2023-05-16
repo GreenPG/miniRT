@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 10:24:24 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:38:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,21 @@ void	free_sphere(t_sphere **sphere)
 	return ;
 }
 
-double	sphere_hit(void *sphere, t_vector ray)
+double	sphere_hit(t_sphere *sphere, t_vector ray)
 {
-	t_sphere *obj;
 	t_vector oc;
 	double a;
 	double b;
 	double c;
 	double d;
 
-	obj = sphere;
-	oc.x = -obj->origin->x;
-	oc.y = -obj->origin->y;
-	oc.z = -obj->origin->z;
-
+	oc.x = -sphere->origin->x;
+	oc.y = -sphere->origin->y;
+	oc.z = -sphere->origin->z;
+	
     a = dot_product(ray, ray);
     b = dot_product(oc, ray);
-    c = dot_product(oc, oc) - ((obj->diameter / 2) * (obj->diameter / 2));
+    c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
     d = (b * b) - (a * c);
     if (d > 0)
 	{
