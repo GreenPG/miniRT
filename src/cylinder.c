@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 15:13:10 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:46:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,8 @@ t_vector transform_ray(t_vector ray, t_cylinder *cylinder)
 	ray.y = -cylinder->origin->y;
 	ray.z = -cylinder->origin->z;
 
-		double tmpx;
-	double tmpy;
-
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha) * cos(cylinder->beta) + ray.z * sin(cylinder->alpha) * sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta) * cos(cylinder->alpha) - ray.z * cos(cylinder->alpha) * sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-
-	// tmpx = ray.x;
-	// ray.x = ray.x * cos(cylinder->theta) + ray.z * sin(cylinder->theta);
-	// ray.z = -tmpx * sin(cylinder->theta) + ray.z * cos(cylinder->theta);
+	vector_rot_x(&ray, alpha);
+	vector_rot_y(&ray, beta);
 	return (ray);
 	
 }
@@ -140,17 +130,8 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	double		*root;
 	t_vector	rayo;
 
-	double tmpx;
-	double tmpy;
-
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha) * cos(cylinder->beta) + ray.z * sin(cylinder->alpha) * sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta) * cos(cylinder->alpha) - ray.z * cos(cylinder->alpha) * sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	// tmpx = ray.x;
-	// ray.x = ray.x * cos(cylinder->theta) + ray.z * sin(cylinder->theta);
-	// ray.z = -tmpx * sin(cylinder->theta) + ray.z * cos(cylinder->theta);
+	vector_rot_x(&ray, cylinder->alpha);
+	vector_rot_y(&ray, cylinder->beta);
 	// ray = transform_ray(ray, cylinder);
 	// a = ray.x_d * ray.x_d + ray.z_d * ray.z_d;
 	// b = 2 * (ray.x_o * ray.x_d + ray.z_o * ray.z_d);
@@ -241,10 +222,6 @@ static double	get_beta(t_vector vec)
 {
 	return (-atan2(vec.z, fabs(vec.y)));
 }
-static double	get_theta(t_vector vec)
-{
-	return (-atan2(vec.z, fabs(vec.x)));
-}
 
 t_cylinder	*init_cylinder(char *str)
 {
@@ -271,6 +248,5 @@ t_cylinder	*init_cylinder(char *str)
 	cylinder = init_cylinder_part2(cylinder, str, i);
 	cylinder->alpha = get_alpha(*cylinder->direction);
 	cylinder->beta = get_beta(*cylinder->direction);
-	cylinder->theta = get_theta(*cylinder->direction);
 	return (cylinder);
 }
