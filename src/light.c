@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 16:16:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 09:23:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ static double	sphere_shadow(t_sphere *sphere, t_vector light_dir, t_light *light
 	double c;
 	double d;
 
+	light_dir.x *= -1;
+	light_dir.y *= -1;
+	light_dir.z *= -1;
 	oc.x = light->origin->x - sphere->origin->x;
 	oc.y = light->origin->y - sphere->origin->y;
 	oc.z = light->origin->z - sphere->origin->z;
-    a = dot_product(light_dir, light_dir);
-    b = dot_product(oc, light_dir);
-    c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
-    d = (b * b) - (a * c);
-    if (d > 0)
+	a = dot_product(light_dir, light_dir);
+	b = dot_product(oc, light_dir);
+	c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
+	d = (b * b) - (a * c);
+	if (d > 0)
 	{
 		double r0;
 		double r1;
@@ -57,6 +60,26 @@ static double	sphere_shadow(t_sphere *sphere, t_vector light_dir, t_light *light
 	return (INFINITY);
 }
 
+static double	plane_shadow(t_plane *plane, t_vector light_dir)
+{
+	double	is_hitted;
+	double	t;
+
+	is_hitted = dot_product(*plane->direction, light_dir);
+	if (is_hitted > 1e-6 || is_hitted < 1e-6)
+	{
+		//remplacer par dot product mais pour linstat jlai pas update donc voila
+//		t = plane->origin->x * plane->direction->x + plane->origin->y * plane->direction->y + plane->origin->z * plane->direction->z;
+		t = dot_product(*plane->origin, *plane->direction);
+		t = t / is_hitted;
+		if (t >= 0)// peut etre t < view_distance
+			return (t);
+		else 
+			return (INFINITY);
+	}
+	return (INFINITY);
+}
+
 static int	light_intersect(t_scene *scene, t_vector light_dir)
 {
 	t_obj_list	*cursor;
@@ -64,9 +87,6 @@ static int	light_intersect(t_scene *scene, t_vector light_dir)
 	double		distance;
 	double		obj_distance;
 
-	light_dir.x *= -1;
-	light_dir.y *= -1;
-	light_dir.z *= -1;
 	nearest = NULL;
 	cursor = scene->obj_list;
 	distance = INFINITY;
@@ -77,9 +97,9 @@ static int	light_intersect(t_scene *scene, t_vector light_dir)
 			distance = sphere_shadow(cursor->sphere, light_dir, scene->light);
 /*		else if (cursor->type == cylinder)
 			distance = cylinder_hit(cursor->cylinder, light_dir);
-		else if (cursor->type == plane)
-				distance = plane_hit(cursor->plane, light_dir);
-*/		if (cursor->hitted == 1)
+	*/	else if (cursor->type == plane)
+				distance = plane_shadow(cursor->plane, light_dir);
+		if (cursor->hitted == 1)
 			obj_distance = distance;
 		else if (distance < obj_distance)
 			return (1);
