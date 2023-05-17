@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 15:13:10 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:31:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,6 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha) * cos(cylinder->beta) + ray.z * sin(cylinder->alpha) * sin(cylinder->beta);
 	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta) * cos(cylinder->alpha) - ray.z * cos(cylinder->alpha) * sin (cylinder->beta);
 	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	// tmpx = ray.x;
-	// ray.x = ray.x * cos(cylinder->theta) + ray.z * sin(cylinder->theta);
-	// ray.z = -tmpx * sin(cylinder->theta) + ray.z * cos(cylinder->theta);
-	// ray = transform_ray(ray, cylinder);
-	// a = ray.x_d * ray.x_d + ray.z_d * ray.z_d;
-	// b = 2 * (ray.x_o * ray.x_d + ray.z_o * ray.z_d);
-	// c = ray.x_o * ray.x_o + ray.z_o * ray.z_o - (cylinder->diameter / 2);
 	rayo = transform_ray(ray, cylinder);
 	a = ray.x * ray.x + ray.z * ray.z;
 	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
@@ -162,22 +155,10 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	root = cyl_quadratic(a, b, c);
 	if (!root)
 		return (INFINITY);
-
-
 	if (root[0] > 0 && root[0] < root[1] && rayo.y + root[0] * ray.y > -cylinder->height / 2 && rayo.y + root[0] * ray.y < cylinder->height / 2)
 		return (root[0]);
 	else if (root[1] > 0 && rayo	.y + root[1] * ray.y > -cylinder->height / 2 && rayo.y + root[1] * ray.y < cylinder->height / 2)
 		return (root[1]);
-
-
-	// if (root[0] > root[1] && root[1] >= 0)
-	// 	return (root[1]);
-	// else if (root[1] >= root[0] && root[0] >= 0)
-	// 	return (root[0]);
-	// else if (root[0] > 0)
-	// 	return (root[0]);
-	// else if (root[1] > 0)
-	// 	return (root[1]);
 	return (INFINITY);
 }
 static int	check_cylinder(char *str)
