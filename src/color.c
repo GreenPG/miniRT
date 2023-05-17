@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:10:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 13:42:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:20:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene, double dist
 		nearest->hitted = 0;
 		return (color);
 	}
-	t = sin((ray.z) + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
+	t = sin(ray.z + scene->camera->beta * (M_PI / 180)); //bon c style mais prend pas en compte la position orig
 	if (t > 0)
-		return(get_rgba((255 * (1 - t) + t * 156),	(255 * (1 - t) + t * 156), (255 * (1 - t) + t * 245), 255));
+		return(get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 156),	scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 245), 255));
 	t = -t;
-	return(get_rgba((255 * (1 - t) + t * 231),	(255 * (1 - t) + t * 109), (255 * (1 - t) + t * 245), 255));
+	return(get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 231),	scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 109), scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 245), 255));
 }
