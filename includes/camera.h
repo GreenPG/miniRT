@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:25:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/13 16:45:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:33:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_camera	t_camera;
 typedef struct s_rays	t_rays;
 
 struct s_rays {
-	t_vector **rays;
+	t_vector	**rays;
 };
 
 struct s_camera	{

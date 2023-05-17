@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 11:19:56 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:10:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ TEST	correct_input(void) {
 	
 	t_scene	*expected = malloc(sizeof(t_scene));
 	expected->ambiant_l = init_ambiant_l("A 0.2 255,255,255");
-	expected->camera = init_camera("C -50,0,20 0,0,0 70");
+	expected->camera = init_camera("C -50,0,20 0,1,0 70");
 	expected->light = init_light("L -40,0,30 0.7 255,255,255");
 	expected->obj_list = malloc(sizeof(t_obj_list));
 	expected->obj_list->type = plane;
 	expected->obj_list->plane = init_plane("pl 0,0,0 0,1.0,0 255,0,225");
-	t_obj_list *tmp1 = malloc(sizeof(t_obj_listcy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255));
+	t_obj_list *tmp1 = malloc(sizeof(t_obj_list));
 	tmp1->type = sphere;
 	tmp1->sphere = init_sphere("sp 0,0,20 20 255,0,0");
 	expected->obj_list->next = tmp1;

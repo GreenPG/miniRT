@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 14:11:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:49:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,6 @@ void	free_light(t_light **light)
 	free(*light);
 	*light = NULL;
 	return ;
-}
-
-int	get_diffuse_ratio(t_light *light, t_normal normal)
-{
-	double		diffuse_ratio;
-	double		light_dir_len;
-	t_vector	light_dir;
-	int			r;
-	int			g;
-	int			b;
-
-	light_dir.x = light->origin->x - normal.origin.x;
-	light_dir.y = light->origin->y - normal.origin.y;
-	light_dir.z = light->origin->z - normal.origin.z;
-	light_dir_len = sqrt(dot_product(light_dir, light_dir));
-	light_dir.x /= light_dir_len;
-	light_dir.y /= light_dir_len;
-	light_dir.z /= light_dir_len;
-	diffuse_ratio = dot_product(normal.dir, light_dir);
-	diffuse_ratio = fmax(0.0, diffuse_ratio);
-	diffuse_ratio *= light->brightness;
-	r = get_r(light->colors) * diffuse_ratio;
-	g = get_g(light->colors) * diffuse_ratio;
-	b = get_b(light->colors) * diffuse_ratio;
-	return (get_rgba(r, g, b, 255));
 }
 
 static int	check_light(char *str)

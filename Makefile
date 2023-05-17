@@ -14,6 +14,7 @@ SRCS	=	main.c	\
 			utils.c \
 			parsing.c \
 			obj.c \
+			obj_utils.c \
 			translate.c \
 			choose_component.c \
 			structs_utils.c \
@@ -21,14 +22,24 @@ SRCS	=	main.c	\
 			camera.c \
 			ambiant_light.c \
 			light.c \
+			light_calculations.c \
 			sphere.c 	\
+			sphere_calculations.c 	\
 			color.c	\
 			vector.c \
 			plane.c	\
 			cylinder.c	\
 			render.c	\
 			free_scene.c	\
-			rotation.c
+			rotation.c \
+			cylinder_rotation.c \
+			plane_rotation.c \
+			sphere_rotation.c \
+			light_rotation.c \
+			hit_functions.c \
+			math_utils.c \
+			rgba.c \
+			normal.c
 
 OBJS	= ${SRCS:.c=.o}
 

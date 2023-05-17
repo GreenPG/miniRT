@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   sphere_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:49:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/17 14:35:24 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/05/17 15:29:26 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/05/17 15:29:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include <minirt.h>
 
-# define WIDTH 500
-# define HEIGHT 281 
+void	sphere_rot_x(t_sphere *sphere, double angle)
+{
+	vector_rot_x(sphere->origin, angle);
+}
 
-#endif
+void	sphere_rot_y(t_sphere *sphere, double angle)
+{
+	vector_rot_y(sphere->origin, angle);
+}

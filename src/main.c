@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
+/*																			*/
+/*														:::	  ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 18:21:55 by gtouzali         ###   ########.fr       */
-/*                                                                            */
+/*													+:+ +:+		 +:+	 */
+/*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
+/*   Updated: 2023/05/17 17:25:21 by gpasquet         ###   ########.fr       */
+/*																			*/
 /* ************************************************************************** */
 
 #include <minirt.h>
@@ -28,27 +28,27 @@ static mlx_t	*ft_mlx_create(void)
 	return (mlx);
 }
 
-static void    sphere_translate(t_sphere *sphere, double x, double y, double z)
+static void	sphere_translate(t_sphere *sphere, double x, double y, double z)
 {
-    sphere->origin->x += x;
-    sphere->origin->y += y;
-    sphere->origin->z += z;
+	sphere->origin->x += x;
+	sphere->origin->y += y;
+	sphere->origin->z += z;
 }
 
-static void    plane_translate(t_plane *plane, double x, double y, double z)
+static void	plane_translate(t_plane *plane, double x, double y, double z)
 {
-    plane->origin->x += x;
-    plane->origin->y += y;
-    plane->origin->z += z;
+	plane->origin->x += x;
+	plane->origin->y += y;
+	plane->origin->z += z;
 }
 
-static void    cylinder_translate(t_cylinder *cylinder, double x, double y, double z)
+static void	cylinder_translate(t_cylinder *cylinder, double x, double y,
+		double z)
 {
-    cylinder->origin->x += x;
-    cylinder->origin->y += y;
-    cylinder->origin->z += z;
+	cylinder->origin->x += x;
+	cylinder->origin->y += y;
+	cylinder->origin->z += z;
 }
-
 
 void	move_one(t_obj_list *nearest, double x, double y, double z)
 {
@@ -62,7 +62,7 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		plane_translate(nearest->plane, x, y, z);
 }
 
-void handle_keypress(mlx_key_data_t keydata, void* ptr)
+void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 {
 	t_data	*data;
 
@@ -129,7 +129,7 @@ t_obj_list	*get_click_obj(t_vector ray, t_scene *scene)
 			current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)
 		{
-			nearest = cursor;	
+			nearest = cursor;
 			nearest_distance = current_distance;
 		}
 		cursor = cursor->next;
@@ -139,26 +139,26 @@ t_obj_list	*get_click_obj(t_vector ray, t_scene *scene)
 	return (nearest);
 }
 
-void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods,
+		void *param)
 {
-	int x;
-	int	y;
+	int		x;
+	int		y;
 	t_data	*data;
 
 	data = param;
-	if(button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
 	{
 		mlx_get_mouse_pos(data->mlx, &x, &y);
 		x = x * ((double)WIDTH / (double)data->mlx->width);
 		y = y * ((double)HEIGHT / (double)data->mlx->height);
-		data->scene->obj_selected = get_click_obj(data->scene->camera->rays->rays[x][y], data->scene);
+		data->scene->obj_selected
+			= get_click_obj(data->scene->camera->rays->rays[x][y], data->scene);
 	}
 	(void)button;
 	(void)action;
 	(void)mods;
 	(void)param;
-
-
 }
 
 int	main(int argc, char **argv)
@@ -167,9 +167,10 @@ int	main(int argc, char **argv)
 	mlx_image_t	*img;
 	t_scene		*scene;
 	t_data		*data;
-	
+
 	if (argc != 2)
-		return (ft_error("Error: expected usage is ./miniRT <path to .rt file>\n"));
+		return (ft_error
+			("Error: expected usage is ./miniRT <path to.rt file>\n"));
 	(void)argv;
 	scene = parsing(argv[1]);
 	if (!scene)
@@ -180,7 +181,8 @@ int	main(int argc, char **argv)
 	mlx = ft_mlx_create();
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
-	world_translate(scene, -scene->camera->origin->x, -scene->camera->origin->y, -scene->camera->origin->z);
+	world_translate(scene, -scene->camera->origin->x,
+		-scene->camera->origin->y, -scene->camera->origin->z);
 	world_rotate(scene, scene->camera->alpha, scene->camera->beta);
 	render(img, scene);
 	scene->img = img;

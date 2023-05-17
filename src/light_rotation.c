@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   light_rotation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 07:49:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/17 14:35:24 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/05/17 15:31:33 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/05/17 15:31:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include <minirt.h>
 
-# define WIDTH 500
-# define HEIGHT 281 
+void	light_rot_y(t_light *light, double angle)
+{
+	vector_rot_y(light->origin, angle);
+}
 
-#endif
+void	light_rot_x(t_light *light, double angle)
+{
+	vector_rot_x(light->origin, angle);
+}

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 11:20:18 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:14:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,31 @@ static int	check_cam(char *str)
 	return (0);
 }
 
-double	get_alpha(t_vector vec)
+static int	check_camera_dir(t_vector *direction)
 {
-	return (atan2(vec.x, vec.y));
+	if (direction->x < -1.0 || direction->x > 1.0
+		|| direction->y < -1.0 || direction->y > 1.0
+		|| direction->z < -1.0 || direction->z > 1.0
+		|| (direction->x == 0 && direction->y == 0
+			&& direction->z == 0))
+		return (1);
+	return (0);
 }
 
-double	get_beta(t_vector vec)
+static t_camera	*init_camera2(t_camera *camera)
 {
-	return (-atan2(vec.z, fabs(vec.y)));
+	if (!camera->origin || !camera->direction
+		||check_camera_dir(camera->direction) == 1
+		|| camera->fov < 0 || camera->fov > 180)
+	{
+		ft_error("Error:camera init\n");
+		free_camera(&camera);
+		return (NULL);
+	}
+	camera->alpha = get_alpha(*camera->direction) * (180 / M_PI);
+	camera->beta = get_beta(*camera->direction) * (180 / M_PI);
+	camera->fov *= (M_PI / 180);
+	return (camera);
 }
 
 t_camera	*init_camera(char *input)
@@ -75,14 +92,6 @@ t_camera	*init_camera(char *input)
 	camera->direction = init_vector(input + i);
 	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
-	if (!camera->origin || !camera->direction || camera->direction->x < -1.0 || camera->direction->x > 1.0 || camera->direction->y < -1.0 || camera->direction->y > 1.0 ||  camera->direction->z < -1.0 || camera->direction->z > 1.0 || camera->fov < 0 || camera->fov > 180)
-	{
-		ft_error("Error:camera init\n");
-		free_camera(&camera);
-		return (NULL);
-	}
-	camera->alpha = get_alpha(*camera->direction) * (180 / M_PI);
-	camera->beta  = get_beta(*camera->direction) * (180 / M_PI);
-	camera->fov *= (M_PI / 180);
+	camera = init_camera2(camera);
 	return (camera);
 }
