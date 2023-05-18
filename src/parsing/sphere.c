@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
+/*																			*/
+/*														:::	  ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 13:11:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 10:38:37 by gpasquet         ###   ########.fr       */
-/*                                                                            */
+/*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
+/*   Updated: 2023/05/18 15:24:02 by gpasquet         ###   ########.fr       */
+/*																			*/
 /* ************************************************************************** */
 
 #include <minirt.h>
@@ -21,41 +21,6 @@ void	free_sphere(t_sphere **sphere)
 	free(*sphere);
 	*sphere = NULL;
 	return ;
-}
-
-double	sphere_hit(t_sphere *sphere, t_vector ray)
-{
-	t_vector oc;
-	double a;
-	double b;
-	double c;
-	double d;
-
-	oc.x = -sphere->origin->x;
-	oc.y = -sphere->origin->y;
-	oc.z = -sphere->origin->z;
-	
-    a = dot_product(ray, ray);
-    b = dot_product(oc, ray);
-    c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
-    d = (b * b) - (a * c);
-    if (d > 0)
-	{
-		double r0;
-		double r1;
-
-		r0 = (-b - sqrt(d)) / (a);
-		r1 = (-b + sqrt(d)) / (a);
-		if (r0 > r1 && r1 >= 0)
-			return (r1);
-		else if (r1 >= r0 && r0 >= 0)
-			return (r0);
-		else if (r0 > 0)
-			return (r0);
-		else if (r1 > 0)
-			return (r1);
-	}
-	return (INFINITY);
 }
 
 static int	check_sphere(char *input)
@@ -93,8 +58,8 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	}
 	pass_to_next_element(input, &i);
 	rgb = get_color_values(input + i);
-	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
-		|| rgb[2] > 255)
+	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
+		|| rgb[2] < 0 || rgb[2] > 255)
 	{
 		free(rgb);
 		free_sphere(&sphere);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 09:23:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:26:48 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ static double	plane_shadow(t_plane *plane, t_vector light_dir)
 	is_hitted = dot_product(*plane->direction, light_dir);
 	if (is_hitted > 1e-6 || is_hitted < 1e-6)
 	{
-		//remplacer par dot product mais pour linstat jlai pas update donc voila
-//		t = plane->origin->x * plane->direction->x + plane->origin->y * plane->direction->y + plane->origin->z * plane->direction->z;
 		t = dot_product(*plane->origin, *plane->direction);
 		t = t / is_hitted;
-		if (t >= 0)// peut etre t < view_distance
+		if (t >= 0)
 			return (t);
-		else 
+		else
 			return (INFINITY);
 	}
 	return (INFINITY);

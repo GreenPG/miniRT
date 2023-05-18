@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:33:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/15 10:30:18 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:08:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ TEST	correct_input(void)
 
 	ASSERT_VECTOR_EQ(actual3, expected);
 	free(actual1);
+	free(actual2);
 	free(actual3);
 	free(expected);
 	PASS();
