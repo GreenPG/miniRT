@@ -10,38 +10,39 @@ HEADERS	=	-I ./includes -I $(LIBMLX)/include -I $(LIBFT)/include
 
 LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRCS	=	main.c	\
-			utils.c \
-			parsing.c \
-			obj.c \
-			obj_utils.c \
-			translate.c \
-			choose_component.c \
-			structs_utils.c \
-			parsing_utils.c \
-			camera.c \
-			ambiant_light.c \
-			light.c \
-			light_calculations.c \
-			sphere.c 	\
-			sphere_calculations.c 	\
-			color.c	\
-			vector.c \
-			plane.c	\
-			cylinder.c	\
-			render.c	\
-			free_functions.c	\
-			rotation.c \
-			cylinder_move.c \
-			plane_move.c \
-			sphere_move.c \
-			light_rotation.c \
-			hit_functions.c \
-			math_utils.c \
-			rgba.c \
-			normal.c \
-			keypress_handle.c \
-			move_obj.c
+SRCS	=	src/main.c	\
+			src/keypress_handle.c \
+			src/free_functions.c	\
+			src/parsing/ambiant_light.c \
+			src/parsing/camera.c \
+			src/parsing/choose_component.c \
+			src/parsing/cylinder.c	\
+			src/parsing/light.c \
+			src/parsing/obj.c \
+			src/parsing/obj_utils.c \
+			src/parsing/parsing.c \
+			src/parsing/parsing_utils.c \
+			src/parsing/plane.c	\
+			src/parsing/sphere.c 	\
+			src/calculations/light_calculations.c \
+			src/calculations/sphere_calculations.c 	\
+			src/calculations/cylinder_calculations.c 	\
+			src/calculations/normal.c \
+			src/calculations/vector.c \
+			src/render/color.c	\
+			src/render/hit_functions.c \
+			src/render/render.c	\
+			src/moves/rotation.c \
+			src/moves/cylinder_move.c \
+			src/moves/plane_move.c \
+			src/moves/sphere_move.c \
+			src/moves/light_rotation.c \
+			src/moves/move_obj.c \
+			src/moves/translate.c \
+			src/utils/math_utils.c \
+			src/utils/rgba.c \
+			src/utils/structs_utils.c \
+			src/utils/utils.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -91,7 +92,7 @@ libmlx:
 libft:
 	@make -C $(LIBFT)
 
-%.o: ./src/%.c
+%.o: %.c 
 	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
