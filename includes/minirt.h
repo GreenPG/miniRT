@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/17 17:01:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:38:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			get_g(int rgba);
 int			get_b(int rgba);
 int			get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 				double distance);
+/*	main.c	*/
 
 /*	utils.c	*/
 
@@ -137,17 +138,21 @@ void		rotation_x(t_scene *scene, double angle);
 void		rotation_y(t_scene *scene, double angle);
 void		world_rotate(t_scene *scene, double alpha, double beta);
 
-	/* 	cylinder_rotation.c	*/
+	/* 	cylinder_move.c	*/
 void		cylinder_rot_y(t_cylinder *cylinder, double angle);
 void		cylinder_rot_x(t_cylinder *cylinder, double angle);
+void		cylinder_translate(t_cylinder *cylinder, double x, double y,
+				double z);
 
-	/*	plane_rotation.c	*/
+	/*	plane_move.c	*/
 void		plane_rot_y(t_plane *plane, double angle);
 void		plane_rot_x(t_plane *plane, double angle);
+void		plane_translate(t_plane *plane, double x, double y, double z);
 
-	/*	sphere_rotation.c	*/
+	/*	sphere_move.c	*/
 void		sphere_rot_y(t_sphere *sphere, double angle);
 void		sphere_rot_x(t_sphere *sphere, double angle);
+void		sphere_translate(t_sphere *sphere, double x, double y, double z);
 
 	/*	light_rotation.c	*/
 void		light_rot_x(t_light *light, double angle);
@@ -157,8 +162,8 @@ void		light_rot_y(t_light *light, double angle);
 
 void		world_translate(t_scene *scene, double x, double y, double z);
 
-	/*	free_scene.c	*/
-
+	/*	free_functions.c	*/
+void		free_all(t_data *data, t_scene *scene);
 void		free_scene(t_scene **scene);
 
 	/*	hit_functions.c */
@@ -169,6 +174,7 @@ double		*cyl_quadratic(double a, double b, double c);
 double		quadratic(double a, double b, double c);
 double		get_alpha(t_vector vec);
 double		get_beta(t_vector vec);
+double		get_theta(t_vector vec);
 
 	/*	rgba.c	*/
 int			get_rgba(int r, int g, int b, int a);
@@ -185,5 +191,13 @@ int			normalized_color(int color, t_vector normal, t_vector ray);
 
 /*	light_calculations.c	*/
 int			get_diffuse_ratio(t_light *light, t_normal normal);
+
+/*	keypress_handle.c	*/
+void		handle_keypress(mlx_key_data_t keydata, void *ptr);
+
+/*	move_obj.c	*/
+void		mouse_handle(mouse_key_t button, action_t action,
+				modifier_key_t mods, void *param);
+void		move_one(t_obj_list *nearest, double x, double y, double z);
 
 #endif

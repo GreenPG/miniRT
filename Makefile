@@ -30,16 +30,18 @@ SRCS	=	main.c	\
 			plane.c	\
 			cylinder.c	\
 			render.c	\
-			free_scene.c	\
+			free_functions.c	\
 			rotation.c \
-			cylinder_rotation.c \
-			plane_rotation.c \
-			sphere_rotation.c \
+			cylinder_move.c \
+			plane_move.c \
+			sphere_move.c \
 			light_rotation.c \
 			hit_functions.c \
 			math_utils.c \
 			rgba.c \
-			normal.c
+			normal.c \
+			keypress_handle.c \
+			move_obj.c
 
 OBJS	= ${SRCS:.c=.o}
 

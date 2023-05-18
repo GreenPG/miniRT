@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_scene.c                                       :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:38:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:46:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,12 @@ void	free_scene(t_scene **scene)
 	free(*scene);
 	*scene = NULL;
 	return ;
+}
+
+void	free_all(t_data *data, t_scene *scene)
+{
+	if (data)
+		free(data);
+	if (scene)
+		free_scene(&scene);
 }

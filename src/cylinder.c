@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 17:24:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:43:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,68 +23,6 @@ void	free_cylinder(t_cylinder **cylinder)
 	free(*cylinder);
 	*cylinder = NULL;
 	return ;
-}
-
-t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
-{
-	//la la separation en deux relou encore
-	double		alpha;
-	double		beta;
-	double		tmpx;
-	double		tmpy;
-
-	alpha = cylinder->alpha;
-	beta = cylinder->beta;
-	ray.x = -cylinder->origin->x;
-	ray.y = -cylinder->origin->y;
-	ray.z = -cylinder->origin->z;
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
-		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
-		* sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
-		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
-		* sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	return (ray);
-}
-
-double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
-{
-	double		a;
-	double		b;
-	double		c;
-	double		*root;
-	t_vector	rayo;
-	double		tmpx;
-	double		tmpy;
-
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
-		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
-		* sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
-		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
-		* sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	rayo = transform_ray(ray, cylinder);
-	a = ray.x * ray.x + ray.z * ray.z;
-	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
-	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2);
-	root = cyl_quadratic(a, b, c);
-	if (!root)
-		return (INFINITY);
-	if (root[0] > 0 && root[0] < root[1] && rayo.y + root[0] * ray.y
-		> -cylinder->height / 2 && rayo.y + root[0] * ray.y
-		< cylinder->height / 2)
-		return (root[0]);
-	else if (root[1] > 0 && rayo.y + root[1] * ray.y
-		> -cylinder->height / 2 && rayo.y + root[1] * ray.y
-		< cylinder->height / 2)
-		return (root[1]);
-	return (INFINITY);
 }
 
 static int	check_cylinder(char *str)
@@ -113,6 +51,14 @@ static int	check_cylinder(char *str)
 	return (0);
 }
 
+static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
+{
+	cylinder->alpha = get_alpha(*cylinder->direction);
+	cylinder->beta = get_beta(*cylinder->direction);
+	cylinder->theta = get_theta(*cylinder->direction);
+	return (cylinder);
+}
+
 static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 {
 	int			*rgb;
@@ -137,12 +83,8 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	}
 	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
+	cylinder = init_cylinder_part3(cylinder);
 	return (cylinder);
-}
-
-static double	get_theta(t_vector vec)
-{
-	return (-atan2(vec.z, fabs(vec.x)));
 }
 
 t_cylinder	*init_cylinder(char *str)
@@ -171,8 +113,5 @@ t_cylinder	*init_cylinder(char *str)
 	}
 	pass_to_next_element(str, &i);
 	cylinder = init_cylinder_part2(cylinder, str, i);
-	cylinder->alpha = get_alpha(*cylinder->direction);
-	cylinder->beta = get_beta(*cylinder->direction);
-	cylinder->theta = get_theta(*cylinder->direction);
 	return (cylinder);
 }
