@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:18:08 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 10:38:19 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/22 08:58:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,4 @@ double	get_alpha(t_vector vec)
 double	get_beta(t_vector vec)
 {
 	return (-atan2(vec.z, fabs(vec.y)));
-}
-
-double	get_theta(t_vector vec)
-{
-	return (-atan2(vec.z, fabs(vec.x)));
 }
