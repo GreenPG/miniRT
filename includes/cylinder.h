@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/16 08:43:00 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:30:43 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct s_cylinder	{
 	int			color;
 	double		alpha;
 	double		beta;
+	double		theta;
 };
 
 #endif

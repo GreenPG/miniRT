@@ -6,13 +6,13 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:57:34 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 17:03:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:18:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static double	get_root(double a, double b, double d)
+double	get_root(double a, double b, double d)
 {
 	double	r0;
 	double	r1;
