@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/19 10:19:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:41:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,8 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance);
 int			normalized_color(int color, t_vector normal, t_vector ray);
 
 /*	light_calculations.c	*/
-int			get_diffuse_ratio(t_scene *scene, t_normal normal);
-
+int			get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray);
+
 /*	keypress_handle.c	*/
 void		handle_keypress(mlx_key_data_t keydata, void *ptr);
 

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 15:54:08 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:17:09 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	normal.origin.x = distance * ray.x;
 	normal.origin.y = distance * ray.y;
 	normal.origin.z = distance * ray.z;
-	normal.dir.x = -plane->direction->x;
-	normal.dir.y = -plane->direction->y;
-	normal.dir.z = -plane->direction->z;
+	normal.dir.x = plane->direction->x;
+	normal.dir.y = plane->direction->y;
+	normal.dir.z = plane->direction->z;
 	vector_len = sqrt(dot_product(normal.dir, normal.dir));
 	normal.dir.x /= vector_len;
 	normal.dir.y /= vector_len;
