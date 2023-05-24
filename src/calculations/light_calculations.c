@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/24 14:44:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:19:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,31 @@ static double	get_light_distance(t_light *light, t_normal normal)
 	return (light_distance);
 }
 
+static int	wich_side(t_vector ray, t_vector light_dir, t_obj_list *obj, t_normal normal)
+{
+	double	a;
+	double	b;
+
+	light_dir.x *= -1;
+	light_dir.y *= -1;
+	light_dir.z *= -1;
+	if (obj->type == plane)
+	{
+		a = dot_product(*obj->plane->direction, ray);
+		b = dot_product(*obj->plane->direction, light_dir);
+		if ((a < 0 && b < 0) || (a > 0 && b > 0))
+			return (1);
+	}
+	if (obj->type == sphere)
+	{
+		a = dot_product(normal.dir, ray);
+		b = dot_product(normal.dir, light_dir);
+		if ((a < 0 && b < 0) || (a > 0 && b > 0))
+			return (1);
+	}
+	return (0);
+}
+
 static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal, t_vector ray)
 {
 	t_obj_list	*cursor;
@@ -82,6 +107,9 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal, 
 			if (cursor->type == plane)
 				distance = plane_shadow(cursor->plane, light_dir, normal);
 		}
+		if (cursor->hitted == 1)
+			if (wich_side(ray, light_dir, cursor, normal) == 0)
+				return (1);
 		if (distance > 0 && distance < light_source_d)
 			return (1);
 		cursor = cursor->next;
