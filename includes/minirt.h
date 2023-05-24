@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/18 10:38:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:41:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ t_sphere	*init_sphere(char *input);
 void		free_sphere(t_sphere **sphere);
 
 /*	sphere_calculations.c	*/
+double		get_root(double a, double b, double d);
 double		sphere_hit(t_sphere *sphere, t_vector ray);
 
 /*	light.c	*/
 
-int			get_diffuse_ratio(t_light *light, t_normal normal);
 t_light		*init_light(char *str);
 void		free_light(t_light **light);
 
@@ -190,8 +190,8 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance);
 int			normalized_color(int color, t_vector normal, t_vector ray);
 
 /*	light_calculations.c	*/
-int			get_diffuse_ratio(t_light *light, t_normal normal);
-
+int			get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray);
+
 /*	keypress_handle.c	*/
 void		handle_keypress(mlx_key_data_t keydata, void *ptr);
 

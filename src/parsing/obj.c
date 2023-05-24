@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 16:44:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:24:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 		if (plane_obj(obj, line) == 1)
 			return (1);
 	}
+
 	return (init_obj2(obj, line, type, list_ptr));
 }		
