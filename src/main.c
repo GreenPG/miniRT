@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:45:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 18:21:55 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:51:32 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ t_obj_list	*get_click_obj(t_vector ray, t_scene *scene)
 		if (cursor->type == sphere)
 			current_distance = sphere_hit(cursor->sphere, ray);
 		else if (cursor->type == cylinder)
-			current_distance = cylinder_hit(cursor->cylinder, ray);
+			current_distance = cylinder_hit(cursor->cylinder, ray, scene);
 		else if (cursor->type == plane)
 			current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)

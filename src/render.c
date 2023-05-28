@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/14 11:46:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:50:47 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ double	*cyl_quadratic(double a, double b, double c)
 		ft_error("Error\n");
 		return (NULL);
 	}
-    d = (b * b) - (4.0 * a * c);
+    d = (b * b) - (a * c);
 	if (d <= 0)
 		return (NULL);
-	r[0] = (-b - sqrt(d)) / (2 * a);
-	r[1] = (-b + sqrt(d)) / (2 * a);
+	r[0] = (-b - sqrt(d)) / (a);
+	r[1] = (-b + sqrt(d)) / (a);
 	return (r);
 }
 
@@ -95,7 +95,7 @@ int	get_background_color(t_vector ray, t_scene *scene)
 		if (cursor->type == sphere)
 			current_distance = sphere_hit(cursor->sphere, ray);
 		else if (cursor->type == cylinder)
-			current_distance = cylinder_hit(cursor->cylinder, ray);
+			current_distance = cylinder_hit(cursor->cylinder, ray, scene);
 		else if (cursor->type == plane)
 			current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)

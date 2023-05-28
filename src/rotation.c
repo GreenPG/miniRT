@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 09:59:40 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/16 13:25:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:56:19 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    plane_rot_x(t_plane *plane, double angle)
 void	cylinder_rot_x(t_cylinder *cylinder, double angle)
 {
     vector_rot_x(cylinder->origin, angle);
-    vector_rot_x(cylinder->direction, angle);
+   // vector_rot_x(cylinder->direction, -angle);
     cylinder->alpha -= angle;
 }
 
@@ -90,7 +90,7 @@ void    plane_rot_y(t_plane *plane, double angle)
 static void	cylinder_rot_y(t_cylinder *cylinder, double angle)
 {
     vector_rot_y(cylinder->origin, angle);
-    vector_rot_y(cylinder->direction, angle);
+    //vector_rot_y(cylinder->direction, angle);
     cylinder->beta -= angle;
 }
 

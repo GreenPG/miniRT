@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/15 15:59:33 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:51:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ double	plane_hit(t_plane	*obj, t_vector ray);
 
 t_cylinder	*init_cylinder(char *str);
 void		free_cylinder(t_cylinder **cylinder);
-double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
+double		cylinder_hit(t_cylinder *cylinder, t_vector ray, t_scene *scene);
 
 /*	structs_utils.c	*/
 
