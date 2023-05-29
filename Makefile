@@ -1,6 +1,8 @@
 NAME	=	miniRT
 
-CFLAGS	=	-Wall -Werror -Wextra -g #-O3 -Ofast
+CFLAGS	=	-Wall -Werror -Wextra -g -O3 -Ofast
+
+DFLAGS	=	-Wall -Werror -Wextra -g
 
 LIBMLX	=	./lib/MLX42
 
