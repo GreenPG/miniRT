@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/30 08:36:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 09:23:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,25 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 	normal.dir.x = (dot_product(normal.origin, axis) / denom) * axis.x;
 	normal.dir.y = (dot_product(normal.origin, axis) / denom) * axis.y;
 	normal.dir.z = (dot_product(normal.origin, axis) / denom) * axis.z;
+	return (normal);
+}
+
+t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
+{
+	t_obj_list	*cursor;
+
+	cursor = scene->obj_list;
+	while (cursor->hitted == 0)
+		cursor = cursor->next;
+	if (cursor->type == plane)
+	{
+		if (dot_product(normal.dir, light_dir) < 0)
+		{
+			normal.dir.x *= -1;
+			normal.dir.y *= -1;
+			normal.dir.z *= -1;
+		}
+	}
 	return (normal);
 }
 

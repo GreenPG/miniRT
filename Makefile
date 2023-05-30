@@ -31,6 +31,7 @@ SRCS	=	src/main.c	\
 			src/calculations/cylinder_calculations.c 	\
 			src/calculations/normal.c \
 			src/calculations/vector.c \
+			src/calculations/shadow.c \
 			src/render/color.c	\
 			src/render/hit_functions.c \
 			src/render/render.c	\

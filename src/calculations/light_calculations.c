@@ -6,51 +6,11 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/24 16:19:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 09:25:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-static double	sphere_shadow(t_sphere *sphere, t_normal normal,
-		t_vector light_dir)
-{
-	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		d;
-
-	oc.x = normal.origin.x - sphere->origin->x;
-	oc.y = normal.origin.y - sphere->origin->y;
-	oc.z = normal.origin.z - sphere->origin->z;
-	a = dot_product(light_dir, light_dir);
-	b = dot_product(oc, light_dir);
-	c = dot_product(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
-	d = (b * b) - (a * c);
-	if (d > 0)
-		return (get_root(a, b, d));
-	return (INFINITY);
-}
-
-static double	plane_shadow(t_plane *plane, t_vector light_dir, t_normal normal)
-{
-	double	is_hitted;
-	double	t;
-
-	is_hitted = dot_product(*plane->direction, light_dir);
-	if (is_hitted > 1e-6 || is_hitted < -1e-6)
-	{
-		light_dir.x = plane->origin->x - normal.origin.x;
-		light_dir.y = plane->origin->y - normal.origin.y;
-		light_dir.z = plane->origin->z - normal.origin.z;
-		t = dot_product(light_dir, *plane->direction);
-		t = t / is_hitted;
-		if (t != 0)
-			return (t);
-	}
-	return (INFINITY);
-}
 
 static double	get_light_distance(t_light *light, t_normal normal)
 {
@@ -64,7 +24,8 @@ static double	get_light_distance(t_light *light, t_normal normal)
 	return (light_distance);
 }
 
-static int	wich_side(t_vector ray, t_vector light_dir, t_obj_list *obj, t_normal normal)
+static int	wich_side(t_vector ray, t_vector light_dir, t_obj_list *obj,
+		t_normal normal)
 {
 	double	a;
 	double	b;
@@ -89,7 +50,8 @@ static int	wich_side(t_vector ray, t_vector light_dir, t_obj_list *obj, t_normal
 	return (0);
 }
 
-static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal, t_vector ray)
+static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
+		t_vector ray)
 {
 	t_obj_list	*cursor;
 	double		distance;
@@ -131,25 +93,6 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 	light_dir.y /= light_dir_len;
 	light_dir.z /= light_dir_len;
 	return (light_dir);
-}
-
-static t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
-{
-	t_obj_list	*cursor;
-
-	cursor = scene->obj_list;
-	while (cursor->hitted == 0)
-		cursor = cursor->next;
-	if (cursor->type == plane)
-	{
-		if (dot_product(normal.dir, light_dir) < 0)
-		{
-			normal.dir.x *= -1;
-			normal.dir.y *= -1;
-			normal.dir.z *= -1;
-		}
-	}
-	return (normal);
 }
 
 int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)

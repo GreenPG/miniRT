@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/30 08:35:50 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 09:26:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance);
 t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 				double distance);
 int			normalized_color(int color, t_vector normal, t_vector ray);
+t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir);
 
 /*	light_calculations.c	*/
 int			get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray);
@@ -201,5 +202,12 @@ void		handle_keypress(mlx_key_data_t keydata, void *ptr);
 void		mouse_handle(mouse_key_t button, action_t action,
 				modifier_key_t mods, void *param);
 void		move_one(t_obj_list *nearest, double x, double y, double z);
+
+/*	shadow.c	*/
+
+double		plane_shadow(t_plane *plane, t_vector light_dir,
+				t_normal normal);
+double		sphere_shadow(t_sphere *sphere, t_normal normal,
+				t_vector light_dir);
 
 #endif
