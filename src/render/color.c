@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/05/23 13:40:55 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/29 13:23:14 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 			color = normalized_color(nearest->plane->colors, normal.dir, ray);
 		}
 		if (nearest->type == cylinder)
-			return (add_ambient(nearest->cylinder->color, scene->ambiant_l));
+		{
+			normal = get_cylinder_normal(nearest->cylinder, ray, distance);
+			color = normalized_color(nearest->cylinder->color, normal.dir, ray);
+		}
 		diffuse_color = get_diffuse_ratio(scene, normal, ray);
 		color = get_final_color(color, diffuse_color, scene);
 		nearest->hitted = 0;

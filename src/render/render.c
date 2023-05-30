@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/19 09:14:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/29 13:21:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	get_background_color(t_vector ray, t_scene *scene)
 			current_distance = plane_hit(cursor->plane, ray);
 		if (current_distance < nearest_distance)
 		{
+			if (nearest && nearest->type == cylinder)
+				nearest->cylinder->hit_body = false;
 			nearest = cursor;
 			nearest_distance = current_distance;
 		}

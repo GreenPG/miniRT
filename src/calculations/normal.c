@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/24 13:12:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 08:21:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,34 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	normal.dir.x /= vector_len;
 	normal.dir.y /= vector_len;
 	normal.dir.z /= vector_len;
+	return (normal);
+}
+
+static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
+{
+	t_normal	normal;
+	t_vector	axis;
+	double		denom;
+
+	normal.origin.x = distance * ray.x;
+	normal.origin.y = distance * ray.y;
+	normal.origin.z = distance * ray.z;
+	axis.x = cylinder->origin->x + cylinder->direction->x;
+	axis.y = cylinder->origin->z + cylinder->direction->y;
+	axis.z = cylinder->origin->y + cylinder->direction->z;
+	denom = sqrt(dot_product(axis, axis));
+	normal.dir.x = (dot_product(normal.origin, axis) / denom) * axis.x;
+	normal.dir.y = (dot_product(normal.origin, axis) / denom) * axis.y;
+	normal.dir.z = (dot_product(normal.origin, axis) / denom) * axis.z;
+	return (normal);
+}
+
+t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray, double distance)
+{
+	t_normal	normal;
+
+	normal = normal_body(cylinder, ray, distance);
+	cylinder->hit_body = false;
 	return (normal);
 }
 

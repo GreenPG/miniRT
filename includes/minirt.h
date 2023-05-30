@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/23 13:41:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/29 13:18:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int			get_a(int rgba);
 t_normal	get_sphere_normal(t_sphere *sphere, t_vector ray,
 				double distance);
 t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance);
+t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray, double distance);
 int			normalized_color(int color, t_vector normal, t_vector ray);
 
 /*	light_calculations.c	*/

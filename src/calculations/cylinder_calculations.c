@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 15:18:31 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:42:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,16 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	if (root[0] > 0 && root[0] < root[1] && rayo.y + root[0] * ray.y
 		> -cylinder->height / 2 && rayo.y + root[0] * ray.y
 		< cylinder->height / 2)
+	{
+		cylinder->hit_body = true;
 		return (root[0]);
+	}
 	else if (root[1] > 0 && rayo.y + root[1] * ray.y
 		> -cylinder->height / 2 && rayo.y + root[1] * ray.y
 		< cylinder->height / 2)
+	{
+		cylinder->hit_body = true;
 		return (root[1]);
+	}
 	return (INFINITY);
 }
