@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_calculations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 15:18:31 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:28:50 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
 	return (ray);
 }
 
+double min_cyl(double t_3, double t_4)
+{
+	double min;
+
+	min = INFINITY;
+	if (t_3 > 0 && t_3 < min)
+		min = t_3;
+	if (t_4 > 0 && t_4 < min)
+		min = t_4;
+	return (min);
+}
+
+void ft_swoop(double *a, double* b)
+{
+	double *swap;
+	swap = a; 
+	a = b;
+	b = swap;
+}
+
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
 	double		a;
@@ -58,10 +78,26 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	rayo = transform_ray(ray, cylinder);
 	a = ray.x * ray.x + ray.z * ray.z;
 	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
-	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2);
+	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2) * (cylinder->diameter / 2);
 	root = cyl_quadratic(a, b, c);
 	if (!root)
 		return (INFINITY);
+
+
+	double t_3;
+	double t_4;
+	t_3 = INFINITY;
+	t_4 = INFINITY;
+	t_3 = (-cylinder->height / 2 - rayo.y) / ray.y;
+	if ((rayo.x + t_3 * ray.x) * (rayo.x + t_3 * ray.x) + (rayo.z + t_3 * ray.z) * (rayo.z + t_3 * ray.z) > (cylinder->diameter / 2) * (cylinder->diameter / 2)) 
+		t_3 = INFINITY;
+	t_4 = (cylinder->height / 2 - rayo.y) / ray.y;
+	if (t_4 > t_3)
+		ft_swoop(&t_3, &t_4);
+	if ((rayo.x + t_4 * ray.x) * (rayo.x + t_4 * ray.x) + (rayo.z + t_4 * ray.z) * (rayo.z + t_4 * ray.z) > (cylinder->diameter / 2) * (cylinder->diameter / 2)) 
+		t_4 = INFINITY;
+	if (min_cyl(t_3, t_4) != INFINITY)
+		return (min_cyl(t_3, t_4));
 	if (root[0] > 0 && root[0] < root[1] && rayo.y + root[0] * ray.y
 		> -cylinder->height / 2 && rayo.y + root[0] * ray.y
 		< cylinder->height / 2)
