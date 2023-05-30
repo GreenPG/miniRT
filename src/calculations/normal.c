@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/30 08:21:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 08:36:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 	return (normal);
 }
 
-t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray, double distance)
+t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
+		double distance)
 {
 	t_normal	normal;
 
