@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/30 09:23:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:08:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,42 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 {
 	t_normal	normal;
+	double		quotient;
+	t_vector	rayo;
 	t_vector	axis;
-	double		denom;
+	double		tmpx;
+	double		tmpy;
 
-	normal.origin.x = distance * ray.x;
-	normal.origin.y = distance * ray.y;
-	normal.origin.z = distance * ray.z;
-	axis.x = cylinder->origin->x + cylinder->direction->x;
-	axis.y = cylinder->origin->z + cylinder->direction->y;
-	axis.z = cylinder->origin->y + cylinder->direction->z;
-	denom = sqrt(dot_product(axis, axis));
-	normal.dir.x = (dot_product(normal.origin, axis) / denom) * axis.x;
-	normal.dir.y = (dot_product(normal.origin, axis) / denom) * axis.y;
-	normal.dir.z = (dot_product(normal.origin, axis) / denom) * axis.z;
+	axis.x = 0;
+	axis.y = 1 * cylinder->height / 2;
+	axis.z = 0;
+	tmpx = ray.x;
+	tmpy = ray.y;
+	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
+		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
+		* sin(cylinder->beta);
+	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
+		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
+		* sin (cylinder->beta);
+	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
+	rayo = transform_ray(ray, cylinder);
+	normal.origin.x = distance * ray.x + rayo.x;
+	normal.origin.y = distance * ray.y + rayo.y;
+	normal.origin.z = distance * ray.z + rayo.z;
+	quotient = dot_product(normal.origin, axis) / dot_product(axis, axis);
+	normal.dir.x = quotient * (axis.x);
+	normal.dir.y = quotient * (axis.y);
+	normal.dir.z = quotient * (axis.z);
+	tmpx = normal.origin.x;
+	tmpy = normal.origin.y;
+	normal.origin.x = normal.origin.x * cos(0) - normal.origin.x *sin(0) + normal.origin.z * sin(0) * sin(0);
+	normal.origin.y = tmpx * sin(0) + normal.origin.y * cos(0) * cos(0) - normal.origin.z * cos(0) * sin(0);
+	normal.origin.z = tmpy * sin(0) + normal.origin.z * cos(1);
+	tmpx = normal.dir.x;
+	tmpy = normal.dir.y;
+	normal.dir.x = normal.dir.x * cos(0) - normal.dir.x *sin(0) + normal.dir.z * sin(0) * sin(0);
+	normal.dir.y = tmpx * sin(0) + normal.dir.y * cos(0) * cos(0) - normal.dir.z * cos(0) * sin(0);
+	normal.dir.z = tmpy * sin(0) + normal.dir.z * cos(1);
 	return (normal);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/29 09:42:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:00:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	rayo = transform_ray(ray, cylinder);
 	a = ray.x * ray.x + ray.z * ray.z;
 	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
-	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2);
+	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2) * (cylinder->diameter / 2);
 	root = cyl_quadratic(a, b, c);
 	if (!root)
 		return (INFINITY);

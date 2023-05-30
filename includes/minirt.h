@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/30 09:26:06 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:50:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,7 @@ double		plane_shadow(t_plane *plane, t_vector light_dir,
 				t_normal normal);
 double		sphere_shadow(t_sphere *sphere, t_normal normal,
 				t_vector light_dir);
+
+t_vector	transform_ray(t_vector ray, t_cylinder *cylinder);
 
 #endif
