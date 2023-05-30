@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/05/29 13:23:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/30 09:15:15 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -61,6 +61,32 @@ static int	sky_color(t_scene *scene, t_vector ray)
 			scene->ambiant_l->light_ratio * (255 * (1 - t) + t * 245), 255));
 }
 
+static t_normal	get_normal(t_obj_list *nearest, t_vector ray, double distance)
+{
+	t_normal	normal;
+
+	if (nearest->type == sphere)
+		normal = get_sphere_normal(nearest->sphere, ray, distance);
+	if (nearest->type == plane)
+		normal = get_plane_normal(nearest->plane, ray, distance);
+	if (nearest->type == cylinder)
+		normal = get_cylinder_normal(nearest->cylinder, ray, distance);
+	return (normal);
+}
+
+static int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal)
+{
+	int			color;
+
+	if (nearest->type == sphere)
+		color = normalized_color(nearest->sphere->color, normal.dir, ray);
+	if (nearest->type == plane)
+		color = normalized_color(nearest->plane->colors, normal.dir, ray);
+	if (nearest->type == cylinder)
+		color = normalized_color(nearest->cylinder->color, normal.dir, ray);
+	return (color);
+}
+
 int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 		double distance)
 {
@@ -70,21 +96,8 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 
 	if (nearest)
 	{
-		if (nearest->type == sphere)
-		{
-			normal = get_sphere_normal(nearest->sphere, ray, distance);
-			color = normalized_color(nearest->sphere->color, normal.dir, ray);
-		}
-		if (nearest->type == plane)
-		{
-			normal = get_plane_normal(nearest->plane, ray, distance);
-			color = normalized_color(nearest->plane->colors, normal.dir, ray);
-		}
-		if (nearest->type == cylinder)
-		{
-			normal = get_cylinder_normal(nearest->cylinder, ray, distance);
-			color = normalized_color(nearest->cylinder->color, normal.dir, ray);
-		}
+		normal = get_normal(nearest, ray, distance);
+		color = get_normal_color(nearest, ray, normal);
 		diffuse_color = get_diffuse_ratio(scene, normal, ray);
 		color = get_final_color(color, diffuse_color, scene);
 		nearest->hitted = 0;
