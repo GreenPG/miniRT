@@ -6,13 +6,13 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 09:06:30 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:33:59 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
+t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder)
 {
 	double		alpha;
 	double		beta;
@@ -36,9 +36,30 @@ t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
 	return (ray);
 }
 
-double min_cyl(double t_1, double t_2, double t_3, double t_4)
+t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
 {
-	double min;
+	double		alpha;
+	double		beta;
+	double		tmpx;
+	double		tmpy;
+
+	alpha = cylinder->alpha;
+	beta = cylinder->beta;
+	tmpx = ray.x;
+	tmpy = ray.y;
+	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
+		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
+		* sin(cylinder->beta);
+	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
+		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
+		* sin (cylinder->beta);
+	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
+	return (ray);
+}
+
+double	min_cyl(double t_1, double t_2, double t_3, double t_4)
+{
+	double	min;
 
 	min = INFINITY;
 	if (t_1 > 0 && t_1 < min)
@@ -52,57 +73,59 @@ double min_cyl(double t_1, double t_2, double t_3, double t_4)
 	return (min);
 }
 
-void ft_swoop(double *a, double* b)
+double	*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder)
 {
-	double *swap;
-	swap = a; 
-	a = b;
-	b = swap;
+	double	*r;
+
+	r = malloc(sizeof(double) * 2);
+	if (!r)
+	{
+		ft_error("Error\n");
+		return (NULL);
+	}
+	r[0] = INFINITY;
+	r[1] = INFINITY;
+	r[0] = (-cylinder->height / 2 - rayo.y) / ray.y;
+	if ((rayo.x + r[0] * ray.x) * (rayo.x + r[0] * ray.x)
+		+ (rayo.z + r[0] * ray.z) * (rayo.z + r[0] * ray.z)
+		> (cylinder->diameter / 2) * (cylinder->diameter / 2))
+		r[0] = INFINITY;
+	r[1] = (cylinder->height / 2 - rayo.y) / ray.y;
+	if ((rayo.x + r[1] * ray.x) * (rayo.x + r[1] * ray.x)
+		+ (rayo.z + r[1] * ray.z) * (rayo.z + r[1] * ray.z)
+		> (cylinder->diameter / 2) * (cylinder->diameter / 2))
+		r[1] = INFINITY;
+	return (r);
 }
 
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
-	double		a;
 	double		b;
 	double		c;
 	double		*root;
+	double		*caps;
 	t_vector	rayo;
-	double		tmpx;
-	double		tmpy;
 
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
-		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
-		* sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
-		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
-		* sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	rayo = transform_ray(ray, cylinder);
-	a = ray.x * ray.x + ray.z * ray.z;
+	ray = transform_ray(ray, cylinder);
+	rayo = transform_rayo(ray, cylinder);
 	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
-	c = rayo.x * rayo.x + rayo.z * rayo.z - (cylinder->diameter / 2) * (cylinder->diameter / 2);
-	root = cyl_quadratic(a, b, c);
-	if (!root)
+	c = rayo.x * rayo.x + rayo.z * rayo.z
+		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
+	root = cyl_quadratic(ray.x * ray.x + ray.z * ray.z, b, c);
+	caps = caps_hit(ray, rayo, cylinder);
+	if (!root || !caps)
 		return (INFINITY);
 	if (!(root[0] > 0 && rayo.y + root[0] * ray.y
-		> -cylinder->height / 2 && rayo.y + root[0] * ray.y
-		< cylinder->height / 2))
+			> -cylinder->height / 2 && rayo.y + root[0] * ray.y
+			< cylinder->height / 2))
 		root[0] = INFINITY;
 	if (!(root[1] > 0 && rayo.y + root[1] * ray.y
-		> -cylinder->height / 2 && rayo.y + root[1] * ray.y
-		< cylinder->height / 2))
+			> -cylinder->height / 2 && rayo.y + root[1] * ray.y
+			< cylinder->height / 2))
 		root[1] = INFINITY;
-	double t_3;
-	double t_4;
-	t_3 = INFINITY;
-	t_4 = INFINITY;
-	t_3 = (-cylinder->height / 2 - rayo.y) / ray.y;
-	if ((rayo.x + t_3 * ray.x) * (rayo.x + t_3 * ray.x) + (rayo.z + t_3 * ray.z) * (rayo.z + t_3 * ray.z) > (cylinder->diameter / 2) * (cylinder->diameter / 2)) 
-		t_3 = INFINITY;
-	t_4 = (cylinder->height / 2 - rayo.y) / ray.y;
-	if ((rayo.x + t_4 * ray.x) * (rayo.x + t_4 * ray.x) + (rayo.z + t_4 * ray.z) * (rayo.z + t_4 * ray.z) > (cylinder->diameter / 2) * (cylinder->diameter / 2)) 
-		t_4 = INFINITY;
-	return (min_cyl(root[0], root[1], t_3, t_4));
+	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
+			&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
+			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
+		cylinder->hit_body = true;
+	return (min_cyl(root[0], root[1], caps[0], caps[1]));
 }
