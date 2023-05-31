@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 10:39:31 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:52:09 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 	double		vector_len;	
 
 	axis.x = 0;
-	axis.y = 1 * cylinder->height / 2;
+	axis.y = cylinder->height / 2;
 	axis.z = 0;
 	tmpx = ray.x;
 	tmpy = ray.y;
@@ -71,7 +71,7 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
 		* sin (cylinder->beta);
 	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
-	rayo = transform_ray(ray, cylinder);
+	rayo = transform_rayo(ray, cylinder);
 	normal.origin.x = distance * ray.x + rayo.x;
 	normal.origin.y = distance * ray.y + rayo.y;
 	normal.origin.z = distance * ray.z + rayo.z;

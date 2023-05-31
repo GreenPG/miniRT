@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/30 09:25:12 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:51:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ static int	wich_side(t_vector ray, t_vector light_dir, t_obj_list *obj,
 		if ((a < 0 && b < 0) || (a > 0 && b > 0))
 			return (1);
 	}
+	if (obj->type == cylinder)
+	{
+		a = dot_product(normal.dir, ray);
+		b = dot_product(normal.dir, light_dir);
+		if ((a < 0 && b < 0) || (a > 0 && b > 0))
+			return (1);
+	}
 	return (0);
 }
 
@@ -68,6 +75,8 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 				distance = sphere_shadow(cursor->sphere, normal, light_dir);
 			if (cursor->type == plane)
 				distance = plane_shadow(cursor->plane, light_dir, normal);
+			if (cursor->type == cylinder)
+				distance = cylinder_shadow(cursor->cylinder, scene->light, light_dir);
 		}
 		if (cursor->hitted == 1)
 			if (wich_side(ray, light_dir, cursor, normal) == 0)
@@ -106,8 +115,7 @@ int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 	light_dir = get_light_dir(scene->light, normal);
 	if (light_intersect(scene, light_dir, normal, ray) == 1)
 		return (0);
-	normal = orient_normal(scene, normal, light_dir);
-	diffuse_ratio = dot_product(normal.dir, light_dir);
+	diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
 	diffuse_ratio *= scene->light->brightness;
 	r = get_r(scene->light->colors) * diffuse_ratio;
