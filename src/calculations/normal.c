@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 10:04:43 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:26:57 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,25 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 	normal.dir.z /= vector_len;
 	tmpx = normal.origin.x;
 	tmpy = normal.origin.y;
-	ray.x = ray.x * cos(-cylinder->alpha) - ray.y * sin(-cylinder->alpha)
-		* cos(-cylinder->beta) + ray.z * sin(-cylinder->alpha)
+	normal.origin.x = normal.origin.x * cos(-cylinder->alpha) - normal.origin.y * sin(-cylinder->alpha)
+		* cos(-cylinder->beta) + normal.origin.z * sin(-cylinder->alpha)
 		* sin(-cylinder->beta);
-	ray.y = tmpx * sin(-cylinder->alpha) + ray.y * cos(-cylinder->beta)
-		* cos(-cylinder->alpha) - ray.z * cos(-cylinder->alpha)
+	normal.origin.y = tmpx * sin(-cylinder->alpha) + normal.origin.y * cos(-cylinder->beta)
+		* cos(-cylinder->alpha) - normal.origin.z * cos(-cylinder->alpha)
 		* sin (-cylinder->beta);
-	ray.z = tmpy * sin(-cylinder->beta) + ray.z * cos(-cylinder->beta);
+	normal.origin.z = tmpy * sin(-cylinder->beta) + normal.origin.z * cos(-cylinder->beta);
+	normal.origin.x += cylinder->origin->x;
+	normal.origin.y += cylinder->origin->y;
+	normal.origin.z += cylinder->origin->z;
+	tmpx = normal.dir.x;
+	tmpy = normal.dir.y;
+	normal.dir.x = normal.dir.x * cos(-cylinder->alpha) - normal.dir.y * sin(-cylinder->alpha)
+		* cos(-cylinder->beta) + normal.dir.z * sin(-cylinder->alpha)
+		* sin(-cylinder->beta);
+	normal.dir.y = tmpx * sin(-cylinder->alpha) + normal.dir.y * cos(-cylinder->beta)
+		* cos(-cylinder->alpha) - normal.dir.z * cos(-cylinder->alpha)
+		* sin (-cylinder->beta);
+	normal.dir.z = tmpy * sin(-cylinder->beta) + normal.dir.z * cos(-cylinder->beta);
 	return (normal);
 	}
 
