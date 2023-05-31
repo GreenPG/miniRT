@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 10:26:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:39:31 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,29 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 		* sin (-cylinder->beta);
 	normal.dir.z = tmpy * sin(-cylinder->beta) + normal.dir.z * cos(-cylinder->beta);
 	return (normal);
+}
+
+static t_normal	normal_caps(t_cylinder *cylinder, t_vector ray, double distance)
+{
+	t_normal	normal;
+
+	normal.origin.x = ray.x * distance;
+	normal.origin.y = ray.y * distance;
+	normal.origin.z = ray.z * distance;
+	if (dot_product(ray, *cylinder->direction) > 0)
+	{
+		normal.dir.x = -cylinder->direction->x;
+		normal.dir.y = -cylinder->direction->y;
+		normal.dir.z = -cylinder->direction->z;
 	}
+	else 
+	{
+		normal.dir.x = cylinder->direction->x;
+		normal.dir.y = cylinder->direction->y;
+		normal.dir.z = cylinder->direction->z;
+	}
+	return (normal);
+}
 
 t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
 {
@@ -131,7 +153,10 @@ t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 {
 	t_normal	normal;
 
-	normal = normal_body(cylinder, ray, distance);
+	if (cylinder->hit_body == true)
+		normal = normal_body(cylinder, ray, distance);
+	else
+		normal = normal_caps(cylinder, ray, distance);
 	cylinder->hit_body = false;
 	return (normal);
 }
@@ -147,5 +172,5 @@ int	normalized_color(int color, t_vector normal, t_vector ray)
 	ray.z /= ray_len;
 	ratio = dot_product(normal, ray);
 	return (get_rgba(fabs(ratio * get_r(color)), fabs(ratio * get_g(color)),
-			fabs(ratio * get_b(color)), 255));
+				fabs(ratio * get_b(color)), 255));
 }
