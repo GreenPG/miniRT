@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 11:10:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:37:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,18 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
 		cylinder->hit_body = true;
 	return (min_cyl(root[0], root[1], caps[0], caps[1]));
+}
+
+double	get_shadow_distance(t_obj_list *cursor, t_normal normal,
+		t_vector light_dir)
+{
+	double	distance;
+
+	if (cursor->type == sphere)
+		distance = sphere_shadow(cursor->sphere, normal, light_dir);
+	if (cursor->type == plane)
+		distance = plane_shadow(cursor->plane, light_dir, normal);
+	if (cursor->type == cylinder)
+		distance = cylinder_shadow(cursor->cylinder, normal, light_dir);
+	return (distance);
 }

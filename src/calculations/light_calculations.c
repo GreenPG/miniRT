@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 10:46:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:37:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ static int	wich_side(t_vector ray, t_vector light_dir,	t_normal normal)
 	if ((a < 0 && b < 0) || (a > 0 && b > 0))
 		return (1);
 	return (0);
-}
-
-static double	get_shadow_distance(t_obj_list *cursor, t_normal normal,
-		t_vector light_dir)
-{
-	double	distance;
-
-	if (cursor->type == sphere)
-		distance = sphere_shadow(cursor->sphere, normal, light_dir);
-	if (cursor->type == plane)
-		distance = plane_shadow(cursor->plane, light_dir, normal);
-	if (cursor->type == cylinder)
-		distance = cylinder_shadow(cursor->cylinder, normal, light_dir);
-	return (distance);
 }
 
 static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,

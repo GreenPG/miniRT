@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/01 11:09:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:45:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void		free_sphere(t_sphere **sphere);
 /*	sphere_calculations.c	*/
 double		get_root(double a, double b, double d);
 double		sphere_hit(t_sphere *sphere, t_vector ray);
+t_normal	get_sphere_normal(t_sphere *sphere, t_vector ray,
+				double distance);
 
 /*	light.c	*/
 
@@ -183,13 +185,11 @@ int			get_b(int rgba);
 int			get_a(int rgba);
 
 	/*	normal.c	*/
-t_normal	get_sphere_normal(t_sphere *sphere, t_vector ray,
-				double distance);
 t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance);
 t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 				double distance);
-int			normalized_color(int color, t_vector normal, t_vector ray);
 t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir);
+t_normal	get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
 int			get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray);
@@ -210,13 +210,32 @@ double		sphere_shadow(t_sphere *sphere, t_normal normal,
 				t_vector light_dir);
 double		cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 				t_vector light_dir);
+double		get_shadow_distance(t_obj_list *cursor, t_normal normal,
+				t_vector light_dir);
 
 /*	cylinder_calculations.c 	*/
-t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder);
-t_vector	transform_ray(t_vector ray, t_cylinder *cylinder);
 double		min_cyl(double t_1, double t_2, double t_3, double t_4);
 double		*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 double		*body_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
+
+/*	ray.c	*/
+t_vector	calculate_ray_direction(unsigned int x, unsigned int y,
+				t_camera *camera);
+t_vector	ray_direction(unsigned int x, unsigned int y, t_camera camera);
+int			init_rays(t_scene *scene);
+
+/*	normal_color.c	*/
+int			get_normal_color(t_obj_list *nearest, t_vector ray,
+				t_normal normal);
+
+/*	ray_transforms.c	*/
+t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder);
+t_vector	transform_ray(t_vector ray, t_cylinder *cylinder);
+t_vector	revert_transform(t_vector vec, t_cylinder *cylinder);
+
+/*	cylinder_shadow.c	*/
+t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
+				double distance);
 
 #endif

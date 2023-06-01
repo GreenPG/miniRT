@@ -6,30 +6,11 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 11:35:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:47:18 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-t_normal	get_sphere_normal(t_sphere *sphere, t_vector ray,
-		double distance)
-{
-	t_normal	normal;
-	double		vector_len;
-
-	normal.origin.x = distance * ray.x;
-	normal.origin.y = distance * ray.y;
-	normal.origin.z = distance * ray.z;
-	normal.dir.x = normal.origin.x - sphere->origin->x;
-	normal.dir.y = normal.origin.y - sphere->origin->y;
-	normal.dir.z = normal.origin.z - sphere->origin->z;
-	vector_len = sqrt(dot_product(normal.dir, normal.dir));
-	normal.dir.x /= vector_len;
-	normal.dir.y /= vector_len;
-	normal.dir.z /= vector_len;
-	return (normal);
-}
 
 t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 {
@@ -46,86 +27,6 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	normal.dir.x /= vector_len;
 	normal.dir.y /= vector_len;
 	normal.dir.z /= vector_len;
-	return (normal);
-}
-
-static t_vector	get_normal_dir(t_cylinder *cylinder, t_vector normal_o)
-{
-	t_vector	axis;
-	t_vector	normal_dir;
-	double		quotient;
-	double		vector_len;	
-
-	axis.x = 0;
-	axis.y = cylinder->height / 2;
-	axis.z = 0;
-	quotient = dot_product(normal_o, axis) / dot_product(axis, axis);
-	normal_dir.x = normal_o.x - quotient * (axis.x);
-	normal_dir.y = normal_o.y - quotient * (axis.y);
-	normal_dir.z = normal_o.z - quotient * (axis.z);
-	vector_len = sqrt(dot_product(normal_dir, normal_dir));
-	normal_dir.x /= vector_len;
-	normal_dir.y /= vector_len;
-	normal_dir.z /= vector_len;
-	return (normal_dir);
-}
-
-static t_vector	revert_transform(t_vector vec, t_cylinder *cylinder)
-{
-	double		tmpx;
-	double		tmpy;
-
-	tmpx = vec.x;
-	tmpy = vec.y;
-	vec.x = vec.x * cos(-cylinder->alpha) - vec.y
-		* sin(-cylinder->alpha) * cos(-cylinder->beta) + vec.z
-		* sin(-cylinder->alpha) * sin(-cylinder->beta);
-	vec.y = tmpx * sin(-cylinder->alpha) + vec.y
-		* cos(-cylinder->beta) * cos(-cylinder->alpha) - vec.z
-		* cos(-cylinder->alpha) * sin (-cylinder->beta);
-	vec.z = tmpy * sin(-cylinder->beta) + vec.z
-		* cos(-cylinder->beta);
-	return (vec);
-}
-
-static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
-{
-	t_normal	normal;
-	t_vector	rayo;
-
-	ray = transform_ray(ray, cylinder);
-	rayo = transform_rayo(ray, cylinder);
-	normal.origin.x = distance * ray.x + rayo.x;
-	normal.origin.y = distance * ray.y + rayo.y;
-	normal.origin.z = distance * ray.z + rayo.z;
-	normal.dir = get_normal_dir(cylinder, normal.origin);
-	normal.origin = revert_transform(normal.origin, cylinder);
-	normal.origin.x += cylinder->origin->x;
-	normal.origin.y += cylinder->origin->y;
-	normal.origin.z += cylinder->origin->z;
-	normal.dir = revert_transform(normal.dir, cylinder);
-	return (normal);
-}
-
-static t_normal	normal_caps(t_cylinder *cylinder, t_vector ray, double distance)
-{
-	t_normal	normal;
-
-	normal.origin.x = ray.x * distance;
-	normal.origin.y = ray.y * distance;
-	normal.origin.z = ray.z * distance;
-	if (dot_product(ray, *cylinder->direction) > 0)
-	{
-		normal.dir.x = -cylinder->direction->x;
-		normal.dir.y = -cylinder->direction->y;
-		normal.dir.z = -cylinder->direction->z;
-	}
-	else
-	{
-		normal.dir.x = cylinder->direction->x;
-		normal.dir.y = cylinder->direction->y;
-		normal.dir.z = cylinder->direction->z;
-	}
 	return (normal);
 }
 
@@ -148,29 +49,15 @@ t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
 	return (normal);
 }
 
-t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
-		double distance)
+t_normal	get_normal(t_obj_list *nearest, t_vector ray, double distance)
 {
 	t_normal	normal;
 
-	if (cylinder->hit_body == true)
-		normal = normal_body(cylinder, ray, distance);
-	else
-		normal = normal_caps(cylinder, ray, distance);
-	cylinder->hit_body = false;
+	if (nearest->type == sphere)
+		normal = get_sphere_normal(nearest->sphere, ray, distance);
+	if (nearest->type == plane)
+		normal = get_plane_normal(nearest->plane, ray, distance);
+	if (nearest->type == cylinder)
+		normal = get_cylinder_normal(nearest->cylinder, ray, distance);
 	return (normal);
-}
-
-int	normalized_color(int color, t_vector normal, t_vector ray)
-{
-	double	ratio;
-	double	ray_len;
-
-	ray_len = sqrt(dot_product(ray, ray));
-	ray.x /= ray_len;
-	ray.y /= ray_len;
-	ray.z /= ray_len;
-	ratio = dot_product(normal, ray);
-	return (get_rgba(fabs(ratio * get_r(color)), fabs(ratio * get_g(color)),
-			fabs(ratio * get_b(color)), 255));
 }

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:57:34 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/19 10:18:11 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:26:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ double	get_root(double a, double b, double d)
 		return (r1);
 	else
 		return (INFINITY);
+}
+
+t_normal	get_sphere_normal(t_sphere *sphere, t_vector ray,
+		double distance)
+{
+	t_normal	normal;
+	double		vector_len;
+
+	normal.origin.x = distance * ray.x;
+	normal.origin.y = distance * ray.y;
+	normal.origin.z = distance * ray.z;
+	normal.dir.x = normal.origin.x - sphere->origin->x;
+	normal.dir.y = normal.origin.y - sphere->origin->y;
+	normal.dir.z = normal.origin.z - sphere->origin->z;
+	vector_len = sqrt(dot_product(normal.dir, normal.dir));
+	normal.dir.x /= vector_len;
+	normal.dir.y /= vector_len;
+	normal.dir.z /= vector_len;
+	return (normal);
 }
 
 double	sphere_hit(t_sphere *sphere, t_vector ray)

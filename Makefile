@@ -29,12 +29,16 @@ SRCS	=	src/main.c	\
 			src/calculations/light_calculations.c \
 			src/calculations/sphere_calculations.c 	\
 			src/calculations/cylinder_calculations.c 	\
+			src/calculations/cylinder_shadow.c 	\
 			src/calculations/normal.c \
 			src/calculations/vector.c \
 			src/calculations/shadow.c \
+			src/calculations/ray_transforms.c \
 			src/render/color.c	\
+			src/render/normal_color.c	\
 			src/render/hit_functions.c \
 			src/render/render.c	\
+			src/render/ray.c \
 			src/moves/rotation.c \
 			src/moves/cylinder_move.c \
 			src/moves/plane_move.c \
