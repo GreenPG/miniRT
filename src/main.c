@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/05/18 09:47:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:51:33 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static t_data	*init_image(mlx_t *mlx, t_scene *scene)
 
 	scene->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	init_rays(scene);
+	if (!scene->camera->rays)
+		return (NULL);
 	world_translate(scene, -scene->camera->origin->x,
 		-scene->camera->origin->y, -scene->camera->origin->z);
 	world_rotate(scene, scene->camera->alpha, scene->camera->beta);
@@ -54,7 +56,6 @@ static void	loop(t_data *data, mlx_t *mlx)
 	mlx_mouse_hook(data->mlx, mouse_handle, data);
 	mlx_key_hook(mlx, &handle_keypress, data);
 	mlx_loop(mlx);
-	mlx_terminate(mlx);
 }
 
 int	main(int argc, char **argv)
@@ -80,6 +81,7 @@ int	main(int argc, char **argv)
 		mlx_image_to_window(mlx, scene->img, 0, 0);
 		loop(data, data->mlx);
 	}
+	mlx_terminate(mlx);
 	free_all(data, scene);
 	return (0);
 }

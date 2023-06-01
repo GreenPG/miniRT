@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/22 08:58:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:01:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
 {
 	cylinder->alpha = get_alpha(*cylinder->direction);
 	cylinder->beta = get_beta(*cylinder->direction);
+	cylinder->hit_body = false;
 	return (cylinder);
 }
 

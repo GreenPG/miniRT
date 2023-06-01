@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/30 08:36:06 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:00:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 		return (1);
 	}
 	obj->type = type;
+	obj->hitted = 0;
 	if (type == sphere)
 	{
 		if (sphere_obj(obj, line) == 1)

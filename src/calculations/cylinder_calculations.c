@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:39:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:16:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,19 @@ double	*body_hit(t_vector ray, t_vector rayo,
 	return (cyl_quadratic(a, b, c));
 }
 
+void	free_cyl_roots(double *root, double *caps)
+{
+	if (root)
+		free(root);
+	if (caps)
+		free(caps);
+}
+
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
 	double		*root;
 	double		*caps;
+	double		distance;
 	t_vector	rayo;
 
 	ray = transform_ray(ray, cylinder);
@@ -78,7 +87,10 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	root = body_hit(ray, rayo, cylinder);
 	caps = caps_hit(ray, rayo, cylinder);
 	if (!root || !caps)
+	{
+		free_cyl_roots(root, caps);
 		return (INFINITY);
+	}
 	if (!(root[0] > 0 && rayo.y + root[0] * ray.y
 			> -cylinder->height / 2 && rayo.y + root[0] * ray.y
 			< cylinder->height / 2))
@@ -91,5 +103,7 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
 		cylinder->hit_body = true;
-	return (min_cyl(root[0], root[1], caps[0], caps[1]));
+	distance = min_cyl(root[0], root[1], caps[0], caps[1]);
+	free_cyl_roots(root, caps);
+	return (distance);
 }

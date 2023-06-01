@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 16:14:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:08:43 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_camera(t_camera **camera)
 		free((*camera)->origin);
 	if ((*camera)->direction)
 		free((*camera)->direction);
+	if ((*camera)->rays)
+		free_rays((*camera)->rays);
 	free(*camera);
 	*camera = (NULL);
 	return ;

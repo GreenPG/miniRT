@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:37:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:17:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 {
 	double		*root;
 	double		*caps;
+	double		distance;
 	t_vector	light_o;
 
 	light_dir = transform_ray(light_dir, cylinder);
@@ -91,7 +92,10 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 	root = body_hit(light_dir, light_o, cylinder);
 	caps = caps_hit(light_dir, light_o, cylinder);
 	if (!root || !caps)
+	{
+		free_cyl_roots(root, caps);
 		return (INFINITY);
+	}
 	if (!(root[0] > 0 && light_o.y + root[0] * light_dir.y
 			> -cylinder->height / 2 && light_o.y + root[0] * light_dir.y
 			< cylinder->height / 2))
@@ -104,7 +108,9 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
 		cylinder->hit_body = true;
-	return (min_cyl(root[0], root[1], caps[0], caps[1]));
+	distance = min_cyl(root[0], root[1], caps[0], caps[1]);
+	free_cyl_roots(root, caps);
+	return (distance);
 }
 
 double	get_shadow_distance(t_obj_list *cursor, t_normal normal,

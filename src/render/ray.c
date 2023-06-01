@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:22:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:22:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:09:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ t_vector	ray_direction(unsigned int x, unsigned int y, t_camera camera)
 	return (ray);
 }
 
+void	free_rays(t_rays *ray_list)
+{
+	int	x;
+
+	if (!ray_list || !ray_list->rays)
+		return ;
+	x = 0;
+	while (x < WIDTH)
+	{
+		if (ray_list->rays[x])
+			free(ray_list->rays[x]);
+		x++;
+	}
+	free(ray_list->rays);
+	free(ray_list);
+}
+
 int	init_rays(t_scene *scene)
 {
 	unsigned int	x;
@@ -46,12 +63,24 @@ int	init_rays(t_scene *scene)
 	t_rays			*ray_list;
 
 	ray_list = malloc(sizeof(t_rays));
+	if (!ray_list)
+		return (0);
 	x = 0;
 	ray_list->rays = malloc(WIDTH * sizeof(t_vector *));
+	if (!ray_list->rays)
+	{
+		free(ray_list);
+		return (0);
+	}
 	while (x < WIDTH)
 	{
 		y = 0;
 		ray_list->rays[x] = malloc(HEIGHT * sizeof(t_vector));
+		if (!ray_list->rays[x])
+		{
+			free_rays(ray_list);
+			return (0);
+		}
 		while (y < HEIGHT)
 		{
 			if (scene->camera->fov > 150 * (M_PI / 180))
