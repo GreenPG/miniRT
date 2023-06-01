@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/31 16:52:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 09:42:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ double		plane_shadow(t_plane *plane, t_vector light_dir,
 				t_normal normal);
 double		sphere_shadow(t_sphere *sphere, t_normal normal,
 				t_vector light_dir);
-double		cylinder_shadow(t_cylinder *cylinder, t_light *light, t_vector light_dir);
+double		cylinder_shadow(t_cylinder *cylinder, t_normal normal, t_vector light_dir);
 
 /*	cylinder_calculations.c 	*/
 t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder);

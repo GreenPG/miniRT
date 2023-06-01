@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 16:51:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 09:42:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 			if (cursor->type == plane)
 				distance = plane_shadow(cursor->plane, light_dir, normal);
 			if (cursor->type == cylinder)
-				distance = cylinder_shadow(cursor->cylinder, scene->light, light_dir);
+				distance = cylinder_shadow(cursor->cylinder, normal, light_dir);
 		}
 		if (cursor->hitted == 1)
 			if (wich_side(ray, light_dir, cursor, normal) == 0)
@@ -85,7 +85,6 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 			return (1);
 		cursor = cursor->next;
 	}
-	ray = light_dir;
 	return (0);
 }
 

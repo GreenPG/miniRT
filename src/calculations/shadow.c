@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 17:13:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 10:15:36 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static t_vector	transform_lighto(t_vector light_dir, t_vector light_origin, t_cy
 	alpha = cylinder->alpha;
 	beta = cylinder->beta;
 	light_dir.x = light_origin.x - cylinder->origin->x;
-	light_dir.y = light_origin.x - cylinder->origin->y;
-	light_dir.z = light_origin.x - cylinder->origin->z;
+	light_dir.y = light_origin.y - cylinder->origin->y;
+	light_dir.z = light_origin.z - cylinder->origin->z;
 	tmpx = light_dir.x;
 	tmpy = light_dir.y;
 	light_dir.x = light_dir.x * cos(cylinder->alpha) - light_dir.y * sin(cylinder->alpha)
@@ -77,7 +77,7 @@ static t_vector	transform_lighto(t_vector light_dir, t_vector light_origin, t_cy
 	return (light_dir);
 }
 
-double	cylinder_shadow(t_cylinder *cylinder, t_light *light, t_vector light_dir)
+double	cylinder_shadow(t_cylinder *cylinder, t_normal normal, t_vector light_dir)
 {
 	double		b;
 	double		c;
@@ -86,7 +86,7 @@ double	cylinder_shadow(t_cylinder *cylinder, t_light *light, t_vector light_dir)
 	t_vector	light_o;
 
 	light_dir = transform_ray(light_dir, cylinder);
-	light_o = transform_lighto(light_dir, *light->origin, cylinder);
+	light_o = transform_lighto(light_dir, normal.origin, cylinder);
 	b = 2 * (light_o.x * light_dir.x + light_o.z * light_dir.z);
 	c = light_o.x * light_o.x + light_o.z * light_o.z
 		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
