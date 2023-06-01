@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 10:33:59 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:11:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,29 @@ double	*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder)
 	return (r);
 }
 
+double	*body_hit(t_vector ray, t_vector rayo,
+		t_cylinder *cylinder)
+{
+	double	a;
+	double	b;
+	double	c;
+
+	a = ray.x * ray.x + ray.z * ray.z;
+	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
+	c = rayo.x * rayo.x + rayo.z * rayo.z
+		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
+	return (cyl_quadratic(a, b, c));
+}
+
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
-	double		b;
-	double		c;
 	double		*root;
 	double		*caps;
 	t_vector	rayo;
 
 	ray = transform_ray(ray, cylinder);
 	rayo = transform_rayo(ray, cylinder);
-	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
-	c = rayo.x * rayo.x + rayo.z * rayo.z
-		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
-	root = cyl_quadratic(ray.x * ray.x + ray.z * ray.z, b, c);
+	root = body_hit(ray, rayo, cylinder);
 	caps = caps_hit(ray, rayo, cylinder);
 	if (!root || !caps)
 		return (INFINITY);
@@ -124,7 +133,7 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 			< cylinder->height / 2))
 		root[1] = INFINITY;
 	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
-			&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
+		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
 		cylinder->hit_body = true;
 	return (min_cyl(root[0], root[1], caps[0], caps[1]));

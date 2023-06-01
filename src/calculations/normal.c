@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/31 15:52:09 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:35:45 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,61 +49,61 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 	return (normal);
 }
 
-static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
+static t_vector	get_normal_dir(t_cylinder *cylinder, t_vector normal_o)
 {
-	t_normal	normal;
-	double		quotient;
-	t_vector	rayo;
 	t_vector	axis;
-	double		tmpx;
-	double		tmpy;
+	t_vector	normal_dir;
+	double		quotient;
 	double		vector_len;	
 
 	axis.x = 0;
 	axis.y = cylinder->height / 2;
 	axis.z = 0;
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
-		* cos(cylinder->beta) + ray.z * sin(cylinder->alpha)
-		* sin(cylinder->beta);
-	ray.y = tmpx * sin(cylinder->alpha) + ray.y * cos(cylinder->beta)
-		* cos(cylinder->alpha) - ray.z * cos(cylinder->alpha)
-		* sin (cylinder->beta);
-	ray.z = tmpy * sin(cylinder->beta) + ray.z * cos(cylinder->beta);
+	quotient = dot_product(normal_o, axis) / dot_product(axis, axis);
+	normal_dir.x = normal_o.x - quotient * (axis.x);
+	normal_dir.y = normal_o.y - quotient * (axis.y);
+	normal_dir.z = normal_o.z - quotient * (axis.z);
+	vector_len = sqrt(dot_product(normal_dir, normal_dir));
+	normal_dir.x /= vector_len;
+	normal_dir.y /= vector_len;
+	normal_dir.z /= vector_len;
+	return (normal_dir);
+}
+
+static t_vector	revert_transform(t_vector vec, t_cylinder *cylinder)
+{
+	double		tmpx;
+	double		tmpy;
+
+	tmpx = vec.x;
+	tmpy = vec.y;
+	vec.x = vec.x * cos(-cylinder->alpha) - vec.y
+		* sin(-cylinder->alpha) * cos(-cylinder->beta) + vec.z
+		* sin(-cylinder->alpha) * sin(-cylinder->beta);
+	vec.y = tmpx * sin(-cylinder->alpha) + vec.y
+		* cos(-cylinder->beta) * cos(-cylinder->alpha) - vec.z
+		* cos(-cylinder->alpha) * sin (-cylinder->beta);
+	vec.z = tmpy * sin(-cylinder->beta) + vec.z
+		* cos(-cylinder->beta);
+	return (vec);
+}
+
+static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
+{
+	t_normal	normal;
+	t_vector	rayo;
+
+	ray = transform_ray(ray, cylinder);
 	rayo = transform_rayo(ray, cylinder);
 	normal.origin.x = distance * ray.x + rayo.x;
 	normal.origin.y = distance * ray.y + rayo.y;
 	normal.origin.z = distance * ray.z + rayo.z;
-	quotient = dot_product(normal.origin, axis) / dot_product(axis, axis);
-	normal.dir.x = normal.origin.x - quotient * (axis.x);
-	normal.dir.y = normal.origin.y - quotient * (axis.y);
-	normal.dir.z = normal.origin.z - quotient * (axis.z);
-	vector_len = sqrt(dot_product(normal.dir, normal.dir));
-	normal.dir.x /= vector_len;
-	normal.dir.y /= vector_len;
-	normal.dir.z /= vector_len;
-	tmpx = normal.origin.x;
-	tmpy = normal.origin.y;
-	normal.origin.x = normal.origin.x * cos(-cylinder->alpha) - normal.origin.y * sin(-cylinder->alpha)
-		* cos(-cylinder->beta) + normal.origin.z * sin(-cylinder->alpha)
-		* sin(-cylinder->beta);
-	normal.origin.y = tmpx * sin(-cylinder->alpha) + normal.origin.y * cos(-cylinder->beta)
-		* cos(-cylinder->alpha) - normal.origin.z * cos(-cylinder->alpha)
-		* sin (-cylinder->beta);
-	normal.origin.z = tmpy * sin(-cylinder->beta) + normal.origin.z * cos(-cylinder->beta);
+	normal.dir = get_normal_dir(cylinder, normal.origin);
+	normal.origin = revert_transform(normal.origin, cylinder);
 	normal.origin.x += cylinder->origin->x;
 	normal.origin.y += cylinder->origin->y;
 	normal.origin.z += cylinder->origin->z;
-	tmpx = normal.dir.x;
-	tmpy = normal.dir.y;
-	normal.dir.x = normal.dir.x * cos(-cylinder->alpha) - normal.dir.y * sin(-cylinder->alpha)
-		* cos(-cylinder->beta) + normal.dir.z * sin(-cylinder->alpha)
-		* sin(-cylinder->beta);
-	normal.dir.y = tmpx * sin(-cylinder->alpha) + normal.dir.y * cos(-cylinder->beta)
-		* cos(-cylinder->alpha) - normal.dir.z * cos(-cylinder->alpha)
-		* sin (-cylinder->beta);
-	normal.dir.z = tmpy * sin(-cylinder->beta) + normal.dir.z * cos(-cylinder->beta);
+	normal.dir = revert_transform(normal.dir, cylinder);
 	return (normal);
 }
 
@@ -120,7 +120,7 @@ static t_normal	normal_caps(t_cylinder *cylinder, t_vector ray, double distance)
 		normal.dir.y = -cylinder->direction->y;
 		normal.dir.z = -cylinder->direction->z;
 	}
-	else 
+	else
 	{
 		normal.dir.x = cylinder->direction->x;
 		normal.dir.y = cylinder->direction->y;
@@ -172,5 +172,5 @@ int	normalized_color(int color, t_vector normal, t_vector ray)
 	ray.z /= ray_len;
 	ratio = dot_product(normal, ray);
 	return (get_rgba(fabs(ratio * get_r(color)), fabs(ratio * get_g(color)),
-				fabs(ratio * get_b(color)), 255));
+			fabs(ratio * get_b(color)), 255));
 }

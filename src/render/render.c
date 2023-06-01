@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/30 09:15:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/01 10:40:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ t_vector	ray_direction(unsigned int x, unsigned int y, t_camera camera)
 	return (ray);
 }
 
+static double	get_distance(t_obj_list *cursor, t_vector ray)
+{
+	double	current_distance;
+
+	current_distance = INFINITY;
+	if (cursor->type == sphere)
+		current_distance = sphere_hit(cursor->sphere, ray);
+	else if (cursor->type == cylinder)
+		current_distance = cylinder_hit(cursor->cylinder, ray);
+	else if (cursor->type == plane)
+		current_distance = plane_hit(cursor->plane, ray);
+	return (current_distance);
+}
+
 int	get_background_color(t_vector ray, t_scene *scene)
 {
 	t_obj_list	*cursor;
@@ -51,13 +65,7 @@ int	get_background_color(t_vector ray, t_scene *scene)
 	cursor = scene->obj_list;
 	while (cursor)
 	{
-		current_distance = INFINITY;
-		if (cursor->type == sphere)
-			current_distance = sphere_hit(cursor->sphere, ray);
-		else if (cursor->type == cylinder)
-			current_distance = cylinder_hit(cursor->cylinder, ray);
-		else if (cursor->type == plane)
-			current_distance = plane_hit(cursor->plane, ray);
+		current_distance = get_distance(cursor, ray);
 		if (current_distance < nearest_distance)
 		{
 			if (nearest && nearest->type == cylinder)
