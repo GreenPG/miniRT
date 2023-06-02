@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:17:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:20:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,7 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 		free_cyl_roots(root, caps);
 		return (INFINITY);
 	}
-	if (!(root[0] > 0 && light_o.y + root[0] * light_dir.y
-			> -cylinder->height / 2 && light_o.y + root[0] * light_dir.y
-			< cylinder->height / 2))
-		root[0] = INFINITY;
-	if (!(root[1] > 0 && light_o.y + root[1] * light_dir.y
-			> -cylinder->height / 2 && light_o.y + root[1] * light_dir.y
-			< cylinder->height / 2))
-		root[1] = INFINITY;
+	root = between_caps(root, light_o, light_dir, cylinder);
 	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
 		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))

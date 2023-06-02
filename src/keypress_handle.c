@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:08:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:44:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:10:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 	{
 		mlx_close_window(data->mlx);
-		mlx_delete_image(data->mlx, data->scene->img);
 		return ;
 	}
 	if (keydata.key == MLX_KEY_KP_8 && keydata.action == MLX_RELEASE)
