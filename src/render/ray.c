@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:22:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:09:42 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:59:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,12 @@ void	free_rays(t_rays *ray_list)
 	free(ray_list);
 }
 
-int	init_rays(t_scene *scene)
+static t_rays	*ray_loop(t_rays *ray_list, t_scene *scene)
 {
 	unsigned int	x;
 	unsigned int	y;
-	t_rays			*ray_list;
 
-	ray_list = malloc(sizeof(t_rays));
-	if (!ray_list)
-		return (0);
 	x = 0;
-	ray_list->rays = malloc(WIDTH * sizeof(t_vector *));
-	if (!ray_list->rays)
-	{
-		free(ray_list);
-		return (0);
-	}
 	while (x < WIDTH)
 	{
 		y = 0;
@@ -92,6 +82,23 @@ int	init_rays(t_scene *scene)
 		}
 		x++;
 	}
+	return (ray_list);
+}
+
+int	init_rays(t_scene *scene)
+{
+	t_rays			*ray_list;
+
+	ray_list = malloc(sizeof(t_rays));
+	if (!ray_list)
+		return (0);
+	ray_list->rays = malloc(WIDTH * sizeof(t_vector *));
+	if (!ray_list->rays)
+	{
+		free(ray_list);
+		return (0);
+	}
+	ray_list = ray_loop(ray_list, scene);
 	scene->camera->rays = ray_list;
 	return (1);
 }

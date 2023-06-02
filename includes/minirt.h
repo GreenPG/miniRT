@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/01 16:18:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:17:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,11 +214,15 @@ double		get_shadow_distance(t_obj_list *cursor, t_normal normal,
 				t_vector light_dir);
 
 /*	cylinder_calculations.c 	*/
-double		min_cyl(double t_1, double t_2, double t_3, double t_4);
 double		*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 double		*body_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 void		free_cyl_roots(double *root, double *caps);
+double		*between_caps(double *root, t_vector light_o,
+				t_vector light_dir, t_cylinder *cylinder);
 double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
+
+/*	cylinder_calculations2.c	*/
+double		min_cyl(double t_1, double t_2, double t_3, double t_4);
 
 /*	ray.c	*/
 t_vector	calculate_ray_direction(unsigned int x, unsigned int y,

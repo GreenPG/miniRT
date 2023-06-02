@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 09:47:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:10:41 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods,
 		mlx_get_mouse_pos(data->mlx, &x, &y);
 		x = x * ((double)WIDTH / (double)data->mlx->width);
 		y = y * ((double)HEIGHT / (double)data->mlx->height);
-		data->scene->obj_selected
-			= get_click_obj(data->scene->camera->rays->rays[x][y], data->scene);
+		if (data && data->scene && data->scene->camera->rays->rays)
+			data->scene->obj_selected
+				= get_click_obj(data->scene->camera->rays->rays[x][y],
+					data->scene);
 	}
 	(void)button;
 	(void)action;

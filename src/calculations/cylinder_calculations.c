@@ -6,27 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:16:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:19:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-double	min_cyl(double t_1, double t_2, double t_3, double t_4)
-{
-	double	min;
-
-	min = INFINITY;
-	if (t_1 > 0 && t_1 < min)
-		min = t_1;
-	if (t_2 > 0 && t_2 < min)
-		min = t_2;
-	if (t_3 > 0 && t_3 < min)
-		min = t_3;
-	if (t_4 > 0 && t_4 < min)
-		min = t_4;
-	return (min);
-}
 
 double	*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder)
 {
@@ -75,6 +59,20 @@ void	free_cyl_roots(double *root, double *caps)
 		free(caps);
 }
 
+double	*between_caps(double *root, t_vector rayo,
+		t_vector ray, t_cylinder *cylinder)
+{
+	if (!(root[0] > 0 && rayo.y + root[0] * ray.y
+			> -cylinder->height / 2 && rayo.y + root[0] * ray.y
+			< cylinder->height / 2))
+		root[0] = INFINITY;
+	if (!(root[1] > 0 && rayo.y + root[1] * ray.y
+			> -cylinder->height / 2 && rayo.y + root[1] * ray.y
+			< cylinder->height / 2))
+		root[1] = INFINITY;
+	return (root);
+}
+
 double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
 	double		*root;
@@ -91,14 +89,7 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 		free_cyl_roots(root, caps);
 		return (INFINITY);
 	}
-	if (!(root[0] > 0 && rayo.y + root[0] * ray.y
-			> -cylinder->height / 2 && rayo.y + root[0] * ray.y
-			< cylinder->height / 2))
-		root[0] = INFINITY;
-	if (!(root[1] > 0 && rayo.y + root[1] * ray.y
-			> -cylinder->height / 2 && rayo.y + root[1] * ray.y
-			< cylinder->height / 2))
-		root[1] = INFINITY;
+	root = between_caps(root, rayo, ray, cylinder);
 	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
 		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))

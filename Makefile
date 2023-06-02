@@ -29,6 +29,7 @@ SRCS	=	src/main.c	\
 			src/calculations/light_calculations.c \
 			src/calculations/sphere_calculations.c 	\
 			src/calculations/cylinder_calculations.c 	\
+			src/calculations/cylinder_calculations2.c 	\
 			src/calculations/cylinder_shadow.c 	\
 			src/calculations/normal.c \
 			src/calculations/vector.c \
