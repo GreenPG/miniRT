@@ -8,49 +8,49 @@ LIBMLX	=	./lib/MLX42
 
 LIBFT	=	./lib/libft
 
-HEADERS	=	-I ./includes -I $(LIBMLX)/include -I $(LIBFT)/include
+HEADERS	=	-I ./mandatory/includes -I $(LIBMLX)/include -I $(LIBFT)/include
 
 LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRCS	=	src/main.c	\
-			src/keypress_handle.c \
-			src/free_functions.c	\
-			src/parsing/ambiant_light.c \
-			src/parsing/camera.c \
-			src/parsing/choose_component.c \
-			src/parsing/cylinder.c	\
-			src/parsing/light.c \
-			src/parsing/obj.c \
-			src/parsing/obj_utils.c \
-			src/parsing/parsing.c \
-			src/parsing/parsing_utils.c \
-			src/parsing/plane.c	\
-			src/parsing/sphere.c 	\
-			src/calculations/light_calculations.c \
-			src/calculations/sphere_calculations.c 	\
-			src/calculations/cylinder_calculations.c 	\
-			src/calculations/cylinder_calculations2.c 	\
-			src/calculations/cylinder_shadow.c 	\
-			src/calculations/normal.c \
-			src/calculations/vector.c \
-			src/calculations/shadow.c \
-			src/calculations/ray_transforms.c \
-			src/render/color.c	\
-			src/render/normal_color.c	\
-			src/render/hit_functions.c \
-			src/render/render.c	\
-			src/render/ray.c \
-			src/moves/rotation.c \
-			src/moves/cylinder_move.c \
-			src/moves/plane_move.c \
-			src/moves/sphere_move.c \
-			src/moves/light_rotation.c \
-			src/moves/move_obj.c \
-			src/moves/translate.c \
-			src/utils/math_utils.c \
-			src/utils/rgba.c \
-			src/utils/structs_utils.c \
-			src/utils/utils.c \
+SRCS	=	mandatory/src/main.c	\
+			mandatory/src/keypress_handle.c \
+			mandatory/src/free_functions.c	\
+			mandatory/src/parsing/ambiant_light.c \
+			mandatory/src/parsing/camera.c \
+			mandatory/src/parsing/choose_component.c \
+			mandatory/src/parsing/cylinder.c	\
+			mandatory/src/parsing/light.c \
+			mandatory/src/parsing/obj.c \
+			mandatory/src/parsing/obj_utils.c \
+			mandatory/src/parsing/parsing.c \
+			mandatory/src/parsing/parsing_utils.c \
+			mandatory/src/parsing/plane.c	\
+			mandatory/src/parsing/sphere.c 	\
+			mandatory/src/calculations/light_calculations.c \
+			mandatory/src/calculations/sphere_calculations.c 	\
+			mandatory/src/calculations/cylinder_calculations.c 	\
+			mandatory/src/calculations/cylinder_calculations2.c 	\
+			mandatory/src/calculations/cylinder_shadow.c 	\
+			mandatory/src/calculations/normal.c \
+			mandatory/src/calculations/vector.c \
+			mandatory/src/calculations/shadow.c \
+			mandatory/src/calculations/ray_transforms.c \
+			mandatory/src/render/color.c	\
+			mandatory/src/render/normal_color.c	\
+			mandatory/src/render/hit_functions.c \
+			mandatory/src/render/render.c	\
+			mandatory/src/render/ray.c \
+			mandatory/src/moves/rotation.c \
+			mandatory/src/moves/cylinder_move.c \
+			mandatory/src/moves/plane_move.c \
+			mandatory/src/moves/sphere_move.c \
+			mandatory/src/moves/light_rotation.c \
+			mandatory/src/moves/move_obj.c \
+			mandatory/src/moves/translate.c \
+			mandatory/src/utils/math_utils.c \
+			mandatory/src/utils/rgba.c \
+			mandatory/src/utils/structs_utils.c \
+			mandatory/src/utils/utils.c \
 
 OBJS	= ${SRCS:.c=.o}
 
