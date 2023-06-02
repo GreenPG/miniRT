@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_component.c                                 :+:      :+:    :+:   */
+/*   choose_component_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:19:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:26:17 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+static void	choose_component_part4(t_scene **scene, char *line)
+{
+	if (ft_strncmp(line, "el ", 2) == 0)
+	{	
+		if (init_obj(line, &(*scene)->obj_list, ellipsoid) == 1)
+		{
+			add_obj_error(scene);
+			return ;
+		}
+	}
+	return ;
+}
 
 static void	choose_component_part3(t_scene **scene, char *line)
 {

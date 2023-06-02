@@ -52,6 +52,7 @@ SRCS	=	mandatory/src/main.c	\
 			mandatory/src/utils/structs_utils.c \
 			mandatory/src/utils/utils.c \
 
+
 OBJS	= ${SRCS:.c=.o}
 
 CC	:= clang
@@ -121,3 +122,4 @@ re: clean all
 .PHONY: all, clean, fclean, re, libmlx
 
 -include test.mk
+-include bonus.mk

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 10:17:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:30:02 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ void		free_plane(t_plane **plane);
 
 t_cylinder	*init_cylinder(char *str);
 void		free_cylinder(t_cylinder **cylinder);
+
+/*	ellipsoid	*/
+
+t_ellipsoid	*init_ellipsoid(char *str)
+void		free_ellipsoid(t_cylinder **cylinder);
 
 /*	structs_utils.c	*/
 
