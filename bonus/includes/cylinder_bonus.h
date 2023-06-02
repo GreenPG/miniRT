@@ -13,7 +13,7 @@
 #ifndef CYLINDER_H
 # define CYLINDER_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_cylinder	t_cylinder;
 

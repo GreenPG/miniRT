@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   rotation.c                                         :+:      :+:    :+:   */
+/*   rotation_bonus.c                                   :+:      :+:    :+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/01 09:59:40 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/05/17 15:32:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:13:05 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	vector_rot_x(t_vector *vec, double angle)
 {
@@ -26,7 +26,7 @@ void	rotation_x(t_scene *scene, double angle)
 	t_obj_list	*cursor;
 
 	cursor = scene->obj_list;
-	light_rot_x(scene->light, angle);
+	light_rot_x(scene->light_list, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -53,7 +53,7 @@ void	rotation_y(t_scene *scene, double angle)
 	t_obj_list	*cursor;
 
 	cursor = scene->obj_list;
-	light_rot_y(scene->light, angle);
+	light_rot_y(scene->light_list, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)

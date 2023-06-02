@@ -13,7 +13,7 @@
 #ifndef STRUCTS_UTILS_H
 # define STRUCTS_UTILS_H
 
-# include "minirt.h"
+# include "minirt_bonus.h"
 
 typedef enum e_type {sphere, plane, cylinder}	t_type;
 

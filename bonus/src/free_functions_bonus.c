@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_functions.c                                   :+:      :+:    :+:   */
+/*   free_functions_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:50:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:16:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	free_obj_list(t_obj_list **list)
 {
@@ -45,8 +45,8 @@ void	free_scene(t_scene **scene)
 	}
 	if ((*scene)->camera)
 		free_camera(&(*scene)->camera);
-	if ((*scene)->light)
-		free_light(&(*scene)->light);
+	if ((*scene)->light_list)
+		free_light_list((*scene)->light_list);
 	if ((*scene)->obj_list)
 		free_obj_list(&(*scene)->obj_list);
 	free(*scene);

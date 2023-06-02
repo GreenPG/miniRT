@@ -120,4 +120,5 @@ re: clean all
 
 .PHONY: all, clean, fclean, re, libmlx
 
+-include bonus.mk
 -include test.mk

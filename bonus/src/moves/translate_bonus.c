@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   translate.c                                        :+:      :+:    :+:   */
+/*   translate_bonus.c                                  :+:      :+:    :+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/05 15:23:39 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/05/18 09:14:56 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:18:46 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
-void	light_translate(t_light *light, double x, double y, double z)
+static void	light_translate(t_light_list *light_list, double x, double y, double z)
 {
-	light->origin->x += x;
-	light->origin->y += y;
-	light->origin->z += z;
+	t_light_list	*tmp;
+
+	tmp = light_list;
+	while (tmp)
+	{
+		tmp->light->origin->x += x;
+		tmp->light->origin->y += y;
+		tmp->light->origin->z += z;
+		tmp = tmp->next;
+	}
 }
 
 void	world_translate(t_scene *scene, double x, double y, double z)
@@ -24,7 +31,7 @@ void	world_translate(t_scene *scene, double x, double y, double z)
 	t_obj_list	*cursor;
 
 	cursor = scene->obj_list;
-	light_translate(scene->light, x, y, z);
+	light_translate(scene->light_list, x, y, z);
 	while (cursor)
 	{
 		if (cursor->type == sphere)

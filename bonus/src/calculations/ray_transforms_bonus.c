@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 t_vector	revert_transform(t_vector vec, t_cylinder *cylinder)
 {

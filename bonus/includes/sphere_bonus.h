@@ -13,7 +13,7 @@
 #ifndef SPHERE_H
 # define SPHERE_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_sphere	t_sphere;
 

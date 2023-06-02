@@ -13,7 +13,7 @@
 #ifndef PLANE_H
 # define PLANE_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_plane	t_plane;
 

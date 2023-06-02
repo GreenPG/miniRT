@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/05 13:20:01 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:21:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 int	check_path(char *path)
 {
@@ -40,7 +40,7 @@ static t_scene	*init_scene(void)
 	}
 	scene->camera = NULL;
 	scene->ambiant_l = NULL;
-	scene->light = NULL;
+	scene->light_list = NULL;
 	scene->obj_list = NULL;
 	return (scene);
 }
@@ -103,7 +103,7 @@ t_scene	*parsing(char *path)
 	if (!scene)
 		return (NULL);
 	close(fd);
-	if (!scene->camera || !scene->ambiant_l || !scene->light)
+	if (!scene->camera || !scene->ambiant_l || !scene->light_list)
 	{
 		ft_error("Scene must have one camera, one ambiant light \
 				and one light\n");

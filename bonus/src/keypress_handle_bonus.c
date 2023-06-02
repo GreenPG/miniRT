@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static void	handle_rotation(mlx_key_data_t keydata, t_data *data)
 {

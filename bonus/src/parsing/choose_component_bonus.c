@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_component.c                                 :+:      :+:    :+:   */
+/*   choose_component_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/02 14:19:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:59:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static void	choose_component_part3(t_scene **scene, char *line)
 {
@@ -55,13 +55,10 @@ static void	choose_component_part2(t_scene **scene, char *line)
 	}
 	else if (ft_strncmp(line, "L ", 2) == 0)
 	{
-		if ((*scene)->light)
-		{
-			ft_error("Scene must have only one light\n");
-			*scene = NULL;
-			return ;
-		}
-		(*scene)->light = init_light(line);
+		if (!(*scene)->light_list)
+			(*scene)->light_list = init_light_list(line);
+		else
+				add_light(&(*scene)->light_list, line);
 	}
 	else
 		choose_component_part3(scene, line);

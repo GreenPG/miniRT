@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_calculations.c                               :+:      :+:    :+:   */
+/*   light_calculations_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:37:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:04:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static double	get_light_distance(t_light *light, t_normal normal)
 {
@@ -46,7 +46,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 	double		distance;
 	double		light_source_d;
 
-	light_source_d = get_light_distance(scene->light, normal);
+	light_source_d = get_light_distance(scene->light_list->light, normal);
 	cursor = scene->obj_list;
 	distance = 0;
 	while (cursor)
@@ -80,20 +80,33 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 
 int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 {
-	double		diffuse_ratio;
-	t_vector	light_dir;
-	int			r;
-	int			g;
-	int			b;
+	double			diffuse_ratio;
+	t_vector		light_dir;
+	int				light_cnt;
+	int				r;
+	int				g;
+	int				b;
+	t_light_list	*light_list;
 
-	light_dir = get_light_dir(scene->light, normal);
-	if (light_intersect(scene, light_dir, normal, ray) == 1)
-		return (0);
-	diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
-	diffuse_ratio = fmax(0.0, diffuse_ratio);
-	diffuse_ratio *= scene->light->brightness;
-	r = get_r(scene->light->colors) * diffuse_ratio;
-	g = get_g(scene->light->colors) * diffuse_ratio;
-	b = get_b(scene->light->colors) * diffuse_ratio;
+	r = 0;
+	g = 0;
+	b = 0;
+	light_cnt = 1;
+	light_list = scene->light_list;
+	while (light_list)
+	{
+		light_dir = get_light_dir(light_list->light, normal);
+		if (light_intersect(scene, light_dir, normal, ray) == 0)
+		{
+			diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
+			diffuse_ratio = fmax(0.0, diffuse_ratio);
+			diffuse_ratio *= light_list->light->brightness;
+			r += (get_r(light_list->light->colors) * diffuse_ratio) / light_cnt;
+			g += (get_g(light_list->light->colors) * diffuse_ratio) / light_cnt;
+			b += (get_b(light_list->light->colors) * diffuse_ratio) / light_cnt;
+		}
+		light_list = light_list->next;
+		light_cnt++;
+	}
 	return (get_rgba(r, g, b, 255));
 }

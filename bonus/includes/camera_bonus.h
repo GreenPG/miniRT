@@ -13,7 +13,7 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_camera	t_camera;
 typedef struct s_rays	t_rays;

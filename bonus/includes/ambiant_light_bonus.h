@@ -13,7 +13,7 @@
 #ifndef AMBIANT_LIGHT_H
 # define AMBIANT_LIGHT_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_ambiant_l	t_ambiant_l;
 

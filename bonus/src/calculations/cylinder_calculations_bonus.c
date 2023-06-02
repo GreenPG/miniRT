@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 double	*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder)
 {

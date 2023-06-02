@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 double	sphere_shadow(t_sphere *sphere, t_normal normal,
 			t_vector light_dir)

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 12:50:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:12:31 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <math.h>
 # include <string.h>
 # include <stdlib.h>
-# include <libft.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <libft.h>
 # include "../../lib/MLX42/include/MLX42/MLX42.h"
 
 # include "./config.h"

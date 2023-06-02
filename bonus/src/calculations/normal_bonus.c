@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 {

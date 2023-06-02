@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static t_vector	get_normal_dir(t_cylinder *cylinder, t_vector normal_o)
 {
