@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/01 16:51:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:15:22 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static mlx_t	*ft_mlx_create(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
-	icon = mlx_load_png("./src/gpasquet.png");
+	icon = mlx_load_png("./bonus/src/gpasquet.png");
 	(void)icon;
 	mlx_set_icon(mlx, icon);
 	mlx_delete_texture(icon);
