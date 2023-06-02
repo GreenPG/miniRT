@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/01 14:32:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:46:21 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	get_final_color(int color, int diffuse_color, t_scene *scene)
 	if (r > 255)
 		r = 255;
 	g = get_g(color) * (scene->ambiant_l->light_ratio
-			* get_g(scene->ambiant_l->colors) + get_r(diffuse_color)) / 255;
+			* get_g(scene->ambiant_l->colors) + get_g(diffuse_color)) / 255;
 	if (g > 255)
 		g = 255;
 	b = get_b(color) * (scene->ambiant_l->light_ratio
-			* get_b(scene->ambiant_l->colors) + get_r(diffuse_color)) / 255;
+			* get_b(scene->ambiant_l->colors) + get_b(diffuse_color)) / 255;
 	if (b > 255)
 		b = 255;
 	return (get_rgba(r, g, b, 255));
