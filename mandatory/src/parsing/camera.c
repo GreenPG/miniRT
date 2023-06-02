@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:08:43 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:03:48 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_camera	*init_camera(char *input)
 	camera->direction = init_vector(input + i);
 	pass_to_next_element(input, &i);
 	camera->fov = ft_atoi(input + i);
+	camera->rays = NULL;
 	camera = init_camera2(camera);
 	return (camera);
 }
