@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   plane_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 15:12:55 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:18:32 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 	}
 	plane->colors = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
+	pass_to_next_element(str, &i);	
+	plane->pattern = plain;
+	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
+		plane->pattern = checkerboard;
 	return (plane);
 }
 

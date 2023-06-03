@@ -67,6 +67,10 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	}
 	sphere->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
+	pass_to_next_element(input, &i);
+	sphere->pattern = plain;
+	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
+		sphere->pattern = checkerboard;
 	return (sphere);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 16:50:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:52:04 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "light_bonus.h"
 # include "cylinder_bonus.h"
 # include "plane_bonus.h"
+# include "ellipsoid_bonus.h"
 # include "scene_bonus.h"
 
 typedef struct s_data {
@@ -114,6 +115,11 @@ void			free_plane(t_plane **plane);
 t_cylinder		*init_cylinder(char *str);
 void			free_cylinder(t_cylinder **cylinder);
 
+/*	ellipsoid	*/
+
+t_ellipsoid	*init_ellipsoid(char *str);
+void		free_ellipsoid(t_ellipsoid **cylinder);
+
 /*	structs_utils.c	*/
 
 t_vector		*init_coords(float x, float y, float z);
@@ -150,10 +156,17 @@ void			plane_rot_y(t_plane *plane, double angle);
 void			plane_rot_x(t_plane *plane, double angle);
 void			plane_translate(t_plane *plane, double x, double y, double z);
 
-/*	sphere_move.c	*/
-void			sphere_rot_y(t_sphere *sphere, double angle);
-void			sphere_rot_x(t_sphere *sphere, double angle);
-void			sphere_translate(t_sphere *sphere, double x, double y, double z);
+
+	/*	ellipsoid_move.c	*/
+void		ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle);
+void		ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle);
+void		ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y, double z);
+
+	/*	sphere_move.c	*/
+void		sphere_rot_y(t_sphere *sphere, double angle);
+void		sphere_rot_x(t_sphere *sphere, double angle);
+void		sphere_translate(t_sphere *sphere, double x, double y, double z);
+
 
 /*	light_rotation.c	*/
 void			light_rot_x(t_light_list *light_list, double angle);
@@ -224,6 +237,11 @@ double			cylinder_hit(t_cylinder *cylinder, t_vector ray);
 /*	cylinder_calculations2.c	*/
 double			min_cyl(double t_1, double t_2, double t_3, double t_4);
 
+/*	cylinder_ellipsoid.c 	*/
+
+double		ellipsoid_hit(t_ellipsoid *hell, t_vector ray);
+double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal, t_vector light_dir);
+
 /*	ray.c	*/
 t_vector		calculate_ray_direction(unsigned int x, unsigned int y,
 					t_camera *camera);
@@ -232,8 +250,10 @@ void			free_rays(t_rays *ray_list);
 int				init_rays(t_scene *scene);
 
 /*	normal_color.c	*/
-int				get_normal_color(t_obj_list *nearest, t_vector ray,
-					t_normal normal);
+
+int			get_normal_color(t_obj_list *nearest, t_vector ray,
+				t_normal normal, t_camera *camera);
+
 
 /*	ray_transforms.c	*/
 t_vector		transform_rayo(t_vector ray, t_cylinder *cylinder);
@@ -248,5 +268,9 @@ t_normal		get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 void			free_light_list(t_light_list *light_list);
 void			add_light(t_light_list **light_list, char *line);
 t_light_list	*init_light_list(char *line);
+
+/*	checkerboard	*/
+
+int			get_checkerboard(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
 
 #endif

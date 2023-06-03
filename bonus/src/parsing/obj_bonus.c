@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj.c                                              :+:      :+:    :+:   */
+/*   obj_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 15:00:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:43:18 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	sphere_obj(t_obj_list *obj, char *line)
 	obj->plane = NULL;
 	obj->cylinder = NULL;
 	obj->sphere = init_sphere(line);
+	obj->ellipsoid = NULL;
+	obj->pattern = obj->sphere->pattern;
 	if (!obj->sphere)
 	{
 		free(obj);
@@ -30,6 +32,8 @@ static int	plane_obj(t_obj_list *obj, char *line)
 	obj->sphere = NULL;
 	obj->cylinder = NULL;
 	obj->plane = init_plane(line);
+	obj->ellipsoid = NULL;
+	obj->pattern = obj->plane->pattern;
 	if (!obj->plane)
 	{
 		free(obj);
@@ -43,7 +47,24 @@ static int	cylinder_obj(t_obj_list *obj, char *line)
 	obj->plane = NULL;
 	obj->sphere = NULL;
 	obj->cylinder = init_cylinder(line);
+	obj->ellipsoid = NULL;
+	obj->pattern = obj->cylinder->pattern;
 	if (!obj->cylinder)
+	{
+		free(obj);
+		return (1);
+	}
+	return (0);
+}
+
+static int	ellipsoid_obj(t_obj_list *obj, char *line)
+{
+	obj->plane = NULL;
+	obj->sphere = NULL;
+	obj->cylinder = NULL;
+	obj->ellipsoid = init_ellipsoid(line);
+	obj->pattern = obj->ellipsoid->pattern;
+	if (!obj->ellipsoid)
 	{
 		free(obj);
 		return (1);
@@ -57,6 +78,11 @@ static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 	if (type == cylinder)
 	{
 		if (cylinder_obj(obj, line) == 1)
+			return (1);
+	}
+	if (type == ellipsoid)
+	{
+		if (ellipsoid_obj(obj, line) == 1)
 			return (1);
 	}
 	obj->next = NULL;

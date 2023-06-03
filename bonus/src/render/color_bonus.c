@@ -71,7 +71,7 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 	if (nearest)
 	{
 		normal = get_normal(nearest, ray, distance);
-		color = get_normal_color(nearest, ray, normal);
+		color = get_normal_color(nearest, ray, normal, scene->camera);
 		diffuse_color = get_diffuse_ratio(scene, normal, ray);
 		color = get_final_color(color, diffuse_color, scene);
 		nearest->hitted = 0;

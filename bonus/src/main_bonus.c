@@ -69,6 +69,7 @@ int	main(int argc, char **argv)
 			("Error: expected usage is ./miniRT <path to.rt file>\n"));
 	(void)argv;
 	scene = parsing(argv[1]);
+	scene->obj_selected = NULL;
 	if (!scene)
 	{
 		ft_error("ERROR\n");

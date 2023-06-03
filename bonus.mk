@@ -15,10 +15,12 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/parsing/parsing_utils_bonus.c \
 				bonus/src/parsing/plane_bonus.c	\
 				bonus/src/parsing/sphere_bonus.c 	\
+				bonus/src/parsing/ellipsoid_bonus.c 	\
 				bonus/src/calculations/light_calculations_bonus.c \
 				bonus/src/calculations/sphere_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations2_bonus.c 	\
+				bonus/src/calculations/ellipsoid_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_shadow_bonus.c 	\
 				bonus/src/calculations/normal_bonus.c \
 				bonus/src/calculations/vector_bonus.c \
@@ -29,10 +31,12 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/render/hit_functions_bonus.c \
 				bonus/src/render/render_bonus.c	\
 				bonus/src/render/ray_bonus.c \
+				bonus/src/render/checkerboard_bonus.c \
 				bonus/src/moves/rotation_bonus.c \
 				bonus/src/moves/cylinder_move_bonus.c \
 				bonus/src/moves/plane_move_bonus.c \
 				bonus/src/moves/sphere_move_bonus.c \
+				bonus/src/moves/ellipsoid_move_bonus.c \
 				bonus/src/moves/light_rotation_bonus.c \
 				bonus/src/moves/move_obj_bonus.c \
 				bonus/src/moves/translate_bonus.c \

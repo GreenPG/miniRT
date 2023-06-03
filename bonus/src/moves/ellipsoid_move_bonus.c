@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs_utils_bonus.c                              :+:      :+:    :+:   */
+/*   ellipsoid_move_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 14:32:35 by gpasquet          #+#    #+#             */
+/*   Created: 2023/05/17 15:27:21 by gpasquet          #+#    #+#             */
 /*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-int	*get_color_values(char	*str)
+void	ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle)
 {
-	int		*rgb;
-	int		i;
+	vector_rot_y(ellipsoid->origin, angle);
+	vector_rot_y(ellipsoid->direction, angle);
+	ellipsoid->alpha -= angle;
+}
 
-	rgb = malloc(sizeof(int) * 3);
-	if (!rgb)
-		return (NULL);
-	i = 0;
-	rgb[0] = ft_atoi(str);
-	while (str[i] && ft_isdigit(str[i]) == 1)
-		i++;
-	if (str[i] == ',')
-		i++;
-	else
-		return (NULL);
-	rgb[1] = ft_atoi(str + i);
-	while (str[i] && ft_isdigit(str[i]) == 1)
-		i++;
-	if (str[i] == ',')
-		i++;
-	else
-		return (NULL);
-	rgb[2] = ft_atoi(str + i);
-	return (rgb);
+void	ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle)
+{
+	vector_rot_x(ellipsoid->origin, angle);
+	vector_rot_x(ellipsoid->direction, angle);
+	ellipsoid->alpha -= angle;
+}
+
+void	ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y, double z)
+{
+	ellipsoid->origin->x += x;
+	ellipsoid->origin->y += y;
+	ellipsoid->origin->z += z;
 }
