@@ -56,13 +56,9 @@ double	plane_shadow(t_plane *plane, t_vector light_dir,
 static t_vector	transform_lighto(t_vector light_dir, t_vector light_origin,
 		t_cylinder *cylinder)
 {
-	double		alpha;
-	double		beta;
 	double		tmpx;
 	double		tmpy;
 
-	alpha = cylinder->alpha;
-	beta = cylinder->beta;
 	light_dir.x = light_origin.x - cylinder->origin->x;
 	light_dir.y = light_origin.y - cylinder->origin->y;
 	light_dir.z = light_origin.z - cylinder->origin->z;

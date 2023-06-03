@@ -32,13 +32,9 @@ t_vector	revert_transform(t_vector vec, t_cylinder *cylinder)
 
 t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder)
 {
-	double		alpha;
-	double		beta;
 	double		tmpx;
 	double		tmpy;
 
-	alpha = cylinder->alpha;
-	beta = cylinder->beta;
 	ray.x = -cylinder->origin->x;
 	ray.y = -cylinder->origin->y;
 	ray.z = -cylinder->origin->z;
@@ -56,13 +52,9 @@ t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder)
 
 t_vector	transform_ray(t_vector ray, t_cylinder *cylinder)
 {
-	double		alpha;
-	double		beta;
 	double		tmpx;
 	double		tmpy;
 
-	alpha = cylinder->alpha;
-	beta = cylinder->beta;
 	tmpx = ray.x;
 	tmpy = ray.y;
 	ray.x = ray.x * cos(cylinder->alpha) - ray.y * sin(cylinder->alpha)
