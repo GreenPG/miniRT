@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	vector_rot_x(t_vector *vec, double angle)
 {
@@ -35,6 +35,8 @@ void	rotation_x(t_scene *scene, double angle)
 			plane_rot_x(cursor->plane, angle);
 		if (cursor->type == cylinder)
 			cylinder_rot_x(cursor->cylinder, angle);
+		if (cursor->type == ellipsoid)
+			ellipsoid_rot_x(cursor->ellipsoid, angle);
 		cursor = cursor->next;
 	}
 }
@@ -62,6 +64,8 @@ void	rotation_y(t_scene *scene, double angle)
 			plane_rot_y(cursor->plane, angle);
 		if (cursor->type == cylinder)
 			cylinder_rot_y(cursor->cylinder, angle);
+		if (cursor->type == ellipsoid)
+			ellipsoid_rot_y(cursor->ellipsoid, angle);
 		cursor = cursor->next;
 	}
 }

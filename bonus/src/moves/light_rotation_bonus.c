@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_rotation.c                                   :+:      :+:    :+:   */
+/*   light_rotation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:31:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:56 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	light_rot_y(t_light *light, double angle)
 {

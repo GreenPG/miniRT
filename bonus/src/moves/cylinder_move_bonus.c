@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder_move.c                                    :+:      :+:    :+:   */
+/*   cylinder_move_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:23:06 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 09:05:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	cylinder_rot_x(t_cylinder *cylinder, double angle)
 {

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   camera_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:25:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 14:33:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_camera	t_camera;
 typedef struct s_rays	t_rays;

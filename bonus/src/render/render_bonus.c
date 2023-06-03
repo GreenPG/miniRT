@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/01 14:23:30 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:48:59 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static double	get_distance(t_obj_list *cursor, t_vector ray)
 {
@@ -23,6 +23,8 @@ static double	get_distance(t_obj_list *cursor, t_vector ray)
 		current_distance = cylinder_hit(cursor->cylinder, ray);
 	else if (cursor->type == plane)
 		current_distance = plane_hit(cursor->plane, ray);
+	else if (cursor->type == ellipsoid)
+		current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
 	return (current_distance);
 }
 

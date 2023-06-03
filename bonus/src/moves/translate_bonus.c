@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	light_translate(t_light *light, double x, double y, double z)
 {
@@ -33,6 +33,8 @@ void	world_translate(t_scene *scene, double x, double y, double z)
 			plane_translate(cursor->plane, x, y, z);
 		if (cursor->type == cylinder)
 			cylinder_translate(cursor->cylinder, x, y, z);
+		if (cursor->type == ellipsoid)
+			ellipsoid_translate(cursor->ellipsoid, x, y, z);
 		cursor = cursor->next;
 	}
 }

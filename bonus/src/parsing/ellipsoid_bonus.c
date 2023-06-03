@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	free_ellipsoid(t_ellipsoid **ellipsoid)
 {
@@ -65,11 +65,11 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int 
 {
 	int			*rgb;
 
-	ellipsoid->a = 1 / (ft_atof(str + i) * ft_atof(str + i)); //division par 0 lololol ca va casser
+	ellipsoid->a = (ft_atof(str + i) * ft_atof(str + i)); //division par 0 lololol ca va casser
 	pass_to_next_element(str, &i);
-	ellipsoid->b = 1 / (ft_atof(str + i) * ft_atof(str + i));
+	ellipsoid->b = (ft_atof(str + i) * ft_atof(str + i));
 	pass_to_next_element(str, &i);
-	ellipsoid->c = 1 / (ft_atof(str + i) * ft_atof(str + i));
+	ellipsoid->c = (ft_atof(str + i) * ft_atof(str + i));
 	pass_to_next_element(str, &i);
 	rgb = get_color_values(str + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0

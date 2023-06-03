@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 t_vector	vector_cross(t_vector a, t_vector b)
 {

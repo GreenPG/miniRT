@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 14:30:02 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:28:53 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../../lib/MLX42/include/MLX42/MLX42.h"
 
-# include "./config.h"
-# include "structs_utils.h"
-# include "sphere.h"
-# include "camera.h"
-# include "ambiant_light.h"
-# include "light.h"
-# include "cylinder.h"
-# include "plane.h"
-# include "scene.h"
+# include "./config_bonus.h"
+# include "structs_utils_bonus.h"
+# include "sphere_bonus.h"
+# include "camera_bonus.h"
+# include "ambiant_light_bonus.h"
+# include "light_bonus.h"
+# include "cylinder_bonus.h"
+# include "plane_bonus.h"
+# include "ellipsoid_bonus.h"
+# include "scene_bonus.h"
 
 typedef struct s_data {
 	mlx_t	*mlx;
@@ -116,8 +117,8 @@ void		free_cylinder(t_cylinder **cylinder);
 
 /*	ellipsoid	*/
 
-t_ellipsoid	*init_ellipsoid(char *str)
-void		free_ellipsoid(t_cylinder **cylinder);
+t_ellipsoid	*init_ellipsoid(char *str);
+void		free_ellipsoid(t_ellipsoid **cylinder);
 
 /*	structs_utils.c	*/
 
@@ -154,6 +155,11 @@ void		cylinder_translate(t_cylinder *cylinder, double x, double y,
 void		plane_rot_y(t_plane *plane, double angle);
 void		plane_rot_x(t_plane *plane, double angle);
 void		plane_translate(t_plane *plane, double x, double y, double z);
+
+	/*	ellipsoid_move.c	*/
+void		ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle);
+void		ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle);
+void		ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y, double z);
 
 	/*	sphere_move.c	*/
 void		sphere_rot_y(t_sphere *sphere, double angle);
@@ -228,6 +234,11 @@ double		cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 /*	cylinder_calculations2.c	*/
 double		min_cyl(double t_1, double t_2, double t_3, double t_4);
+
+/*	cylinder_ellipsoid.c 	*/
+
+double		ellipsoid_hit(t_ellipsoid *hell, t_vector ray);
+double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal, t_vector light_dir);
 
 /*	ray.c	*/
 t_vector	calculate_ray_direction(unsigned int x, unsigned int y,

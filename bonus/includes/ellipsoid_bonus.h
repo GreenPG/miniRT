@@ -13,7 +13,7 @@
 #ifndef ELLIPSOID_H
 # define ELLIPSOID_H
 
-# include <minirt.h>
+# include <minirt_bonus.h>
 
 typedef struct s_ellipsoid	t_ellipsoid;
 

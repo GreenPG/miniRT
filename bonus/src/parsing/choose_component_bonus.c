@@ -6,17 +6,25 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:26:17 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:30:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static void	choose_component_part4(t_scene **scene, char *line)
 {
 	if (ft_strncmp(line, "el ", 2) == 0)
 	{	
 		if (init_obj(line, &(*scene)->obj_list, ellipsoid) == 1)
+		{
+			add_obj_error(scene);
+			return ;
+		}
+	}
+	else if (ft_strncmp(line, "cy ", 2) == 0)
+	{	
+		if (init_obj(line, &(*scene)->obj_list, cylinder) == 1)
 		{
 			add_obj_error(scene);
 			return ;
@@ -43,14 +51,8 @@ static void	choose_component_part3(t_scene **scene, char *line)
 			return ;
 		}
 	}
-	else if (ft_strncmp(line, "cy ", 2) == 0)
-	{	
-		if (init_obj(line, &(*scene)->obj_list, cylinder) == 1)
-		{
-			add_obj_error(scene);
-			return ;
-		}
-	}
+	else
+		choose_component_part4(scene, line);
 	return ;
 }
 

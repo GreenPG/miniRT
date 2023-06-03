@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normal_color.c                                     :+:      :+:    :+:   */
+/*   normal_color_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:33:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:21:00 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static int	normalized_color(int color, t_vector normal, t_vector ray)
 {
@@ -36,5 +36,7 @@ int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal)
 		color = normalized_color(nearest->plane->colors, normal.dir, ray);
 	if (nearest->type == cylinder)
 		color = normalized_color(nearest->cylinder->color, normal.dir, ray);
+	if (nearest->type == ellipsoid)
+		color = normalized_color(nearest->ellipsoid->color, normal.dir, ray);
 	return (color);
 }

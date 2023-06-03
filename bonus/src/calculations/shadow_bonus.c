@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shadow.c                                           :+:      :+:    :+:   */
+/*   shadow_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:20:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:29:07 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 double	sphere_shadow(t_sphere *sphere, t_normal normal,
 			t_vector light_dir)
@@ -117,5 +117,7 @@ double	get_shadow_distance(t_obj_list *cursor, t_normal normal,
 		distance = plane_shadow(cursor->plane, light_dir, normal);
 	if (cursor->type == cylinder)
 		distance = cylinder_shadow(cursor->cylinder, normal, light_dir);
+	if (cursor->type == ellipsoid)
+		distance = ellipsoid_shadow(cursor->ellipsoid, normal, light_dir);
 	return (distance);
 }

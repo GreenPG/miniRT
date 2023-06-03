@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static mlx_t	*ft_mlx_create(void)
 {
@@ -21,7 +21,7 @@ static mlx_t	*ft_mlx_create(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
-	icon = mlx_load_png("./src/gpasquet.png");
+	icon = mlx_load_png("./bonus/src/gpasquet.png");
 	(void)icon;
 	mlx_set_icon(mlx, icon);
 	mlx_delete_texture(icon);

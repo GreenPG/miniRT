@@ -6,16 +6,16 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 14:22:27 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:18:53 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_UTILS_H
 # define STRUCTS_UTILS_H
 
-# include "minirt.h"
+# include "minirt_bonus.h"
 
-typedef enum e_type {sphere, plane, cylinder}	t_type;
+typedef enum e_type {sphere, plane, cylinder, ellipsoid}	t_type;
 
 typedef struct s_vector		t_vector;
 typedef struct s_obj_list	t_obj_list;

@@ -6,11 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:29:00 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:30:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 static int	sphere_obj(t_obj_list *obj, char *line)
 {
@@ -54,7 +54,7 @@ static int	cylinder_obj(t_obj_list *obj, char *line)
 	return (0);
 }
 
-static int	cylinder_obj(t_obj_list *obj, char *line)
+static int	ellipsoid_obj(t_obj_list *obj, char *line)
 {
 	obj->plane = NULL;
 	obj->sphere = NULL;

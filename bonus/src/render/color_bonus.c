@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 int	add_ambient(int color, t_ambiant_l *ambiant)
 {

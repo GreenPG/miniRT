@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_obj.c                                         :+:      :+:    :+:   */
+/*   move_obj_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:10:41 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:36:03 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <minirt_bonus.h>
 
 void	move_one(t_obj_list *nearest, double x, double y, double z)
 {
@@ -22,6 +22,8 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		cylinder_translate(nearest->cylinder, x, y, z);
 	else if (nearest->type == plane)
 		plane_translate(nearest->plane, x, y, z);
+	else if (nearest->type == ellipsoid)
+		ellipsoid_translate(nearest->ellipsoid, x, y, z);
 }
 
 static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
@@ -40,6 +42,8 @@ static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
 			current_distance = cylinder_hit(cursor->cylinder, ray);
 		else if (cursor->type == plane)
 			current_distance = plane_hit(cursor->plane, ray);
+		else if (cursor->type == ellipsoid)
+			current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;
