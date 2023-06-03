@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 16:30:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:43:18 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	sphere_obj(t_obj_list *obj, char *line)
 	obj->cylinder = NULL;
 	obj->sphere = init_sphere(line);
 	obj->ellipsoid = NULL;
+	obj->pattern = obj->sphere->pattern;
 	if (!obj->sphere)
 	{
 		free(obj);
@@ -32,6 +33,7 @@ static int	plane_obj(t_obj_list *obj, char *line)
 	obj->cylinder = NULL;
 	obj->plane = init_plane(line);
 	obj->ellipsoid = NULL;
+	obj->pattern = obj->plane->pattern;
 	if (!obj->plane)
 	{
 		free(obj);
@@ -46,6 +48,7 @@ static int	cylinder_obj(t_obj_list *obj, char *line)
 	obj->sphere = NULL;
 	obj->cylinder = init_cylinder(line);
 	obj->ellipsoid = NULL;
+	obj->pattern = obj->cylinder->pattern;
 	if (!obj->cylinder)
 	{
 		free(obj);
@@ -60,6 +63,7 @@ static int	ellipsoid_obj(t_obj_list *obj, char *line)
 	obj->sphere = NULL;
 	obj->cylinder = NULL;
 	obj->ellipsoid = init_ellipsoid(line);
+	obj->pattern = obj->ellipsoid->pattern;
 	if (!obj->ellipsoid)
 	{
 		free(obj);

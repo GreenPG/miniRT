@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:38:05 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:39:49 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	pass_to_next_element(char *str, int *i)
 {
-	while (ft_isspace(str[*i]) == 0)
+	while (str[*i] && ft_isspace(str[*i]) == 0)
 		(*i)++;
-	while (ft_isspace(str[*i]))
+	while (str[*i] && ft_isspace(str[*i]))
 		(*i)++;
 }
 

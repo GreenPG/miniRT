@@ -81,6 +81,10 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int 
 	}
 	ellipsoid->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
+	pass_to_next_element(str, &i);
+	ellipsoid->pattern = plain;
+	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
+		ellipsoid->pattern = checkerboard;
 	ellipsoid = init_ellipsoid_part3(ellipsoid);
 	return (ellipsoid);
 }

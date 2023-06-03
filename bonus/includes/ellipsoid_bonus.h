@@ -28,6 +28,7 @@ struct	s_ellipsoid {
 	double		alpha;
 	double		beta;
 	int			color;
+	int			pattern;
 };
 
 #endif

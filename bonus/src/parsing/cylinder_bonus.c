@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:29:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ static int	check_cylinder(char *str)
 	return (0);
 }
 
-static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
+static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
 {
 	cylinder->alpha = get_alpha(*cylinder->direction);
 	cylinder->beta = get_beta(*cylinder->direction);
 	cylinder->hit_body = false;
+	pass_to_next_element(str, &i);
+	cylinder->pattern = plain;
+	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
+		cylinder->pattern = checkerboard;
 	return (cylinder);
 }
 
@@ -83,7 +87,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	}
 	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	cylinder = init_cylinder_part3(cylinder);
+	cylinder = init_cylinder_part3(cylinder, str, i);
 	return (cylinder);
 }
 

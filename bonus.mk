@@ -30,6 +30,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/render/hit_functions_bonus.c \
 				bonus/src/render/render_bonus.c	\
 				bonus/src/render/ray_bonus.c \
+				bonus/src/render/checkerboard_bonus.c \
 				bonus/src/moves/rotation_bonus.c \
 				bonus/src/moves/cylinder_move_bonus.c \
 				bonus/src/moves/plane_move_bonus.c \
