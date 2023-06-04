@@ -50,7 +50,7 @@ OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 %_bonus.o: %_bonus.c 
 	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS_BONUS)
 
-bonus: $(OBJS_BONUS)
+bonus: libmlx libft $(OBJS_BONUS)
 	@$(CC) $(addprefix ./obj/,$(OBJS_BONUS)) $(LIBS) $(HEADERS_BONUS) -o minirt_bonus
 
 clean_bonus:
