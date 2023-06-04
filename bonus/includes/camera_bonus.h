@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:25:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 16:14:22 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#ifndef CAMERA_BONUS_H
+# define CAMERA_BONUS_H
 
 # include <minirt_bonus.h>
 

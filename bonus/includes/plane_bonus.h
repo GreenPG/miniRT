@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:09:09 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:13:46 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 16:13:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANE_H
-# define PLANE_H
+#ifndef PLANE_BONUS_H
+# define PLANE_BONUS_H
 
 # include <minirt_bonus.h>
 

@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/03 15:23:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 16:13:41 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_UTILS_H
-# define STRUCTS_UTILS_H
+#ifndef STRUCTS_UTILS_BONUS_H
+# define STRUCTS_UTILS_BONUS_H
 
 # include "minirt_bonus.h"
 

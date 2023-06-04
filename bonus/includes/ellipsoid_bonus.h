@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ellipsoid.h                                           :+:      :+:    :+:   */
+/*   ellipsoid_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/05/13 16:44:14 by gtouzali         ###   ########.fr       */
+/*   Created: 2023/06/04 16:14:07 by gtouzali          #+#    #+#             */
+/*   Updated: 2023/06/04 16:14:12 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELLIPSOID_H
-# define ELLIPSOID_H
+#ifndef ELLIPSOID_BONUS_H
+# define ELLIPSOID_BONUS_H
 
 # include <minirt_bonus.h>
 
