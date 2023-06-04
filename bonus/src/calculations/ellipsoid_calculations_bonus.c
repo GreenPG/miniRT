@@ -18,9 +18,9 @@ double	*hell_hit(t_vector ray, t_vector rayo, t_ellipsoid *hell)
 	double	b;
 	double	c;
 
-	a = (ray.x * ray.x) / hell->a + (ray.y * ray.y) / hell->b + (ray.z * ray.z) / hell->c;
-	b = 2 * ((ray.x * rayo.x) / hell->a + (ray.y * rayo.y) / hell->b + (ray.z * rayo.z) / hell->c);
-	c = (rayo.x * rayo.x) / hell->a + (rayo.y * rayo.y) / hell->b + (rayo.z * rayo.z) / hell->c - 1;
+	a = (ray.x * ray.x) * hell->a + (ray.y * ray.y) * hell->b + (ray.z * ray.z) * hell->c;
+	b = ((ray.x * rayo.x) * hell->a + (ray.y * rayo.y) * hell->b + (ray.z * rayo.z) * hell->c);
+	c = (rayo.x * rayo.x) * hell->a + (rayo.y * rayo.y) * hell->b + (rayo.z * rayo.z) * hell->c - 1;
 	return (cyl_quadratic(a, b, c));
 }
 

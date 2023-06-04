@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 09:47:00 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	*body_hit(t_vector ray, t_vector rayo,
 	double	c;
 
 	a = ray.x * ray.x + ray.z * ray.z;
-	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
+	b = (rayo.x * ray.x + rayo.z * ray.z);
 	c = rayo.x * rayo.x + rayo.z * rayo.z
 		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
 	return (cyl_quadratic(a, b, c));

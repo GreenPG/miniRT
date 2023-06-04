@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:18:12 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 09:50:30 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray, doubl
 	normal.origin.x = distance * ray.x;
 	normal.origin.y = distance * ray.y;
 	normal.origin.z = distance * ray.z;
-	normal.dir.x = (normal.origin.x - ellipsoid->origin->x) / ellipsoid->a;
-	normal.dir.y = (normal.origin.y - ellipsoid->origin->y) / ellipsoid->b;
-	normal.dir.z = (normal.origin.z - ellipsoid->origin->z) / ellipsoid->c;
+	normal.dir.x = (normal.origin.x - ellipsoid->origin->x) * ellipsoid->a;
+	normal.dir.y = (normal.origin.y - ellipsoid->origin->y) * ellipsoid->b;
+	normal.dir.z = (normal.origin.z - ellipsoid->origin->z) * ellipsoid->c;
 	vector_len = sqrt(dot_product(normal.dir, normal.dir));
 	normal.dir.x /= vector_len;
 	normal.dir.y /= vector_len;

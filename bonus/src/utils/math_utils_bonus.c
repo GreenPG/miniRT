@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:18:08 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 09:48:58 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ double	*cyl_quadratic(double a, double b, double c)
 		ft_error("Error\n");
 		return (NULL);
 	}
-	d = (b * b) - (4.0 * a * c);
+	d = (b * b) - (a * c);
 	if (d <= 0)
 	{
 		free(r);
 		return (NULL);
 	}
-	r[0] = (-b - sqrt(d)) / (2 * a);
-	r[1] = (-b + sqrt(d)) / (2 * a);
+	r[0] = (-b - sqrt(d)) / (a);
+	r[1] = (-b + sqrt(d)) / (a);
 	return (r);
 }
 
