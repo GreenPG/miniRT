@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/02 14:17:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/04 11:47:06 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	sky_color(t_scene *scene, t_vector ray)
 int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 		double distance)
 {
-	int			diffuse_color;
+	int			shading_color;
 	int			color;
 	t_normal	normal;
 
@@ -72,8 +72,8 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 	{
 		normal = get_normal(nearest, ray, distance);
 		color = get_normal_color(nearest, ray, normal, scene->camera);
-		diffuse_color = get_diffuse_ratio(scene, normal, ray);
-		color = get_final_color(color, diffuse_color, scene);
+		shading_color = get_shading_color(scene, normal, ray);
+		color = get_final_color(color, shading_color, scene);
 		nearest->hitted = 0;
 		return (color);
 	}

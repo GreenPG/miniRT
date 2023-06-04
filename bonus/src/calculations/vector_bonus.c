@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   vector_bonus.c                                     :+:      :+:    :+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/19 08:57:28 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/05/17 15:54:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:39:35 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+t_vector	invert_vector(t_vector u)
+{
+	u.x = -u.x;
+	u.y = -u.y;
+	u.z = -u.z;
+	return (u);
+}
 
 t_vector	vector_cross(t_vector a, t_vector b)
 {

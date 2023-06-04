@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/03 16:52:04 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:40:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int				*get_color_values(char	*str);
 
 /*	vector.c	*/
 
+t_vector		invert_vector(t_vector u);
 t_vector		vector_cross(t_vector a, t_vector b);
 double			dot_product(const t_vector v, const t_vector u);
 t_vector		*init_vector(char *str);
@@ -205,7 +206,8 @@ t_normal		orient_normal(t_scene *scene, t_normal normal, t_vector light_dir);
 t_normal		get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
-int				get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray);
+int				get_shading_color(t_scene *scene, t_normal normal,
+					t_vector ray);
 
 /*	keypress_handle.c	*/
 void			handle_keypress(mlx_key_data_t keydata, void *ptr);
