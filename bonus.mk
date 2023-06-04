@@ -58,7 +58,7 @@ clean_bonus:
 	@make clean -C $(LIBFT)
 	@rm -f $(addprefix ./obj/,$(OBJS_BONUS))
 
-fclean_bonus: clean
+fclean_bonus: clean_bonus
 	@rm -f minirt_bonus
 
 re_bonus: clean_bonus all_bonus
