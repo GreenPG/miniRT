@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:52:44 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 10:32:49 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,17 @@ int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 			diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
 			diffuse_ratio = fmax(0.0, diffuse_ratio);
 			diffuse_ratio *= light_list->light->brightness;
-			r += (get_r(light_list->light->colors) * diffuse_ratio) / light_cnt;
-			g += (get_g(light_list->light->colors) * diffuse_ratio) / light_cnt;
-			b += (get_b(light_list->light->colors) * diffuse_ratio) / light_cnt;
+			r += (get_r(light_list->light->colors) * diffuse_ratio);
+			g += (get_g(light_list->light->colors) * diffuse_ratio);
+			b += (get_b(light_list->light->colors) * diffuse_ratio);
 		}
 		light_list = light_list->next;
+		
 		light_cnt++;
+		
 	}
+	r /= light_cnt;
+ 	g /= light_cnt;
+ 	b /= light_cnt;
 	return (get_rgba(r, g, b, 255));
 }
