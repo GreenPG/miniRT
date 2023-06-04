@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/04 10:39:04 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static t_camera	*init_camera2(t_camera *camera)
 	camera->alpha = get_alpha(*camera->direction) * (180 / M_PI);
 	camera->beta = get_beta(*camera->direction) * (180 / M_PI);
 	camera->fov *= (M_PI / 180);
+	camera->rays = NULL;
 	return (camera);
 }
 

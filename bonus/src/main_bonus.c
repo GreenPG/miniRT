@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/02 14:15:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/04 10:37:31 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int	main(int argc, char **argv)
 			("Error: expected usage is ./miniRT <path to.rt file>\n"));
 	(void)argv;
 	scene = parsing(argv[1]);
-	scene->obj_selected = NULL;
 	if (!scene)
 	{
 		ft_error("ERROR\n");
 		return (0);
 	}
+	scene->obj_selected = NULL;
 	mlx = ft_mlx_create();
 	data = init_image(mlx, scene);
 	if (data)
