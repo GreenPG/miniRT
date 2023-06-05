@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/04 16:15:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:12:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,38 +78,33 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 	return (light_dir);
 }
 
-int	get_specular_ratio(t_light *light, t_vector ray, t_vector light_dir, t_vector normal)
+static double	get_specular_ratio(t_light *light, t_vector ray, t_vector light_dir, t_vector normal)
 {
-	double			n_l_dot_product;
-	t_vector		reflection_vector;
- 	int				r;
-	int				g;
-	int				b;
+	t_vector	reflection;
+	double		vector_len;
+	double		ray_reflect_dot_product;
+	double		specular_ratio;
 
-	n_l_dot_product = dot_product(normal, light_dir);
-	reflection_vector.x = light_dir.x - 2 * n_l_dot_product * normal.x;
-	reflection_vector.y = light_dir.y - 2 * n_l_dot_product * normal.y;
-	reflection_vector.z = light_dir.z - 2 * n_l_dot_product * normal.z;
-	r = pow(dot_product(ray, reflection_vector) * get_r(light->colors) * light->brightness, 1);
-	g = pow(dot_product(ray, reflection_vector) * get_g(light->colors) * light->brightness, 1);
-	b = pow(dot_product(ray, reflection_vector) * get_b(light->colors) * light->brightness, 1);
-	return (get_rgba(r, g, b, 255));
+	reflection.x = 2 * dot_product(normal, light_dir) * normal.x;
+	reflection.y = 2 * dot_product(normal, light_dir) * normal.y;
+	reflection.z = 2 * dot_product(normal, light_dir) * normal.z;
+	vector_len = sqrt(dot_product(reflection, reflection));
+	reflection.x /= vector_len;
+	reflection.y /= vector_len;
+	reflection.z /= vector_len;
+	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
+	specular_ratio = pow(ray_reflect_dot_product, 50) * light->brightness;
+	return (specular_ratio);
 }
 
-static int	get_diffuse_ratio(t_light *light, t_normal normal, t_vector light_dir)
+static double get_diffuse_ratio(t_light *light, t_normal normal, t_vector light_dir)
 {
 	double			diffuse_ratio;
-	int				r;
-	int				g;
-	int				b;
 
 	diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
 	diffuse_ratio = fmax(0.0, diffuse_ratio);
 	diffuse_ratio *= light->brightness;
-	r = get_r(light->colors) * diffuse_ratio;
-	g = get_g(light->colors) * diffuse_ratio;
-	b = get_b(light->colors) * diffuse_ratio;
-	return (get_rgba(r, g, b, 255));
+	return (diffuse_ratio);
 }
 
 int	get_shading_color(t_scene *scene, t_normal normal, t_vector ray)
@@ -134,10 +129,10 @@ int	get_shading_color(t_scene *scene, t_normal normal, t_vector ray)
 		if (light_intersect(scene, light_dir, normal, ray) == 0)
 		{
 			diffuse_ratio = get_diffuse_ratio(light_list->light, normal, light_dir);
-			specular_ratio = get_specular_ratio(light_list->light, ray, invert_vector(light_dir), invert_vector(normal.dir));
-			r += get_r(diffuse_ratio) + get_r(specular_ratio);
-			g += get_g(diffuse_ratio) + get_g(specular_ratio);
-			b += get_b(diffuse_ratio) + get_b(specular_ratio);
+			specular_ratio = get_specular_ratio(light_list->light, invert_vector(ray), light_dir, normal.dir);
+			r += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
+			g += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
+			b += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
 		}
 		light_list = light_list->next;
 		light_cnt++;
@@ -145,5 +140,11 @@ int	get_shading_color(t_scene *scene, t_normal normal, t_vector ray)
 	r /= light_cnt;
 	g /= light_cnt;
 	b /= light_cnt;
+	if (r > 255)
+		r = 255;
+	if (g > 255)
+		g = 255;
+	if (b > 255)
+		b = 255;
 	return (get_rgba(r, g, b, 255));
 }
