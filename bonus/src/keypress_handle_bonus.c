@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:08:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:34:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 		move_one(data->scene->obj_selected, 0, 0, 1);
 	if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_RELEASE)
 		move_one(data->scene->obj_selected, 0, 0, -1);
-	render(data->scene->img, data->scene);
+	if (keydata.action == MLX_RELEASE)
+		render(data->scene->img, data->scene);
 }

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/05 15:12:50 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:37:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,12 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 static double	get_specular_ratio(t_light *light, t_vector ray, t_vector light_dir, t_vector normal)
 {
 	t_vector	reflection;
-	double		vector_len;
 	double		ray_reflect_dot_product;
 	double		specular_ratio;
 
-	reflection.x = 2 * dot_product(normal, light_dir) * normal.x;
-	reflection.y = 2 * dot_product(normal, light_dir) * normal.y;
-	reflection.z = 2 * dot_product(normal, light_dir) * normal.z;
-	vector_len = sqrt(dot_product(reflection, reflection));
-	reflection.x /= vector_len;
-	reflection.y /= vector_len;
-	reflection.z /= vector_len;
+	reflection.x = 2 * dot_product(normal, light_dir) * normal.x - light_dir.x;
+	reflection.y = 2 * dot_product(normal, light_dir) * normal.y - light_dir.y;
+	reflection.z = 2 * dot_product(normal, light_dir) * normal.z - light_dir.z;
 	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
 	specular_ratio = pow(ray_reflect_dot_product, 50) * light->brightness;
 	return (specular_ratio);
