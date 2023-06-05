@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/29 09:21:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:55:40 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ struct s_cylinder	{
 	bool		hit_body;
 	double		alpha;
 	double		beta;
-	double		theta;
 };
 
 #endif

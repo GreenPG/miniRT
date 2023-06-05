@@ -21,6 +21,15 @@ void	vector_rot_x(t_vector *vec, double angle)
 	vec->y = vec->y * cos(angle) + tmp * sin(angle);
 }
 
+// void	vector_rot_x(t_vector *vec, double angle)
+// {
+// 	double	tmp;
+
+// 	tmp = vec->x;
+// 	vec->x = vec->x * cos(angle) - vec->y * sin(angle);
+// 	vec->y = vec->y * cos(angle) + tmp * sin(angle);
+// }
+
 void	rotation_x(t_scene *scene, double angle)
 {
 	t_obj_list	*cursor;
