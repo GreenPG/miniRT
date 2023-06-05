@@ -6,7 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/05 17:37:32 by gpasquet         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/05 15:42:27 by gtouzali         ###   ########.fr       */
+>>>>>>> 7f433a786d4d385f1e88325815e8c472984c257f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +91,7 @@ static double	get_specular_ratio(t_light *light, t_vector ray, t_vector light_di
 	reflection.x = 2 * dot_product(normal, light_dir) * normal.x - light_dir.x;
 	reflection.y = 2 * dot_product(normal, light_dir) * normal.y - light_dir.y;
 	reflection.z = 2 * dot_product(normal, light_dir) * normal.z - light_dir.z;
+	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
 	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
 	specular_ratio = pow(ray_reflect_dot_product, 50) * light->brightness;
 	return (specular_ratio);
