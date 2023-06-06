@@ -6,11 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/05 17:37:32 by gpasquet         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/05 15:42:27 by gtouzali         ###   ########.fr       */
->>>>>>> 7f433a786d4d385f1e88325815e8c472984c257f
+/*   Updated: 2023/06/06 10:23:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +78,17 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 	return (light_dir);
 }
 
+static t_vector	normalize_vector(t_vector v)
+{
+	double	vector_len;
+
+	vector_len = dot_product(v, v);
+	v.x /= vector_len;
+	v.y /= vector_len;
+	v.z /= vector_len;
+	return (v);
+}
+
 static double	get_specular_ratio(t_light *light, t_vector ray, t_vector light_dir, t_vector normal)
 {
 	t_vector	reflection;
@@ -91,9 +98,10 @@ static double	get_specular_ratio(t_light *light, t_vector ray, t_vector light_di
 	reflection.x = 2 * dot_product(normal, light_dir) * normal.x - light_dir.x;
 	reflection.y = 2 * dot_product(normal, light_dir) * normal.y - light_dir.y;
 	reflection.z = 2 * dot_product(normal, light_dir) * normal.z - light_dir.z;
+	reflection = normalize_vector(reflection);
+	ray = normalize_vector(ray);
 	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
-	ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
-	specular_ratio = pow(ray_reflect_dot_product, 50) * light->brightness;
+	specular_ratio = pow(ray_reflect_dot_product, 2) * light->brightness;
 	return (specular_ratio);
 }
 
@@ -114,9 +122,9 @@ int	get_shading_color(t_scene *scene, t_normal normal, t_vector ray)
 	int				light_cnt;
 	double			diffuse_ratio;
 	double			specular_ratio;
-	int				r;
-	int				g;
-	int				b;
+	unsigned long int				r;
+	unsigned long int				g;
+	unsigned long int				b;
 
 	r = 0;
 	g = 0;
@@ -130,9 +138,9 @@ int	get_shading_color(t_scene *scene, t_normal normal, t_vector ray)
 		{
 			diffuse_ratio = get_diffuse_ratio(light_list->light, normal, light_dir);
 			specular_ratio = get_specular_ratio(light_list->light, invert_vector(ray), light_dir, normal.dir);
-			r += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
-			g += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
-			b += get_r(light_list->light->colors) * specular_ratio;// (diffuse_ratio * 0.8 + specular_ratio * 0.2);
+			r += get_r(light_list->light->colors) * (diffuse_ratio * 0.96 + specular_ratio * 0.04);
+			g += get_g(light_list->light->colors) * (diffuse_ratio * 0.96 + specular_ratio * 0.04);
+			b += get_b(light_list->light->colors) * (diffuse_ratio * 0.96 + specular_ratio * 0.04);
 		}
 		light_list = light_list->next;
 		light_cnt++;
