@@ -38,7 +38,7 @@ static t_data	*init_image(mlx_t *mlx, t_scene *scene)
 		return (NULL);
 	world_translate(scene, -scene->camera->origin->x,
 		-scene->camera->origin->y, -scene->camera->origin->z);
-	world_rotate(scene, scene->camera->alpha, scene->camera->beta);
+	world_rotate(scene, scene->camera->alpha, scene->camera->beta, 0);
 	render(scene->img, scene);
 	data = malloc(sizeof(t_data));
 	if (!data)

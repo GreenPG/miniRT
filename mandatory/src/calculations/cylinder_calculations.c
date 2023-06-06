@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:19:54 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:39:41 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,21 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	double		distance;
 	t_vector	rayo;
 
-	ray = transform_ray(ray, cylinder);
-	rayo = transform_rayo(ray, cylinder);
+	t_vector cross;
+	t_vector front;
+	front.x = 0;
+	front.y = 1;
+	front.z = 0;
+	cross = vector_cross(*cylinder->direction, front);
+	double angle;
+	angle = acos(dot_product(*cylinder->direction, front) / (sqrt(dot_product(*cylinder->direction, *cylinder->direction)) * sqrt(dot_product (front, front))));
+	rotate_around_axis(&ray, cross, -angle);
+	rayo.x = -cylinder->origin->x;
+	rayo.y = -cylinder->origin->y;
+	rayo.z = -cylinder->origin->z;
+	rotate_around_axis(&rayo, cross, -angle);
+	// ray = transform_ray(ray, cylinder);
+	// rayo = transform_rayo(ray, cylinder);
 	root = body_hit(ray, rayo, cylinder);
 	caps = caps_hit(ray, rayo, cylinder);
 	if (!root || !caps)

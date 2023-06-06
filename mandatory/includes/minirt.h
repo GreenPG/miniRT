@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 15:12:31 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:36:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,29 +135,35 @@ int			init_rays(t_scene *scene);
 
 void		vector_rot_x(t_vector *vec, double angle);
 void		vector_rot_y(t_vector *vec, double angle);
+void		vector_rot_z(t_vector *vec, double angle);
 void		rotation_x(t_scene *scene, double angle);
 void		rotation_y(t_scene *scene, double angle);
-void		world_rotate(t_scene *scene, double alpha, double beta);
+void		rotation_z(t_scene *scene, double angle);
+void		world_rotate(t_scene *scene, double alpha, double beta, double theta);
 
 	/* 	cylinder_move.c	*/
 void		cylinder_rot_y(t_cylinder *cylinder, double angle);
 void		cylinder_rot_x(t_cylinder *cylinder, double angle);
+void		cylinder_rot_z(t_cylinder *cylinder, double angle);
 void		cylinder_translate(t_cylinder *cylinder, double x, double y,
 				double z);
 
 	/*	plane_move.c	*/
 void		plane_rot_y(t_plane *plane, double angle);
 void		plane_rot_x(t_plane *plane, double angle);
+void		plane_rot_z(t_plane *plane, double angle);
 void		plane_translate(t_plane *plane, double x, double y, double z);
 
 	/*	sphere_move.c	*/
 void		sphere_rot_y(t_sphere *sphere, double angle);
 void		sphere_rot_x(t_sphere *sphere, double angle);
+void		sphere_rot_z(t_sphere *sphere, double angle);
 void		sphere_translate(t_sphere *sphere, double x, double y, double z);
 
 	/*	light_rotation.c	*/
 void		light_rot_x(t_light *light, double angle);
 void		light_rot_y(t_light *light, double angle);
+void		light_rot_z(t_light *light, double angle);
 
 	/*	translate.c	*/
 
@@ -243,5 +249,9 @@ t_vector	revert_transform(t_vector vec, t_cylinder *cylinder);
 /*	cylinder_shadow.c	*/
 t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 				double distance);
+
+/*	quaternions.c	*/
+
+void	rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 
 #endif
