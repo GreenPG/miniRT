@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   sphere_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/05/18 15:24:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:18:38 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ static int	check_sphere(char *input)
 	return (0);
 }
 
+static void	get_specular_const(t_sphere **sphere_p, char *str)
+{
+	t_sphere	*sphere;
+	int			i;
+
+	if (!sphere || !*sphere || !str)
+		return ;
+	sphere = *sphere_p;
+	sphere->sp_e = atof(str);
+	i = 0;
+	pass_to_next_element(str, *i);
+	sphere->ks = atof(str + i);
+	return ;
+}
+
 t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 {
 	int			*rgb;
@@ -71,6 +86,17 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	sphere->pattern = plain;
 	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
 		sphere->pattern = checkerboard;
+	pass_to_next_element(input, &i);
+	if (!ft_strncmp("specular", &input[i], ft_strlen("specular")))
+	{
+		pass_to_next_element(input &i);
+		get_specular_const(&sphere, &input[i]);
+	}
+	else
+	{
+		sphere->sp_e = 0;
+		sphere->ks = 0;
+	}
 	return (sphere);
 }
 
