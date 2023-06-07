@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 08:18:41 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/06 16:21:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:19:05 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 t_quaternion quaternion(double a, double i, double j, double k)
 {
-	t_quaternion quat;
+	t_quaternion	quat;
 
 	quat.a = a;
 	quat.i = i;
 	quat.j = j;
 	quat.k = k;
+
+	return (quat);
+}
+
+t_quaternion	normalise_quat(t_quaternion quat)
+{
+	double	len;
+	
+	len = sqrt(quat.a * quat.a + quat.i * quat.i + quat.j * quat.j + quat.k * quat.k);
+	quat.a /= len;
+	quat.i /= len;
+	quat.j /= len;
+	quat.k /= len;
 	return (quat);
 }
 
@@ -54,9 +67,9 @@ void	rotate_around_axis(t_vector *vec, t_vector axis, double angle)
 	double			rot;
 
 	rot = sin(angle / 2.);
-	q = quaternion(cos(angle / 2.), axis.x * rot, axis.y * rot, axis.z * rot);
+	q = normalise_quat(quaternion(cos(angle / 2.), axis.x * rot, axis.y * rot, axis.z * rot));
 	rot = sin(-angle / 2.);
-	q_c = quaternion(cos(-angle / 2.), axis.x * rot, axis.y * rot, axis.z * rot);
+	q_c = normalise_quat(quaternion(cos(-angle / 2.), axis.x * rot, axis.y * rot, axis.z * rot));
 	p = quaternion(0, vec->x, vec->y, vec->z);
 	p = quaternion_multiplicate(q, p);
 	p = quaternion_multiplicate(p, q_c);

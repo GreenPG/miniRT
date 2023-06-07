@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 15:01:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:38:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	cylinder = init_cylinder_part3(cylinder);
 	return (cylinder);
 }
+t_vector	*nor(t_vector *ray)
+{
+	double	len;
+
+	len = sqrt(dot_product(*ray, *ray));
+	ray->x /= len;
+	ray->y /= len;
+	ray->z /= len;
+	return (ray);
+}
 
 t_cylinder	*init_cylinder(char *str)
 {
@@ -102,7 +112,7 @@ t_cylinder	*init_cylinder(char *str)
 		i++;
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
-	cylinder->direction = init_vector(str + i);
+	cylinder->direction = nor(init_vector(str + i));
 	if (!cylinder->origin || cylinder->direction->x < -1.0
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
