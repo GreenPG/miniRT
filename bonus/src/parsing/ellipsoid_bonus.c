@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 10:09:15 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:34:47 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,27 @@ static	t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid)
 	return (ellipsoid);
 }
 
-static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int i)
+static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
+		char *str, int i)
 {
 	int			*rgb;
+	int			a;
+	int			b;
+	int			c;
 
-	ellipsoid->a = 1. / (ft_atof(str + i) * ft_atof(str + i)); //division par 0 lololol ca va casser
+	a = ft_atof(str + i);
 	pass_to_next_element(str, &i);
-	ellipsoid->b = 1. / (ft_atof(str + i) * ft_atof(str + i));
+	b = ft_atof(str + i);
 	pass_to_next_element(str, &i);
-	ellipsoid->c = 1. / (ft_atof(str + i) * ft_atof(str + i));
+	c = ft_atof(str + i);
+	if (a == 0 || b == 0 || c == 0)
+	{
+		free_ellipsoid(&ellipsoid);
+		return (NULL);
+	}
+	ellipsoid->a = 1. / (a * a);
+	ellipsoid->b = 1. / (b * b);
+	ellipsoid->c = 1. / (c * c);
 	pass_to_next_element(str, &i);
 	rgb = get_color_values(str + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0

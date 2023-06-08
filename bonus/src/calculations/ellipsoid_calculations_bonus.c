@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hell_calculations_bonus.c                     :+:      :+:    :+:   */
+/*   ellipsoid_calculations_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:09:30 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:08:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ double	*hell_hit(t_vector ray, t_vector rayo, t_ellipsoid *hell)
 	double	b;
 	double	c;
 
-	a = (ray.x * ray.x) * hell->a + (ray.y * ray.y) * hell->b + (ray.z * ray.z) * hell->c;
-	b = ((ray.x * rayo.x) * hell->a + (ray.y * rayo.y) * hell->b + (ray.z * rayo.z) * hell->c);
-	c = (rayo.x * rayo.x) * hell->a + (rayo.y * rayo.y) * hell->b + (rayo.z * rayo.z) * hell->c - 1;
+	a = (ray.x * ray.x) * hell->a + (ray.y * ray.y) * hell->b
+		+ (ray.z * ray.z) * hell->c;
+	b = ((ray.x * rayo.x) * hell->a + (ray.y * rayo.y) * hell->b
+			+ (ray.z * rayo.z) * hell->c);
+	c = (rayo.x * rayo.x) * hell->a + (rayo.y * rayo.y) * hell->b
+		+ (rayo.z * rayo.z) * hell->c - 1;
 	return (cyl_quadratic(a, b, c));
 }
 
@@ -30,7 +33,7 @@ void	free_hell_roots(double *root)
 		free(root);
 }
 
-double hell_min_root(double *root)
+double	hell_min_root(double *root)
 {
 	if (root[0] > 0 && root[0] < root[1])
 		return (root[0]);

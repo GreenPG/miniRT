@@ -1,4 +1,4 @@
-// /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/08 09:58:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:38:19 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void			free_cylinder(t_cylinder **cylinder);
 
 /*	ellipsoid	*/
 
-t_ellipsoid	*init_ellipsoid(char *str);
-void		free_ellipsoid(t_ellipsoid **cylinder);
+t_ellipsoid		*init_ellipsoid(char *str);
+void			free_ellipsoid(t_ellipsoid **cylinder);
 
 /*	structs_utils.c	*/
 
@@ -159,17 +159,17 @@ void			plane_rot_y(t_plane *plane, double angle);
 void			plane_rot_x(t_plane *plane, double angle);
 void			plane_translate(t_plane *plane, double x, double y, double z);
 
-
 	/*	ellipsoid_move.c	*/
-void		ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle);
-void		ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle);
-void		ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y, double z);
+void			ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle);
+void			ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle);
+void			ellipsoid_translate(t_ellipsoid *ellipsoid, double x,
+					double y, double z);
 
 	/*	sphere_move.c	*/
-void		sphere_rot_y(t_sphere *sphere, double angle);
-void		sphere_rot_x(t_sphere *sphere, double angle);
-void		sphere_translate(t_sphere *sphere, double x, double y, double z);
-
+void			sphere_rot_y(t_sphere *sphere, double angle);
+void			sphere_rot_x(t_sphere *sphere, double angle);
+void			sphere_translate(t_sphere *sphere, double x, double y,
+					double z);
 
 /*	light_rotation.c	*/
 void			light_rot_x(t_light_list *light_list, double angle);
@@ -204,12 +204,15 @@ int				get_a(int rgba);
 t_normal		get_plane_normal(t_plane *plane, t_vector ray, double distance);
 t_normal		get_cylinder_normal(t_cylinder *cylinder, t_vector ray,
 					double distance);
-t_normal		orient_normal(t_scene *scene, t_normal normal, t_vector light_dir);
+t_normal		orient_normal(t_scene *scene, t_normal normal,
+					t_vector light_dir);
 t_normal		get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
-int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest);
-int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest);
+int				get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
+					t_obj_list *nearest);
+int				get_specular_color(t_scene *scene, t_vector ray,
+					t_normal normal, t_obj_list *nearest);
 
 /*	keypress_handle.c	*/
 void			handle_keypress(mlx_key_data_t keydata, void *ptr);
@@ -243,8 +246,9 @@ double			min_cyl(double t_1, double t_2, double t_3, double t_4);
 
 /*	cylinder_ellipsoid.c 	*/
 
-double		ellipsoid_hit(t_ellipsoid *hell, t_vector ray);
-double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal, t_vector light_dir);
+double			ellipsoid_hit(t_ellipsoid *hell, t_vector ray);
+double			ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
+					t_vector light_dir);
 
 /*	ray.c	*/
 t_vector		calculate_ray_direction(unsigned int x, unsigned int y,
@@ -255,9 +259,8 @@ int				init_rays(t_scene *scene);
 
 /*	normal_color.c	*/
 
-int			get_normal_color(t_obj_list *nearest, t_vector ray,
-				t_normal normal, t_camera *camera);
-
+int				get_normal_color(t_obj_list *nearest, t_vector ray,
+					t_normal normal, t_camera *camera);
 
 /*	ray_transforms.c	*/
 t_vector		transform_rayo(t_vector ray, t_cylinder *cylinder);
@@ -275,6 +278,7 @@ t_light_list	*init_light_list(char *line);
 
 /*	checkerboard	*/
 
-int			get_checkerboard(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
+int				get_checkerboard(t_obj_list *nearest, t_vector ray,
+					t_normal normal, t_camera *camera);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:53:05 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:21:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	choose_component_part2(t_scene **scene, char *line)
 		if (!(*scene)->light_list)
 			(*scene)->light_list = init_light_list(line);
 		else
-				add_light(&(*scene)->light_list, line);
+			add_light(&(*scene)->light_list, line);
 	}
 	else
 		choose_component_part3(scene, line);

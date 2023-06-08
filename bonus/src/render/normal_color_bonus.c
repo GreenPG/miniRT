@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:24:07 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:17:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	normalized_color(int color, t_vector normal, t_vector ray)
 			fabs(ratio * get_b(color)), 255));
 }
 
-int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera)
+int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal,
+		t_camera *camera)
 {
 	int			color;
 

@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/07 17:08:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:06:48 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELLIPSOID_H
-# define ELLIPSOID_H
+#ifndef ELLIPSOID_BONUS_H
+# define ELLIPSOID_BONUS_H
 
 # include <minirt_bonus.h>
 

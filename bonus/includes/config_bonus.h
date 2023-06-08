@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:49:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/04 12:15:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:35:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#ifndef CONFIG_BONUS_H
+# define CONFIG_BONUS_H
 
 # define WIDTH 1500
 # define HEIGHT 900

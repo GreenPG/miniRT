@@ -6,13 +6,14 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/05 15:23:39 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/02 16:18:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:04:27 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static void	light_translate(t_light_list *light_list, double x, double y, double z)
+static void	light_translate(t_light_list *light_list, double x, double y,
+		double z)
 {
 	t_light_list	*tmp;
 

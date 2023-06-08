@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/08 09:12:50 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:35:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_UTILS_H
-# define STRUCTS_UTILS_H
+#ifndef STRUCTS_UTILS_BONUS_H
+# define STRUCTS_UTILS_BONUS_H
 
 # include "minirt_bonus.h"
 
@@ -37,7 +37,7 @@ struct	s_obj_list {
 	t_plane		*plane;
 	t_sphere	*sphere;
 	t_cylinder	*cylinder;
-	t_ellipsoid *ellipsoid;
+	t_ellipsoid	*ellipsoid;
 	t_obj_list	*next;
 	int			pattern;
 	int			hitted;

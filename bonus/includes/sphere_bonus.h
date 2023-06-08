@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/08 09:12:08 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:28:31 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERE_H
-# define SPHERE_H
+#ifndef SPHERE_BONUS_H
+# define SPHERE_BONUS_H
 
 # include <minirt_bonus.h>
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/04 09:50:30 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:08:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
 	}
 	return (normal);
 }
-static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray, double distance)
+
+static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
+			double distance)
 {
-	double vector_len;
+	double		vector_len;
 	t_normal	normal;
 
 	normal.origin.x = distance * ray.x;

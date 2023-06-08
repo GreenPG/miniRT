@@ -6,12 +6,12 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:24:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:33:13 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CYLINDER_H
-# define CYLINDER_H
+#ifndef CYLINDER_BONUS_H
+# define CYLINDER_BONUS_H
 
 # include <minirt_bonus.h>
 

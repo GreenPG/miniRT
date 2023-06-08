@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ellipsoid_move_bonus.c                                 :+:      :+:    :+:   */
+/*   ellipsoid_move_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:27:21 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:05:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle)
 	ellipsoid->alpha -= angle;
 }
 
-void	ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y, double z)
+void	ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y,
+		double z)
 {
 	ellipsoid->origin->x += x;
 	ellipsoid->origin->y += y;

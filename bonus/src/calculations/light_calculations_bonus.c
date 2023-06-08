@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 09:59:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:55:19 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,15 @@ static t_vector	normalize_vector(t_vector u)
 
 int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
 {
-	t_vector		light_dir;
-	t_light_list	*light_list;
-	int				light_cnt;
-	t_vector	reflection;
-	double		ray_reflect_dot_product;
-	double		specular_ratio;
-	unsigned long int				r;
-	unsigned long int				g;
-	unsigned long int				b;
+	t_vector			light_dir;
+	t_light_list		*light_list;
+	int					light_cnt;
+	t_vector			reflection;
+	double				ray_reflect_dot_product;
+	double				specular_ratio;
+	unsigned long int	r;
+	unsigned long int	g;
+	unsigned long int	b;
 
 	r = 0;
 	g = 0;
@@ -111,15 +111,22 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list
 		light_dir = get_light_dir(light_list->light, normal);
 		if (light_intersect(scene, light_dir, normal, ray) == 0)
 		{
-			reflection.x = 2 * dot_product(normal.dir, light_dir) * normal.dir.x - light_dir.x;
-			reflection.y = 2 * dot_product(normal.dir, light_dir) * normal.dir.y - light_dir.y;
-			reflection.z = 2 * dot_product(normal.dir, light_dir) * normal.dir.z - light_dir.z;
-			ray = normalize_vector(invert_vector(ray));		
+			reflection.x = 2 * dot_product(normal.dir, light_dir) * normal.dir.x
+				- light_dir.x;
+			reflection.y = 2 * dot_product(normal.dir, light_dir) * normal.dir.y
+				- light_dir.y;
+			reflection.z = 2 * dot_product(normal.dir, light_dir) * normal.dir.z
+				- light_dir.z;
+			ray = normalize_vector(invert_vector(ray));
 			ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
-			specular_ratio = fmax(0.0, pow(ray_reflect_dot_product, nearest->sp_e) * light_list->light->brightness);
-			r += get_r(light_list->light->colors) * specular_ratio * nearest->ks;
-			g += get_g(light_list->light->colors) * specular_ratio * nearest->ks;
-			b += get_b(light_list->light->colors) * specular_ratio * nearest->ks;
+			specular_ratio = fmax(0.0, pow(ray_reflect_dot_product,
+						nearest->sp_e) * light_list->light->brightness);
+			r += get_r(light_list->light->colors) * specular_ratio
+				* nearest->ks;
+			g += get_g(light_list->light->colors) * specular_ratio
+				* nearest->ks;
+			b += get_b(light_list->light->colors) * specular_ratio
+				* nearest->ks;
 		}
 		light_list = light_list->next;
 		light_cnt++;
