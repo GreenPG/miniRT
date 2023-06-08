@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/07 14:53:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 10:24:21 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -70,8 +70,11 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 	{
 		normal = get_normal(nearest, ray, distance);
 		color = get_normal_color(nearest, ray, normal, scene->camera);
-		diffuse_color = get_diffuse_color(scene, ray, normal);
-		specular_color = get_specular_color(scene, ray, normal);
+		diffuse_color = get_diffuse_color(scene, ray, normal, nearest);
+		if (nearest->sp_e == 0)
+			specular_color = 0;
+		else
+			specular_color = get_specular_color(scene, ray, normal, nearest);
 		color = get_final_color(color, diffuse_color, specular_color, scene);
 		nearest->hitted = 0;
 		return (color);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:43:18 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 10:02:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static int	plane_obj(t_obj_list *obj, char *line)
 	obj->cylinder = NULL;
 	obj->plane = init_plane(line);
 	obj->ellipsoid = NULL;
-	obj->pattern = obj->plane->pattern;
 	if (!obj->plane)
 	{
 		free(obj);
 		return (1);
 	}
+	obj->pattern = obj->plane->pattern;
 	return (0);
 }
 
@@ -85,6 +85,7 @@ static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 		if (ellipsoid_obj(obj, line) == 1)
 			return (1);
 	}
+	get_specular_const(&obj, line);
 	obj->next = NULL;
 	add_obj(list_ptr, obj);
 	return (0);

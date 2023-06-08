@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/07 10:24:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:58:46 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ int				init_obj(char *line, t_obj_list **list_ptr, t_type type);
 
 /*	obj_utils.c	*/
 
+void			get_specular_const(t_obj_list **obj_ptr, char *line);
 void			add_obj_error(t_scene **scene);
 void			add_obj(t_obj_list **list_ptr, t_obj_list *obj);
 
 /*	parsing_utils.c	*/
 
 void			pass_to_next_element(char *str, int *i);
+int				check_specular(char *str, int *i);
 int				check_triple_int(char *str, int *i);
 int				check_int(char *str, int *i);
 int				check_float(char *str, int *i);
@@ -206,8 +208,8 @@ t_normal		orient_normal(t_scene *scene, t_normal normal, t_vector light_dir);
 t_normal		get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
-int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal);
-int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal);
+int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest);
+int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest);
 
 /*	keypress_handle.c	*/
 void			handle_keypress(mlx_key_data_t keydata, void *ptr);

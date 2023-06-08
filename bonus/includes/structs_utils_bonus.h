@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/03 15:23:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:12:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ struct	s_obj_list {
 	t_obj_list	*next;
 	int			pattern;
 	int			hitted;
+	float		sp_e;
+	float		ks;
 	bool		front_face;
 };
 

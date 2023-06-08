@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/07 14:35:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:59:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static t_vector	normalize_vector(t_vector u)
 	return (u);
 }
 
-int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal)
+int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
 {
 	t_vector		light_dir;
 	t_light_list	*light_list;
@@ -116,10 +116,10 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal)
 			reflection.z = 2 * dot_product(normal.dir, light_dir) * normal.dir.z - light_dir.z;
 			ray = normalize_vector(invert_vector(ray));		
 			ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
-			specular_ratio = fmax(0.0, pow(ray_reflect_dot_product, 2) * light_list->light->brightness);
-			r += get_r(light_list->light->colors) * specular_ratio * 0.4;
-			g += get_g(light_list->light->colors) * specular_ratio * 0.4;
-			b += get_b(light_list->light->colors) * specular_ratio * 0.4;
+			specular_ratio = fmax(0.0, pow(ray_reflect_dot_product, nearest->sp_e) * light_list->light->brightness);
+			r += get_r(light_list->light->colors) * specular_ratio * nearest->ks;
+			g += get_g(light_list->light->colors) * specular_ratio * nearest->ks;
+			b += get_b(light_list->light->colors) * specular_ratio * nearest->ks;
 		}
 		light_list = light_list->next;
 		light_cnt++;
@@ -136,7 +136,7 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal)
 	return (get_rgba(r, g, b, 255));
 }
 
-int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal)
+int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
 {
 	t_vector		light_dir;
 	t_light_list	*light_list;
@@ -159,9 +159,9 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal)
 			diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
 			diffuse_ratio = fmax(0.0, diffuse_ratio);
 			diffuse_ratio *= light_list->light->brightness;
-			r += get_r(light_list->light->colors) * diffuse_ratio * 0.6;
-			g += get_g(light_list->light->colors) * diffuse_ratio * 0.6;
-			b += get_b(light_list->light->colors) * diffuse_ratio * 0.6;
+			r += get_r(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
+			g += get_g(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
+			b += get_b(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
 		}
 		light_list = light_list->next;
 		light_cnt++;

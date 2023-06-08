@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:48:47 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/07 17:09:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:12:08 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ struct	s_sphere {
 	double		diameter;
 	int			color;
 	int			pattern;
-	int			sp_e;
-	int			ks;
 };
 
 #endif
