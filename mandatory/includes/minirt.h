@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/09 11:08:35 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:57:48 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,11 +243,6 @@ int			init_rays(t_scene *scene);
 /*	normal_color.c	*/
 int			get_normal_color(t_obj_list *nearest, t_vector ray,
 				t_normal normal);
-
-/*	ray_transforms.c	*/
-t_vector	transform_rayo(t_vector ray, t_cylinder *cylinder);
-t_vector	transform_ray(t_vector ray, t_cylinder *cylinder);
-t_vector	revert_transform(t_vector vec, t_cylinder *cylinder);
 
 /*	cylinder_shadow.c	*/
 t_normal	get_cylinder_normal(t_cylinder *cylinder, t_vector ray,

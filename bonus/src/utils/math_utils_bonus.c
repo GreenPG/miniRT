@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:18:08 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/04 09:48:58 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:31:32 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ double	quadratic(double a, double b, double c)
 	double	r0;
 	double	r1;
 
-	d = (b * b) - (4.0 * a * c);
+	d = (b * b) - (a * c);
 	if (d > 0)
 	{
-		r0 = 1 * (-b - sqrt(d)) / (2 * a);
-		r1 = 1 * (-b + sqrt(d)) / (2 * a);
+		r0 = 1 * (-b - sqrt(d)) / a;
+		r1 = 1 * (-b + sqrt(d)) / a;
 		if (r0 > r1 && r1 >= 0)
 			return (r1);
 		else if (r1 >= r0 && r0 >= 0)

@@ -54,13 +54,6 @@ static int	check_ellipsoid(char *str)
 	return (0);
 }
 
-static	t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid)
-{
-	ellipsoid->alpha = get_alpha(*ellipsoid->direction);
-	ellipsoid->beta = get_beta(*ellipsoid->direction);
-	return (ellipsoid);
-}
-
 static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int i)
 {
 	int			*rgb;
@@ -85,7 +78,6 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int 
 	ellipsoid->pattern = plain;
 	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
 		ellipsoid->pattern = checkerboard;
-	ellipsoid = init_ellipsoid_part3(ellipsoid);
 	return (ellipsoid);
 }
 
@@ -105,6 +97,7 @@ t_ellipsoid	*init_ellipsoid(char *str)
 	ellipsoid->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
 	ellipsoid->direction = init_vector(str + i);
+	vector_norm(ellipsoid->direction);
 	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
 		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
 		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z

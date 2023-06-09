@@ -14,11 +14,12 @@
 
 void	vector_rot_x(t_vector *vec, double angle)
 {
-	double	tmp;
+	t_vector	axis;
 
-	tmp = vec->x;
-	vec->x = vec->x * cos(angle) - vec->y * sin(angle);
-	vec->y = vec->y * cos(angle) + tmp * sin(angle);
+	axis.x = 0;
+	axis.y = 0;
+	axis.z = 1;
+	rotate_around_axis(vec, axis, angle);
 }
 
 void	rotation_x(t_scene *scene, double angle)
@@ -36,18 +37,19 @@ void	rotation_x(t_scene *scene, double angle)
 		if (cursor->type == cylinder)
 			cylinder_rot_x(cursor->cylinder, angle);
 		if (cursor->type == ellipsoid)
-			ellipsoid_rot_x(cursor->ellipsoid, angle);
+			ellipsoid_rot_z(cursor->ellipsoid, angle);
 		cursor = cursor->next;
 	}
 }
 
 void	vector_rot_y(t_vector *vec, double angle)
 {
-	double	tmp;
+	t_vector	axis;
 
-	tmp = vec->y;
-	vec->y = vec->y * cos(angle) - vec->z * sin(angle);
-	vec->z = vec->z * cos(angle) + tmp * sin(angle);
+	axis.x = 1;
+	axis.y = 0;
+	axis.z = 0;
+	rotate_around_axis(vec, axis, angle);
 }
 
 void	rotation_y(t_scene *scene, double angle)
@@ -65,20 +67,48 @@ void	rotation_y(t_scene *scene, double angle)
 		if (cursor->type == cylinder)
 			cylinder_rot_y(cursor->cylinder, angle);
 		if (cursor->type == ellipsoid)
-			ellipsoid_rot_y(cursor->ellipsoid, angle);
+			ellipsoid_rot_z(cursor->ellipsoid, angle);
 		cursor = cursor->next;
 	}
 }
 
-void	world_rotate(t_scene *scene, double alpha, double beta)
+void	vector_rot_z(t_vector *vec, double angle)
 {
-	if (scene->camera->beta + beta > 90 || scene->camera->beta + beta < -90)
-		return ;
-	rotation_y(scene, scene->camera->beta * (M_PI / 180));
-	rotation_x(scene, -scene->camera->alpha * (M_PI / 180));
-	scene->camera->alpha = fmod(scene->camera->alpha + alpha, 360);
-	scene->camera->beta += beta;
-	rotation_x(scene, scene->camera->alpha * (M_PI / 180));
-	rotation_y(scene, -scene->camera->beta * (M_PI / 180));
+	t_vector	axis;
+
+	axis.x = 0;
+	axis.y = 1;
+	axis.z = 0;
+	rotate_around_axis(vec, axis, angle);
+}
+
+void	rotation_z(t_scene *scene, double angle)
+{
+	t_obj_list	*cursor;
+
+	cursor = scene->obj_list;
+	light_rot_z(scene->light_list, angle);
+	while (cursor)
+	{
+		if (cursor->type == sphere)
+			sphere_rot_z(cursor->sphere, angle);
+		if (cursor->type == plane)
+			plane_rot_z(cursor->plane, angle);
+		if (cursor->type == cylinder)
+			cylinder_rot_z(cursor->cylinder, angle);
+		if (cursor->type == ellipsoid)
+			ellipsoid_rot_z(cursor->ellipsoid, angle);
+		cursor = cursor->next;
+	}
+}
+
+void	world_rotate(t_scene *scene, double alpha, double beta, double theta)
+{
+	if (alpha)
+		rotation_x(scene, -alpha * (M_PI / 180));
+	if (beta)
+		rotation_y(scene, beta * (M_PI / 180));
+	if (theta)
+		rotation_z(scene, -theta * (M_PI / 180));
 	printf("alpha: %f\nbeta: %f\n\n", scene->camera->alpha, scene->camera->beta);
 }

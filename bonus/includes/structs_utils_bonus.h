@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/04 16:13:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:55:16 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_ellipsoid	t_ellipsoid;
 typedef struct s_normal		t_normal;
+typedef struct s_quaternion	t_quaternion;
 
 struct	s_vector {
 	double	x;
 	double	y;
 	double	z;
+};
+
+struct	s_quaternion {
+	double	a;
+	double	i;
+	double	j;
+	double	k;
 };
 
 struct	s_obj_list {

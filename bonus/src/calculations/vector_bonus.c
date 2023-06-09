@@ -12,6 +12,16 @@
 
 #include <minirt_bonus.h>
 
+void	vector_norm(t_vector *vec)
+{
+	double	len;
+
+	len = sqrt(dot_product(*vec, *vec));
+	vec->x /= len;
+	vec->y /= len;
+	vec->z /= len;
+}
+
 t_vector	vector_cross(t_vector a, t_vector b)
 {
 	t_vector	result;

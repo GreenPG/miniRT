@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/07 13:02:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:29:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static int	check_cylinder(char *str)
 
 static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
 {
-	cylinder->alpha = get_alpha(*cylinder->direction);
-	cylinder->beta = get_beta(*cylinder->direction);
 	cylinder->hit_body = false;
 	pass_to_next_element(str, &i);
 	cylinder->pattern = plain;
@@ -91,17 +89,6 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	return (cylinder);
 }
 
-t_vector	*nor(t_vector *ray)
-{
-	double	len;
-
-	len = sqrt(dot_product(*ray, *ray));
-	ray->x /= len;
-	ray->y /= len;
-	ray->z /= len;
-	return (ray);
-}
-
 t_cylinder	*init_cylinder(char *str)
 {
 	t_cylinder	*cylinder;
@@ -117,7 +104,8 @@ t_cylinder	*init_cylinder(char *str)
 		i++;
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
-	cylinder->direction = nor(init_vector(str + i));
+	cylinder->direction = init_vector(str + i);
+	vector_norm(cylinder->direction);
 	if (!cylinder->origin || cylinder->direction->x < -1.0
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z

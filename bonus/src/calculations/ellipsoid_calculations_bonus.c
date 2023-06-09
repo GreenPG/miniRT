@@ -39,60 +39,26 @@ double hell_min_root(double *root)
 	return (INFINITY);
 }
 
-t_vector	etransform_rayo(t_vector ray, t_ellipsoid *ellipsoid)
-{
-	double		alpha;
-	double		beta;
-	double		tmpx;
-	double		tmpy;
-
-	alpha = ellipsoid->alpha;
-	beta = ellipsoid->beta;
-	ray.x = -ellipsoid->origin->x;
-	ray.y = -ellipsoid->origin->y;
-	ray.z = -ellipsoid->origin->z;
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(ellipsoid->alpha) - ray.y * sin(ellipsoid->alpha)
-		* cos(ellipsoid->beta) + ray.z * sin(ellipsoid->alpha)
-		* sin(ellipsoid->beta);
-	ray.y = tmpx * sin(ellipsoid->alpha) + ray.y * cos(ellipsoid->beta)
-		* cos(ellipsoid->alpha) - ray.z * cos(ellipsoid->alpha)
-		* sin (ellipsoid->beta);
-	ray.z = tmpy * sin(ellipsoid->beta) + ray.z * cos(ellipsoid->beta);
-	return (ray);
-}
-
-t_vector	etransform_ray(t_vector ray, t_ellipsoid *ellipsoid)
-{
-	double		alpha;
-	double		beta;
-	double		tmpx;
-	double		tmpy;
-
-	alpha = ellipsoid->alpha;
-	beta = ellipsoid->beta;
-	tmpx = ray.x;
-	tmpy = ray.y;
-	ray.x = ray.x * cos(ellipsoid->alpha) - ray.y * sin(ellipsoid->alpha)
-		* cos(ellipsoid->beta) + ray.z * sin(ellipsoid->alpha)
-		* sin(ellipsoid->beta);
-	ray.y = tmpx * sin(ellipsoid->alpha) + ray.y * cos(ellipsoid->beta)
-		* cos(ellipsoid->alpha) - ray.z * cos(ellipsoid->alpha)
-		* sin (ellipsoid->beta);
-	ray.z = tmpy * sin(ellipsoid->beta) + ray.z * cos(ellipsoid->beta);
-	return (ray);
-}
-
-double	ellipsoid_hit(t_ellipsoid *hell, t_vector ray)
+double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 {
 	double		*root;
 	double		distance;
-	t_vector	rayo;
+	t_cyl_calc	data;
 
-	ray = etransform_ray(ray, hell);
-	rayo = etransform_rayo(ray, hell);
-	root = hell_hit(ray, rayo, hell);
+	data.front.x = 0;
+	data.front.y = 1;
+	data.front.z = 0;
+	data.cross = vector_cross(*ellipsoid->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	data.rayo.x = -ellipsoid->origin->x;
+	data.rayo.y = -ellipsoid->origin->y;
+	data.rayo.z = -ellipsoid->origin->z;
+	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{
 		free_hell_roots(root);
@@ -103,42 +69,27 @@ double	ellipsoid_hit(t_ellipsoid *hell, t_vector ray)
 	return (distance);
 }
 
-static t_vector	etransform_lighto(t_vector light_dir, t_vector light_origin,
-		t_ellipsoid *ellipsoid)
-{
-	double		alpha;
-	double		beta;
-	double		tmpx;
-	double		tmpy;
-
-	alpha = ellipsoid->alpha;
-	beta = ellipsoid->beta;
-	light_dir.x = light_origin.x - ellipsoid->origin->x;
-	light_dir.y = light_origin.y - ellipsoid->origin->y;
-	light_dir.z = light_origin.z - ellipsoid->origin->z;
-	tmpx = light_dir.x;
-	tmpy = light_dir.y;
-	light_dir.x = light_dir.x * cos(ellipsoid->alpha) - light_dir.y
-		* sin(ellipsoid->alpha) * cos(ellipsoid->beta) + light_dir.z
-		* sin(ellipsoid->alpha) * sin(ellipsoid->beta);
-	light_dir.y = tmpx * sin(ellipsoid->alpha) + light_dir.y
-		* cos(ellipsoid->beta) * cos(ellipsoid->alpha) - light_dir.z
-		* cos(ellipsoid->alpha) * sin (ellipsoid->beta);
-	light_dir.z = tmpy * sin(ellipsoid->beta) + light_dir.z
-		* cos(ellipsoid->beta);
-	return (light_dir);
-}
-
 double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
-		t_vector light_dir)
+		t_vector ray)
 {
 	double		*root;
 	double		distance;
-	t_vector	light_o;
+	t_cyl_calc	data;
 
-	light_dir = etransform_ray(light_dir, ellipsoid);
-	light_o = etransform_lighto(light_dir, normal.origin, ellipsoid);
-	root = hell_hit(light_dir, light_o, ellipsoid);
+	data.front.x = 0;
+	data.front.y = 1;
+	data.front.z = 0;
+	data.cross = vector_cross(*ellipsoid->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	data.rayo.x = normal.origin.x - ellipsoid->origin->x;
+	data.rayo.y = normal.origin.y - ellipsoid->origin->y;
+	data.rayo.z = normal.origin.z - ellipsoid->origin->z;
+	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{
 		free_hell_roots(root);

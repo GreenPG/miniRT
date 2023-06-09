@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 15:22:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:30:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,6 @@ double	plane_shadow(t_plane *plane, t_vector light_dir,
 	return (INFINITY);
 }
 
-// static t_vector	transform_lighto(t_vector light_dir, t_vector light_origin,
-// 		t_cylinder *cylinder)
-// {
-// 	double		tmpx;
-// 	double		tmpy;
-
-// 	light_dir.x = light_origin.x - cylinder->origin->x;
-// 	light_dir.y = light_origin.y - cylinder->origin->y;
-// 	light_dir.z = light_origin.z - cylinder->origin->z;
-// 	tmpx = light_dir.x;
-// 	tmpy = light_dir.y;
-// 	light_dir.x = light_dir.x * cos(cylinder->alpha) - light_dir.y
-// 		* sin(cylinder->alpha) * cos(cylinder->beta) + light_dir.z
-// 		* sin(cylinder->alpha) * sin(cylinder->beta);
-// 	light_dir.y = tmpx * sin(cylinder->alpha) + light_dir.y
-// 		* cos(cylinder->beta) * cos(cylinder->alpha) - light_dir.z
-// 		* cos(cylinder->alpha) * sin (cylinder->beta);
-// 	light_dir.z = tmpy * sin(cylinder->beta) + light_dir.z
-// 		* cos(cylinder->beta);
-// 	return (light_dir);
-// }
 static double	cylinder_distance_shad(t_cylinder *cylinder, t_vector ray,
 	t_cyl_calc	data)
 {
