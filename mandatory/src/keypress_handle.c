@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:08:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/06 16:29:06 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 10:32:37 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,22 @@ static void	handle_translate(mlx_key_data_t keydata, t_data *data)
 		world_translate(data->scene, 0, 0, 1);
 }
 
+static void	handle_object_rotate(mlx_key_data_t keydata, t_data *data)
+{
+	if (keydata.key == MLX_KEY_I && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, 0, 1, 0);
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, 0, -1, 0);
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, 1, 0, 0);
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, -1, 0, 0);
+	if (keydata.key == MLX_KEY_U && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, 0, 0, 1);
+	if (keydata.key == MLX_KEY_O && keydata.action == MLX_RELEASE)
+		rotate_one(data->scene->obj_selected, 0, 0, -1);
+}
+
 void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 {
 	t_data	*data;
@@ -51,6 +67,7 @@ void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 	data = ptr;
 	handle_rotation(keydata, data);
 	handle_translate(keydata, data);
+	handle_object_rotate(keydata, data);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 	{
 		mlx_close_window(data->mlx);

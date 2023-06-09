@@ -14,19 +14,13 @@
 
 void	vector_rot_x(t_vector *vec, double angle)
 {
-	// double	tmp;
-
-	// tmp = vec->x;
-	// vec->x = vec->x * cos(angle) - vec->y * sin(angle);
-	// vec->y = vec->y * cos(angle) + tmp * sin(angle);
-		t_vector axis;
+	t_vector	axis;
 
 	axis.x = 0;
 	axis.y = 0;
 	axis.z = 1;
 	rotate_around_axis(vec, axis, angle);
 }
-
 
 void	rotation_x(t_scene *scene, double angle)
 {
@@ -48,12 +42,7 @@ void	rotation_x(t_scene *scene, double angle)
 
 void	vector_rot_y(t_vector *vec, double angle)
 {
-	// double	tmp;
-
-	// tmp = vec->y;
-	// vec->y = vec->y * cos(angle) - vec->z * sin(angle);
-	// vec->z = vec->z * cos(angle) + tmp * sin(angle);
-	t_vector axis;
+	t_vector	axis;
 
 	axis.x = 1;
 	axis.y = 0;
@@ -81,7 +70,7 @@ void	rotation_y(t_scene *scene, double angle)
 
 void	vector_rot_z(t_vector *vec, double angle)
 {
-	t_vector axis;
+	t_vector	axis;
 
 	axis.x = 0;
 	axis.y = 1;
@@ -107,24 +96,13 @@ void	rotation_z(t_scene *scene, double angle)
 	}
 }
 
-
-
 void	world_rotate(t_scene *scene, double alpha, double beta, double theta)
 {
-	// if (scene->camera->beta + beta > 90 || scene->camera->beta + beta < -90)
-	// 	return ;
-	// rotation_y(scene, scene->camera->beta * (M_PI / 180));
-	// rotation_x(scene, -scene->camera->alpha * (M_PI / 180));
-	// scene->camera->alpha = fmod(scene->camera->alpha + alpha, 360);
-	// scene->camera->beta += beta;
-	// rotation_x(scene, scene->camera->alpha * (M_PI / 180));
-	// rotation_y(scene, -scene->camera->beta * (M_PI / 180));
-	printf("%f, %f\n",beta, -beta * (M_PI / 180));
-	rotation_x(scene, -alpha * (M_PI / 180));
-	rotation_y(scene, beta * (M_PI / 180));
-	rotation_z(scene, -theta * (M_PI / 180));
-
-	(void)alpha;
-	(void)theta;
+	if (alpha)
+		rotation_x(scene, -alpha * (M_PI / 180));
+	if (beta)
+		rotation_y(scene, beta * (M_PI / 180));
+	if (theta)
+		rotation_z(scene, -theta * (M_PI / 180));
 	printf("alpha: %f\nbeta: %f\n\n", scene->camera->alpha, scene->camera->beta);
 }
