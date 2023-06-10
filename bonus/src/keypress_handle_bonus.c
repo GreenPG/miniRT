@@ -105,5 +105,18 @@ void	handle_keypress(mlx_key_data_t keydata, void *ptr)
 	has_changed += handle_object_rotate(keydata, data);
 	has_changed += handle_object_move(keydata, data);
 	if (has_changed != 0)
+	if (keydata.key == MLX_KEY_KP_8 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 0, 1, 0);
+	if (keydata.key == MLX_KEY_KP_2 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 0, -1, 0);
+	if (keydata.key == MLX_KEY_KP_6 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 1, 0, 0);
+	if (keydata.key == MLX_KEY_KP_4 && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, -1, 0, 0);
+	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 0, 0, 1);
+	if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_RELEASE)
+		move_one(data->scene->obj_selected, 0, 0, -1);
+	if (keydata.action == MLX_RELEASE)
 		render(data->scene->img, data->scene);
 }

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 16:10:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:32:18 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ TEST	ASSERT_SCENE_EQ(t_scene *actual, t_scene *expected)
 	CHECK_CALL(ASSERT_CAM_EQ(actual->camera, expected->camera));
 	
 	t_obj_list *tmp1 = actual->obj_list;
-	t_obj_list *tmp2 = actual->obj_list;
+	t_obj_list *tmp2 = expected->obj_list;
 	
 	while (tmp1)
 	{

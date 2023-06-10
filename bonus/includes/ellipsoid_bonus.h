@@ -27,6 +27,8 @@ struct	s_ellipsoid {
 	double		c;
 	int			color;
 	int			pattern;
+	int			sp_e;
+	int			ks;
 };
 
 #endif

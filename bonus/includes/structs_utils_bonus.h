@@ -49,6 +49,8 @@ struct	s_obj_list {
 	t_obj_list	*next;
 	int			pattern;
 	int			hitted;
+	float		sp_e;
+	float		ks;
 	bool		front_face;
 };
 

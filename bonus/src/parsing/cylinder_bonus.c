@@ -48,6 +48,17 @@ static int	check_cylinder(char *str)
 	pass_to_next_element(str, &i);
 	if (check_triple_int(str, &i) == 1)
 		return (1);
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0)
+		pass_to_next_element(str, &i);
+	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
+		if (check_specular(str, &i) == 1)
+			return (1);
+	if (str[i] != '\0')
+		return (1);
 	return (0);
 }
 

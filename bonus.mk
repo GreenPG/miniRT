@@ -48,7 +48,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 
 %_bonus.o: %_bonus.c 
-	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS_BONUS)
+	@$(CC) $(DFLAGS) -o ./obj/$@ -c $< $(HEADERS_BONUS)
 
 bonus: libmlx libft $(OBJS_BONUS)
 	@$(CC) $(addprefix ./obj/,$(OBJS_BONUS)) $(LIBS) $(HEADERS_BONUS) -o miniRT_bonus
@@ -61,6 +61,6 @@ clean_bonus:
 fclean_bonus: clean_bonus
 	@rm -f miniRT_bonus
 
-re_bonus: clean_bonus all_bonus
+re_bonus: clean_bonus bonus 
 
 .PHONY: clean_bonus, fclean_bonus, re_bonus, bonus

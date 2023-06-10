@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:38:05 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 15:39:49 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:53:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ void	pass_to_next_element(char *str, int *i)
 		(*i)++;
 	while (str[*i] && ft_isspace(str[*i]))
 		(*i)++;
+}
+
+int	check_specular(char *str, int *i)
+{
+	if (!str)
+		return (1);
+	while (ft_isalpha(str[*i]))
+		(*i)++;
+	while (ft_isspace(str[*i]))
+		(*i)++;
+	if (check_float(str, i) == 1)
+		return (1);
+	while (ft_isspace(str[*i]))
+		(*i)++;
+	if (check_float(str, i) == 1)
+		return (1);
+	return (0);
 }
 
 int	check_float(char *str, int *i)
