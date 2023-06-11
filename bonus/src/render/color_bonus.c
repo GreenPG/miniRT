@@ -45,11 +45,23 @@ static int	get_final_color(int color, int diffuse_color, t_scene *scene)
 	return (get_rgba(r, g, b, 255));
 }
 
+t_vector	ray_to_world(t_vector *base, t_vector ray)
+{
+	t_vector world_ray;
+
+	world_ray.x = base[0].x * ray.x + base[1].x * ray.y + base[2].x * ray.z;
+	world_ray.y = base[0].y * ray.x + base[1].y * ray.y + base[2].y * ray.z;
+	world_ray.z = base[0].z * ray.x + base[1].z * ray.y + base[2].z * ray.z;
+	vector_norm(&world_ray);
+	return(world_ray);
+}
+
 static int	sky_color(t_scene *scene, t_vector ray)
 {
 	double	t;
 
-	t = sin(ray.z + scene->camera->beta * (M_PI / 180));
+	ray = ray_to_world(scene->world_base, ray);
+	t = sin(ray.z);
 	if (t > 0)
 		return (get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t
 					* 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t
@@ -77,6 +89,5 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 		nearest->hitted = 0;
 		return (color);
 	}
-	else
-		return (sky_color(scene, ray));
+	return (sky_color(scene, ray));
 }

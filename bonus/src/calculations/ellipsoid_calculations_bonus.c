@@ -45,9 +45,9 @@ double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 	double		distance;
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 0.0000001;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
@@ -76,9 +76,9 @@ double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
 	double		distance;
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 0.0000001;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)

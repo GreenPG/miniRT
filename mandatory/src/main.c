@@ -22,7 +22,8 @@ static mlx_t	*ft_mlx_create(void)
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
 	icon = mlx_load_png("./mandatory/src/gpasquet.png");
-	(void)icon;
+	if (!icon)
+		return (mlx);
 	mlx_set_icon(mlx, icon);
 	mlx_delete_texture(icon);
 	return (mlx);
