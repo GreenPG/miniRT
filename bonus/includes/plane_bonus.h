@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:09:09 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/04 16:13:55 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:50:27 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ struct s_plane {
 	t_vector	*direction;
 	int			colors;
 	int			pattern;
+	mlx_texture_t	*tex;
 };
 
 #endif

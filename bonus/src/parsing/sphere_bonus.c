@@ -45,6 +45,20 @@ static int	check_sphere(char *input)
 	return (0);
 }
 
+t_sphere	*init_sphere_part3(t_sphere *sphere, char *input, int i)
+{
+	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
+		sphere->pattern = checkerboard;
+	else
+	{
+		sphere->pattern = texture;
+		sphere->tex = mlx_load_png(&input[i]);
+		if (!sphere->tex)
+			sphere->pattern = plain;
+	}
+	return (sphere);
+}
+
 t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 {
 	int			*rgb;
@@ -66,11 +80,9 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 		return (NULL);
 	}
 	sphere->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
-	free(rgb);
 	pass_to_next_element(input, &i);
-	sphere->pattern = plain;
-	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
-		sphere->pattern = checkerboard;
+	free(rgb);
+	sphere = init_sphere_part3(sphere, input, i);
 	return (sphere);
 }
 

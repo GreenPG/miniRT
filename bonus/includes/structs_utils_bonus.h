@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/09 17:55:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:53:52 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minirt_bonus.h"
 
 typedef enum e_type {sphere, plane, cylinder, ellipsoid}	t_type;
-typedef enum e_pattern {plain, checkerboard}	t_pattern;
+typedef enum e_pattern {plain, checkerboard, texture}	t_pattern;
 
 typedef struct s_vector		t_vector;
 typedef struct s_obj_list	t_obj_list;

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 18:02:02 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:44:47 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ struct s_cylinder	{
 	int			color;
 	bool		hit_body;
 	int			pattern;
+	mlx_texture_t	*tex;
 };
 
 struct s_cyl_calc	{

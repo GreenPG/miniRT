@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/10 12:26:49 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:06:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,10 @@ t_light_list	*init_light_list(char *line);
 /*	checkerboard	*/
 
 int			get_checkerboard(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
+
+/*	textures	*/
+
+int			get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
 
 /*	quaternions.c	*/
 
