@@ -69,7 +69,7 @@ libft:
 %.o: %.c 
 	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS)
 
-$(NAME): $(OBJS)
+	$(NAME): $(OBJS)
 	@$(CC) $(addprefix ./obj/,$(OBJS)) $(LIBS) $(HEADERS) -o $(NAME)
 	@clear
 	@make header --no-print-directory

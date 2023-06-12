@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:36:19 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/03 15:22:59 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:48:52 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static double	get_distance(t_obj_list *cursor, t_vector ray)
 		current_distance = plane_hit(cursor->plane, ray);
 	else if (cursor->type == ellipsoid)
 		current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
+	else if (cursor->type == triangle)
+		current_distance = triangle_hit(cursor->triangle, ray);
 	return (current_distance);
 }
 

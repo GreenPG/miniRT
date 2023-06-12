@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:34:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 09:32:18 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:10:15 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ TEST	ASSERT_PLANE_EQ(t_plane *actual, t_plane *expected)
 	CHECK_CALL(ASSERT_VECTOR_EQ(actual->origin, expected->origin));
 	CHECK_CALL(ASSERT_VECTOR_EQ(actual->direction, expected->direction));
 	ASSERT_EQ_FMT(expected->colors, actual->colors, "%i");
+	PASS();
+}
+
+TEST	ASSERT_TRIANGLE_EQ(t_triangle *actual, t_triangle *expected)
+{
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->a, expected->a));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->b, expected->b));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->c, expected->c));
+	CHECK_CALL(ASSERT_VECTOR_EQ(actual->normal, expected->normal));
+	ASSERT_EQ_FMT(expected->color, actual->color, "%i");
 	PASS();
 }
 
@@ -105,8 +115,12 @@ TEST	correct_input(void) {
 	t_obj_list *tmp2 = malloc(sizeof(t_obj_list));
 	tmp2->type = cylinder;
 	tmp2->cylinder = init_cylinder("cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255");
-	tmp2->next = NULL;
+	tmp2->next = tmp3;
 	tmp1->next = tmp2;
+	t_obj_list *tmp3 = malloc(sizeof(t_obj_list));
+	tmp3->type = triangle;
+	tmp3->triangle = init_triangle("tr 0,0,0 0,1,0 1,0,0 150,100,10");
+	tmp3->next = NULL;
 
 	CHECK_CALL(ASSERT_SCENE_EQ(scene1, expected));
 	CHECK_CALL(ASSERT_SCENE_EQ(scene2, expected));

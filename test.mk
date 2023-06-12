@@ -6,19 +6,20 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:03:28 by gpasquet          #+#    #+#              #
-#    Updated: 2023/04/14 12:16:10 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/06/12 11:03:40 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##########################	FILES	############################################
 
-TSRCS = $(shell find unit_tests -name '*.c')
+TSRCS =  unit_tests/runner.c \
+		unit_tests/test_init_triangle.c# $(shell find unit_tests -name '*.c')
 
 TRUNNER =	run_tests
 
 TOBJS =	$(TSRCS:%.c=%.o)
 
-BOBJS = $(addprefix ./obj/, $(OBJS))
+BOBJS = $(addprefix ./obj/, $(OBJS_BONUS))
 
 ##########################	CMDS	############################################
 
@@ -31,7 +32,7 @@ VALGRIND :=	valgrind \
 test: test.build
 	./run_tests
 
-test.build:
+test.build: bonus
 	$(MAKE) -s --jobs=8 $(TRUNNER)
 
 test.leak: test.build
@@ -57,10 +58,10 @@ test.re: test.clean test
 
 .PHONY:	test test.build test.clean test.re
 
-$(TRUNNER):	BOBJS	:=	$(filter-out %/main.o, $(BOBJS))
+$(TRUNNER):	BOBJS	:=	$(filter-out %/main_bonus.o, $(BOBJS))
 
 $(TRUNNER): $(OBJS) $(TOBJS)
-	$(CC) $(CFLAGS) $(HEADERS) $(BOBJS) $(TOBJS) $(LIBS) -o $(TRUNNER)
+	$(CC) $(CFLAGS) $(HEADERS_BONUS) $(BOBJS) $(TOBJS) $(LIBS) -o $(TRUNNER)
 
 $(TOBJS): %.o: %.c
-	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+	$(CC) $(CFLAGS) $(HEADERS_BONUS) -c $< -o $@

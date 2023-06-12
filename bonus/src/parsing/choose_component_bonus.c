@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 16:21:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:05:13 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ static void	choose_component_part4(t_scene **scene, char *line)
 	else if (ft_strncmp(line, "cy ", 2) == 0)
 	{	
 		if (init_obj(line, &(*scene)->obj_list, cylinder) == 1)
+		{
+			add_obj_error(scene);
+			return ;
+		}
+	}
+	else if (ft_strncmp(line, "tr ", 2) == 0)
+	{
+		if (init_obj(line, &(*scene)->obj_list, triangle) == 1)
 		{
 			add_obj_error(scene);
 			return ;

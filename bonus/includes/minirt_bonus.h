@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 09:07:08 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:40:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include "cylinder_bonus.h"
 # include "plane_bonus.h"
 # include "ellipsoid_bonus.h"
+# include "triangle.h"
 # include "scene_bonus.h"
 
 typedef struct s_data {
@@ -121,6 +122,10 @@ void			free_cylinder(t_cylinder **cylinder);
 
 t_ellipsoid		*init_ellipsoid(char *str);
 void			free_ellipsoid(t_ellipsoid **cylinder);
+
+/*	triangle_bonus.c */
+void			free_triangle(t_triangle **triangle_ptr);
+t_triangle		*init_triangle(char	*input);
 
 /*	structs_utils.c	*/
 
@@ -252,6 +257,9 @@ double			cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 /*	cylinder_calculations2.c	*/
 double			min_cyl(double t_1, double t_2, double t_3, double t_4);
+
+/* triangle_calculations_bonus.c */
+double			triangle_hit(t_triangle *triangle, t_vector ray);
 
 /*	cylinder_ellipsoid.c 	*/
 
