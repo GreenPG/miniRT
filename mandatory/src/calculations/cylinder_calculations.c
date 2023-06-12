@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:19:54 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:23:50 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	*body_hit(t_vector ray, t_vector rayo,
 	double	c;
 
 	a = ray.x * ray.x + ray.z * ray.z;
-	b = 2 * (rayo.x * ray.x + rayo.z * ray.z);
+	b = rayo.x * ray.x + rayo.z * ray.z;
 	c = rayo.x * rayo.x + rayo.z * rayo.z
 		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
 	return (cyl_quadratic(a, b, c));
@@ -73,23 +73,21 @@ double	*between_caps(double *root, t_vector rayo,
 	return (root);
 }
 
-double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
+static double	cylinder_distance(t_cylinder *cylinder, t_vector ray,
+	t_cyl_calc	data)
 {
 	double		*root;
 	double		*caps;
 	double		distance;
-	t_vector	rayo;
 
-	ray = transform_ray(ray, cylinder);
-	rayo = transform_rayo(ray, cylinder);
-	root = body_hit(ray, rayo, cylinder);
-	caps = caps_hit(ray, rayo, cylinder);
+	root = body_hit(ray, data.rayo, cylinder);
+	caps = caps_hit(ray, data.rayo, cylinder);
 	if (!root || !caps)
 	{
 		free_cyl_roots(root, caps);
 		return (INFINITY);
 	}
-	root = between_caps(root, rayo, ray, cylinder);
+	root = between_caps(root, data.rayo, ray, cylinder);
 	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
 		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
 			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
@@ -97,4 +95,24 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 	distance = min_cyl(root[0], root[1], caps[0], caps[1]);
 	free_cyl_roots(root, caps);
 	return (distance);
+}
+
+double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
+{
+	t_cyl_calc	data;
+
+	data.front.x = 0;
+	data.front.y = 1;
+	data.front.z = 0;
+	data.cross = vector_cross(*cylinder->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*cylinder->direction, data.front)
+			/ (sqrt(dot_product(*cylinder->direction, *cylinder->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	data.rayo.x = -cylinder->origin->x;
+	data.rayo.y = -cylinder->origin->y;
+	data.rayo.z = -cylinder->origin->z;
+	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	return (cylinder_distance(cylinder, ray, data));
 }

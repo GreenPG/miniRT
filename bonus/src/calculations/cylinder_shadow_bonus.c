@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:44:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:25:26 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,31 @@ static t_vector	get_normal_dir(t_cylinder *cylinder, t_vector normal_o)
 
 static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 {
-	t_normal	normal;
-	t_vector	rayo;
+	t_cyl_calc	data;
 
-	ray = transform_ray(ray, cylinder);
-	rayo = transform_rayo(ray, cylinder);
-	normal.origin.x = distance * ray.x + rayo.x;
-	normal.origin.y = distance * ray.y + rayo.y;
-	normal.origin.z = distance * ray.z + rayo.z;
-	normal.dir = get_normal_dir(cylinder, normal.origin);
-	normal.origin = revert_transform(normal.origin, cylinder);
-	normal.origin.x += cylinder->origin->x;
-	normal.origin.y += cylinder->origin->y;
-	normal.origin.z += cylinder->origin->z;
-	normal.dir = revert_transform(normal.dir, cylinder);
-	return (normal);
+	data.front.x = 0;
+	data.front.y = 1;
+	data.front.z = 0;
+	data.cross = vector_cross(*cylinder->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*cylinder->direction, data.front)
+			/ (sqrt(dot_product(*cylinder->direction, *cylinder->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	data.rayo.x = -cylinder->origin->x;
+	data.rayo.y = -cylinder->origin->y;
+	data.rayo.z = -cylinder->origin->z;
+	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	data.normal.origin.x = distance * ray.x + data.rayo.x;
+	data.normal.origin.y = distance * ray.y + data.rayo.y;
+	data.normal.origin.z = distance * ray.z + data.rayo.z;
+	data.normal.dir = get_normal_dir(cylinder, data.normal.origin);
+	rotate_around_axis(&data.normal.origin, data.cross, data.angle);
+	data.normal.origin.x += cylinder->origin->x;
+	data.normal.origin.y += cylinder->origin->y;
+	data.normal.origin.z += cylinder->origin->z;
+	rotate_around_axis(&data.normal.dir, data.cross, data.angle);
+	return (data.normal);
 }
 
 static t_normal	normal_caps(t_cylinder *cylinder, t_vector ray, double distance)

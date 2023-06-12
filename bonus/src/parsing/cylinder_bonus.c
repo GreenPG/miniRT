@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 10:09:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:29:55 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static int	check_cylinder(char *str)
 
 static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
 {
-	cylinder->alpha = get_alpha(*cylinder->direction);
-	cylinder->beta = get_beta(*cylinder->direction);
 	cylinder->hit_body = false;
 	pass_to_next_element(str, &i);
 	cylinder->pattern = plain;
@@ -118,6 +116,7 @@ t_cylinder	*init_cylinder(char *str)
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
 	cylinder->direction = init_vector(str + i);
+	vector_norm(cylinder->direction);
 	if (!cylinder->origin || cylinder->direction->x < -1.0
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z

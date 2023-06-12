@@ -16,14 +16,21 @@ void	ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle)
 {
 	vector_rot_y(ellipsoid->origin, angle);
 	vector_rot_y(ellipsoid->direction, angle);
-	ellipsoid->alpha -= angle;
+	vector_norm(ellipsoid->direction);
 }
 
 void	ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle)
 {
 	vector_rot_x(ellipsoid->origin, angle);
 	vector_rot_x(ellipsoid->direction, angle);
-	ellipsoid->alpha -= angle;
+	vector_norm(ellipsoid->direction);
+}
+
+void	ellipsoid_rot_z(t_ellipsoid *ellipsoid, double angle)
+{
+	vector_rot_z(ellipsoid->origin, angle);
+	vector_rot_z(ellipsoid->direction, angle);
+	vector_norm(ellipsoid->direction);
 }
 
 void	ellipsoid_translate(t_ellipsoid *ellipsoid, double x, double y,

@@ -6,14 +6,14 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:49:39 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/02 09:11:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:54:58 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# define WIDTH 500
-# define HEIGHT 300
+# define WIDTH 400
+# define HEIGHT 200
 
 #endif

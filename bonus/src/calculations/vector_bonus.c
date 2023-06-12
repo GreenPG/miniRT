@@ -12,6 +12,16 @@
 
 #include <minirt_bonus.h>
 
+void	vector_norm(t_vector *vec)
+{
+	double	len;
+
+	len = sqrt(dot_product(*vec, *vec));
+	vec->x /= len;
+	vec->y /= len;
+	vec->z /= len;
+}
+
 t_vector	invert_vector(t_vector u)
 {
 	u.x = -u.x;

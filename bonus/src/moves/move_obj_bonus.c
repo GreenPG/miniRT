@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 13:36:03 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:53:43 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,32 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		cylinder_translate(nearest->cylinder, x, y, z);
 	else if (nearest->type == plane)
 		plane_translate(nearest->plane, x, y, z);
-	else if (nearest->type == ellipsoid)
-		ellipsoid_translate(nearest->ellipsoid, x, y, z);
+}
+
+void	rotate_one(t_obj_list *nearest, int x, int y, int z)
+{
+	double	angle;
+
+	if (!nearest)
+		return ;
+	if (x)
+	{
+		angle = 10 * (M_PI / 180) * x;
+		if (nearest->type == cylinder)
+			vector_rot_x(nearest->cylinder->direction, angle);
+	}
+	else if (y)
+	{
+		angle = 10 * (M_PI / 180) * y;
+		if (nearest->type == cylinder)
+			vector_rot_y(nearest->cylinder->direction, angle);
+	}
+	else if (z)
+	{
+		angle = 10 * (M_PI / 180) * z;
+		if (nearest->type == cylinder)
+			vector_rot_z(nearest->cylinder->direction, angle);
+	}
 }
 
 static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
@@ -42,8 +66,6 @@ static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
 			current_distance = cylinder_hit(cursor->cylinder, ray);
 		else if (cursor->type == plane)
 			current_distance = plane_hit(cursor->plane, ray);
-		else if (cursor->type == ellipsoid)
-			current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;

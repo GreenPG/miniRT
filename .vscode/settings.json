@@ -6,7 +6,12 @@
 		"random": "c",
 		"unistd.h": "c",
 		"cmath": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"array": "c",
+		"deque": "c",
+		"vector": "c",
+		"string_view": "c",
+		"ranges": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled",
 	"cmake.configureOnOpen": false

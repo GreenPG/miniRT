@@ -33,8 +33,8 @@ SRCS	=	mandatory/src/main.c	\
 			mandatory/src/calculations/cylinder_shadow.c 	\
 			mandatory/src/calculations/normal.c \
 			mandatory/src/calculations/vector.c \
+			mandatory/src/calculations/quaternions.c \
 			mandatory/src/calculations/shadow.c \
-			mandatory/src/calculations/ray_transforms.c \
 			mandatory/src/render/color.c	\
 			mandatory/src/render/normal_color.c	\
 			mandatory/src/render/hit_functions.c \

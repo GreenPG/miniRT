@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/08 13:38:19 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 09:00:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ t_vector		invert_vector(t_vector u);
 t_vector		vector_cross(t_vector a, t_vector b);
 double			dot_product(const t_vector v, const t_vector u);
 t_vector		*init_vector(char *str);
+void			vector_norm(t_vector *vec);
 
 /*	render.c	*/
 
@@ -144,9 +145,12 @@ int				init_rays(t_scene *scene);
 
 void			vector_rot_x(t_vector *vec, double angle);
 void			vector_rot_y(t_vector *vec, double angle);
+void			vector_rot_z(t_vector *vec, double angle);
 void			rotation_x(t_scene *scene, double angle);
 void			rotation_y(t_scene *scene, double angle);
-void			world_rotate(t_scene *scene, double alpha, double beta);
+void			rotation_z(t_scene *scene, double angle);
+void			cylinder_rot_z(t_cylinder *cylinder, double angle);
+void			world_rotate(t_scene *scene, double alpha, double beta, double theta);
 
 /* 	cylinder_move.c	*/
 void			cylinder_rot_y(t_cylinder *cylinder, double angle);
@@ -157,6 +161,7 @@ void			cylinder_translate(t_cylinder *cylinder, double x, double y,
 /*	plane_move.c	*/
 void			plane_rot_y(t_plane *plane, double angle);
 void			plane_rot_x(t_plane *plane, double angle);
+void			plane_rot_z(t_plane *plane, double angle);
 void			plane_translate(t_plane *plane, double x, double y, double z);
 
 	/*	ellipsoid_move.c	*/
@@ -174,6 +179,7 @@ void			sphere_translate(t_sphere *sphere, double x, double y,
 /*	light_rotation.c	*/
 void			light_rot_x(t_light_list *light_list, double angle);
 void			light_rot_y(t_light_list *light_list, double angle);
+void			light_rot_z(t_light_list *light_list, double angle);
 
 /*	translate.c	*/
 
@@ -221,6 +227,7 @@ void			handle_keypress(mlx_key_data_t keydata, void *ptr);
 void			mouse_handle(mouse_key_t button, action_t action,
 					modifier_key_t mods, void *param);
 void			move_one(t_obj_list *nearest, double x, double y, double z);
+void			rotate_one(t_obj_list *nearest, int x, int y, int z);
 
 /*	shadow.c	*/
 
@@ -280,5 +287,9 @@ t_light_list	*init_light_list(char *line);
 
 int				get_checkerboard(t_obj_list *nearest, t_vector ray,
 					t_normal normal, t_camera *camera);
+
+/*	quaternions.c	*/
+
+void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 
 #endif

@@ -171,7 +171,9 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list 
 			b += get_b(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
 		}
 		light_list = light_list->next;
+		
 		light_cnt++;
+		
 	}
 	r /= light_cnt;
 	g /= light_cnt;

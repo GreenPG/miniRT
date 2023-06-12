@@ -25,7 +25,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/calculations/normal_bonus.c \
 				bonus/src/calculations/vector_bonus.c \
 				bonus/src/calculations/shadow_bonus.c \
-				bonus/src/calculations/ray_transforms_bonus.c \
+				bonus/src/calculations/quaternions_bonus.c \
 				bonus/src/render/color_bonus.c	\
 				bonus/src/render/normal_color_bonus.c	\
 				bonus/src/render/hit_functions_bonus.c \
@@ -51,7 +51,7 @@ OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 	@$(CC) $(DFLAGS) -o ./obj/$@ -c $< $(HEADERS_BONUS)
 
 bonus: libmlx libft $(OBJS_BONUS)
-	@$(CC) $(addprefix ./obj/,$(OBJS_BONUS)) $(LIBS) $(HEADERS_BONUS) -o minirt_bonus
+	@$(CC) $(addprefix ./obj/,$(OBJS_BONUS)) $(LIBS) $(HEADERS_BONUS) -o miniRT_bonus
 
 clean_bonus:
 	@rm -rf $(LIBMLX)/build
@@ -59,7 +59,7 @@ clean_bonus:
 	@rm -f $(addprefix ./obj/,$(OBJS_BONUS))
 
 fclean_bonus: clean_bonus
-	@rm -f minirt_bonus
+	@rm -f miniRT_bonus
 
 re_bonus: clean_bonus bonus 
 

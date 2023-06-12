@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 16:34:47 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 08:56:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 	ellipsoid->pattern = plain;
 	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
 		ellipsoid->pattern = checkerboard;
-	ellipsoid = init_ellipsoid_part3(ellipsoid);
 	return (ellipsoid);
 }
 
@@ -128,6 +127,7 @@ t_ellipsoid	*init_ellipsoid(char *str)
 	ellipsoid->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
 	ellipsoid->direction = init_vector(str + i);
+	vector_norm(ellipsoid->direction);
 	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
 		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
 		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
