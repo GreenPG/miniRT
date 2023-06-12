@@ -12,6 +12,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/parsing/obj_bonus.c \
 				bonus/src/parsing/obj_utils_bonus.c \
 				bonus/src/parsing/parsing_bonus.c \
+				bonus/src/parsing/frame_init_bonus.c \
 				bonus/src/parsing/parsing_utils_bonus.c \
 				bonus/src/parsing/plane_bonus.c	\
 				bonus/src/parsing/sphere_bonus.c 	\

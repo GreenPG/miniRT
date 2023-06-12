@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/11 11:06:56 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:15:39 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,5 +290,9 @@ int			get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *
 /*	quaternions.c	*/
 
 void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
+
+/*	frame_init.c	*/
+
+t_frame		*frame_init(void);
 
 #endif

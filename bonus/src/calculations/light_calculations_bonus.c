@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/05 17:32:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:14:51 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 {
 	double			diffuse_ratio;
 	t_vector		light_dir;
-	int				light_cnt;
 	int				r;
 	int				g;
 	int				b;
@@ -91,7 +90,6 @@ int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 	r = 0;
 	g = 0;
 	b = 0;
-	light_cnt = 1;
 	light_list = scene->light_list;
 	while (light_list)
 	{
@@ -107,11 +105,13 @@ int	get_diffuse_ratio(t_scene *scene, t_normal normal, t_vector ray)
 		}
 		light_list = light_list->next;
 		
-		light_cnt++;
 		
 	}
-	r /= light_cnt;
- 	g /= light_cnt;
- 	b /= light_cnt;
+	if (r > 255)
+		r = 255;
+	if (g > 255)
+		g = 255;
+	if (b > 255)
+		b = 255;
 	return (get_rgba(r, g, b, 255));
 }
