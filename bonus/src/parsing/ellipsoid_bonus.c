@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/12 08:56:50 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 09:02:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,6 @@ static int	check_ellipsoid(char *str)
 	if (str[i] != '\0')
 		return (1);
 	return (0);
-}
-
-static	t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid)
-{
-	ellipsoid->alpha = get_alpha(*ellipsoid->direction);
-	ellipsoid->beta = get_beta(*ellipsoid->direction);
-	return (ellipsoid);
 }
 
 static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,

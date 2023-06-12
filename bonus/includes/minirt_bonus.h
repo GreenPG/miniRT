@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 09:00:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/12 09:07:08 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,14 @@ void			plane_translate(t_plane *plane, double x, double y, double z);
 	/*	ellipsoid_move.c	*/
 void			ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle);
 void			ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle);
+void			ellipsoid_rot_z(t_ellipsoid *ellipsoid, double angle);
 void			ellipsoid_translate(t_ellipsoid *ellipsoid, double x,
 					double y, double z);
 
 	/*	sphere_move.c	*/
 void			sphere_rot_y(t_sphere *sphere, double angle);
 void			sphere_rot_x(t_sphere *sphere, double angle);
+void			sphere_rot_z(t_sphere *sphere, double angle);
 void			sphere_translate(t_sphere *sphere, double x, double y,
 					double z);
 
