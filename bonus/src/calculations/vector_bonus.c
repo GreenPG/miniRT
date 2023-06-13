@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/19 08:57:28 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/12 17:05:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:38:29 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vector	vector_cross(t_vector a, t_vector b)
 	t_vector	result;
 
 	result.x = (a.y * b.z) - (a.z * b.y);
-	result.y = (a.x * b.z) + (a.z * b.x);
+	result.y = (a.x * b.z) - (a.z * b.x);
 	result.z = (a.x * b.y) - (a.y * b.x);
 	return (result);
 }

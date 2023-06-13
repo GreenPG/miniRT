@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/05 15:23:39 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/08 16:04:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:24:35 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	world_translate(t_scene *scene, double x, double y, double z)
 			cylinder_translate(cursor->cylinder, x, y, z);
 		if (cursor->type == ellipsoid)
 			ellipsoid_translate(cursor->ellipsoid, x, y, z);
+		if (cursor->type == triangle)
+			triangle_translate(cursor->triangle, x, y, z);
 		cursor = cursor->next;
 	}
 }

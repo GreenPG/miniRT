@@ -6,14 +6,14 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 17:30:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:57:55 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
 double	sphere_shadow(t_sphere *sphere, t_normal normal,
-			t_vector light_dir)
+		t_vector light_dir)
 {
 	t_vector	oc;
 	double		a;
@@ -54,7 +54,7 @@ double	plane_shadow(t_plane *plane, t_vector light_dir,
 }
 
 static double	cylinder_distance_shad(t_cylinder *cylinder, t_vector ray,
-	t_cyl_calc	data)
+		t_cyl_calc	data)
 {
 	double		*root;
 	double		*caps;
@@ -69,8 +69,8 @@ static double	cylinder_distance_shad(t_cylinder *cylinder, t_vector ray,
 	}
 	root = between_caps(root, data.rayo, ray, cylinder);
 	if (min_cyl(root[0], root[1], caps[0], caps[1]) != INFINITY
-		&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
-			|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
+			&& (min_cyl(root[0], root[1], caps[0], caps[1]) == root[0]
+				|| min_cyl(root[0], root[1], caps[0], caps[1]) == root[1]))
 		cylinder->hit_body = true;
 	distance = min_cyl(root[0], root[1], caps[0], caps[1]);
 	free_cyl_roots(root, caps);
@@ -98,6 +98,44 @@ double	cylinder_shadow(t_cylinder *cylinder, t_normal normal,
 	return (cylinder_distance_shad(cylinder, light_dir, data));
 }
 
+static bool is_inside_triangle_shadow(t_triangle *triangle, t_vector light_dir, double distance, t_vector origin)
+{
+	t_vector	intersect;
+
+	intersect.x = origin.x + distance * light_dir.x;
+	intersect.y = origin.y + distance * light_dir.y;
+	intersect.z = origin.z + distance * light_dir.z;
+	if (dot_product(*triangle->normal, light_dir) > 0)
+	{
+		if (is_in_front_of_edge_ff(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
+				|| is_in_front_of_edge_ff(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
+				|| is_in_front_of_edge_ff(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
+			return (false);
+	}
+	else
+	{
+		if (is_in_front_of_edge_bf(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
+				|| is_in_front_of_edge_bf(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
+				|| is_in_front_of_edge_bf(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
+			return (false);
+	}
+	return (true);
+}
+
+double triangle_shadow(t_triangle *triangle, t_normal normal, t_vector light_dir)
+{
+	double		distance;
+
+	if (dot_product(light_dir, *triangle->normal) > 0)
+		*triangle->normal = invert_vector(*triangle->normal);
+	distance = distance_to_plane(triangle, light_dir);
+	if (distance == INFINITY)
+		return (distance);
+	if (is_inside_triangle_shadow(triangle, light_dir, distance, normal.origin))
+		return (INFINITY);
+	return (distance);
+} 
+
 double	get_shadow_distance(t_obj_list *cursor, t_normal normal,
 		t_vector light_dir)
 {
@@ -111,5 +149,7 @@ double	get_shadow_distance(t_obj_list *cursor, t_normal normal,
 		distance = cylinder_shadow(cursor->cylinder, normal, light_dir);
 	if (cursor->type == ellipsoid)
 		distance = ellipsoid_shadow(cursor->ellipsoid, normal, light_dir);
+	if (cursor->type == triangle)
+		distance = triangle_shadow(cursor->triangle, normal, light_dir);
 	return (distance);
 }

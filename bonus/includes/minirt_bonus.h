@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 15:40:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:56:15 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include "cylinder_bonus.h"
 # include "plane_bonus.h"
 # include "ellipsoid_bonus.h"
-# include "triangle.h"
+# include "triangle_bonus.h"
 # include "scene_bonus.h"
 
 typedef struct s_data {
@@ -183,6 +183,13 @@ void			sphere_rot_z(t_sphere *sphere, double angle);
 void			sphere_translate(t_sphere *sphere, double x, double y,
 					double z);
 
+/*	triangle_move.c	*/
+void			triangle_rot_y(t_triangle *triangle, double angle);
+void			triangle_rot_z(t_triangle *triangle, double angle);
+void			triangle_rot_x(t_triangle *triangle, double angle);
+void			triangle_translate(t_triangle *triangle, double x,
+					double y, double z);
+
 /*	light_rotation.c	*/
 void			light_rot_x(t_light_list *light_list, double angle);
 void			light_rot_y(t_light_list *light_list, double angle);
@@ -259,6 +266,11 @@ double			cylinder_hit(t_cylinder *cylinder, t_vector ray);
 double			min_cyl(double t_1, double t_2, double t_3, double t_4);
 
 /* triangle_calculations_bonus.c */
+bool			is_in_front_of_edge_bf(t_vector a, t_vector b, t_vector intersect,
+					t_vector normal);
+bool			is_in_front_of_edge_ff(t_vector a, t_vector b, t_vector intersect,
+					t_vector normal);
+double			distance_to_plane(t_triangle *triangle, t_vector ray);
 double			triangle_hit(t_triangle *triangle, t_vector ray);
 
 /*	cylinder_ellipsoid.c 	*/

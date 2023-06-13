@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/12 11:06:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:39:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_vector	*get_triangle_normal(t_vector *a, t_vector *b, t_vector *c)
 	t_vector	*normal;
 	t_vector	ab;
 	t_vector	ac;
-
+	
 	if (!a || !b || !c)
 		return (NULL);
 	normal = malloc(sizeof(t_vector));
@@ -87,6 +87,7 @@ t_vector	*get_triangle_normal(t_vector *a, t_vector *b, t_vector *c)
 	ac.y = c->y - a->y;
 	ac.z = c->z - a->z;
 	*normal = vector_cross(ab, ac);
+	vector_norm(normal);
 	return (normal);
 }
 

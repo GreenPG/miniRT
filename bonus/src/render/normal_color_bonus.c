@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 16:17:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:51:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal,
 		color = normalized_color(nearest->cylinder->color, normal.dir, ray);
 	if (nearest->type == ellipsoid)
 		color = normalized_color(nearest->ellipsoid->color, normal.dir, ray);
+	if (nearest->type == triangle)
+		color = normalized_color(nearest->triangle->color, normal.dir, ray);
 	return (color);
 }

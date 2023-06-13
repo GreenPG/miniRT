@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/01 09:59:40 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/12 09:04:59 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:25:46 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	rotation_x(t_scene *scene, double angle)
 		if (cursor->type == cylinder)
 			cylinder_rot_x(cursor->cylinder, angle);
 		if (cursor->type == ellipsoid)
-			ellipsoid_rot_z(cursor->ellipsoid, angle);
+			ellipsoid_rot_y(cursor->ellipsoid, angle);
+		if (cursor->type == triangle)
+			triangle_rot_y(cursor->triangle, angle);
 		cursor = cursor->next;
 	}
 }
@@ -67,7 +69,9 @@ void	rotation_y(t_scene *scene, double angle)
 		if (cursor->type == cylinder)
 			cylinder_rot_y(cursor->cylinder, angle);
 		if (cursor->type == ellipsoid)
-			ellipsoid_rot_z(cursor->ellipsoid, angle);
+			ellipsoid_rot_y(cursor->ellipsoid, angle);
+		if (cursor->type == triangle)
+			triangle_rot_y(cursor->triangle, angle);
 		cursor = cursor->next;
 	}
 }
@@ -98,6 +102,8 @@ void	rotation_z(t_scene *scene, double angle)
 			cylinder_rot_z(cursor->cylinder, angle);
 		if (cursor->type == ellipsoid)
 			ellipsoid_rot_z(cursor->ellipsoid, angle);
+		if (cursor->type == triangle)
+			triangle_rot_z(cursor->triangle, angle);
 		cursor = cursor->next;
 	}
 }
