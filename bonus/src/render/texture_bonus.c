@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 15:41:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:32:32 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,33 @@ static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere)
 	int		r;
 	int		g;
 	int		b;
+	
+	t_vector	tmp;
+
+	tmp.x = sphere->up->x;
+	tmp.y = sphere->up->y;
+	tmp.z = sphere->up->z;
+	t_cyl_calc	data;
+
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*sphere->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*sphere->direction, data.front)
+			/ (sqrt(dot_product(*sphere->direction, *sphere->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, data.angle);
 	
 	alpha = atan2(vec.y, vec.x);
 	beta = acos(vec.z);
@@ -92,6 +119,32 @@ int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, t_camera *camera)
 	int		g;
 	int		b;
 	
+	t_vector	tmp;
+
+	tmp.x = ellipsoid->up->x;
+	tmp.y = ellipsoid->up->y;
+	tmp.z = ellipsoid->up->z;
+	t_cyl_calc	data;
+
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*ellipsoid->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, data.angle);
 	alpha = atan2(vec.y, vec.x);
 	beta = acos(vec.z);
 	int x;

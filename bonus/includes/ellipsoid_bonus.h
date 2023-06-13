@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:14:07 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 10:10:58 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:24:19 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ typedef struct s_ellipsoid	t_ellipsoid;
 struct	s_ellipsoid {
 	t_vector		*origin;
 	t_vector		*direction;
+	t_vector		*up;
 	double			a;
 	double			b;
 	double			c;
 	int				color;
 	int				pattern;
 	mlx_texture_t	*tex;
-	t_frame			*frame;
 };
 
 #endif

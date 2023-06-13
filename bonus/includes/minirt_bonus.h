@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 10:15:39 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:20:19 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,6 @@ void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 
 /*	frame_init.c	*/
 
-t_frame		*frame_init(void);
+t_frame		*frame_init(t_vector *dir);
 
 #endif

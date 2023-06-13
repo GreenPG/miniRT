@@ -16,12 +16,7 @@ void	ellipsoid_rot_y(t_ellipsoid *ellipsoid, double angle)
 {
 	vector_rot_y(ellipsoid->origin, angle);
 	vector_rot_y(ellipsoid->direction, angle);
-	vector_rot_y(&ellipsoid->frame->i, -angle);
-	vector_rot_y(&ellipsoid->frame->j, -angle);
-	vector_rot_y(&ellipsoid->frame->k, -angle);
-	vector_norm(&ellipsoid->frame->i);
-	vector_norm(&ellipsoid->frame->j);
-	vector_norm(&ellipsoid->frame->k);
+	vector_rot_y(ellipsoid->up, angle);
 	vector_norm(ellipsoid->direction);
 }
 
@@ -29,12 +24,7 @@ void	ellipsoid_rot_x(t_ellipsoid *ellipsoid, double angle)
 {
 	vector_rot_x(ellipsoid->origin, angle);
 	vector_rot_x(ellipsoid->direction, angle);
-	vector_rot_x(&ellipsoid->frame->i, -angle);
-	vector_rot_x(&ellipsoid->frame->j, -angle);
-	vector_rot_x(&ellipsoid->frame->k, -angle);
-	vector_norm(&ellipsoid->frame->i);
-	vector_norm(&ellipsoid->frame->j);
-	vector_norm(&ellipsoid->frame->k);
+	vector_rot_x(ellipsoid->up, angle);
 	vector_norm(ellipsoid->direction);
 }
 
@@ -42,12 +32,7 @@ void	ellipsoid_rot_z(t_ellipsoid *ellipsoid, double angle)
 {
 	vector_rot_z(ellipsoid->origin, angle);
 	vector_rot_z(ellipsoid->direction, angle);
-	vector_rot_z(&ellipsoid->frame->i, -angle);
-	vector_rot_z(&ellipsoid->frame->j, -angle);
-	vector_rot_z(&ellipsoid->frame->k, -angle);
-	vector_norm(&ellipsoid->frame->i);
-	vector_norm(&ellipsoid->frame->j);
-	vector_norm(&ellipsoid->frame->k);
+	vector_rot_z(ellipsoid->up, angle);
 	vector_norm(ellipsoid->direction);
 }
 

@@ -60,8 +60,8 @@ static int	sky_color(t_scene *scene, t_vector ray)
 {
 	double	t;
 
-	ray = ray_to_world(scene->world_base, ray);
-	t = sin(ray.z);
+	//ray = ray_to_world(scene->world_base, ray);
+	t = sin(ray.z + scene->camera->beta * (M_PI / 180));
 	if (t > 0)
 		return (get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t
 					* 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t

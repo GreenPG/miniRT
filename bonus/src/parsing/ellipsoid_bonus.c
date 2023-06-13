@@ -20,8 +20,6 @@ void	free_ellipsoid(t_ellipsoid **ellipsoid)
 		free((*ellipsoid)->origin);
 	if ((*ellipsoid)->direction)
 		free((*ellipsoid)->direction);
-	if ((*ellipsoid)->frame)
-		free((*ellipsoid)->frame);
 	free(*ellipsoid);
 	*ellipsoid = NULL;
 	return ;
@@ -86,7 +84,13 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid, char *str, int 
 		if (!ellipsoid->tex)
 			ellipsoid->pattern = plain;
 	}
-	ellipsoid->frame = frame_init();
+	ellipsoid->up = malloc(sizeof(t_vector));
+	ellipsoid->up->x = 0;
+	ellipsoid->up->y = 0;
+	ellipsoid->up->z = 1;
+	ellipsoid->direction->x = 0;
+	ellipsoid->direction->y = 1;
+	ellipsoid->direction->z = 0;
 	return (ellipsoid);
 }
 
