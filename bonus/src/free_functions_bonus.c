@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 17:03:36 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:32:15 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_obj_list(t_obj_list **list)
 			free_cylinder(&(*list)->cylinder);
 		if ((*list)->type == ellipsoid)
 			free_ellipsoid(&(*list)->ellipsoid);
+		if ((*list)->type == triangle)
+			free_triangle(&(*list)->triangle);
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp);

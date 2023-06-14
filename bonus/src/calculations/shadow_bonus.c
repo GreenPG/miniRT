@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:24:35 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 10:26:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:27:16 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,15 @@ static bool is_inside_triangle_shadow(t_triangle *triangle, t_vector light_dir, 
 	intersect.y = origin.y + distance * light_dir.y;
 	intersect.z = origin.z + distance * light_dir.z;
 	if (is_in_front_of_edge_ff(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
-			|| is_in_front_of_edge_ff(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
-			|| is_in_front_of_edge_ff(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
-		return (false);
-	return (true);
+			&& is_in_front_of_edge_ff(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
+			&& is_in_front_of_edge_ff(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
+		return (true);
+	if (is_in_front_of_edge_ff(*triangle->a, *triangle->b, intersect, *triangle->normal) == true
+			&& is_in_front_of_edge_ff(*triangle->b, *triangle->c, intersect, *triangle->normal) == true
+			&& is_in_front_of_edge_ff(*triangle->c, *triangle->a, intersect, *triangle->normal) == true)
+		return (true);
+	return (false);
+
 }
 
 static double	distance_to_plane_shadow(t_triangle *triangle, t_vector light_dir, t_normal normal)
