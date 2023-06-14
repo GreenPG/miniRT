@@ -28,7 +28,7 @@ void	rotation_x(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_x(scene->light_list, angle);
-	world_rot_x(scene->world_base, angle);
+	world_rot_x(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -60,7 +60,7 @@ void	rotation_y(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_y(scene->light_list, angle);
-	world_rot_y(scene->world_base, angle);
+	world_rot_y(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -91,7 +91,7 @@ void	rotation_z(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_z(scene->light_list, angle);
-	world_rot_z(scene->world_base, angle);
+	world_rot_z(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)

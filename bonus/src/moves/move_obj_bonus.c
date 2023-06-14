@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/10 09:49:32 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:43:57 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,73 @@ void	rotate_one(t_obj_list *nearest, int x, int y, int z)
 	{
 		angle = 10 * (M_PI / 180) * x;
 		if (nearest->type == cylinder)
+		{
 			vector_rot_x(nearest->cylinder->direction, angle);
+			vector_rot_x(nearest->cylinder->up, angle);
+		}
 		if (nearest->type == plane)
+		{
 			vector_rot_x(nearest->plane->direction, angle);
+			vector_rot_x(nearest->plane->up, angle);
+		}
 		if (nearest->type == ellipsoid)
+		{
 			vector_rot_x(nearest->ellipsoid->direction, angle);
+			vector_rot_x(nearest->ellipsoid->up, angle);
+		}
+		if (nearest->type == sphere)
+		{
+			vector_rot_x(nearest->sphere->direction, angle);
+			vector_rot_x(nearest->sphere->up, angle);
+		}
 	}
 	else if (y)
 	{
 		angle = 10 * (M_PI / 180) * y;
 		if (nearest->type == cylinder)
+		{
 			vector_rot_y(nearest->cylinder->direction, angle);
+			vector_rot_y(nearest->cylinder->up, angle);
+		}
 		if (nearest->type == plane)
+		{
 			vector_rot_y(nearest->plane->direction, angle);
+			vector_rot_y(nearest->plane->up, angle);
+		}
 		if (nearest->type == ellipsoid)
+		{
 			vector_rot_y(nearest->ellipsoid->direction, angle);
+			vector_rot_y(nearest->ellipsoid->up, angle);
+		}
+		if (nearest->type == sphere)
+		{
+			vector_rot_y(nearest->sphere->direction, angle);
+			vector_rot_y(nearest->sphere->up, angle);
+		}
 	}
 	else if (z)
 	{
 		angle = 10 * (M_PI / 180) * z;
 		if (nearest->type == cylinder)
+		{
 			vector_rot_z(nearest->cylinder->direction, angle);
+			vector_rot_z(nearest->cylinder->up, angle);
+		}
 		if (nearest->type == plane)
+		{
 			vector_rot_z(nearest->plane->direction, angle);
+			vector_rot_z(nearest->plane->up, angle);
+		}
 		if (nearest->type == ellipsoid)
+		{
 			vector_rot_z(nearest->ellipsoid->direction, angle);
+			vector_rot_z(nearest->ellipsoid->up, angle);
+		}
+		if (nearest->type == sphere)
+		{
+			vector_rot_z(nearest->sphere->direction, angle);
+			vector_rot_z(nearest->sphere->up, angle);
+		}
 	}
 }
 

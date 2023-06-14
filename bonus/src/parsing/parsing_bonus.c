@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/10 11:52:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:14:12 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,18 @@ static void	finish_gnl(int fd)
 	}
 }
 
-static t_vector	*init_world_coord(void)
-{
-	t_vector	*vec;
-
-	vec = malloc(3 * sizeof(t_vector));
-	if (!vec)
-		return (NULL);
-	vec[0].x = 1;	
-	vec[0].y = 0;
-	vec[0].z = 0;
-	vec[1].x = 0;
-	vec[1].y = 1;
-	vec[1].z = 0;
-	vec[2].x = 0;
-	vec[2].y = 0;
-	vec[2].z = 1;	
-	return(vec);
-}
-
 static t_scene	*fill_scene(t_scene *scene, int fd)
 {
 	char	*line;
 
-	scene->world_base = init_world_coord();
-	if (!scene->world_base)
-		return(NULL);
+	scene->up = malloc(sizeof(t_vector));
+	scene->up->x = 0;
+	scene->up->y = 0;
+	scene->up->z = 1;
+	scene->direction = malloc(sizeof(t_vector));
+	scene->direction->x = 0;
+	scene->direction->y = 1;
+	scene->direction->z = 0;
 	line = get_next_line(fd);
 	while (line)
 	{

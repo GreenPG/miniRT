@@ -45,23 +45,37 @@ static int	get_final_color(int color, int diffuse_color, t_scene *scene)
 	return (get_rgba(r, g, b, 255));
 }
 
-t_vector	ray_to_world(t_vector *base, t_vector ray)
-{
-	t_vector world_ray;
-
-	world_ray.x = base[0].x * ray.x + base[1].x * ray.y + base[2].x * ray.z;
-	world_ray.y = base[0].y * ray.x + base[1].y * ray.y + base[2].y * ray.z;
-	world_ray.z = base[0].z * ray.x + base[1].z * ray.y + base[2].z * ray.z;
-	vector_norm(&world_ray);
-	return(world_ray);
-}
-
 static int	sky_color(t_scene *scene, t_vector ray)
 {
 	double	t;
 
-	//ray = ray_to_world(scene->world_base, ray);
-	t = sin(ray.z + scene->camera->beta * (M_PI / 180));
+	t_vector	tmp;
+
+	tmp.x = scene->up->x;
+	tmp.y = scene->up->y;
+	tmp.z = scene->up->z;
+	t_cyl_calc	data;
+
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*scene->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*scene->direction, data.front)
+			/ (sqrt(dot_product(*scene->direction, *scene->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, data.angle);
+	t = sin(ray.z);
 	if (t > 0)
 		return (get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t
 					* 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t

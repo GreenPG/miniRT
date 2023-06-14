@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:17:57 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/11 12:44:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:39:27 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_cyl_calc	t_cyl_calc;
 struct s_cylinder	{
 	t_vector	*origin;
 	t_vector	*direction;
+	t_vector	*up;
 	float		diameter;
 	float		height;
 	int			color;

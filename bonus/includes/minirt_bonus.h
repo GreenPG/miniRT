@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/13 09:20:19 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:12:48 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,9 @@ void			world_rotate(t_scene *scene, double alpha, double beta, double theta);
 
 /* 	world_move.c	*/
 
-void			world_rot_x(t_vector *world_base, double angle);
-void			world_rot_y(t_vector *world_base, double angle);
-void			world_rot_z(t_vector *world_base, double angle);
+void			world_rot_x(t_scene *scene, double angle);
+void			world_rot_y(t_scene *scene, double angle);
+void			world_rot_z(t_scene *scene, double angle);
 
 /* 	cylinder_move.c	*/
 

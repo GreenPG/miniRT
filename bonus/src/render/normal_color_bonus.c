@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/11 10:56:53 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:31:53 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal, t_camer
 	if (nearest->pattern == checkerboard)
 	{
 		color = get_checkerboard(nearest, ray, normal, camera);
-		return (color);
+		return (normalized_color(color, normal.dir, ray));
 	}
 	if (nearest->pattern == texture)
 	{
 		color = get_texture(nearest, ray, normal, camera);
-		return (color);
+		return (normalized_color(color, normal.dir, ray));
 	}
 	if (nearest->type == sphere)
 		color = normalized_color(nearest->sphere->color, normal.dir, ray);

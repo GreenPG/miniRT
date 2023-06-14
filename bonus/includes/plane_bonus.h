@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:09:09 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/11 12:50:27 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:38:44 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_plane	t_plane;
 struct s_plane {
 	t_vector	*origin;
 	t_vector	*direction;
+	t_vector	*up;
 	int			colors;
 	int			pattern;
 	mlx_texture_t	*tex;
