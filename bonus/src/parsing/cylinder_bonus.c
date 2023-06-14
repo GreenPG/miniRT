@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 18:29:55 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:40:42 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,23 @@ static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
 {
 	cylinder->hit_body = false;
 	pass_to_next_element(str, &i);
-	cylinder->pattern = plain;
 	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
 		cylinder->pattern = checkerboard;
+	else
+	{
+		cylinder->pattern = texture;
+		cylinder->tex = mlx_load_png(&str[i]);
+		if (!cylinder->tex)
+			cylinder->pattern = plain;
+	}
+	cylinder->up = malloc(sizeof(t_vector));
+	cylinder->up->x = 0;
+	cylinder->up->y = 0;
+	cylinder->up->z = 1;
+	cylinder->direction = malloc(sizeof(t_vector));
+	cylinder->direction->x = 0;
+	cylinder->direction->y = 1;
+	cylinder->direction->z = 0;
 	return (cylinder);
 }
 

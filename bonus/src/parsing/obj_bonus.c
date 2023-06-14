@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/12 15:53:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:08:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	sphere_obj(t_obj_list *obj, char *line)
 	obj->sphere = init_sphere(line);
 	obj->ellipsoid = NULL;
 	obj->triangle = NULL;
-	obj->pattern = obj->sphere->pattern;
 	if (!obj->sphere)
 	{
 		free(obj);
 		return (1);
 	}
+	obj->pattern = obj->sphere->pattern;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/12 11:13:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:00:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minirt_bonus.h"
 
 typedef enum e_type {sphere, plane, cylinder, ellipsoid, triangle}	t_type;
-typedef enum e_pattern {plain, checkerboard}	t_pattern;
+typedef enum e_pattern {plain, checkerboard, texture}	t_pattern;
 
 typedef struct s_vector		t_vector;
 typedef struct s_obj_list	t_obj_list;
@@ -27,6 +27,7 @@ typedef struct s_ellipsoid	t_ellipsoid;
 typedef struct s_normal		t_normal;
 typedef struct s_triangle	t_triangle;
 typedef struct s_quaternion	t_quaternion;
+typedef struct s_frame		t_frame;
 
 struct	s_vector {
 	double	x;
@@ -59,6 +60,12 @@ struct	s_obj_list {
 struct	s_normal {
 	t_vector	origin;
 	t_vector	dir;
+};
+
+struct s_frame {
+	t_vector	i;
+	t_vector	j;
+	t_vector	k;
 };
 
 #endif

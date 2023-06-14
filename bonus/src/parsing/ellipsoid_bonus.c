@@ -98,9 +98,22 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 	ellipsoid->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
 	pass_to_next_element(str, &i);
-	ellipsoid->pattern = plain;
 	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
 		ellipsoid->pattern = checkerboard;
+	else
+	{
+		ellipsoid->pattern = texture;
+		ellipsoid->tex = mlx_load_png(&str[i]);
+		if (!ellipsoid->tex)
+			ellipsoid->pattern = plain;
+	}
+	ellipsoid->up = malloc(sizeof(t_vector));
+	ellipsoid->up->x = 0;
+	ellipsoid->up->y = 0;
+	ellipsoid->up->z = 1;
+	ellipsoid->direction->x = 0;
+	ellipsoid->direction->y = 1;
+	ellipsoid->direction->z = 0;
 	return (ellipsoid);
 }
 

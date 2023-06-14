@@ -46,11 +46,16 @@ double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 {
 	double		*root;
 	double		distance;
+	t_vector	tmp;
+
+	tmp.x = ellipsoid->up->x;
+	tmp.y = ellipsoid->up->y;
+	tmp.z = ellipsoid->up->z;
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 0.0000001;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
@@ -61,6 +66,19 @@ double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 	data.rayo.y = -ellipsoid->origin->y;
 	data.rayo.z = -ellipsoid->origin->z;
 	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, data.angle);
+	rotate_around_axis(&data.rayo, data.cross, data.angle);
+
 	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{
@@ -79,19 +97,37 @@ double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
 	double		distance;
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.rayo.x = normal.origin.x - ellipsoid->origin->x;
+	data.rayo.y = normal.origin.y - ellipsoid->origin->y;
+	data.rayo.z = normal.origin.z - ellipsoid->origin->z;
+	t_vector	tmp;
+
+	tmp.x = ellipsoid->up->x;
+	tmp.y = ellipsoid->up->y;
+	tmp.z = ellipsoid->up->z;
+
+	data.front.x = 0.0000001;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
 			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
 				* sqrt(dot_product (data.front, data.front))));
 	rotate_around_axis(&ray, data.cross, -data.angle);
-	data.rayo.x = normal.origin.x - ellipsoid->origin->x;
-	data.rayo.y = normal.origin.y - ellipsoid->origin->y;
-	data.rayo.z = normal.origin.z - ellipsoid->origin->z;
 	rotate_around_axis(&data.rayo, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, data.angle);
+	rotate_around_axis(&data.rayo, data.cross, data.angle);
 	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{

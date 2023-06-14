@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/01 09:59:40 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/14 13:23:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:57:59 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	rotation_x(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_x(scene->light_list, angle);
+	world_rot_x(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -52,6 +53,7 @@ void	vector_rot_y(t_vector *vec, double angle)
 	axis.y = 0;
 	axis.z = 0;
 	rotate_around_axis(vec, axis, angle);
+	
 }
 
 void	rotation_y(t_scene *scene, double angle)
@@ -60,6 +62,7 @@ void	rotation_y(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_y(scene->light_list, angle);
+	world_rot_y(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -92,6 +95,7 @@ void	rotation_z(t_scene *scene, double angle)
 
 	cursor = scene->obj_list;
 	light_rot_z(scene->light_list, angle);
+	world_rot_z(scene, angle);
 	while (cursor)
 	{
 		if (cursor->type == sphere)
@@ -116,5 +120,6 @@ void	world_rotate(t_scene *scene, double alpha, double beta, double theta)
 		rotation_y(scene, beta * (M_PI / 180));
 	if (theta)
 		rotation_z(scene, -theta * (M_PI / 180));
+	scene->camera->beta += beta;
 	printf("alpha: %f\nbeta: %f\n\n", scene->camera->alpha, scene->camera->beta);
 }

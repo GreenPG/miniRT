@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:53:35 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:14:12 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 {
 	char	*line;
 
+	scene->up = malloc(sizeof(t_vector));
+	scene->up->x = 0;
+	scene->up->y = 0;
+	scene->up->z = 1;
+	scene->direction = malloc(sizeof(t_vector));
+	scene->direction->x = 0;
+	scene->direction->y = 1;
+	scene->direction->z = 0;
 	line = get_next_line(fd);
 	while (line)
 	{

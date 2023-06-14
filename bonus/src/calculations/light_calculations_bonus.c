@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 16:55:19 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:02:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 		if (cursor->hitted == 1)
 			if (wich_side(ray, light_dir, normal) == 0)
 				return (1);
-		if (distance > 0 && distance < light_source_d)
+		if (distance < light_source_d)
 			return (1);
 		cursor = cursor->next;
 	}
@@ -146,17 +146,15 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list
 int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
 {
 	t_vector		light_dir;
+	int				r;
+	int				g;
+	int				b;
 	t_light_list	*light_list;
-	int				light_cnt;
 	double			diffuse_ratio;
-	unsigned long int				r;
-	unsigned long int				g;
-	unsigned long int				b;
 
 	r = 0;
 	g = 0;
 	b = 0;
-	light_cnt = 0;
 	light_list = scene->light_list;
 	while (light_list)
 	{
@@ -171,13 +169,7 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list 
 			b += get_b(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
 		}
 		light_list = light_list->next;
-		
-		light_cnt++;
-		
 	}
-	r /= light_cnt;
-	g /= light_cnt;
-	b /= light_cnt;
 	if (r > 255)
 		r = 255;
 	if (g > 255)

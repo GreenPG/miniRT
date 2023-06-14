@@ -1,0 +1,22 @@
+A 0.1 255,250,250
+C 0,0,0 0,1,0 100 
+L -100,0,0 1 244,233,155
+
+#planets
+sp 0,60,0 50 255,123,23 ./bonus/src/earth_day.png
+sp -35,110,15 50 255,123,23 ./bonus/src/gpasquet_zoom_hd.png
+sp -90,100,15 12.5 255,123,23 ./bonus/src/moon.png
+#skybox
+sp 0,0,0 200000 255,123,23 ./bonus/src/space.png
+#ovni
+el -5,18,-3 0,1,0	 2 2 0.3 55,55,55 ./bonus/src/galette.png
+sp -5,18,-3 1 20,200,23 ./bonus/src/green_ovni.png
+
+el -9,14.324,-6 0,1,0	 2 2 0.3 55,55,55 ./bonus/src/galette.png
+sp -9,14.324,-6 1 20,200,23 ./bonus/src/green_ovni.png
+
+el -11,17,-4 0,1,0	 2 2 0.3 55,55,55 ./bonus/src/galette.png
+sp -11,17,-4 1 20,200,23 ./bonus/src/green_ovni.png
+
+el -3,16.324,-10 0,1,0	 2 2 0.3 55,55,55 ./bonus/src/galette.png
+sp -3,16.324,-10 1 20,200,23 ./bonus/src/green_ovni.png

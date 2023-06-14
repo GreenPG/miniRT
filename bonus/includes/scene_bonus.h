@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:26:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/12 08:58:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:00:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ struct s_scene {
 	t_obj_list		*obj_list;
 	t_obj_list		*obj_selected;
 	mlx_image_t		*img;
+	t_vector		*up;
+	t_vector		*direction;
 };
 
 #endif

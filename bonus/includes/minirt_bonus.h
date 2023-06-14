@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/13 16:56:15 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:00:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,12 +154,19 @@ void			vector_rot_z(t_vector *vec, double angle);
 void			rotation_x(t_scene *scene, double angle);
 void			rotation_y(t_scene *scene, double angle);
 void			rotation_z(t_scene *scene, double angle);
-void			cylinder_rot_z(t_cylinder *cylinder, double angle);
 void			world_rotate(t_scene *scene, double alpha, double beta, double theta);
 
+/* 	world_move.c	*/
+
+void			world_rot_x(t_scene *scene, double angle);
+void			world_rot_y(t_scene *scene, double angle);
+void			world_rot_z(t_scene *scene, double angle);
+
 /* 	cylinder_move.c	*/
+
 void			cylinder_rot_y(t_cylinder *cylinder, double angle);
 void			cylinder_rot_x(t_cylinder *cylinder, double angle);
+void			cylinder_rot_z(t_cylinder *cylinder, double angle);
 void			cylinder_translate(t_cylinder *cylinder, double x, double y,
 					double z);
 
@@ -310,8 +317,16 @@ t_light_list	*init_light_list(char *line);
 int				get_checkerboard(t_obj_list *nearest, t_vector ray,
 					t_normal normal, t_camera *camera);
 
+/*	textures	*/
+
+int			get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
+
 /*	quaternions.c	*/
 
 void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
+
+/*	frame_init.c	*/
+
+t_frame		*frame_init(t_vector *dir);
 
 #endif

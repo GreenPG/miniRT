@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/08 16:17:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:55:18 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -56,7 +56,33 @@ static int	sky_color(t_scene *scene, t_vector ray)
 {
 	double	t;
 
-	t = sin(ray.z + scene->camera->beta * (M_PI / 180));
+	t_vector	tmp;
+
+	tmp.x = scene->up->x;
+	tmp.y = scene->up->y;
+	tmp.z = scene->up->z;
+	t_cyl_calc	data;
+
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*scene->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*scene->direction, data.front)
+			/ (sqrt(dot_product(*scene->direction, *scene->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&ray, data.cross, data.angle);
+	t = sin(ray.z);
 	if (t > 0)
 		return (get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t
 					* 156), scene->ambiant_l->light_ratio * (255 * (1 - t) + t
@@ -89,6 +115,5 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 		nearest->hitted = 0;
 		return (color);
 	}
-	else
-		return (sky_color(scene, ray));
+	return (sky_color(scene, ray));
 }
