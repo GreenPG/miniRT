@@ -6,13 +6,13 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:39:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/13 17:06:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:57:56 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-bool	is_in_front_of_edge_bf(t_vector a, t_vector b, t_vector intersect, t_vector normal)
+bool	is_in_front_of_edge_ff(t_vector a, t_vector b, t_vector intersect, t_vector normal)
 {
 	t_vector	edge;
 	t_vector	vertice_to_intersect;
@@ -30,24 +30,6 @@ bool	is_in_front_of_edge_bf(t_vector a, t_vector b, t_vector intersect, t_vector
 	return (true);
 }
 
-bool	is_in_front_of_edge_ff(t_vector a, t_vector b, t_vector intersect, t_vector normal)
-{
-	t_vector	edge;
-	t_vector	vertice_to_intersect;
-	t_vector	cross_vector;
-
-	edge.x = b.x - a.x;
-	edge.y = b.y - a.y;
-	edge.z = b.z - a.z;
-	vertice_to_intersect.x = intersect.x - a.x;
-	vertice_to_intersect.y = intersect.y - a.y;
-	vertice_to_intersect.z = intersect.z - a.z;
-	cross_vector = vector_cross(edge, vertice_to_intersect);
-	if (dot_product(normal, cross_vector) > -1e-6)
-		return (false);
-	return (true);
-}
-
 static bool	is_inside_triangle(t_triangle *triangle, t_vector ray, double distance)
 {
 	t_vector	intersect;
@@ -55,20 +37,10 @@ static bool	is_inside_triangle(t_triangle *triangle, t_vector ray, double distan
 	intersect.x = distance * ray.x;
 	intersect.y = distance * ray.y;
 	intersect.z = distance * ray.z;
-	if (dot_product(*triangle->normal, ray) > 0)
-	{
-		if (is_in_front_of_edge_bf(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
-			|| is_in_front_of_edge_bf(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
-			|| is_in_front_of_edge_bf(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
-			return (false);
-	}
-	else
-	{
-		if (is_in_front_of_edge_ff(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
+	if (is_in_front_of_edge_ff(*triangle->a, *triangle->b, intersect, *triangle->normal) == false
 			|| is_in_front_of_edge_ff(*triangle->b, *triangle->c, intersect, *triangle->normal) == false
 			|| is_in_front_of_edge_ff(*triangle->c, *triangle->a, intersect, *triangle->normal) == false)
-			return (false);
-	}
+		return (false);
 	return (true);
 }
 
