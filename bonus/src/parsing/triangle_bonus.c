@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 14:48:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:09:42 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static int	check_triangle(char *input)
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0)
-		pass_to_next_element(input, &i);
 	if (ft_strncmp("specular", &input[i], ft_strlen("specular")) == 0)
 		if (check_specular(input, &i) == 1)
 			return (1);
+	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &input[i], ft_strlen("./")) == 0)
+		pass_to_next_element(input, &i);
 	if (input[i] != '\0')
 		return (1);
 	return (0);

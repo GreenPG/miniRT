@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 13:27:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,7 +296,7 @@ int				init_rays(t_scene *scene);
 /*	normal_color.c	*/
 
 int				get_normal_color(t_obj_list *nearest, t_vector ray,
-					t_normal normal, t_camera *camera);
+					t_normal normal);
 
 /*	ray_transforms.c	*/
 t_vector		transform_rayo(t_vector ray, t_cylinder *cylinder);
@@ -318,7 +318,7 @@ int				get_checkerboard(t_obj_list *nearest, t_normal normal);
 
 /*	textures	*/
 
-int			get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera);
+int			get_texture(t_obj_list *nearest, t_normal normal);
 
 /*	quaternions.c	*/
 

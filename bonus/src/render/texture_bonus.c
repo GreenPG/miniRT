@@ -6,13 +6,13 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 10:26:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:05:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere, mlx_texture_t *tex)
+static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 {
 	double alpha;
 	double beta;
@@ -60,11 +60,9 @@ static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere, mlx_
     b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
-	(void)camera;
-	return (0);
 }
 
-int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera, mlx_texture_t *tex)
+static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 {
 	int	r;
 	int	g;
@@ -112,10 +110,9 @@ int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera, mlx_texture_t 
     b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
-	(void)camera;
 }
 
-int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *tex)
+static int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *tex)
 {	
 	double alpha;
 	double beta;
@@ -167,7 +164,7 @@ int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *tex)
     return get_rgba(r,g,b,255);
 }
 
-int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t *tex)
+static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t *tex)
 {	
 	double alpha;
 	double beta;
@@ -217,23 +214,75 @@ int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t *tex)
     b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
-	return (0);
 }
 
-int	get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *camera)
+static int	texture_triangle(t_vector vec, t_triangle *triangle, mlx_texture_t *tex)
+{
+	int	r;
+	int	g;
+	int	b;	
+	t_vector	tmp;
+	t_cyl_calc	data;
+
+	tmp.x = triangle->up->x;
+	tmp.y = triangle->up->y;
+	tmp.z = triangle->up->z;
+
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	vec.x -= triangle->a->x;
+	vec.y -= triangle->a->y;
+	vec.z -= triangle->a->z;
+	data.cross = vector_cross(*triangle->normal, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*triangle->normal, data.front)
+			/ (sqrt(dot_product(*triangle->normal, *triangle->normal))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, data.angle);
+	int x;
+	int	y;
+	vec.z = fmodf(vec.z, 1);
+	if (vec.z < 0)
+		vec.z += 1;
+	vec.x = fmodf(vec.x, 1);
+	if (vec.x < 0)
+		vec.x += 1;
+	x =  vec.z * tex->width;
+	y =  fmodf(fabs(vec.x), 1) * tex->height;
+	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+
+    r = tex->pixels[pixel_index];
+    g = tex->pixels[pixel_index + 1];
+    b = tex->pixels[pixel_index + 2];
+    
+    return get_rgba(r,g,b,255);
+}
+
+int	get_texture(t_obj_list *nearest, t_normal normal)
 {
 	int			color;
 
 	color = 0;
 	if (nearest->type == sphere)
-		color = texture_sphere(normal.dir, camera, nearest->sphere, nearest->tex);
+		color = texture_sphere(normal.dir, nearest->sphere, nearest->tex);
 	if (nearest->type == plane)
-		color = texture_plane(normal.origin, nearest->plane, camera, nearest->tex);
+		color = texture_plane(normal.origin, nearest->plane, nearest->tex);
 	if (nearest->type == cylinder)
 	 	color = texture_cylinder(normal.origin, nearest->cylinder, nearest->tex);
 	if (nearest->type == ellipsoid)
 	 	color = texture_ellipsoid(normal.origin, nearest->ellipsoid, nearest->tex);
-	(void)ray;
-	(void)nearest;
+	if (nearest->type == triangle)
+		color = texture_triangle(normal.origin, nearest->triangle, nearest->tex);
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 13:27:06 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:06:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static int	normalized_color(int color, t_vector normal, t_vector ray)
 			fabs(ratio * get_b(color)), 255));
 }
 
-int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal,
-		t_camera *camera)
+int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal)
 {
 	int			color;
 
@@ -38,7 +37,7 @@ int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal,
 	}
 	if (nearest->pattern == texture)
 	{
-		color = get_texture(nearest, ray, normal, camera);
+		color = get_texture(nearest, normal);
 		return (normalized_color(color, normal.dir, ray));
 	}
 	if (nearest->type == sphere)
