@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 08:51:16 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:27:12 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,54 @@ t_normal	orient_normal(t_scene *scene, t_normal normal, t_vector light_dir)
 }
 static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray, double distance)
 {
-	double vector_len;
 	t_normal	normal;
 
 	normal.origin.x = distance * ray.x;
 	normal.origin.y = distance * ray.y;
 	normal.origin.z = distance * ray.z;
-	normal.dir.x = (normal.origin.x - ellipsoid->origin->x) * ellipsoid->a;
-	normal.dir.y = (normal.origin.y - ellipsoid->origin->y) * ellipsoid->b;
-	normal.dir.z = (normal.origin.z - ellipsoid->origin->z) * ellipsoid->c;
-	vector_len = sqrt(dot_product(normal.dir, normal.dir));
-	normal.dir.x /= vector_len;
-	normal.dir.y /= vector_len;
-	normal.dir.z /= vector_len;
+	normal.dir.x = (normal.origin.x - ellipsoid->origin->x);
+	normal.dir.y = (normal.origin.y - ellipsoid->origin->y);
+	normal.dir.z = (normal.origin.z - ellipsoid->origin->z);
+
+	t_cyl_calc	data;
+	t_vector	tmp;
+
+	tmp.x = ellipsoid->up->x;
+	tmp.y = ellipsoid->up->y;
+	tmp.z = ellipsoid->up->z;
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*ellipsoid->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&normal.dir, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	data.cross = vector_cross(tmp, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(tmp, data.front)
+			/ (sqrt(dot_product(tmp, tmp))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&normal.dir, data.cross, data.angle);
+	normal.dir.x *= ellipsoid->a;
+	normal.dir.y *= ellipsoid->b;
+	normal.dir.z *= ellipsoid->c;
+	rotate_around_axis(&normal.dir, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*ellipsoid->direction, data.front);
+	vector_norm(&data.cross);
+	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&normal.dir, data.cross, data.angle);
+	vector_norm(&normal.dir);
 	return (normal);
 }
 

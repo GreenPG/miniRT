@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 09:39:13 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:10:06 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,7 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 		if (!plane->tex)
 			plane->pattern = plain;
 	}
-	plane->up = malloc(sizeof(t_vector));
-	plane->up->x = 0;
-	plane->up->y = 0;
-	plane->up->z = 1;
-	plane->direction = malloc(sizeof(t_vector));
-	plane->direction->x = 0;
-	plane->direction->y = 1;
-	plane->direction->z = 0;
+	plane->up = get_up(plane->direction);
 	return (plane);
 }
 
