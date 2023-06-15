@@ -6,12 +6,12 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 09:35:31 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 14:48:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:01:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRIANGLE_H
-# define TRIANGLE_H
+#ifndef TRIANGLE_BONUS_H
+# define TRIANGLE_BONUS_H
 
 # include <minirt_bonus.h>
 
