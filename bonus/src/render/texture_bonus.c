@@ -6,13 +6,13 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/14 15:47:10 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:26:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere)
+static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere, mlx_texture_t *tex)
 {
 	double alpha;
 	double beta;
@@ -51,20 +51,20 @@ static int	texture_sphere(t_vector vec, t_camera *camera, t_sphere *sphere)
 	beta = acos(vec.z);
 	int x;
 	int	y;
-	x = (alpha + M_PI) / (M_PI * 2.)* sphere->tex->width;
-	y = (beta) / M_PI * sphere->tex->height;
-	uint32_t pixel_index = (y * sphere->tex->width + x) * sphere->tex->bytes_per_pixel;
+	x = (alpha + M_PI) / (M_PI * 2.)* tex->width;
+	y = (beta) / M_PI * tex->height;
+	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 
-    r = sphere->tex->pixels[pixel_index];
-    g = sphere->tex->pixels[pixel_index + 1];
-    b = sphere->tex->pixels[pixel_index + 2];
+    r = tex->pixels[pixel_index];
+    g = tex->pixels[pixel_index + 1];
+    b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
 	(void)camera;
 	return (0);
 }
 
-int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera)
+int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera, mlx_texture_t *tex)
 {
 	int	r;
 	int	g;
@@ -103,19 +103,19 @@ int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera)
 	vec.x = fmodf(vec.x, 1);
 	if (vec.x < 0)
 		vec.x += 1;
-	x =  vec.z * plane->tex->width;
-	y =  fmodf(fabs(vec.x), 1) * plane->tex->height;
-	uint32_t pixel_index = (y * plane->tex->width + x) * plane->tex->bytes_per_pixel;
+	x =  vec.z * tex->width;
+	y =  fmodf(fabs(vec.x), 1) * tex->height;
+	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 
-    r = plane->tex->pixels[pixel_index];
-    g = plane->tex->pixels[pixel_index + 1];
-    b = plane->tex->pixels[pixel_index + 2];
+    r = tex->pixels[pixel_index];
+    g = tex->pixels[pixel_index + 1];
+    b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
 	(void)camera;
 }
 
-int	texture_cylinder(t_vector vec, t_cylinder *cylinder)
+int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *tex)
 {	
 	double alpha;
 	double beta;
@@ -156,18 +156,18 @@ int	texture_cylinder(t_vector vec, t_cylinder *cylinder)
 	beta = acos(vec.y);
 	int x;
 	int	y;
-	x = (beta) / M_PI * cylinder->tex->width;
-	y = (alpha + M_PI) / (M_PI * 2.) * cylinder->tex->height;
-	uint32_t pixel_index = (y * cylinder->tex->width + x) * cylinder->tex->bytes_per_pixel;
+	x = (beta) / M_PI * tex->width;
+	y = (alpha + M_PI) / (M_PI * 2.) * tex->height;
+	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 
-    r = cylinder->tex->pixels[pixel_index];
-    g = cylinder->tex->pixels[pixel_index + 1];
-    b = cylinder->tex->pixels[pixel_index + 2];
+    r = tex->pixels[pixel_index];
+    g = tex->pixels[pixel_index + 1];
+    b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
 }
 
-int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
+int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t *tex)
 {	
 	double alpha;
 	double beta;
@@ -208,13 +208,13 @@ int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 	beta = acos(vec.z);
 	int x;
 	int	y;
-	x = (alpha + M_PI) / (M_PI * 2.)* ellipsoid->tex->width;
-	y = (beta) / M_PI * ellipsoid->tex->height;
-	uint32_t pixel_index = (y * ellipsoid->tex->width + x) * ellipsoid->tex->bytes_per_pixel;
+	x = (alpha + M_PI) / (M_PI * 2.)* tex->width;
+	y = (beta) / M_PI * tex->height;
+	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 
-    r = ellipsoid->tex->pixels[pixel_index];
-    g = ellipsoid->tex->pixels[pixel_index + 1];
-    b = ellipsoid->tex->pixels[pixel_index + 2];
+    r = tex->pixels[pixel_index];
+    g = tex->pixels[pixel_index + 1];
+    b = tex->pixels[pixel_index + 2];
     
     return get_rgba(r,g,b,255);
 	return (0);
@@ -226,13 +226,13 @@ int	get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *ca
 
 	color = 0;
 	if (nearest->type == sphere)
-		color = texture_sphere(normal.dir, camera, nearest->sphere);
+		color = texture_sphere(normal.dir, camera, nearest->sphere, nearest->tex);
 	if (nearest->type == plane)
-		color = texture_plane(normal.origin, nearest->plane, camera);
+		color = texture_plane(normal.origin, nearest->plane, camera, nearest->tex);
 	if (nearest->type == cylinder)
-	 	color = texture_cylinder(normal.origin, nearest->cylinder);
+	 	color = texture_cylinder(normal.origin, nearest->cylinder, nearest->tex);
 	if (nearest->type == ellipsoid)
-	 	color = texture_ellipsoid(normal.origin, nearest->ellipsoid);
+	 	color = texture_ellipsoid(normal.origin, nearest->ellipsoid, nearest->tex);
 	(void)ray;
 	(void)nearest;
 	return (color);

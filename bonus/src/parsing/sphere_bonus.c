@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/12 10:38:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:34:16 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -46,27 +46,18 @@ static int	check_sphere(char *input)
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0)
-		pass_to_next_element(input, &i);
 	if (ft_strncmp("specular", &input[i], ft_strlen("specular")) == 0)
 		if (check_specular(input, &i) == 1)
 			return (1);
+	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &input[i], ft_strlen("./")) == 0)
+		pass_to_next_element(input, &i);	
 	if (input[i] != '\0')
 		return (1);
 	return (0);
 }
 
-t_sphere	*init_sphere_part3(t_sphere *sphere, char *input, int i)
+t_sphere	*init_sphere_part3(t_sphere *sphere)
 {
-	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
-		sphere->pattern = checkerboard;
-	else
-	{
-		sphere->pattern = texture;
-		sphere->tex = mlx_load_png(&input[i]);
-		if (!sphere->tex)
-			sphere->pattern = plain;
-	}
 	sphere->up = malloc(sizeof(t_vector));
 	sphere->up->x = 0;
 	sphere->up->y = 0;
@@ -101,7 +92,7 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	sphere->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	pass_to_next_element(input, &i);
 	free(rgb);
-	sphere = init_sphere_part3(sphere, input, i);
+	sphere = init_sphere_part3(sphere);
 	return (sphere);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:14:07 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/14 17:01:43 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:59:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ struct	s_ellipsoid {
 	double		b;
 	double		c;
 	int			color;
-	int			pattern;
-	int			sp_e;
-	int			ks;
-	mlx_texture_t	*tex;
 };
 
 #endif

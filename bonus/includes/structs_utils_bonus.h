@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/14 17:00:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:01:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,19 @@ struct	s_quaternion {
 };
 
 struct	s_obj_list {
-	t_type		type;
-	t_plane		*plane;
-	t_sphere	*sphere;
-	t_cylinder	*cylinder;
-	t_ellipsoid	*ellipsoid;
-	t_triangle	*triangle;
-	t_obj_list	*next;
-	int			pattern;
-	int			hitted;
-	float		sp_e;
-	float		ks;
-	bool		front_face;
+	t_type			type;
+	t_plane			*plane;
+	t_sphere		*sphere;
+	t_cylinder		*cylinder;
+	t_ellipsoid		*ellipsoid;
+	t_triangle		*triangle;
+	t_obj_list		*next;
+	int				hitted;
+	int				pattern;
+	float			sp_e;
+	float			ks;
+	mlx_texture_t	*tex;		
+	bool			front_face;
 };
 
 struct	s_normal {

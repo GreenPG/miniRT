@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 17:08:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:21:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	sphere_obj(t_obj_list *obj, char *line)
 		free(obj);
 		return (1);
 	}
-	obj->pattern = obj->sphere->pattern;
 	return (0);
 }
 
@@ -40,7 +39,6 @@ static int	plane_obj(t_obj_list *obj, char *line)
 		free(obj);
 		return (1);
 	}
-	obj->pattern = obj->plane->pattern;
 	return (0);
 }
 
@@ -56,7 +54,6 @@ static int	cylinder_obj(t_obj_list *obj, char *line)
 		free(obj);
 		return (1);
 	}
-	obj->pattern = obj->cylinder->pattern;
 	return (0);
 }
 
@@ -72,7 +69,6 @@ static int	ellipsoid_obj(t_obj_list *obj, char *line)
 		free(obj);
 		return (1);
 	}
-	obj->pattern = obj->ellipsoid->pattern;
 	return (0);
 }
 
@@ -88,7 +84,6 @@ static int	triangle_obj(t_obj_list *obj, char *line)
 		free(obj);
 		return (1);
 	}
-	obj->pattern = obj->triangle->pattern;
 	return (0);
 }
 
@@ -110,7 +105,8 @@ static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 		if (triangle_obj(obj, line) == 1)
 			return (1);
 	}
-	get_specular_const(&obj, line);
+	if (get_bonus_data(&obj, line)== 1)
+		return (1);
 	obj->next = NULL;
 	add_obj(list_ptr, obj);
 	return (0);
