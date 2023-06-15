@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 17:02:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:32:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 
 	light_source_d = get_light_distance(scene->light_list->light, normal);
 	cursor = scene->obj_list;
-	distance = 0;
+	distance = INFINITY;
 	while (cursor)
 	{
 		if (cursor->hitted == 0)
@@ -56,7 +56,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 		if (cursor->hitted == 1)
 			if (wich_side(ray, light_dir, normal) == 0)
 				return (1);
-		if (distance < light_source_d)
+		if (distance > 0 && distance < light_source_d)
 			return (1);
 		cursor = cursor->next;
 	}

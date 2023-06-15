@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 13:27:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:47:58 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ static int	checkerboard_triangle(t_vector vec, t_triangle *triangle)
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
+	vec.x -= -triangle->a->x;
+	vec.y -= -triangle->a->y;
+	vec.z -= -triangle->a->z;
 	data.cross = vector_cross(*triangle->normal, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*triangle->normal, data.front)

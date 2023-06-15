@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:19:19 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 13:13:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:48:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	triangle_rot_y(t_triangle *triangle, double angle)
 	vector_rot_y(triangle->b, angle);
 	vector_rot_y(triangle->c, angle);
 	vector_rot_y(triangle->normal, angle);
+	vector_rot_y(triangle->up, angle);
 }
 
 void	triangle_rot_z(t_triangle *triangle, double angle)
@@ -26,6 +27,7 @@ void	triangle_rot_z(t_triangle *triangle, double angle)
 	vector_rot_z(triangle->b, angle);
 	vector_rot_z(triangle->c, angle);
 	vector_rot_z(triangle->normal, angle);
+	vector_rot_z(triangle->up, angle);
 }
 
 void	triangle_rot_x(t_triangle *triangle, double angle)
@@ -34,6 +36,7 @@ void	triangle_rot_x(t_triangle *triangle, double angle)
 	vector_rot_x(triangle->b, angle);
 	vector_rot_x(triangle->c, angle);
 	vector_rot_x(triangle->normal, angle);
+	vector_rot_x(triangle->up, angle);
 }
 
 void	triangle_translate(t_triangle *triangle, double x, double y, double z)
