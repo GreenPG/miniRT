@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 08:40:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:24:47 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,7 @@ static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
 		if (!cylinder->tex)
 			cylinder->pattern = plain;
 	}
-	cylinder->up = malloc(sizeof(t_vector));
-	cylinder->up->x = 0;
-	cylinder->up->y = 0;
-	cylinder->up->z = 1;
-	cylinder->direction = malloc(sizeof(t_vector));
-	cylinder->direction->x = 0;
-	cylinder->direction->y = 1;
-	cylinder->direction->z = 0;
+	cylinder->up = get_up(cylinder->direction);
 	return (cylinder);
 }
 

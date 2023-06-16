@@ -71,14 +71,16 @@ double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&ray, data.cross, data.angle);
-	rotate_around_axis(&data.rayo, data.cross, data.angle);
-
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&ray, data.cross, data.angle);
+		rotate_around_axis(&data.rayo, data.cross, data.angle);
+	}
 	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{
@@ -121,13 +123,16 @@ double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&ray, data.cross, data.angle);
-	rotate_around_axis(&data.rayo, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&ray, data.cross, data.angle);
+		rotate_around_axis(&data.rayo, data.cross, data.angle);
+	}
 	root = hell_hit(ray, data.rayo, ellipsoid);
 	if (!root)
 	{

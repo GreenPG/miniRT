@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/14 17:00:56 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:12:08 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,8 +325,10 @@ int			get_texture(t_obj_list *nearest, t_vector ray, t_normal normal, t_camera *
 
 void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 
-/*	frame_init.c	*/
+/*	direction_init.c	*/
 
-t_frame		*frame_init(t_vector *dir);
+t_vector		*get_up(t_vector *direction);
+t_vector		*up_default(void);
+t_vector		*direction_default(void);
 
 #endif

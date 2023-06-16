@@ -121,5 +121,4 @@ void	world_rotate(t_scene *scene, double alpha, double beta, double theta)
 	if (theta)
 		rotation_z(scene, -theta * (M_PI / 180));
 	scene->camera->beta += beta;
-	printf("alpha: %f\nbeta: %f\n\n", scene->camera->alpha, scene->camera->beta);
 }

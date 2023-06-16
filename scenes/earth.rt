@@ -1,11 +1,12 @@
-A 0.1 255,250,250
+A 0.001 255,250,250
 C 0,0,0 0,1,0 100 
 L -100,0,0 1 244,233,155
 
-#planets
-sp 0,60,0 50 255,123,23 ./bonus/src/earth_day.png
+sp 0,0,-1000000 1 255,123,23
+
 sp -35,110,15 50 255,123,23 ./bonus/src/gpasquet_zoom_hd.png
 sp -90,100,15 12.5 255,123,23 ./bonus/src/moon.png
+sp 0,60,0 50 255,123,23 ./bonus/src/earth_day.png
 #skybox
 sp 0,0,0 200000 255,123,23 ./bonus/src/space.png
 #ovni

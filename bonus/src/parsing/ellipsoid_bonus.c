@@ -107,13 +107,7 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 		if (!ellipsoid->tex)
 			ellipsoid->pattern = plain;
 	}
-	ellipsoid->up = malloc(sizeof(t_vector));
-	ellipsoid->up->x = 0;
-	ellipsoid->up->y = 0;
-	ellipsoid->up->z = 1;
-	ellipsoid->direction->x = 0;
-	ellipsoid->direction->y = 1;
-	ellipsoid->direction->z = 0;
+	ellipsoid->up = get_up(ellipsoid->direction);
 	return (ellipsoid);
 }
 
