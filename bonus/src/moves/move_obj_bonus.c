@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 09:43:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:05:25 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,86 +24,6 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		plane_translate(nearest->plane, x, y, z);
 	else if (nearest->type == ellipsoid)
 		ellipsoid_translate(nearest->ellipsoid, x, y, z);
-}
-
-void	rotate_one(t_obj_list *nearest, int x, int y, int z)
-{
-	double	angle;
-
-	if (!nearest)
-		return ;
-	if (x)
-	{
-		angle = 10 * (M_PI / 180) * x;
-		if (nearest->type == cylinder)
-		{
-			vector_rot_x(nearest->cylinder->direction, angle);
-			vector_rot_x(nearest->cylinder->up, angle);
-		}
-		if (nearest->type == plane)
-		{
-			vector_rot_x(nearest->plane->direction, angle);
-			vector_rot_x(nearest->plane->up, angle);
-		}
-		if (nearest->type == ellipsoid)
-		{
-			vector_rot_x(nearest->ellipsoid->direction, angle);
-			vector_rot_x(nearest->ellipsoid->up, angle);
-		}
-		if (nearest->type == sphere)
-		{
-			vector_rot_x(nearest->sphere->direction, angle);
-			vector_rot_x(nearest->sphere->up, angle);
-		}
-	}
-	else if (y)
-	{
-		angle = 10 * (M_PI / 180) * y;
-		if (nearest->type == cylinder)
-		{
-			vector_rot_y(nearest->cylinder->direction, angle);
-			vector_rot_y(nearest->cylinder->up, angle);
-		}
-		if (nearest->type == plane)
-		{
-			vector_rot_y(nearest->plane->direction, angle);
-			vector_rot_y(nearest->plane->up, angle);
-		}
-		if (nearest->type == ellipsoid)
-		{
-			vector_rot_y(nearest->ellipsoid->direction, angle);
-			vector_rot_y(nearest->ellipsoid->up, angle);
-		}
-		if (nearest->type == sphere)
-		{
-			vector_rot_y(nearest->sphere->direction, angle);
-			vector_rot_y(nearest->sphere->up, angle);
-		}
-	}
-	else if (z)
-	{
-		angle = 10 * (M_PI / 180) * z;
-		if (nearest->type == cylinder)
-		{
-			vector_rot_z(nearest->cylinder->direction, angle);
-			vector_rot_z(nearest->cylinder->up, angle);
-		}
-		if (nearest->type == plane)
-		{
-			vector_rot_z(nearest->plane->direction, angle);
-			vector_rot_z(nearest->plane->up, angle);
-		}
-		if (nearest->type == ellipsoid)
-		{
-			vector_rot_z(nearest->ellipsoid->direction, angle);
-			vector_rot_z(nearest->ellipsoid->up, angle);
-		}
-		if (nearest->type == sphere)
-		{
-			vector_rot_z(nearest->sphere->direction, angle);
-			vector_rot_z(nearest->sphere->up, angle);
-		}
-	}
 }
 
 static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
@@ -156,6 +76,7 @@ void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods,
 	int		y;
 	t_data	*data;
 
+	(void)mods;
 	data = param;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
 	{
@@ -167,8 +88,4 @@ void	mouse_handle(mouse_key_t button, action_t action, modifier_key_t mods,
 				= get_click_obj(data->scene->camera->rays->rays[x][y],
 					data->scene);
 	}
-	(void)button;
-	(void)action;
-	(void)mods;
-	(void)param;
 }

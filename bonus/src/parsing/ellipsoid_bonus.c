@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 10:36:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:18:48 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_ellipsoid(char *str)
 	if (check_float(str, &i) == 1)
 		return (1);
 	pass_to_next_element(str, &i);
-	if (check_cylinder2(str, i) == 1)
+	if (check_ellipsoid2(str, i) == 1)
 		return (1);
 	return (0);
 }
@@ -121,7 +121,7 @@ t_ellipsoid	*init_ellipsoid(char *str)
 	ellipsoid->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
 	ellipsoid->direction = init_vector(str + i);
-	vector_norm(ellipsoid->direction);
+	*ellipsoid->direction = vector_norm(*ellipsoid->direction);
 	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
 		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
 		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z

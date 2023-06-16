@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/16 10:39:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:52:39 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_sphere(char *input)
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	if (check_bonus_var(str) == 1)
+	if (check_bonus_var(input) == 1)
 		return (1);
 	return (0);
 }

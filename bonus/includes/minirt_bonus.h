@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 10:22:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:36:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,13 @@ int				*get_color_values(char	*str);
 
 /*	vector.c	*/
 
+t_vector		*init_vector(char *str);
+
+/*	vector_calcuations.c	*/
+t_vector		vector_norm(t_vector vec);
 t_vector		invert_vector(t_vector u);
 t_vector		vector_cross(t_vector a, t_vector b);
 double			dot_product(const t_vector v, const t_vector u);
-t_vector		*init_vector(char *str);
-void			vector_norm(t_vector *vec);
 
 /*	render.c	*/
 
@@ -157,14 +159,19 @@ int				init_rays(t_scene *scene);
 
 /*	rotation.c	*/
 
-void			vector_rot_x(t_vector *vec, double angle);
-void			vector_rot_y(t_vector *vec, double angle);
-void			vector_rot_z(t_vector *vec, double angle);
 void			rotation_x(t_scene *scene, double angle);
 void			rotation_y(t_scene *scene, double angle);
 void			rotation_z(t_scene *scene, double angle);
 void			world_rotate(t_scene *scene, double alpha,
 					double beta, double theta);
+
+/*	rotation_obj_bonus.c	*/
+void			rotate_one(t_obj_list *nearest, int x, int y, int z);
+
+/*	vector_rotation_bonus.c */
+void			vector_rot_x(t_vector *vec, double angle);
+void			vector_rot_y(t_vector *vec, double angle);
+void			vector_rot_z(t_vector *vec, double angle);
 
 /* 	world_move.c	*/
 
@@ -253,10 +260,22 @@ t_normal		orient_normal(t_scene *scene, t_normal normal,
 t_normal		get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
+t_vector		get_light_dir(t_light *light, t_normal normal);
+int				light_intersect(t_scene *scene, t_vector light_dir,
+					t_normal normal, t_vector ray);
 int				get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
 					t_obj_list *nearest);
 int				get_specular_color(t_scene *scene, t_vector ray,
 					t_normal normal, t_obj_list *nearest);
+
+/*	specular_bonus.c	*/
+int				get_specular_color(t_scene *scene, t_vector ray,
+					t_normal normal, t_obj_list *nearest);
+
+/*	light_rgb_bonus.c	*/
+void			increment_color(int *rgb, int color, double ratio, double ks);
+void			clamp_rgb(int *rgb);
+int				*init_rgb_tab(void);
 
 /*	keypress_handle.c	*/
 void			handle_keypress(mlx_key_data_t keydata, void *ptr);
@@ -265,28 +284,25 @@ void			handle_keypress(mlx_key_data_t keydata, void *ptr);
 void			mouse_handle(mouse_key_t button, action_t action,
 					modifier_key_t mods, void *param);
 void			move_one(t_obj_list *nearest, double x, double y, double z);
-void			rotate_one(t_obj_list *nearest, int x, int y, int z);
 
 /*	shadow.c	*/
 
-double			plane_shadow(t_plane *plane, t_vector light_dir,
-					t_normal normal);
-double			sphere_shadow(t_sphere *sphere, t_normal normal,
-					t_vector light_dir);
-double			cylinder_shadow(t_cylinder *cylinder, t_normal normal,
-					t_vector light_dir);
 double			get_shadow_distance(t_obj_list *cursor, t_normal normal,
+					t_vector light_dir);
+
+/*	triangle_shadows.c */
+double			triangle_shadow(t_triangle *triangle, t_normal normal,
 					t_vector light_dir);
 
 /*	cylinder_calculations.c 	*/
 double			*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 double			*body_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
-void			free_cyl_roots(double *root, double *caps);
 double			*between_caps(double *root, t_vector light_o,
 					t_vector light_dir, t_cylinder *cylinder);
 double			cylinder_hit(t_cylinder *cylinder, t_vector ray);
 
 /*	cylinder_calculations2.c	*/
+void			free_cyl_roots(double *root, double *caps);
 double			min_cyl(double t_1, double t_2, double t_3, double t_4);
 
 /* triangle_calculations_bonus.c */

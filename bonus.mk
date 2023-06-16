@@ -22,14 +22,18 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/parsing/ellipsoid_bonus.c 	\
 				bonus/src/parsing/triangle_bonus.c 	\
 				bonus/src/calculations/light_calculations_bonus.c \
+				bonus/src/calculations/light_rgb_bonus.c \
+				bonus/src/calculations/specular_bonus.c \
 				bonus/src/calculations/sphere_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations2_bonus.c 	\
 				bonus/src/calculations/ellipsoid_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_shadow_bonus.c 	\
+				bonus/src/calculations/triangle_shadow_bonus.c 	\
 				bonus/src/calculations/triangle_calculations_bonus.c 	\
 				bonus/src/calculations/normal_bonus.c \
 				bonus/src/calculations/vector_bonus.c \
+				bonus/src/calculations/vector_calculations_bonus.c \
 				bonus/src/calculations/shadow_bonus.c \
 				bonus/src/calculations/quaternions_bonus.c \
 				bonus/src/render/color_bonus.c	\
@@ -40,6 +44,8 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/render/checkerboard_bonus.c \
 				bonus/src/render/texture_bonus.c \
 				bonus/src/moves/rotation_bonus.c \
+				bonus/src/moves/vector_rotation_bonus.c \
+				bonus/src/moves/rotation_obj_bonus.c \
 				bonus/src/moves/cylinder_move_bonus.c \
 				bonus/src/moves/plane_move_bonus.c \
 				bonus/src/moves/sphere_move_bonus.c \
