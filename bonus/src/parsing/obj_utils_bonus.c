@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:31:14 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 11:20:43 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:43:41 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	get_bonus_data(t_obj_list **obj_ptr, char *line)
 	else if (!ft_strncmp("./", &line[i - 2], ft_strlen("./")))
 	{
 		obj->pattern = texture;
-		obj->tex = mlx_load_png(&line[i - 2]);
+		//obj->tex = mlx_load_png(&line[i - 2]);
+		obj->tex = mlx_load_png("./bonus/src/earth_day.png");//
 		if (!obj->tex)
 			return (1);
 	}

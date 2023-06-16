@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 06:54:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 10:01:14 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:56:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct	s_obj_list {
 	t_obj_list		*next;
 	int				hitted;
 	int				pattern;
+	int				bump_map;
 	float			sp_e;
 	float			ks;
 	mlx_texture_t	*tex;		

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 08:14:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:43:41 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,5 +329,9 @@ void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 t_vector		*get_up(t_vector *direction);
 t_vector		*up_default(void);
 t_vector		*direction_default(void);
+
+/*	bump_map	*/
+
+t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal);
 
 #endif
