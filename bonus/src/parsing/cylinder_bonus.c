@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:14:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:17:49 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,6 @@ static int	check_cylinder(char *str)
 static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
 {
 	cylinder->hit_body = false;
-	pass_to_next_element(str, &i);
-	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
-		cylinder->pattern = checkerboard;
-	else
-	{
-		cylinder->pattern = texture;
-		cylinder->tex = mlx_load_png(&str[i]);
-		if (!cylinder->tex)
-			cylinder->pattern = plain;
-	}
 	cylinder->up = get_up(cylinder->direction);
 	return (cylinder);
 }

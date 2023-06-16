@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:12:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 07:56:05 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:20:05 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_vector	*get_up(t_vector *direction)
 		up->x = 0;
 		up->y = -1;
 		up->z = 0;
-		printf("ewqfwqfwqefwef\n");
 		return (up);
 	}
 	if (sqrt(dot_product(data.cross, data.cross)) < 1e-6)

@@ -58,15 +58,6 @@ static int	check_sphere(char *input)
 
 t_sphere	*init_sphere_part3(t_sphere *sphere)
 {
-	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
-		sphere->pattern = checkerboard;
-	else
-	{
-		sphere->pattern = texture;
-		sphere->tex = mlx_load_png(&input[i]);
-		if (!sphere->tex)
-			sphere->pattern = plain;
-	}
 	sphere->direction = direction_default();
 	sphere->up = up_default();
 	return (sphere);

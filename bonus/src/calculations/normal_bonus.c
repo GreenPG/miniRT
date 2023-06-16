@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:13:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:19:03 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_normal	get_plane_normal(t_plane *plane, t_vector ray, double distance)
 static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
 			double distance)
 {
-	double		vector_len;
 	t_normal	normal;
 
 	normal.origin.x = distance * ray.x;

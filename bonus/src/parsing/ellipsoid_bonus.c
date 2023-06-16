@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:15:02 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:18:43 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,6 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 	}
 	ellipsoid->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	pass_to_next_element(str, &i);
-	if (!ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")))
-		ellipsoid->pattern = checkerboard;
-	else
-	{
-		ellipsoid->pattern = texture;
-		ellipsoid->tex = mlx_load_png(&str[i]);
-		if (!ellipsoid->tex)
-			ellipsoid->pattern = plain;
-	}
 	ellipsoid->up = get_up(ellipsoid->direction);
 	return (ellipsoid);
 }
