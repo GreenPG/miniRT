@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 08:12:08 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:14:14 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				init_obj(char *line, t_obj_list **list_ptr, t_type type);
 
 /*	obj_utils.c	*/
 
-void			get_specular_const(t_obj_list **obj_ptr, char *line);
+int				get_bonus_data(t_obj_list **obj_ptr, char *line);
 void			add_obj_error(t_scene **scene);
 void			add_obj(t_obj_list **list_ptr, t_obj_list *obj);
 
@@ -314,8 +314,7 @@ t_light_list	*init_light_list(char *line);
 
 /*	checkerboard	*/
 
-int				get_checkerboard(t_obj_list *nearest, t_vector ray,
-					t_normal normal, t_camera *camera);
+int				get_checkerboard(t_obj_list *nearest, t_normal normal);
 
 /*	textures	*/
 

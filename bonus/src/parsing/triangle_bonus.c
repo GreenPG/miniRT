@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/13 16:39:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:48:23 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_triangle	*init_triangle(char	*input)
 	pass_to_next_element(input, &i);
 	rgb = get_color_values(input + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
-			|| rgb[2] < 0 || rgb[2] > 255)
+		|| rgb[2] < 0 || rgb[2] > 255)
 	{
 		free(rgb);
 		free_triangle(&triangle);
@@ -137,9 +137,9 @@ t_triangle	*init_triangle(char	*input)
 	}
 	triangle->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	pass_to_next_element(input, &i);
-	triangle->pattern = plain;
-	if (!ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")))
-		triangle->pattern = checkerboard;
+	triangle->up = malloc(sizeof(t_vector));
+	triangle->up->x = 0;
+	triangle->up->y = 0;
+	triangle->up->z = 1;
 	return (triangle);
 }

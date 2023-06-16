@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 13:24:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:14:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ static int	check_cylinder(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0)
-		pass_to_next_element(str, &i);
 	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
 		if (check_specular(str, &i) == 1)
 			return (1);
+	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
+		pass_to_next_element(str, &i);
 	if (str[i] != '\0')
 		return (1);
 	return (0);
 }
 
-static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
+static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
 {
 	cylinder->hit_body = false;
 	pass_to_next_element(str, &i);
@@ -103,7 +103,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	}
 	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	cylinder = init_cylinder_part3(cylinder, str, i);
+	cylinder = init_cylinder_part3(cylinder);
 	return (cylinder);
 }
 

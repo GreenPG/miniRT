@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:13:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:15:27 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static int	check_plane(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0)
-		pass_to_next_element(str, &i);
 	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
 		if (check_specular(str, &i) == 1)
 			return (1);
+	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
+		pass_to_next_element(str, &i);
 	if (str[i] != '\0')
 		return (1);
 	return (0);
