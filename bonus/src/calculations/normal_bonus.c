@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 10:27:12 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:09:07 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,20 @@ static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray, doubl
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&normal.dir, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&normal.dir, data.cross, data.angle);
+	}
 	normal.dir.x *= ellipsoid->a;
 	normal.dir.y *= ellipsoid->b;
 	normal.dir.z *= ellipsoid->c;
-	rotate_around_axis(&normal.dir, data.cross, -data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+		rotate_around_axis(&normal.dir, data.cross, -data.angle);
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;

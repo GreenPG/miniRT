@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 17:09:40 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 07:44:28 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,18 +108,18 @@ int	texture_plane(t_vector vec, t_plane *plane, t_camera *camera)
 	else
 	{
 		vec.x = -vec.x;
-		vec.z = -vec.z;
+		vec.z = -vec.z;	
 	}
 	int x;
 	int	y;
-	vec.y = fmodf(vec.y, 1);
-	if (vec.y < 0)
-		vec.y += 1;
+	vec.z = fmodf(vec.z, 1);
+	if (vec.z < 0)
+		vec.z += 1;
 	vec.x = fmodf(vec.x, 1);
 	if (vec.x < 0)
 		vec.x += 1;
-	x =  vec.y * plane->tex->width;
-	y =  fmodf(fabs(vec.x), 1) * plane->tex->height;
+	x =  vec.z * plane->tex->width;
+	y =  fabs(vec.x) * plane->tex->height;
 	uint32_t pixel_index = (y * plane->tex->width + x) * plane->tex->bytes_per_pixel;
 
     r = plane->tex->pixels[pixel_index];

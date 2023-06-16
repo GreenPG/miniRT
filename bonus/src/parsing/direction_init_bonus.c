@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:12:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 13:45:59 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 07:56:05 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ t_vector	*get_up(t_vector *direction)
 	data.front.y = direction->y;
 	data.front.z = 0;
 	data.cross = vector_cross(*direction, data.front);
+	if (direction->x < 0.01 && direction->y < 0.01 && direction->z > 0.99)
+	{
+		up->x = 0;
+		up->y = -1;
+		up->z = 0;
+		printf("ewqfwqfwqefwef\n");
+		return (up);
+	}
 	if (sqrt(dot_product(data.cross, data.cross)) < 1e-6)
 		return (up);
 	vector_norm(&data.cross);

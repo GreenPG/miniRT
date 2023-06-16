@@ -8,8 +8,8 @@ sp 0,5,1 1 255,123,23 ./bonus/src/earth_day.png
 sp 0,5,0 1 255,123,23 checkerboard
 sp 0,5,-1 1 255,123,255
 
-cy 1,5,1 1,0,0 0.2 1 10,200,2 ./bonus/src/earth_day.png
-cy 1,5,0 1,0,0 0.2 1 10,200,2 checkerboard
+cy 1,5,1 0,0,1 0.2 1 10,200,2 ./bonus/src/earth_day.png
+cy 1,5,0 0,1,0 0.2 1 10,200,2 checkerboard
 cy 1,5,-1 1,0,0 0.2 1 10,200,2
 
 el -1,5,1 0,1,0	0.41 0.12 0.6 255,255,255 ./bonus/src/gpasquet_zoom_hd.png
