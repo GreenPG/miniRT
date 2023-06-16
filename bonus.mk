@@ -28,6 +28,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/calculations/cylinder_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations2_bonus.c 	\
 				bonus/src/calculations/ellipsoid_calculations_bonus.c 	\
+				bonus/src/calculations/ellipsoid_shadow_bonus.c 	\
 				bonus/src/calculations/cylinder_shadow_bonus.c 	\
 				bonus/src/calculations/triangle_shadow_bonus.c 	\
 				bonus/src/calculations/triangle_calculations_bonus.c 	\
@@ -59,6 +60,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/utils/rgba_bonus.c \
 				bonus/src/utils/structs_utils_bonus.c \
 				bonus/src/utils/utils_bonus.c \
+				bonus/src/utils/utils_calc_bonus.c \
 
 OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 15:02:19 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:31:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static int	checkerboard_cylinder(t_vector vec, t_cylinder *cylinder)
 	tmp.x = cylinder->up->x;
 	tmp.y = cylinder->up->y;
 	tmp.z = cylinder->up->z;
-
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
@@ -133,7 +132,6 @@ static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 	tmp.x = ellipsoid->up->x;
 	tmp.y = ellipsoid->up->y;
 	tmp.z = ellipsoid->up->z;
-
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
