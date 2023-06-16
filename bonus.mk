@@ -2,7 +2,8 @@ HEADERS_BONUS	=	-I ./bonus/includes -I $(LIBMLX)/include -I $(LIBFT)/include
 
 SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/keypress_handle_bonus.c \
-				bonus/src/free_functions_bonus.c	\
+				bonus/src/free/free_functions_bonus.c	\
+				bonus/src/free/free_obj_bonus.c	\
 				bonus/src/parsing/ambiant_light_bonus.c \
 				bonus/src/parsing/camera_bonus.c \
 				bonus/src/parsing/choose_component_bonus.c \
@@ -10,9 +11,9 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/parsing/light_bonus.c \
 				bonus/src/parsing/light_list_bonus.c \
 				bonus/src/parsing/obj_bonus.c \
+				bonus/src/parsing/obj_type_bonus.c \
 				bonus/src/parsing/obj_utils_bonus.c \
 				bonus/src/parsing/parsing_bonus.c \
-				bonus/src/parsing/frame_init_bonus.c \
 				bonus/src/parsing/parsing_utils_bonus.c \
 				bonus/src/parsing/check_input_bonus.c \
 				bonus/src/parsing/check_input2_bonus.c \

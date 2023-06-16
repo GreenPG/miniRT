@@ -6,30 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 17:19:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:45:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_plane(t_plane **plane)
-{
-	if (!plane || !*plane)
-		return ;
-	if ((*plane)->direction)
-	{
-		free((*plane)->direction);
-		(*plane)->direction = NULL;
-	}
-	if ((*plane)->origin)
-	{
-		free((*plane)->origin);
-		(*plane)->origin = NULL;
-	}
-	free(*plane);
-	*plane = NULL;
-	return ;
-}
 
 static int	check_plane(char *str)
 {

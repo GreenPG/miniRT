@@ -6,24 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 11:02:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:45:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_ellipsoid(t_ellipsoid **ellipsoid)
-{
-	if (!ellipsoid || !*ellipsoid)
-		return ;
-	if ((*ellipsoid)->origin)
-		free((*ellipsoid)->origin);
-	if ((*ellipsoid)->direction)
-		free((*ellipsoid)->direction);
-	free(*ellipsoid);
-	*ellipsoid = NULL;
-	return ;
-}
 
 static int	check_ellipsoid(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 17:19:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:47:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ void			choose_component(char *line, t_scene **scene);
 
 int				init_obj(char *line, t_obj_list **list_ptr, t_type type);
 
+/*	obj_type_bonus.c	*/
+int				sphere_obj(t_obj_list *obj, char *line);
+int				plane_obj(t_obj_list *obj, char *line);
+int				cylinder_obj(t_obj_list *obj, char *line);
+int				ellipsoid_obj(t_obj_list *obj, char *line);
+int				triangle_obj(t_obj_list *obj, char *line);
+
 /*	obj_utils.c	*/
 
 int				get_bonus_data(t_obj_list **obj_ptr, char *line);
@@ -87,6 +94,7 @@ int				check_triple_float(char *str, int *i);
 
 /*	check_input.c	*/
 int				check_bonus_var(char *str);
+int				check_triangle(char *input);
 
 /*	ambiant_light.c	*/
 
@@ -100,7 +108,6 @@ void			free_camera(t_camera **camera);
 /*	sphere.c	*/
 
 t_sphere		*init_sphere(char *input);
-void			free_sphere(t_sphere **sphere);
 
 /*	sphere_calculations.c	*/
 double			get_root(double a, double b, double d);
@@ -116,20 +123,16 @@ void			free_light(t_light **light);
 /*	plane.c	*/
 
 t_plane			*init_plane(char *str);
-void			free_plane(t_plane **plane);
 
 /*	cylinder.c */
 
 t_cylinder		*init_cylinder(char *str);
-void			free_cylinder(t_cylinder **cylinder);
 
 /*	ellipsoid	*/
 
 t_ellipsoid		*init_ellipsoid(char *str);
-void			free_ellipsoid(t_ellipsoid **cylinder);
 
 /*	triangle_bonus.c */
-void			free_triangle(t_triangle **triangle_ptr);
 t_triangle		*init_triangle(char	*input);
 
 /*	structs_utils.c	*/
@@ -215,6 +218,13 @@ void			world_translate(t_scene *scene, double x, double y, double z);
 /*	free_functions.c	*/
 void			free_all(t_data *data, t_scene *scene);
 void			free_scene(t_scene **scene);
+
+/*	free_obj_bonus.c	*/
+void			free_triangle(t_triangle **triangle_ptr);
+void			free_ellipsoid(t_ellipsoid **cylinder);
+void			free_cylinder(t_cylinder **cylinder);
+void			free_plane(t_plane **plane);
+void			free_sphere(t_sphere **sphere);
 
 /*	hit_functions.c */
 double			plane_hit(t_plane *obj, t_vector ray);

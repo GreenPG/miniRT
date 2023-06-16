@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/04 10:37:31 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:40:30 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static mlx_t	*ft_mlx_create(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
-	icon = mlx_load_png("./bonus/src/gpasquet.png");
+	icon = mlx_load_png("./bonus/src/textures/gpasquet.png");
 	if (!icon)
 		return (mlx);
 	mlx_set_icon(mlx, icon);

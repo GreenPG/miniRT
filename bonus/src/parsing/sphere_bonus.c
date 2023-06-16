@@ -6,22 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/15 10:34:16 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:44:58 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_sphere(t_sphere **sphere)
-{
-	if (!sphere || !*sphere)
-		return ;
-	if ((*sphere)->origin)
-		free((*sphere)->origin);
-	free(*sphere);
-	*sphere = NULL;
-	return ;
-}
 
 static int	check_sphere(char *input)
 {

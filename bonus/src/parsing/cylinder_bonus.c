@@ -6,24 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 11:23:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:44:45 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_cylinder(t_cylinder **cylinder)
-{
-	if (!cylinder || !*cylinder)
-		return ;
-	if ((*cylinder)->origin)
-		free((*cylinder)->origin);
-	if ((*cylinder)->direction)
-		free((*cylinder)->direction);
-	free(*cylinder);
-	*cylinder = NULL;
-	return ;
-}
 
 static int	check_cylinder(char *str)
 {
@@ -52,12 +39,7 @@ static int	check_cylinder(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
-		if (check_specular(str, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
-		pass_to_next_element(str, &i);
-	if (str[i] != '\0')
+	if (check_bonus_var(str) == 1)
 		return (1);
 	return (0);
 }
