@@ -6,11 +6,24 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:45:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:36:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static int	check_ellipsoid2(char *str, int i)
+{
+	if (check_triple_int(str, &i) == 1)
+		return (1);
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	if (check_bonus_var(str) == 1)
+		return (1);
+	return (0);
+}
 
 static int	check_ellipsoid(char *str)
 {
@@ -36,43 +49,16 @@ static int	check_ellipsoid(char *str)
 	if (check_float(str, &i) == 1)
 		return (1);
 	pass_to_next_element(str, &i);
-	if (check_triple_int(str, &i) == 1)
-		return (1);
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
-		if (check_specular(str, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
-		pass_to_next_element(str, &i);
-	if (str[i] != '\0')
+	if (check_cylinder2(str, i) == 1)
 		return (1);
 	return (0);
 }
 
-static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
+static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 		char *str, int i)
 {
 	int			*rgb;
-	float			a;
-	float			b;
-	float			c;
 
-	a = ft_atof(str + i);
-	pass_to_next_element(str, &i);
-	b = ft_atof(str + i);
-	pass_to_next_element(str, &i);
-	c = ft_atof(str + i);
-	if (a == 0 || b == 0 || c == 0)
-	{
-		free_ellipsoid(&ellipsoid);
-		return (NULL);
-	}
-	ellipsoid->a = 1. / (a * a);
-	ellipsoid->b = 1. / (b * b);
-	ellipsoid->c = 1. / (c * c);
 	pass_to_next_element(str, &i);
 	rgb = get_color_values(str + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
@@ -91,6 +77,31 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 	ellipsoid->direction->x = 0;
 	ellipsoid->direction->y = 1;
 	ellipsoid->direction->z = 0;
+	return (ellipsoid);
+}
+
+static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
+		char *str, int i)
+{
+	float		a;
+	float		b;
+	float		c;
+
+	pass_to_next_element(str, &i);
+	a = ft_atof(str + i);
+	pass_to_next_element(str, &i);
+	b = ft_atof(str + i);
+	pass_to_next_element(str, &i);
+	c = ft_atof(str + i);
+	if (a == 0 || b == 0 || c == 0)
+	{
+		free_ellipsoid(&ellipsoid);
+		return (NULL);
+	}
+	ellipsoid->a = 1. / (a * a);
+	ellipsoid->b = 1. / (b * b);
+	ellipsoid->c = 1. / (c * c);
+	ellipsoid = init_ellipsoid_part3(ellipsoid, str, i);
 	return (ellipsoid);
 }
 
@@ -119,7 +130,6 @@ t_ellipsoid	*init_ellipsoid(char *str)
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
 	}
-	pass_to_next_element(str, &i);
 	ellipsoid = init_ellipsoid_part2(ellipsoid, str, i);
 	return (ellipsoid);
 }

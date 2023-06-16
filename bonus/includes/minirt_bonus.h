@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 09:47:05 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:22:57 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ int				check_int(char *str, int *i);
 int				check_float(char *str, int *i);
 int				check_triple_float(char *str, int *i);
 
-/*	check_input.c	*/
+/*	check_input2.c	*/
 int				check_bonus_var(char *str);
 int				check_triangle(char *input);
+int				check_cylinder(char *str);
 
 /*	ambiant_light.c	*/
 

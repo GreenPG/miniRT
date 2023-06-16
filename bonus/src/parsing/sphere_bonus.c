@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/16 09:44:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:39:02 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ static int	check_sphere(char *input)
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	if (ft_strncmp("specular", &input[i], ft_strlen("specular")) == 0)
-		if (check_specular(input, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &input[i], ft_strlen("./")) == 0)
-		pass_to_next_element(input, &i);	
-	if (input[i] != '\0')
+	if (check_bonus_var(str) == 1)
 		return (1);
 	return (0);
 }

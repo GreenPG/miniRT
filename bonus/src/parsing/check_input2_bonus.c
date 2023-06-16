@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:14:21 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:29:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:25:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,45 @@ int	check_triangle(char *input)
 	if (check_triple_int(input, &i) == 1)
 		return (1);
 	if (check_triangle2(&input[i]) == 1)
+		return (1);
+	return (0);
+}
+
+static int	check_cylinder2(char *str, int i)
+{
+	if (check_triple_int(str, &i) == 1)
+		return (1);
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	if (check_bonus_var(str) == 1)
+		return (1);
+	return (0);
+}
+
+int	check_cylinder(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (1);
+	i = 2;
+	while (ft_isspace(str[i]) == 1)
+		i++;
+	if (check_triple_float(str, &i) == 1)
+		return (1);
+	pass_to_next_element(str, &i);
+	if (check_triple_float(str, &i) == 1)
+		return (1);
+	pass_to_next_element(str, &i);
+	if (check_int(str, &i) == 1)
+		return (1);
+	pass_to_next_element(str, &i);
+	if (check_int(str, &i) == 1)
+		return (1);
+	pass_to_next_element(str, &i);
+	if (check_cylinder2(str, i) == 1)
 		return (1);
 	return (0);
 }
