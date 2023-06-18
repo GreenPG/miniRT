@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_calculations_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:39:22 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 16:26:32 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/18 11:10:46 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,4 @@ double	triangle_hit(t_triangle *triangle, t_vector ray)
 		return (INFINITY);
 	return (distance);
 }
+
