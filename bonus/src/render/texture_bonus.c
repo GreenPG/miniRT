@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/17 15:22:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 09:51:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t *tex)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
 		rotate_around_axis(&vec, data.cross, data.angle);
-		alpha = atan2(vec.y, vec.x);
+		alpha = atan2(vec.y, -vec.x);
 		beta = acos(vec.z);
 	}
 	else
