@@ -2,16 +2,16 @@ A 0.3 255,255,250
 C 0,0,0 0,1,0 100 
 L -10,4.6645645,20 1 255,255,255
 
-sp 0,0,0 200000 255,123,23 ./bonus/src/sky4.png
+sp 0,0,0 200000 255,123,23 ./bonus/src/textures/sky4.png
 
-sp 0,5,1 1 255,123,23 bump ./bonus/src/earth_bump.png ./bonus/src/earth_day.png 
+sp 0,5,1 1 255,123,23 bump ./bonus/src/textures/earth_bump.png ./bonus/src/textures/earth_day.png 
 # sp 0,5,0 1 255,123,23 checkerboard
 # sp 0,5,-1 1 255,123,255
 
-cy -0,0,0 1,0,0 0.2 5 10,200,2 ./bonus/src/earth_day.png
+cy -0,0,0 1,0,0 0.2 5 10,200,2 ./bonus/src/textures/earth_day.png
 cy 1,5,0 0,1,0 0.2 1 10,200,2 checkerboard
 cy 1,5,-1 1,0,1 0.2 1 10,200,2
 
-el -1,5,1 1,0.5,1	0.41 0.12 0.6 255,255,255 ./bonus/src/gpasquet_zoom_hd.png
+el -1,5,1 1,0.5,1	0.41 0.12 0.6 255,255,255 ./bonus/src/textures/gpasquet_zoom_hd.png
 el -1,5,0 1,0,1	0.41 0.12 0.6 255,255,255 checkerboard
 el -1,5,-1 1,0,1	0.41 0.12 0.6 255,255,255
