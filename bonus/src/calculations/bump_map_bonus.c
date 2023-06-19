@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/18 15:21:36 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 08:16:02 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,14 +272,14 @@ static t_normal	bump_sphere(t_sphere *sphere, t_vector vec, t_normal normal, mlx
 
 t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal)
 {
-	if (nearest->type == sphere && nearest->tex)
-		normal = bump_sphere(nearest->sphere, normal.dir, normal, nearest->tex);
+	if (nearest->type == sphere)
+		normal = bump_sphere(nearest->sphere, normal.dir, normal, nearest->bump_map);
 	if (nearest->type == plane)
-	 	normal = bump_plane(nearest->plane, normal.origin, normal, nearest->tex);
+	 	normal = bump_plane(nearest->plane, normal.origin, normal, nearest->bump_map);
 	// if (nearest->type == cylinder)
 	//  	color = texture_cylinder(normal.origin, nearest->cylinder, nearest->tex);
 	if (nearest->type == ellipsoid)
-	 	normal = bump_ellipsoid(nearest->ellipsoid, normal.origin, normal, nearest->tex);
+	 	normal = bump_ellipsoid(nearest->ellipsoid, normal.origin, normal, nearest->bump_map);
 	(void)ray;
 	(void)distance;
 	return (normal);
