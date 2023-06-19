@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/14 09:43:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 08:40:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,74 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		plane_translate(nearest->plane, x, y, z);
 	else if (nearest->type == ellipsoid)
 		ellipsoid_translate(nearest->ellipsoid, x, y, z);
+	else if (nearest->type == triangle)
+		triangle_translate(nearest->triangle, x, y, z);
+}
+
+static void	triangle_rotate(t_triangle *triangle, int x, int y, int z)
+{
+	double	angle;
+
+	if (x)
+	{
+		angle = 10 * (M_PI / 180) * x;
+		triangle->b->x -= triangle->a->x;
+		triangle->b->y -= triangle->a->y;
+		triangle->b->z -= triangle->a->z;
+		triangle->c->x -= triangle->a->x;
+		triangle->c->y -= triangle->a->y;
+		triangle->c->z -= triangle->a->z;
+		vector_rot_x(triangle->b, angle);
+		vector_rot_x(triangle->c, angle);
+		triangle->b->x += triangle->a->x;
+		triangle->b->y += triangle->a->y;
+		triangle->b->z += triangle->a->z;
+		triangle->c->x += triangle->a->x;
+		triangle->c->y += triangle->a->y;
+		triangle->c->z += triangle->a->z;
+		vector_rot_x(triangle->normal, angle);
+		vector_rot_x(triangle->up, angle);
+	}
+	else if (y)
+	{
+		angle = 10 * (M_PI / 180) * y;
+		triangle->b->x -= triangle->a->x;
+		triangle->b->y -= triangle->a->y;
+		triangle->b->z -= triangle->a->z;
+		triangle->c->x -= triangle->a->x;
+		triangle->c->y -= triangle->a->y;
+		triangle->c->z -= triangle->a->z;
+		vector_rot_y(triangle->b, angle);
+		vector_rot_y(triangle->c, angle);
+		triangle->b->x += triangle->a->x;
+		triangle->b->y += triangle->a->y;
+		triangle->b->z += triangle->a->z;
+		triangle->c->x += triangle->a->x;
+		triangle->c->y += triangle->a->y;
+		triangle->c->z += triangle->a->z;
+		vector_rot_y(triangle->normal, angle);
+		vector_rot_y(triangle->up, angle);
+	}
+	else if (z)
+	{
+		angle = 10 * (M_PI / 180) * z;
+		triangle->b->x -= triangle->a->x;
+		triangle->b->y -= triangle->a->y;
+		triangle->b->z -= triangle->a->z;
+		triangle->c->x -= triangle->a->x;
+		triangle->c->y -= triangle->a->y;
+		triangle->c->z -= triangle->a->z;
+		vector_rot_z(triangle->b, angle);
+		vector_rot_z(triangle->c, angle);
+		triangle->b->x += triangle->a->x;
+		triangle->b->y += triangle->a->y;
+		triangle->b->z += triangle->a->z;
+		triangle->c->x += triangle->a->x;
+		triangle->c->y += triangle->a->y;
+		triangle->c->z += triangle->a->z;
+		vector_rot_z(triangle->normal, angle);
+		vector_rot_z(triangle->up, angle);
+	}
 }
 
 void	rotate_one(t_obj_list *nearest, int x, int y, int z)
@@ -32,7 +100,9 @@ void	rotate_one(t_obj_list *nearest, int x, int y, int z)
 
 	if (!nearest)
 		return ;
-	if (x)
+	if (nearest->type == triangle)
+		triangle_rotate(nearest->triangle, x, y, z);
+	else if (x)
 	{
 		angle = 10 * (M_PI / 180) * x;
 		if (nearest->type == cylinder)
@@ -124,6 +194,8 @@ static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
 			current_distance = plane_hit(cursor->plane, ray);
 		else if (cursor->type == ellipsoid)
 			current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
+		else if (cursor->type == triangle)
+			current_distance = triangle_hit(cursor->triangle, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;

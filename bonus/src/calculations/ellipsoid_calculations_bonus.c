@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/08 16:08:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 10:30:30 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ double	ellipsoid_hit(t_ellipsoid *ellipsoid, t_vector ray)
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
+		printf("%f\n",dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp)))
+					* sqrt(dot_product (data.front, data.front)));
 		rotate_around_axis(&ray, data.cross, data.angle);
 		rotate_around_axis(&data.rayo, data.cross, data.angle);
 	}

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:18:43 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 08:13:30 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ static int	check_ellipsoid(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
-		if (check_specular(str, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
+	if (ft_strncmp("bump", &str[i], ft_strlen("bump")) == 0)
+	{
 		pass_to_next_element(str, &i);
+		pass_to_next_element(str, &i);
+	}
+	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
+		pass_to_next_element(str, &i);	
 	if (str[i] != '\0')
 		return (1);
 	return (0);

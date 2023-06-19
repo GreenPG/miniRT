@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 09:15:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 10:42:07 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			add_obj(t_obj_list **list_ptr, t_obj_list *obj);
 
 void			pass_to_next_element(char *str, int *i);
 int				check_specular(char *str, int *i);
+int				check_bump(char *str, int *i);
 int				check_triple_int(char *str, int *i);
 int				check_int(char *str, int *i);
 int				check_float(char *str, int *i);
@@ -329,5 +330,9 @@ void		rotate_around_axis(t_vector *vec, t_vector axis, double angle);
 t_vector		*get_up(t_vector *direction);
 t_vector		*up_default(void);
 t_vector		*direction_default(void);
+
+/*	bump_map	*/
+
+t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal);
 
 #endif
