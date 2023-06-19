@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:14:21 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 10:25:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:36:20 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	check_bonus_var(char *str)
 	if (ft_strncmp("specular", str, ft_strlen("specular")) == 0)
 		if (check_specular(str, &i) == 1)
 			return (1);
+	if (ft_strncmp("bump", str, ft_strlen("bump")) == 0)
+	{
+		pass_to_next_element(str, &i);
+		pass_to_next_element(str, &i);
+	}
 	if (ft_strncmp("checkerboard", str, ft_strlen("checkerboard"))
 		== 0 || ft_strncmp("./", str, ft_strlen("./")) == 0)
 		pass_to_next_element(str, &i);

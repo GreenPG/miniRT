@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:11:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:37:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 10:42:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +49,7 @@ static t_triangle	*init_triangle3(t_triangle *triangle, char *input, int i)
 	}
 	triangle->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	triangle->up = malloc(sizeof(t_vector));
-	triangle->up->x = 0;
-	triangle->up->y = 0;
-	triangle->up->z = 1;
+	triangle->up = get_up(triangle->normal);
 	return (triangle);
 }
 

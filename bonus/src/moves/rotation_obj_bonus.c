@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:55:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 13:11:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:41:53 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	rotate_one(t_obj_list *nearest, int x, int y, int z)
 {
 	if (!nearest)
 		return ;
+	if (nearest->type == triangle)
+		triangle_rotate(nearest->triangle, x, y, z);
 	if (x)
 		rotate_one_x(nearest, x);
 	else if (y)

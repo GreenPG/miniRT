@@ -38,6 +38,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/calculations/vector_calculations_bonus.c \
 				bonus/src/calculations/shadow_bonus.c \
 				bonus/src/calculations/quaternions_bonus.c \
+				bonus/src/calculations/bump_map_bonus.c \
 				bonus/src/render/color_bonus.c	\
 				bonus/src/render/normal_color_bonus.c	\
 				bonus/src/render/hit_functions_bonus.c \

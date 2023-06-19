@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 10:54:37 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:48:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			pass_to_next_element(char *str, int *i);
 
 /*	check_input.c	*/
 int				check_specular(char *str, int *i);
+int				check_bump(char *str, int *i);
 int				check_triple_int(char *str, int *i);
 int				check_int(char *str, int *i);
 int				check_float(char *str, int *i);
@@ -211,6 +212,7 @@ void			sphere_translate(t_sphere *sphere, double x, double y,
 void			triangle_rot_y(t_triangle *triangle, double angle);
 void			triangle_rot_z(t_triangle *triangle, double angle);
 void			triangle_rot_x(t_triangle *triangle, double angle);
+void			triangle_rotate(t_triangle *triangle, int x, int y, int z);
 void			triangle_translate(t_triangle *triangle, double x,
 					double y, double z);
 
@@ -368,5 +370,9 @@ t_vector		*get_up(t_vector *direction);
 t_vector		*up_default(void);
 t_vector		*direction_default(void);
 t_frame			*frame_init(t_vector *dir);
+
+/*	bump_map	*/
+
+t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal);
 
 #endif

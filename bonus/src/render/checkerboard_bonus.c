@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 11:19:36 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:39:22 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,9 +193,9 @@ static int	checkerboard_triangle(t_vector vec, t_triangle *triangle)
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
-	vec.x -= -triangle->a->x;
-	vec.y -= -triangle->a->y;
-	vec.z -= -triangle->a->z;
+	vec.x -= triangle->a->x;
+	vec.y -= triangle->a->y;
+	vec.z -= triangle->a->z;
 	data.cross = vector_cross(*triangle->normal, data.front);
 	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*triangle->normal, data.front)
@@ -206,12 +206,15 @@ static int	checkerboard_triangle(t_vector vec, t_triangle *triangle)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	data.cross = vector_norm(data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		data.cross = vector_norm(data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
 	if ((int)(floor(vec.x) + floor(vec.z)) % 2 == 0)
 		return (get_rgba(255,255,255,0));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:46:54 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 13:05:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:42:50 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	move_one(t_obj_list *nearest, double x, double y, double z)
 		plane_translate(nearest->plane, x, y, z);
 	else if (nearest->type == ellipsoid)
 		ellipsoid_translate(nearest->ellipsoid, x, y, z);
+	else if (nearest->type == triangle)
+		triangle_translate(nearest->triangle, x, y, z);
 }
 
 static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
@@ -44,6 +46,8 @@ static t_obj_list	*get_nearest_obj(t_obj_list *cursor,
 			current_distance = plane_hit(cursor->plane, ray);
 		else if (cursor->type == ellipsoid)
 			current_distance = ellipsoid_hit(cursor->ellipsoid, ray);
+		else if (cursor->type == triangle)
+			current_distance = triangle_hit(cursor->triangle, ray);
 		if (current_distance < nearest_distance)
 		{
 			nearest = cursor;
