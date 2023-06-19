@@ -35,6 +35,17 @@ int	check_specular(char *str, int *i)
 	return (0);
 }
 
+int	check_bump(char *str, int *i)
+{
+	if (!str)
+		return (1);
+	while (ft_isalpha(str[*i]))
+		(*i)++;
+	while (ft_isspace(str[*i]))
+		(*i)++;
+	return (0);
+}
+
 int	check_float(char *str, int *i)
 {
 	if (ft_isdigit(str[*i]) == 0 && str[*i] != '-' && str[*i] != '+')

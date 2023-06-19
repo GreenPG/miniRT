@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 10:43:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:15:04 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			add_obj(t_obj_list **list_ptr, t_obj_list *obj);
 
 void			pass_to_next_element(char *str, int *i);
 int				check_specular(char *str, int *i);
+int				check_bump(char *str, int *i);
 int				check_triple_int(char *str, int *i);
 int				check_int(char *str, int *i);
 int				check_float(char *str, int *i);

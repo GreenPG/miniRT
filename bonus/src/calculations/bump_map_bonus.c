@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/17 13:46:43 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:21:36 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ static	t_normal	bump_plane(t_plane *plane, t_vector vec, t_normal normal, mlx_te
 	double derivative_v;
 	double ratio;
 
-    derivative_u = (double)tex->pixels[pixel_index] / 16.;
-	derivative_v = (double)tex->pixels[pixel_index] / 16.;
+    derivative_u = (double)tex->pixels[pixel_index] / 64.;
+	derivative_v = (double)tex->pixels[pixel_index] / 64.;
 	pixel_index = (((y + 1) % tex->height)  * tex->width + x) * tex->bytes_per_pixel;
-	derivative_u = (double)tex->pixels[pixel_index] / 16. - derivative_u; 
+	derivative_u = (double)tex->pixels[pixel_index] / 64. - derivative_u; 
 	pixel_index = (y * tex->width + (x + 1) % tex->width) * tex->bytes_per_pixel;
-	derivative_v = (double)tex->pixels[pixel_index] / 16. - derivative_v;
+	derivative_v = (double)tex->pixels[pixel_index] / 64. - derivative_v;
 	ratio = 1. / sqrt(derivative_u * derivative_u + derivative_v * derivative_v + 1);
 	normal.dir.x += -derivative_u * ratio;
     normal.dir.y += -derivative_v * ratio;

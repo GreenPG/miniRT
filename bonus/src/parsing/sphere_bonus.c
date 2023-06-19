@@ -49,6 +49,11 @@ static int	check_sphere(char *input)
 	if (ft_strncmp("specular", &input[i], ft_strlen("specular")) == 0)
 		if (check_specular(input, &i) == 1)
 			return (1);
+	if (ft_strncmp("bump", &input[i], ft_strlen("bump")) == 0)
+	{
+		pass_to_next_element(input, &i);
+		pass_to_next_element(input, &i);
+	}
 	if (ft_strncmp("checkerboard", &input[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &input[i], ft_strlen("./")) == 0)
 		pass_to_next_element(input, &i);	
 	if (input[i] != '\0')

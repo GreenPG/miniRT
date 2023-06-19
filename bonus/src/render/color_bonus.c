@@ -106,7 +106,8 @@ int	get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 	{
 		normal = get_normal(nearest, ray, distance);
 		color = get_normal_color(nearest, ray, normal, scene->camera);
-		//normal = get_bump(nearest, ray, distance, normal);
+		if (nearest->has_bump == 1)
+			normal = get_bump(nearest, ray, distance, normal);
 		diffuse_color = get_diffuse_color(scene, ray, normal, nearest);
 		if (nearest->sp_e == 0)
 			specular_color = 0;
