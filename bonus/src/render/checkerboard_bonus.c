@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 14:47:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:15:52 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ static int	checkerboard_sphere(t_vector vec, t_sphere *sphere)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
 	alpha = atan2(vec.x, vec.y);
 	beta = acos(vec.z);
 	if ((int)(floor(alpha * M_PI) + floor(beta * M_PI)) % 2 == 0)
@@ -71,12 +74,15 @@ static int	checkerboard_plane(t_vector vec, t_plane *plane)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
 	if ((int)(floor(vec.x) + floor(vec.z)) % 2 == 0)
 		return (get_rgba(255,255,255,0));
 	return (0);
@@ -107,12 +113,15 @@ static int	checkerboard_cylinder(t_vector vec, t_cylinder *cylinder)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
 	if ((int)floor(vec.z) % 2 == 0)
 	{
 		if ((int)(floor(vec.x) + floor(vec.y)) % 2 == 0)
@@ -139,7 +148,7 @@ static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
-	vec.x -= ellipsoid->origin->x;
+	vec.x -= ellipsoid->origin->x;	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	vec.y -= ellipsoid->origin->y;
 	vec.z -= ellipsoid->origin->z;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
@@ -152,12 +161,15 @@ static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
 	if ((int)floor(vec.z) % 2 == 0)
 	{
 		if ((int)(floor(vec.x) + floor(vec.y)) % 2 == 0)

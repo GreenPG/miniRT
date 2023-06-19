@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 15:05:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 09:14:25 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,22 @@ static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
-	
-	alpha = atan2(vec.y, vec.x);
-	beta = acos(vec.z);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+		alpha = atan2(vec.y, vec.x);
+		beta = acos(vec.z);
+	}
+	else
+	{
+		alpha = atan2(vec.y, -vec.x);
+		beta = acos(-vec.z);
+	}
 	int x;
 	int	y;
 	x = (alpha + M_PI) / (M_PI * 2.)* tex->width;
@@ -87,12 +94,20 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
+	else
+	{
+		vec.x = -vec.x;
+		vec.z = -vec.z;	
+	}
 	int x;
 	int	y;
 	vec.z = fmodf(vec.z, 1);
@@ -101,8 +116,8 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 	vec.x = fmodf(vec.x, 1);
 	if (vec.x < 0)
 		vec.x += 1;
-	x =  vec.z * tex->width;
-	y =  fmodf(fabs(vec.x), 1) * tex->height;
+	x = vec.z * tex->width;
+	y = vec.x * tex->height;
 	uint32_t pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 
     r = tex->pixels[pixel_index];
@@ -143,14 +158,22 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *t
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
-	alpha = atan2(vec.z, vec.x);
-	beta = acos(vec.y);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+		alpha = atan2(vec.z, vec.x);
+		beta = acos(vec.y);
+	}
+	else
+	{
+		alpha = atan2(-vec.z, -vec.x);
+		beta = acos(vec.y);
+	}
 	int x;
 	int	y;
 	x = (beta) / M_PI * tex->width;
@@ -195,14 +218,22 @@ static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t
 	data.front.x = 0.0000001;
 	data.front.y = 0.0000001;
 	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&vec, data.cross, data.angle);
-	alpha = atan2(vec.y, vec.x);
-	beta = acos(vec.z);
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		vector_norm(&data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+		alpha = atan2(vec.y, vec.x);
+		beta = acos(vec.z);
+	}
+	else
+	{
+		alpha = atan2(vec.y, vec.x);
+		beta = acos(-vec.z);
+	}
 	int x;
 	int	y;
 	x = (alpha + M_PI) / (M_PI * 2.)* tex->width;

@@ -58,14 +58,8 @@ static int	check_sphere(char *input)
 
 t_sphere	*init_sphere_part3(t_sphere *sphere)
 {
-	sphere->up = malloc(sizeof(t_vector));
-	sphere->up->x = 0;
-	sphere->up->y = 0;
-	sphere->up->z = 1;
-	sphere->direction = malloc(sizeof(t_vector));
-	sphere->direction->x = 0;
-	sphere->direction->y = 1;
-	sphere->direction->z = 0;
+	sphere->direction = direction_default();
+	sphere->up = up_default();
 	return (sphere);
 }
 

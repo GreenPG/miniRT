@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 11:23:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 08:17:49 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,7 @@ static int	check_cylinder(char *str)
 static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
 {
 	cylinder->hit_body = false;
-	cylinder->up = malloc(sizeof(t_vector));
-	cylinder->up->x = 0;
-	cylinder->up->y = 0;
-	cylinder->up->z = 1;
-	cylinder->direction = malloc(sizeof(t_vector));
-	cylinder->direction->x = 0;
-	cylinder->direction->y = 1;
-	cylinder->direction->z = 0;
+	cylinder->up = get_up(cylinder->direction);
 	return (cylinder);
 }
 
