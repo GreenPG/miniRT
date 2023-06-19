@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/09 17:57:48 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:52:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int			check_int(char *str, int *i);
 int			check_float(char *str, int *i);
 int			check_triple_float(char *str, int *i);
 
+/*	vector_parsing.c */
+t_vector	*init_vector(char *str);
+
 /*	ambiant_light.c	*/
 
 t_ambiant_l	*init_ambiant_l(char *input);
@@ -124,7 +127,6 @@ int			*get_color_values(char	*str);
 
 t_vector	vector_cross(t_vector a, t_vector b);
 double		dot_product(const t_vector v, const t_vector u);
-t_vector	*init_vector(char *str);
 void		vector_norm(t_vector *vec);
 
 	/*	render.c	*/
@@ -134,14 +136,16 @@ int			init_rays(t_scene *scene);
 
 	/*	rotation.c	*/
 
-void		vector_rot_x(t_vector *vec, double angle);
-void		vector_rot_y(t_vector *vec, double angle);
-void		vector_rot_z(t_vector *vec, double angle);
 void		rotation_x(t_scene *scene, double angle);
 void		rotation_y(t_scene *scene, double angle);
 void		rotation_z(t_scene *scene, double angle);
 void		world_rotate(t_scene *scene, double alpha, double beta,
 				double theta);
+
+/*	vector_rotation.c	*/
+void		vector_rot_x(t_vector *vec, double angle);
+void		vector_rot_y(t_vector *vec, double angle);
+void		vector_rot_z(t_vector *vec, double angle);
 
 	/* 	cylinder_move.c	*/
 void		cylinder_rot_y(t_cylinder *cylinder, double angle);
@@ -172,6 +176,7 @@ void		light_rot_z(t_light *light, double angle);
 void		world_translate(t_scene *scene, double x, double y, double z);
 
 	/*	free_functions.c	*/
+void		free_cyl_roots(double *root, double *caps);
 void		free_all(t_data *data, t_scene *scene);
 void		free_scene(t_scene **scene);
 
@@ -225,7 +230,6 @@ double		get_shadow_distance(t_obj_list *cursor, t_normal normal,
 /*	cylinder_calculations.c 	*/
 double		*caps_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
 double		*body_hit(t_vector ray, t_vector rayo, t_cylinder *cylinder);
-void		free_cyl_roots(double *root, double *caps);
 double		*between_caps(double *root, t_vector light_o,
 				t_vector light_dir, t_cylinder *cylinder);
 double		cylinder_hit(t_cylinder *cylinder, t_vector ray);

@@ -6,30 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:18:08 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:10:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_plane(t_plane **plane)
-{
-	if (!plane || !*plane)
-		return ;
-	if ((*plane)->direction)
-	{
-		free((*plane)->direction);
-		(*plane)->direction = NULL;
-	}
-	if ((*plane)->origin)
-	{
-		free((*plane)->origin);
-		(*plane)->origin = NULL;
-	}
-	free(*plane);
-	*plane = NULL;
-	return ;
-}
 
 static int	check_plane(char *str)
 {
@@ -52,12 +33,7 @@ static int	check_plane(char *str)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
-		if (check_specular(str, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
-		pass_to_next_element(str, &i);
-	if (str[i] != '\0')
+	if (check_bonus_var(&str[i]) == 1)
 		return (1);
 	return (0);
 }

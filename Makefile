@@ -26,6 +26,7 @@ SRCS	=	mandatory/src/main.c	\
 			mandatory/src/parsing/parsing_utils.c \
 			mandatory/src/parsing/plane.c	\
 			mandatory/src/parsing/sphere.c 	\
+			mandatory/src/parsing/vector_parsing.c 	\
 			mandatory/src/calculations/light_calculations.c \
 			mandatory/src/calculations/sphere_calculations.c 	\
 			mandatory/src/calculations/cylinder_calculations.c 	\
@@ -41,6 +42,7 @@ SRCS	=	mandatory/src/main.c	\
 			mandatory/src/render/render.c	\
 			mandatory/src/render/ray.c \
 			mandatory/src/moves/rotation.c \
+			mandatory/src/moves/vector_rotation.c \
 			mandatory/src/moves/cylinder_move.c \
 			mandatory/src/moves/plane_move.c \
 			mandatory/src/moves/sphere_move.c \

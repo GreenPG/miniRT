@@ -6,11 +6,19 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:50:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:49:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_cyl_roots(double *root, double *caps)
+{
+	if (root)
+		free(root);
+	if (caps)
+		free(caps);
+}
 
 void	free_obj_list(t_obj_list **list)
 {

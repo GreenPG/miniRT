@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 18:03:22 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:42:09 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 {
 	int			*rgb;
 
+	pass_to_next_element(str, &i);
 	cylinder->diameter = ft_atof(str + i);
 	pass_to_next_element(str, &i);
 	cylinder->height = ft_atof(str + i);
@@ -85,17 +86,6 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	return (cylinder);
 }
 
-t_vector	*nor(t_vector *ray)
-{
-	double	len;
-
-	len = sqrt(dot_product(*ray, *ray));
-	ray->x /= len;
-	ray->y /= len;
-	ray->z /= len;
-	return (ray);
-}
-
 t_cylinder	*init_cylinder(char *str)
 {
 	t_cylinder	*cylinder;
@@ -111,7 +101,8 @@ t_cylinder	*init_cylinder(char *str)
 		i++;
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
-	cylinder->direction = nor(init_vector(str + i));
+	cylinder->direction = init_vector(str + i);
+	vector_norm(cylinder->direction);
 	if (!cylinder->origin || cylinder->direction->x < -1.0
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
@@ -120,7 +111,6 @@ t_cylinder	*init_cylinder(char *str)
 		free_cylinder(&cylinder);
 		return (NULL);
 	}
-	pass_to_next_element(str, &i);
 	cylinder = init_cylinder_part2(cylinder, str, i);
 	return (cylinder);
 }

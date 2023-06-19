@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   triangle_bonus.h                                   :+:      :+:    :+:   */
+/*   ellipsoid_shadow_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 09:35:31 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 17:01:12 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/06/16 16:45:41 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/06/16 16:45:59 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRIANGLE_BONUS_H
-# define TRIANGLE_BONUS_H
+#include <minirt_bonus.h>
 
-# include <minirt_bonus.h>
+double	ellipsoid_shadow(t_ellipsoid *ellipsoid, t_normal normal,
+		t_vector ray)
+{
+	double		distance;
+	t_cyl_calc	data;
 
-typedef struct s_triangle	t_triangle;
-
-struct	s_triangle {
-	t_vector	*a;
-	t_vector	*b;
-	t_vector	*c;
-	t_vector	*normal;
-	t_vector	*up;
-	int			color;
-};
-
-#endif
+	data.rayo.x = normal.origin.x - ellipsoid->origin->x;
+	data.rayo.y = normal.origin.y - ellipsoid->origin->y;
+	data.rayo.z = normal.origin.z - ellipsoid->origin->z;
+	distance = ellipsoid_distance(ellipsoid, data, ray);
+	return (distance);
+}

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:08:47 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 17:18:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:38:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static int	handle_object_move(mlx_key_data_t keydata, t_data *data)
 		move_one(data->scene->obj_selected, 1, 0, 0);
 	else if (keydata.key == MLX_KEY_KP_4 && keydata.action == MLX_RELEASE)
 		move_one(data->scene->obj_selected, -1, 0, 0);
-	else if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == MLX_RELEASE)
+	else if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action
+		== MLX_RELEASE)
 		move_one(data->scene->obj_selected, 0, 0, 1);
 	else if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_RELEASE)
 		move_one(data->scene->obj_selected, 0, 0, -1);

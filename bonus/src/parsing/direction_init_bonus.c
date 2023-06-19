@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:12:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/16 09:08:28 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:14:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ t_vector	*get_up(t_vector *direction)
 	}
 	if (sqrt(dot_product(data.cross, data.cross)) < 1e-6)
 		return (up);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	up->x = direction->x;
 	up->y = direction->y;
 	up->z = direction->z;
 	rotate_around_axis(up, data.cross, -90 * (M_PI / 180));
-	vector_norm(up);
+	*up = vector_norm(*up);
 	return (up);
 }

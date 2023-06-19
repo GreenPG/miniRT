@@ -6,21 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/05/01 09:59:40 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/05/17 15:32:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:52:47 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-void	vector_rot_x(t_vector *vec, double angle)
-{
-	t_vector	axis;
-
-	axis.x = 0;
-	axis.y = 0;
-	axis.z = 1;
-	rotate_around_axis(vec, axis, angle);
-}
 
 void	rotation_x(t_scene *scene, double angle)
 {
@@ -40,16 +30,6 @@ void	rotation_x(t_scene *scene, double angle)
 	}
 }
 
-void	vector_rot_y(t_vector *vec, double angle)
-{
-	t_vector	axis;
-
-	axis.x = 1;
-	axis.y = 0;
-	axis.z = 0;
-	rotate_around_axis(vec, axis, angle);
-}
-
 void	rotation_y(t_scene *scene, double angle)
 {
 	t_obj_list	*cursor;
@@ -66,16 +46,6 @@ void	rotation_y(t_scene *scene, double angle)
 			cylinder_rot_y(cursor->cylinder, angle);
 		cursor = cursor->next;
 	}
-}
-
-void	vector_rot_z(t_vector *vec, double angle)
-{
-	t_vector	axis;
-
-	axis.x = 0;
-	axis.y = 1;
-	axis.z = 0;
-	rotate_around_axis(vec, axis, angle);
 }
 
 void	rotation_z(t_scene *scene, double angle)

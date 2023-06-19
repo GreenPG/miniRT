@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:16:07 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:51:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ double	min_cyl(double t_1, double t_2, double t_3, double t_4)
 	if (t_4 > 0 && t_4 < min)
 		min = t_4;
 	return (min);
+}
+
+void	free_cyl_roots(double *root, double *caps)
+{
+	if (root)
+		free(root);
+	if (caps)
+		free(caps);
 }

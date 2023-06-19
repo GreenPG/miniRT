@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/17 17:10:29 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/15 15:04:42 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:40:41 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -54,20 +54,18 @@ static int	get_final_color(int color, int diffuse_color, int specular_color,
 
 static int	sky_color(t_scene *scene, t_vector ray)
 {
-	double	t;
-
+	double		t;
+	t_cyl_calc	data;
 	t_vector	tmp;
 
 	tmp.x = scene->up->x;
 	tmp.y = scene->up->y;
 	tmp.z = scene->up->z;
-	t_cyl_calc	data;
-
 	data.front.x = 0.0000001;
 	data.front.y = 1;
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*scene->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*scene->direction, data.front)
 			/ (sqrt(dot_product(*scene->direction, *scene->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -77,7 +75,7 @@ static int	sky_color(t_scene *scene, t_vector ray)
 	data.front.y = 0.0000001;
 	data.front.z = 1;
 	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(tmp, data.front)
 			/ (sqrt(dot_product(tmp, tmp))
 				* sqrt(dot_product (data.front, data.front))));

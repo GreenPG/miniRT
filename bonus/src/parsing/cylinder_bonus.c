@@ -6,61 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:17:49 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:07:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_cylinder(t_cylinder **cylinder)
-{
-	if (!cylinder || !*cylinder)
-		return ;
-	if ((*cylinder)->origin)
-		free((*cylinder)->origin);
-	if ((*cylinder)->direction)
-		free((*cylinder)->direction);
-	free(*cylinder);
-	*cylinder = NULL;
-	return ;
-}
-
-static int	check_cylinder(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (1);
-	i = 2;
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	if (check_triple_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_triple_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_int(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_int(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_triple_int(str, &i) == 1)
-		return (1);
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	if (ft_strncmp("specular", &str[i], ft_strlen("specular")) == 0)
-		if (check_specular(str, &i) == 1)
-			return (1);
-	if (ft_strncmp("checkerboard", &str[i], ft_strlen("checkerboard")) == 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
-		pass_to_next_element(str, &i);
-	if (str[i] != '\0')
-		return (1);
-	return (0);
-}
 
 static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
 {
@@ -73,6 +23,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 {
 	int			*rgb;
 
+	pass_to_next_element(str, &i);
 	cylinder->diameter = ft_atof(str + i);
 	pass_to_next_element(str, &i);
 	cylinder->height = ft_atof(str + i);
@@ -113,7 +64,7 @@ t_cylinder	*init_cylinder(char *str)
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
 	cylinder->direction = init_vector(str + i);
-	vector_norm(cylinder->direction);
+	*cylinder->direction = vector_norm(*cylinder->direction);
 	if (!cylinder->origin || cylinder->direction->x < -1.0
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
@@ -122,7 +73,6 @@ t_cylinder	*init_cylinder(char *str)
 		free_cylinder(&cylinder);
 		return (NULL);
 	}
-	pass_to_next_element(str, &i);
 	cylinder = init_cylinder_part2(cylinder, str, i);
 	return (cylinder);
 }

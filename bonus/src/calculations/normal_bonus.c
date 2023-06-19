@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 08:19:03 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:17:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
 	data.front.y = 1;
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
 			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -64,7 +64,7 @@ static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
 	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	{
 		data.cross = vector_cross(tmp, data.front);
-		vector_norm(&data.cross);
+		data.cross = vector_norm(data.cross);
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
@@ -79,12 +79,12 @@ static t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
 	data.front.y = 1;
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
 			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
 				* sqrt(dot_product (data.front, data.front))));
 	rotate_around_axis(&normal.dir, data.cross, data.angle);
-	vector_norm(&normal.dir);
+	normal.dir = vector_norm(normal.dir);
 	return (normal);
 }
 

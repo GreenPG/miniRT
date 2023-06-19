@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 09:14:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:21:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 	data.front.y = 1;
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*sphere->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*sphere->direction, data.front)
 			/ (sqrt(dot_product(*sphere->direction, *sphere->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -43,7 +43,7 @@ static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	{
 		data.cross = vector_cross(tmp, data.front);
-		vector_norm(&data.cross);
+		data.cross = vector_norm(data.cross);
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
@@ -85,7 +85,7 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 	data.front.y = 1;
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*plane->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*plane->direction, data.front)
 			/ (sqrt(dot_product(*plane->direction, *plane->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -97,7 +97,7 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	{
 		data.cross = vector_cross(tmp, data.front);
-		vector_norm(&data.cross);
+		data.cross = vector_norm(data.cross);
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
@@ -149,7 +149,7 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *t
 	vec.y -= cylinder->origin->y;
 	vec.z -= cylinder->origin->z;
 	data.cross = vector_cross(*cylinder->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*cylinder->direction, data.front)
 			/ (sqrt(dot_product(*cylinder->direction, *cylinder->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -161,7 +161,7 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder, mlx_texture_t *t
 	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	{
 		data.cross = vector_cross(tmp, data.front);
-		vector_norm(&data.cross);
+		data.cross = vector_norm(data.cross);
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
@@ -209,7 +209,7 @@ static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t
 	vec.y -= ellipsoid->origin->y;
 	vec.z -= ellipsoid->origin->z;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
 			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
 				* sqrt(dot_product (data.front, data.front))));
@@ -221,7 +221,7 @@ static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid, mlx_texture_t
 	if (dot_product(tmp, data.front) > -1 + 1e-6)
 	{
 		data.cross = vector_cross(tmp, data.front);
-		vector_norm(&data.cross);
+		data.cross = vector_norm(data.cross);
 		data.angle = acos(dot_product(tmp, data.front)
 				/ (sqrt(dot_product(tmp, tmp))
 					* sqrt(dot_product (data.front, data.front))));
@@ -266,7 +266,7 @@ static int	texture_triangle(t_vector vec, t_triangle *triangle, mlx_texture_t *t
 	vec.y -= triangle->a->y;
 	vec.z -= triangle->a->z;
 	data.cross = vector_cross(*triangle->normal, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(*triangle->normal, data.front)
 			/ (sqrt(dot_product(*triangle->normal, *triangle->normal))
 				* sqrt(dot_product (data.front, data.front))));
@@ -276,7 +276,7 @@ static int	texture_triangle(t_vector vec, t_triangle *triangle, mlx_texture_t *t
 	data.front.y = 0.0000001;
 	data.front.z = 1;
 	data.cross = vector_cross(tmp, data.front);
-	vector_norm(&data.cross);
+	data.cross = vector_norm(data.cross);
 	data.angle = acos(dot_product(tmp, data.front)
 			/ (sqrt(dot_product(tmp, tmp))
 				* sqrt(dot_product (data.front, data.front))));

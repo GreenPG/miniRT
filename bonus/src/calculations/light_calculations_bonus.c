@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 14:32:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:36:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	wich_side(t_vector ray, t_vector light_dir,	t_normal normal)
 	return (0);
 }
 
-static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
+int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 		t_vector ray)
 {
 	t_obj_list	*cursor;
@@ -63,7 +63,7 @@ static int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 	return (0);
 }
 
-static t_vector	get_light_dir(t_light *light, t_normal normal)
+t_vector	get_light_dir(t_light *light, t_normal normal)
 {
 	double		light_dir_len;
 	t_vector	light_dir;
@@ -78,83 +78,17 @@ static t_vector	get_light_dir(t_light *light, t_normal normal)
 	return (light_dir);
 }
 
-static t_vector	normalize_vector(t_vector u)
-{
-	double	vector_len;
-
-	vector_len = sqrt(dot_product(u, u));
-	u.x /= vector_len;
-	u.y /= vector_len;
-	u.z /= vector_len;
-	return (u);
-}
-
-int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
-{
-	t_vector			light_dir;
-	t_light_list		*light_list;
-	int					light_cnt;
-	t_vector			reflection;
-	double				ray_reflect_dot_product;
-	double				specular_ratio;
-	unsigned long int	r;
-	unsigned long int	g;
-	unsigned long int	b;
-
-	r = 0;
-	g = 0;
-	b = 0;
-	light_cnt = 0;
-	light_list = scene->light_list;
-	while (light_list)
-	{
-		light_dir = get_light_dir(light_list->light, normal);
-		if (light_intersect(scene, light_dir, normal, ray) == 0)
-		{
-			reflection.x = 2 * dot_product(normal.dir, light_dir) * normal.dir.x
-				- light_dir.x;
-			reflection.y = 2 * dot_product(normal.dir, light_dir) * normal.dir.y
-				- light_dir.y;
-			reflection.z = 2 * dot_product(normal.dir, light_dir) * normal.dir.z
-				- light_dir.z;
-			ray = normalize_vector(invert_vector(ray));
-			ray_reflect_dot_product = fmax(0.0, dot_product(ray, reflection));
-			specular_ratio = fmax(0.0, pow(ray_reflect_dot_product,
-						nearest->sp_e) * light_list->light->brightness);
-			r += get_r(light_list->light->colors) * specular_ratio
-				* nearest->ks;
-			g += get_g(light_list->light->colors) * specular_ratio
-				* nearest->ks;
-			b += get_b(light_list->light->colors) * specular_ratio
-				* nearest->ks;
-		}
-		light_list = light_list->next;
-		light_cnt++;
-	}
-	r /= light_cnt;
-	g /= light_cnt;
-	b /= light_cnt;
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return (get_rgba(r, g, b, 255));
-}
-
-int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list *nearest)
+int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
+		t_obj_list *nearest)
 {
 	t_vector		light_dir;
-	int				r;
-	int				g;
-	int				b;
+	int				*rgb;
 	t_light_list	*light_list;
 	double			diffuse_ratio;
 
-	r = 0;
-	g = 0;
-	b = 0;
+	rgb = init_rgb_tab();
+	if (!rgb)
+		return (0);
 	light_list = scene->light_list;
 	while (light_list)
 	{
@@ -164,17 +98,11 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal, t_obj_list 
 			diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
 			diffuse_ratio = fmax(0.0, diffuse_ratio);
 			diffuse_ratio *= light_list->light->brightness;
-			r += get_r(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
-			g += get_g(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
-			b += get_b(light_list->light->colors) * diffuse_ratio * (1 - nearest->ks);
+			increment_color(rgb, light_list->light->colors, diffuse_ratio,
+				1 - nearest->ks);
 		}
 		light_list = light_list->next;
 	}
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return (get_rgba(r, g, b, 255));
+	clamp_rgb(rgb);
+	return (get_rgba(rgb[0], rgb[1], rgb[2], 255));
 }
