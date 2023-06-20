@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:01:32 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:27:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,9 +222,11 @@ void			sphere_translate(t_sphere *sphere, double x, double y,
 void			triangle_rot_y(t_triangle *triangle, double angle);
 void			triangle_rot_z(t_triangle *triangle, double angle);
 void			triangle_rot_x(t_triangle *triangle, double angle);
-void			triangle_rotate(t_triangle *triangle, int x, int y, int z);
 void			triangle_translate(t_triangle *triangle, double x,
 					double y, double z);
+
+/*	rotate_around_triangle_bonus.c	*/
+void			triangle_rotate(t_triangle *triangle, int x, int y, int z);
 
 /*	light_rotation.c	*/
 void			light_rot_x(t_light_list *light_list, double angle);

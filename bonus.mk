@@ -56,6 +56,7 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/moves/sphere_move_bonus.c \
 				src/moves/ellipsoid_move_bonus.c \
 				src/moves/triangle_move_bonus.c \
+				src/moves/rotate_around_triangle_bonus.c \
 				src/moves/world_move_bonus.c \
 				src/moves/light_rotation_bonus.c \
 				src/moves/move_obj_bonus.c \
