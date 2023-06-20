@@ -4,82 +4,90 @@ CFLAGS	=	-Wall -Werror -Wextra -g -O3 -Ofast
 
 DFLAGS	=	-Wall -Werror -Wextra -g
 
-LIBMLX	=	./lib/MLX42
+LIBMLX_PATH	=	./lib/MLX42
 
-LIBFT	=	./lib/libft
+LIBMLX		=	$(LIBMLX_PATH)/build/libmlx42.a
 
-HEADERS	=	-I ./mandatory/includes -I $(LIBMLX)/include -I $(LIBFT)/include
+LIBFT_PATH	=	./lib/libft
 
-LIBS	= 	$(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBFT		=	$(LIBFT_PATH)/libft.a
 
-SRCS	=	mandatory/src/main.c	\
-			mandatory/src/keypress_handle.c \
-			mandatory/src/free_functions.c	\
-			mandatory/src/parsing/ambiant_light.c \
-			mandatory/src/parsing/camera.c \
-			mandatory/src/parsing/choose_component.c \
-			mandatory/src/parsing/cylinder.c	\
-			mandatory/src/parsing/light.c \
-			mandatory/src/parsing/obj.c \
-			mandatory/src/parsing/obj_utils.c \
-			mandatory/src/parsing/parsing.c \
-			mandatory/src/parsing/parsing_utils.c \
-			mandatory/src/parsing/plane.c	\
-			mandatory/src/parsing/sphere.c 	\
-			mandatory/src/parsing/vector_parsing.c 	\
-			mandatory/src/calculations/light_calculations.c \
-			mandatory/src/calculations/sphere_calculations.c 	\
-			mandatory/src/calculations/cylinder_calculations.c 	\
-			mandatory/src/calculations/cylinder_calculations2.c 	\
-			mandatory/src/calculations/cylinder_shadow.c 	\
-			mandatory/src/calculations/normal.c \
-			mandatory/src/calculations/vector.c \
-			mandatory/src/calculations/quaternions.c \
-			mandatory/src/calculations/shadow.c \
-			mandatory/src/render/color.c	\
-			mandatory/src/render/normal_color.c	\
-			mandatory/src/render/hit_functions.c \
-			mandatory/src/render/render.c	\
-			mandatory/src/render/ray.c \
-			mandatory/src/moves/rotation.c \
-			mandatory/src/moves/vector_rotation.c \
-			mandatory/src/moves/cylinder_move.c \
-			mandatory/src/moves/plane_move.c \
-			mandatory/src/moves/sphere_move.c \
-			mandatory/src/moves/light_rotation.c \
-			mandatory/src/moves/move_obj.c \
-			mandatory/src/moves/translate.c \
-			mandatory/src/utils/math_utils.c \
-			mandatory/src/utils/rgba.c \
-			mandatory/src/utils/structs_utils.c \
-			mandatory/src/utils/utils.c \
+DIR_OBJ	=	obj
 
-OBJS	= ${SRCS:.c=.o}
+HEADERS	=	-I ./mandatory/includes -I $(LIBMLX_PATH)/include -I $(LIBFT_PATH)/include
+
+LIBS	= 	$(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm
+
+SRCS	:=	src/main.c	\
+			src/keypress_handle.c \
+			src/free_functions.c	\
+			src/parsing/ambiant_light.c \
+			src/parsing/camera.c \
+			src/parsing/choose_component.c \
+			src/parsing/cylinder.c	\
+			src/parsing/light.c \
+			src/parsing/obj.c \
+			src/parsing/obj_utils.c \
+			src/parsing/parsing.c \
+			src/parsing/parsing_utils.c \
+			src/parsing/plane.c	\
+			src/parsing/sphere.c 	\
+			src/parsing/vector_parsing.c 	\
+			src/calculations/light_calculations.c \
+			src/calculations/sphere_calculations.c 	\
+			src/calculations/cylinder_calculations.c 	\
+			src/calculations/cylinder_calculations2.c 	\
+			src/calculations/cylinder_shadow.c 	\
+			src/calculations/normal.c \
+			src/calculations/vector.c \
+			src/calculations/quaternions.c \
+			src/calculations/shadow.c \
+			src/render/color.c	\
+			src/render/normal_color.c	\
+			src/render/hit_functions.c \
+			src/render/render.c	\
+			src/render/ray.c \
+			src/moves/rotation.c \
+			src/moves/vector_rotation.c \
+			src/moves/cylinder_move.c \
+			src/moves/plane_move.c \
+			src/moves/sphere_move.c \
+			src/moves/light_rotation.c \
+			src/moves/move_obj.c \
+			src/moves/translate.c \
+			src/utils/math_utils.c \
+			src/utils/rgba.c \
+			src/utils/structs_utils.c \
+			src/utils/utils.c \
+
+SRCS	:=	$(SRCS:%=mandatory/%)
+
+OBJS		:=	$(addprefix $(DIR_OBJ)/, $(SRCS:%.c=%.o))
 
 CC	:= clang
 
-all: libmlx libft $(NAME)
-
--include header.mk
-
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
-
-libft:
-	@make -C $(LIBFT)
-
-%.o: %.c 
-	@$(CC) $(CFLAGS) -o ./obj/$@ -c $< $(HEADERS)
+all: $(LIBMLX) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(addprefix ./obj/,$(OBJS)) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $@
 	@clear
 	@make header --no-print-directory
 
+$(DIR_OBJ)/%.o: %.c 
+	mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@   
+
+$(LIBMLX): 
+	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
+
+$(LIBFT): 
+	@make -C $(LIBFT_PATH)
+
+
 clean: clean_bonus
-	@rm -f $(addprefix ./obj/,$(OBJS))
-	@rm -rf $(LIBMLX)/build
-	@make clean -C $(LIBFT)
+	@rm -rf 
+	@rm -rf $(LIBMLX_PATH)/build
+	@make fclean -C $(LIBFT_PATH)
 
 fclean: clean fclean_bonus
 	@rm -f $(NAME)
@@ -90,3 +98,4 @@ re: clean all
 
 -include bonus.mk
 -include test.mk
+-include header.mk
