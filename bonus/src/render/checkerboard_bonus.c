@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 10:56:13 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:59:58 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static int	checkerboard_sphere(t_vector vec, t_sphere *sphere)
 
 static int	checkerboard_plane(t_vector vec, t_plane *plane)
 {
+	vec.x -= plane->origin->x;
+	vec.y -= plane->origin->y;
+	vec.z -= plane->origin->z;
 	vec = camera_to_object_space(vec, *plane->direction, *plane->up);
 	if ((int)(floor(vec.x) + floor(vec.z)) % 2 == 0)
 		return (get_rgba(255, 255, 255, 0));
@@ -34,7 +37,10 @@ static int	checkerboard_plane(t_vector vec, t_plane *plane)
 }
 
 static int	checkerboard_cylinder(t_vector vec, t_cylinder *cylinder)
-{	
+{
+	vec.x -= cylinder->origin->x;
+	vec.y -= cylinder->origin->y;
+	vec.z -= cylinder->origin->z;
 	vec = camera_to_object_space(vec, *cylinder->direction, *cylinder->up);
 	if ((int)floor(vec.z) % 2 == 0)
 	{
@@ -52,6 +58,9 @@ static int	checkerboard_cylinder(t_vector vec, t_cylinder *cylinder)
 
 static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 {
+	vec.x -= ellipsoid->origin->x;
+	vec.y -= ellipsoid->origin->y;
+	vec.z -= ellipsoid->origin->z;
 	vec = camera_to_object_space(vec, *ellipsoid->direction, *ellipsoid->up);
 	if ((int)floor(vec.z) % 2 == 0)
 	{
@@ -69,6 +78,9 @@ static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 
 static int	checkerboard_triangle(t_vector vec, t_triangle *triangle)
 {
+	vec.x -= triangle->a->x;
+	vec.y -= triangle->a->y;
+	vec.z -= triangle->a->z;
 	vec = camera_to_object_space(vec, *triangle->normal, *triangle->up);
 	if ((int)(floor(vec.x) + floor(vec.z)) % 2 == 0)
 		return (get_rgba(255, 255, 255, 0));

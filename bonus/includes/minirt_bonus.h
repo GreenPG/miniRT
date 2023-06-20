@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 11:11:33 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:50:54 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,14 @@ t_plane			*init_plane(char *str);
 
 t_cylinder		*init_cylinder(char *str);
 
-/*	ellipsoid	*/
+/*	ellipsoid.c	*/
 
 t_ellipsoid		*init_ellipsoid(char *str);
+
+/*	ellipsoid_normal.c*/
+
+t_normal		get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
+					double distance);
 
 /*	triangle_bonus.c */
 t_triangle		*init_triangle(char	*input);
@@ -359,7 +364,7 @@ int				get_checkerboard(t_obj_list *nearest, t_normal normal);
 
 /*	textures	*/
 
-int				get_texture(t_obj_list *nearest, t_normal normal);
+int				get_texture(t_obj_list *near, t_normal normal);
 
 /*	quaternions.c	*/
 
@@ -374,8 +379,7 @@ t_frame			*frame_init(t_vector *dir);
 
 /*	bump_map	*/
 
-t_normal		get_bump(t_obj_list *nearest, t_vector ray, double distance,
-					t_normal normal);
+t_normal		get_bump(t_obj_list *near, t_normal normal);
 
 /*	coordinate_frame_transform.c	*/
 
