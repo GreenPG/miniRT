@@ -74,7 +74,7 @@ $(NAME): $(OBJS)
 	@make header --no-print-directory
 
 $(DIR_OBJ)/%.o: %.c 
-	mkdir -p $(@D)
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@   
 
 $(LIBMLX): 

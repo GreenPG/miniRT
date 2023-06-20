@@ -70,7 +70,7 @@ SRCS_BONUS	:=	$(SRCS_BONUS:%=bonus/%)
 OBJS_BONUS	:=	$(addprefix $(DIR_OBJ)/, $(SRCS_BONUS:.c=.o))
 
 $(DIR_OBJ)/%_bonus.o: %_bonus.c 
-	mkdir -p $(@D)
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(HEADERS_BONUS) -c $< -o $@
 
 bonus: $(LIBMLX) $(LIBFT) $(OBJS_BONUS)
