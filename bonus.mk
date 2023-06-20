@@ -39,6 +39,7 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/calculations/shadow_bonus.c \
 				src/calculations/quaternions_bonus.c \
 				src/calculations/bump_map_bonus.c \
+				src/calculations/bump_map2_bonus.c \
 				src/calculations/ellipsoid_normal_bonus.c	\
 				src/render/color_bonus.c	\
 				src/render/normal_color_bonus.c	\
@@ -46,7 +47,9 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/render/render_bonus.c	\
 				src/render/ray_bonus.c \
 				src/render/checkerboard_bonus.c \
+				src/render/checkerboard2_bonus.c \
 				src/render/texture_bonus.c \
+				src/render/texture2_bonus.c \
 				src/moves/rotation_bonus.c \
 				src/moves/vector_rotation_bonus.c \
 				src/moves/rotation_obj_bonus.c \

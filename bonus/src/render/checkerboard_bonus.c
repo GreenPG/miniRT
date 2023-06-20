@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 14:59:58 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:16:59 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,6 @@ static int	checkerboard_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid)
 			return (0);
 		return (get_rgba(255, 255, 255, 0));
 	}
-}
-
-static int	checkerboard_triangle(t_vector vec, t_triangle *triangle)
-{
-	vec.x -= triangle->a->x;
-	vec.y -= triangle->a->y;
-	vec.z -= triangle->a->z;
-	vec = camera_to_object_space(vec, *triangle->normal, *triangle->up);
-	if ((int)(floor(vec.x) + floor(vec.z)) % 2 == 0)
-		return (get_rgba(255, 255, 255, 0));
-	return (0);
 }
 
 int	get_checkerboard(t_obj_list *nearest, t_normal normal)
