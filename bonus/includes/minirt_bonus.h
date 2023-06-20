@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 09:07:29 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:23:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ t_vector		*init_vector(char *str);
 /*	vector_calcuations.c	*/
 t_vector		vector_norm(t_vector vec);
 t_vector		invert_vector(t_vector u);
+t_vector		vector_cross_tr(t_vector a, t_vector b);
 t_vector		vector_cross(t_vector a, t_vector b);
 double			dot_product(const t_vector v, const t_vector u);
 

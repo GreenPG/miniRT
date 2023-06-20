@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:37:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:23:46 by gpasquet         ###   ########.fr       */
 /*   Updated: 2023/06/19 10:42:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ t_vector	*get_triangle_normal(t_vector *a, t_vector *b, t_vector *c)
 	ac.x = c->x - a->x;
 	ac.y = c->y - a->y;
 	ac.z = c->z - a->z;
-	*normal = vector_cross(ab, ac);
+	*normal = vector_cross_tr(ab, ac);
 	*normal = vector_norm(*normal);
 	return (normal);
 }
