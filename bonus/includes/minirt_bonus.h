@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:27:39 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:29:52 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int				check_cylinder(char *str);
 
 /*	ambiant_light.c	*/
 
-t_ambiant_l		*init_ambiant_l(char *input);
+t_ambiant_l		*init_ambiant_l(char_move *input);
 
 /*	camera.c	*/
 
@@ -371,6 +371,15 @@ int				get_checkerboard(t_obj_list *nearest, t_normal normal);
 /*	textures	*/
 
 int				get_texture(t_obj_list *near, t_normal normal);
+int				texture_triangle(t_vector vec, t_triangle *triangle,
+					mlx_texture_t *tex);
+int				checkerboard_triangle(t_vector vec, t_triangle *triangle);
+t_normal		bump_triangle(t_triangle *triangle, t_vector vec,
+					t_normal normal, mlx_texture_t *tex);
+t_normal		bump_cylinder(t_cylinder *cylinder, t_vector vec,
+					t_normal normal, mlx_texture_t *tex);
+t_vector		normal_perturbation(t_vector normal_dir, int x, int y,
+					mlx_texture_t *tex);
 
 /*	quaternions.c	*/
 

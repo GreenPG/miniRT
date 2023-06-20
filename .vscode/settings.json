@@ -11,7 +11,8 @@
 		"deque": "c",
 		"vector": "c",
 		"string_view": "c",
-		"ranges": "c"
+		"ranges": "c",
+		"texture2_bonus": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled",
 	"cmake.configureOnOpen": false
