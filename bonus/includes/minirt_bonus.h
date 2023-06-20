@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 11:48:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:07:29 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ double			get_beta(t_vector vec);
 double			get_theta(t_vector vec);
 
 /*	utils_calc.c	*/
-void			get_angle(t_cyl_calc data, t_ellipsoid *ellipsoid, int dir);
+void			get_angle(t_cyl_calc *data, t_ellipsoid *ellipsoid, int dir);
 
 /*	rgba.c	*/
 int				get_rgba(int r, int g, int b, int a);

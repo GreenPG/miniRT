@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_calculations_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:22:48 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 17:15:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:10:09 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_vector	vector_cross(t_vector a, t_vector b)
 	t_vector	result;
 
 	result.x = (a.y * b.z) - (a.z * b.y);
-	result.y = (a.z * b.x) - (a.x * b.z);
+	result.y = (a.x * b.z) - (a.z * b.x);
 	result.z = (a.x * b.y) - (a.y * b.x);
 	return (result);
 }
