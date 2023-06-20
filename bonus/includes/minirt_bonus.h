@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:29:52 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:33:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int				check_cylinder(char *str);
 
 /*	ambiant_light.c	*/
 
-t_ambiant_l		*init_ambiant_l(char_move *input);
+t_ambiant_l		*init_ambiant_l(char *input);
 
 /*	camera.c	*/
 
