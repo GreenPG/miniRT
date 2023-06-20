@@ -2,6 +2,6 @@ A 0.3 255,255,255
 C 0,0,0 0,1,0 100
 L -3,0,0 0.7 255,255,255
 
-tr -10,5,3 -1,-5,30 -0,5,-2 100,100,100 ./bonus/src/textures/sky1.png
+tr -10,5,3 -1,-5,30 -0,5,-2 100,100,100 bump ./bonus/src/textures/earth_bump.png ./bonus/src/textures/earth_day.png
 pl 0,20,0 0,-1,0 255,10,10
 

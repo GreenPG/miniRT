@@ -6,13 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/19 11:38:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:56:13 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-
 
 static	t_normal	bump_plane(t_plane *plane, t_vector vec, t_normal normal, mlx_texture_t *tex)
 {
@@ -65,6 +63,69 @@ static	t_normal	bump_plane(t_plane *plane, t_vector vec, t_normal normal, mlx_te
 	double derivative_v;
 	double ratio;
 
+    derivative_u = (double)tex->pixels[pixel_index] / 64.;
+	derivative_v = (double)tex->pixels[pixel_index] / 64.;
+	pixel_index = (((y + 1) % tex->height)  * tex->width + x) * tex->bytes_per_pixel;
+	derivative_u = (double)tex->pixels[pixel_index] / 64. - derivative_u; 
+	pixel_index = (y * tex->width + (x + 1) % tex->width) * tex->bytes_per_pixel;
+	derivative_v = (double)tex->pixels[pixel_index] / 64. - derivative_v;
+	ratio = 1. / sqrt(derivative_u * derivative_u + derivative_v * derivative_v + 1);
+	normal.dir.x += -derivative_u * ratio;
+    normal.dir.y += -derivative_v * ratio;
+	normal.dir.z += ratio - 1;
+    return (normal);
+}
+
+static t_normal	bump_triangle(t_triangle *triangle, t_vector vec, t_normal normal, mlx_texture_t *tex)
+{
+	t_vector	tmp;
+	t_cyl_calc	data;
+	int x;
+	int	y;
+	uint32_t pixel_index;
+	double derivative_u;
+	double derivative_v;
+	double ratio;
+
+	tmp.x = triangle->up->x;
+	tmp.y = triangle->up->y;
+	tmp.z = triangle->up->z;
+	data.front.x = 0.0000001;
+	data.front.y = 1;
+	data.front.z = 0.0000001;
+	data.cross = vector_cross(*triangle->normal, data.front);
+	data.cross = vector_norm(data.cross);
+	data.angle = acos(dot_product(*triangle->normal, data.front)
+			/ (sqrt(dot_product(*triangle->normal, *triangle->normal))
+				* sqrt(dot_product (data.front, data.front))));
+	rotate_around_axis(&vec, data.cross, -data.angle);
+	rotate_around_axis(&tmp, data.cross, -data.angle);
+	data.front.x = 0.0000001;
+	data.front.y = 0.0000001;
+	data.front.z = 1;
+	if (dot_product(tmp, data.front) > -1 + 1e-6)
+	{
+		data.cross = vector_cross(tmp, data.front);
+		data.cross = vector_norm(data.cross);
+		data.angle = acos(dot_product(tmp, data.front)
+				/ (sqrt(dot_product(tmp, tmp))
+					* sqrt(dot_product (data.front, data.front))));
+		rotate_around_axis(&vec, data.cross, data.angle);
+	}
+	else
+	{
+		vec.x = -vec.x;
+		vec.z = -vec.z;	
+	}
+	vec.z = fmodf(vec.z, 1);
+	if (vec.z < 0)
+		vec.z += 1;
+	vec.x = fmodf(vec.x, 1);
+	if (vec.x < 0)
+		vec.x += 1;
+	x = vec.z * tex->width;
+	y = vec.x * tex->height;
+	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
     derivative_u = (double)tex->pixels[pixel_index] / 64.;
 	derivative_v = (double)tex->pixels[pixel_index] / 64.;
 	pixel_index = (((y + 1) % tex->height)  * tex->width + x) * tex->bytes_per_pixel;
@@ -199,6 +260,7 @@ static t_normal	bump_ellipsoid(t_ellipsoid *ellipsoid, t_vector vec, t_normal no
 	derivative_v = (double)tex->pixels[pixel_index] / 16. - derivative_v;
 	ratio = 1. / sqrt(derivative_u * derivative_u + derivative_v * derivative_v + 1);
 	normal.dir.x += -derivative_u * ratio;
+
     normal.dir.y += -derivative_v * ratio;
 	normal.dir.z += ratio - 1;
     return (normal);
@@ -270,6 +332,7 @@ static t_normal	bump_sphere(t_sphere *sphere, t_vector vec, t_normal normal, mlx
 	(void)sphere;
 }
 
+
 t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal)
 {
 	if (nearest->type == sphere)
@@ -280,6 +343,8 @@ t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal n
 	//  	color = texture_cylinder(normal.origin, nearest->cylinder, nearest->tex);
 	if (nearest->type == ellipsoid)
 	 	normal = bump_ellipsoid(nearest->ellipsoid, normal.origin, normal, nearest->bump_map);
+	if (nearest->type == triangle)
+		normal = bump_triangle(nearest->triangle, normal.origin, normal, nearest->bump_map);
 	(void)ray;
 	(void)distance;
 	return (normal);
