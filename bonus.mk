@@ -21,6 +21,7 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/parsing/plane_bonus.c	\
 				bonus/src/parsing/sphere_bonus.c 	\
 				bonus/src/parsing/ellipsoid_bonus.c 	\
+				bonus/src/calculations/coordinate_frame_transform_bonus.c 	\
 				bonus/src/parsing/triangle_bonus.c 	\
 				bonus/src/calculations/light_calculations_bonus.c \
 				bonus/src/calculations/light_rgb_bonus.c \
@@ -29,7 +30,6 @@ SRCS_BONUS	=	bonus/src/main_bonus.c	\
 				bonus/src/calculations/cylinder_calculations_bonus.c 	\
 				bonus/src/calculations/cylinder_calculations2_bonus.c 	\
 				bonus/src/calculations/ellipsoid_calculations_bonus.c 	\
-				bonus/src/calculations/ellipsoid_shadow_bonus.c 	\
 				bonus/src/calculations/cylinder_shadow_bonus.c 	\
 				bonus/src/calculations/triangle_shadow_bonus.c 	\
 				bonus/src/calculations/triangle_calculations_bonus.c 	\
