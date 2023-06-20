@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 14:50:54 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:01:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ int				triangle_obj(t_obj_list *obj, char *line);
 int				get_bonus_data(t_obj_list **obj_ptr, char *line);
 void			add_obj_error(t_scene **scene);
 void			add_obj(t_obj_list **list_ptr, t_obj_list *obj);
+
+/*	bonus_data_parsing.g	*/
+
+int				get_bonus_data(t_obj_list **obj_ptr, char *line);
 
 /*	parsing_utils.c	*/
 

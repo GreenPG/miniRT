@@ -13,6 +13,7 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/parsing/obj_bonus.c \
 				src/parsing/obj_type_bonus.c \
 				src/parsing/obj_utils_bonus.c \
+				src/parsing/data_parsing_bonus.c \
 				src/parsing/parsing_bonus.c \
 				src/parsing/direction_init_bonus.c \
 				src/parsing/parsing_utils_bonus.c \
@@ -71,7 +72,7 @@ OBJS_BONUS	:=	$(addprefix $(DIR_OBJ)/, $(SRCS_BONUS:.c=.o))
 
 $(DIR_OBJ)/%_bonus.o: %_bonus.c 
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(HEADERS_BONUS) -c $< -o $@
+	@$(CC) $(DFLAGS) $(HEADERS_BONUS) -c $< -o $@
 
 bonus: $(LIBMLX) $(LIBFT) $(OBJS_BONUS)
 	@$(CC) $(OBJS_BONUS) $(LIBS) $(HEADERS_BONUS) -o miniRT_bonus
