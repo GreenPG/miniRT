@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 09:23:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:11:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,6 +374,13 @@ t_frame			*frame_init(t_vector *dir);
 
 /*	bump_map	*/
 
-t_normal	get_bump(t_obj_list *nearest, t_vector ray, double distance, t_normal normal);
+t_normal		get_bump(t_obj_list *nearest, t_vector ray, double distance,
+					t_normal normal);
+
+/*	coordinate_frame_transform.c	*/
+
+t_vector		camera_to_object_space(t_vector vec, t_vector obj_dir,
+					t_vector obj_up);
+t_vector		camera_to_object_space_sym(t_vector vec, t_vector obj_dir);
 
 #endif

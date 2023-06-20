@@ -55,31 +55,8 @@ static int	get_final_color(int color, int diffuse_color, int specular_color,
 static int	sky_color(t_scene *scene, t_vector ray)
 {
 	double		t;
-	t_cyl_calc	data;
-	t_vector	tmp;
 
-	tmp.x = scene->up->x;
-	tmp.y = scene->up->y;
-	tmp.z = scene->up->z;
-	data.front.x = 0.0000001;
-	data.front.y = 1;
-	data.front.z = 0.0000001;
-	data.cross = vector_cross(*scene->direction, data.front);
-	data.cross = vector_norm(data.cross);
-	data.angle = acos(dot_product(*scene->direction, data.front)
-			/ (sqrt(dot_product(*scene->direction, *scene->direction))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&ray, data.cross, -data.angle);
-	rotate_around_axis(&tmp, data.cross, -data.angle);
-	data.front.x = 0.0000001;
-	data.front.y = 0.0000001;
-	data.front.z = 1;
-	data.cross = vector_cross(tmp, data.front);
-	data.cross = vector_norm(data.cross);
-	data.angle = acos(dot_product(tmp, data.front)
-			/ (sqrt(dot_product(tmp, tmp))
-				* sqrt(dot_product (data.front, data.front))));
-	rotate_around_axis(&ray, data.cross, data.angle);
+	ray = camera_to_object_space(ray, *scene->direction, *scene->up);
 	t = sin(ray.z);
 	if (t > 0)
 		return (get_rgba(scene->ambiant_l->light_ratio * (255 * (1 - t) + t
