@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:02:30 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 14:33:40 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:44:43 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	increment_color(int *rgb, int color, double ratio, double ks)
 {
-	rgb[0] = get_r(color) * ratio * ks;
-	rgb[1] = get_r(color) * ratio * ks;
-	rgb[2] = get_r(color) * ratio * ks;
+	rgb[0] += get_r(color) * ratio * ks;
+	rgb[1] += get_g(color) * ratio * ks;
+	rgb[2] += get_b(color) * ratio * ks;
 }
 
 void	clamp_rgb(int *rgb)

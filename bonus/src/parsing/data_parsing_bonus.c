@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:49:23 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/20 16:19:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:54:52 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	get_bonus_data(t_obj_list **obj_ptr, char *line)
 	if (!ft_strncmp("./", &line[i - 2], ft_strlen("./")))
 		i -= 2;
 	if (!ft_strncmp("specular", &line[i], ft_strlen("specular")))
-		get_specular_const(obj, &line[i], &i);
+		get_specular_const(obj, line, &i);
 	if (!ft_strncmp("bump", &line[i], ft_strlen("bump")))
 		if (get_bump_data(obj, line, &i) == 1)
 			return (1);
