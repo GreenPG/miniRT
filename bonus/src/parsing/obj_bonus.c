@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:05:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:25:51 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 		if (triangle_obj(obj, line) == 1)
 			return (1);
 	}
+	obj->bump_map = NULL;
+	obj->tex = NULL;
 	if (get_bonus_data(&obj, line) == 1)
 		return (1);
 	obj->next = NULL;

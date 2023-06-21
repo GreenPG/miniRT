@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:33:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:22:06 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ int				get_specular_color(t_scene *scene, t_vector ray,
 
 /*	light_rgb_bonus.c	*/
 void			increment_color(int *rgb, int color, double ratio, double ks);
-void			clamp_rgb(int *rgb);
+int				clamp_rgb(int *rgb);
 int				*init_rgb_tab(void);
 
 /*	keypress_handle.c	*/

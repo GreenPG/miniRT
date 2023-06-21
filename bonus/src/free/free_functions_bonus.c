@@ -6,11 +6,19 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:45:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:33:38 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	free_tex(t_obj_list *obj)
+{
+	if (obj->tex)
+		mlx_delete_texture(obj->tex);
+	if (obj->bump_map)
+		mlx_delete_texture(obj->bump_map);
+}
 
 void	free_obj_list(t_obj_list **list)
 {
@@ -30,6 +38,7 @@ void	free_obj_list(t_obj_list **list)
 			free_ellipsoid(&(*list)->ellipsoid);
 		if ((*list)->type == triangle)
 			free_triangle(&(*list)->triangle);
+		free_tex(*list);
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp);
@@ -53,6 +62,10 @@ void	free_scene(t_scene **scene)
 		free_light_list((*scene)->light_list);
 	if ((*scene)->obj_list)
 		free_obj_list(&(*scene)->obj_list);
+	if ((*scene)->up)
+		free((*scene)->up);
+	if ((*scene)->direction)
+		free((*scene)->direction);
 	free(*scene);
 	*scene = NULL;
 	return ;

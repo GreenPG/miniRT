@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_obj_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 09:41:14 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:50:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:15:31 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_cylinder(t_cylinder **cylinder)
 		free((*cylinder)->origin);
 	if ((*cylinder)->direction)
 		free((*cylinder)->direction);
+	if ((*cylinder)->up)
+		free((*cylinder)->up);
 	free(*cylinder);
 	*cylinder = NULL;
 	return ;
@@ -31,6 +33,10 @@ void	free_sphere(t_sphere **sphere)
 		return ;
 	if ((*sphere)->origin)
 		free((*sphere)->origin);
+	if ((*sphere)->direction)
+		free((*sphere)->direction);
+	if ((*sphere)->up)
+		free((*sphere)->up);
 	free(*sphere);
 	*sphere = NULL;
 	return ;
@@ -50,6 +56,8 @@ void	free_plane(t_plane **plane)
 		free((*plane)->origin);
 		(*plane)->origin = NULL;
 	}
+	if ((*plane)->up)
+		free((*plane)->up);
 	free(*plane);
 	*plane = NULL;
 	return ;
@@ -63,6 +71,8 @@ void	free_ellipsoid(t_ellipsoid **ellipsoid)
 		free((*ellipsoid)->origin);
 	if ((*ellipsoid)->direction)
 		free((*ellipsoid)->direction);
+	if ((*ellipsoid)->up)
+		free((*ellipsoid)->up);
 	free(*ellipsoid);
 	*ellipsoid = NULL;
 	return ;
@@ -83,6 +93,8 @@ void	free_triangle(t_triangle **triangle_ptr)
 		free(triangle->c);
 	if (triangle->normal)
 		free(triangle->normal);
+	if (triangle->up)
+		free(triangle->up);
 	free(triangle);
 	triangle = NULL;
 	return ;

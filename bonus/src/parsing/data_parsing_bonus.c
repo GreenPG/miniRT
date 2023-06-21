@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   data_parsing_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:49:23 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/20 16:54:52 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:19:14 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static char	*get_tex_path(char *line)
+static mlx_texture_t	*get_tex_path(char *line)
 {
-	char	*path;
-	int		i;
+	char			*path;
+	int				i;
+	mlx_texture_t	*tex;
 
 	i = 0;
 	path = NULL;
@@ -30,7 +31,11 @@ static char	*get_tex_path(char *line)
 		path[i - 1] = line[i - 1];
 		i--;
 	}
-	return (path);
+	tex = mlx_load_png(path);
+	free (path);
+	if (!tex)
+		return (NULL);
+	return (tex);
 }
 
 static int	get_bump_data(t_obj_list *obj, char *line, int *i)
@@ -39,7 +44,7 @@ static int	get_bump_data(t_obj_list *obj, char *line, int *i)
 		(*i)++;
 	while (ft_isspace(line[*i]) == 1)
 		(*i)++;
-	obj->bump_map = mlx_load_png(get_tex_path(&line[*i]));
+	obj->bump_map = get_tex_path(&line[*i]);
 	if (!obj->bump_map)
 		return (1);
 	obj->has_bump = 1;
@@ -67,7 +72,7 @@ static int	get_tex(t_obj_list *obj, char *line)
 
 	i = 0;
 	obj->pattern = texture;
-	obj->tex = mlx_load_png(get_tex_path(&line[i]));
+	obj->tex = get_tex_path(&line[i]);
 	if (!obj->tex)
 		return (1);
 	return (0);

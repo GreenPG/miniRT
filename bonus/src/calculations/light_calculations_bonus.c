@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:33:53 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:30:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
 	t_light_list	*light_list;
 	double			diffuse_ratio;
 
+	rgb = NULL;
 	rgb = init_rgb_tab();
 	if (!rgb)
 		return (0);
@@ -103,6 +104,5 @@ int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
 		}
 		light_list = light_list->next;
 	}
-	clamp_rgb(rgb);
-	return (get_rgba(rgb[0], rgb[1], rgb[2], 255));
+	return (clamp_rgb(rgb));
 }
