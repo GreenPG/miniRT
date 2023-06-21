@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:31:43 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:38:55 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 08:30:49 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	get_normal_color(t_obj_list *nearest, t_vector ray, t_normal normal)
 {
 	int			color;
 
+	color = 0;
 	if (nearest->pattern == checkerboard)
 	{
 		color = get_checkerboard(nearest, normal);

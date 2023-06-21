@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:46:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/20 14:55:48 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 08:31:20 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static t_normal	get_triangle_normal(t_triangle *triangle, t_vector ray,
 t_normal	get_normal(t_obj_list *nearest, t_vector ray, double distance)
 {
 	t_normal	normal;
-
 	if (nearest->type == sphere)
 		normal = get_sphere_normal(nearest->sphere, ray, distance);
 	if (nearest->type == plane)

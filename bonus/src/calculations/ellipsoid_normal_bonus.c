@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:48:32 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 15:54:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 08:32:40 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static t_cyl_calc	to_object(t_ellipsoid *ellipsoid,
 	{
 		data.cross = vector_cross(*tmp, data.front);
 		data.cross = vector_norm(data.cross);
-		data.angle = acos(dot_product(*tmp, data.front)
+		data.angle = acos(fmin(dot_product(*tmp, data.front)
 				/ (sqrt(dot_product(*tmp, *tmp))
-					* sqrt(dot_product (data.front, data.front))));
+					* sqrt(dot_product (data.front, data.front))), 1.));
 		rotate_around_axis(&normal->dir, data.cross, data.angle);
 	}
 	return (data);
@@ -78,9 +78,9 @@ t_normal	get_ellipsoid_normal(t_ellipsoid *ellipsoid, t_vector ray,
 	data.front.z = 0.0000001;
 	data.cross = vector_cross(*ellipsoid->direction, data.front);
 	data.cross = vector_norm(data.cross);
-	data.angle = acos(dot_product(*ellipsoid->direction, data.front)
+	data.angle = acos(fmin(dot_product(*ellipsoid->direction, data.front)
 			/ (sqrt(dot_product(*ellipsoid->direction, *ellipsoid->direction))
-				* sqrt(dot_product (data.front, data.front))));
+				* sqrt(dot_product (data.front, data.front))), 1.));
 	rotate_around_axis(&normal.dir, data.cross, data.angle);
 	normal.dir = vector_norm(normal.dir);
 	return (normal);

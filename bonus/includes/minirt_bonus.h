@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/21 07:22:06 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:47:41 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ void			world_translate(t_scene *scene, double x, double y, double z);
 /*	free_functions.c	*/
 void			free_all(t_data *data, t_scene *scene);
 void			free_scene(t_scene **scene);
+void			free_obj_list(t_obj_list **list);
 
 /*	free_obj_bonus.c	*/
 void			free_triangle(t_triangle **triangle_ptr);
