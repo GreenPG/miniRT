@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/21 07:47:41 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:10:44 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int				*get_color_values(char	*str);
 /*	vector.c	*/
 
 t_vector		*init_vector(char *str);
+int				is_aligned(t_vector u, t_vector v);
 
 /*	vector_calcuations.c	*/
 t_vector		vector_norm(t_vector vec);
