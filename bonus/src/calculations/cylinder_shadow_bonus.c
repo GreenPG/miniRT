@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:44:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 14:38:42 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 08:36:08 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 {
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 1e-6;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 1e-6;
 	data.cross = vector_cross(*cylinder->direction, data.front);
 	data.cross = vector_norm(data.cross);
-	data.angle = acos(dot_product(*cylinder->direction, data.front)
+	data.angle = acos(fmin(dot_product(*cylinder->direction, data.front)
 			/ (sqrt(dot_product(*cylinder->direction, *cylinder->direction))
-				* sqrt(dot_product (data.front, data.front))));
+				* sqrt(dot_product (data.front, data.front))), 1.));
 	rotate_around_axis(&ray, data.cross, -data.angle);
 	data.rayo.x = -cylinder->origin->x;
 	data.rayo.y = -cylinder->origin->y;
