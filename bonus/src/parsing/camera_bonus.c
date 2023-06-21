@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/04 10:39:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:54:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ void	free_camera(t_camera **camera)
 	free(*camera);
 	*camera = (NULL);
 	return ;
+}
+
+static void	null_all_camera(t_camera *camera)
+{
+	camera->origin = NULL;
+	camera->direction = NULL;
+	camera->rays = NULL;
 }
 
 static int	check_cam(char *str)
@@ -87,6 +94,7 @@ t_camera	*init_camera(char *input)
 	camera = malloc(sizeof(t_camera));
 	if (!camera)
 		return (NULL);
+	null_all_camera(camera);
 	i = 1;
 	while (ft_isspace(input[i]))
 		i++;

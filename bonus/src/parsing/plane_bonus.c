@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:26:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:28:27 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ static int	check_plane(char *str)
 	return (0);
 }
 
+static void	null_all_plane(t_plane *plane_ptr)
+{
+	plane_ptr->origin = NULL;
+	plane_ptr->direction = NULL;
+	plane_ptr->up = NULL;
+}
+
 static int	check_plane_direction(t_vector *direction)
 {
 	if (!direction
@@ -64,7 +71,6 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 	}
 	plane->colors = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	free(rgb);
-	pass_to_next_element(str, &i);
 	plane->up = get_up(plane->direction);
 	return (plane);
 }
@@ -82,6 +88,7 @@ t_plane	*init_plane(char *str)
 		ft_error("Error: fatal\n");
 		return (NULL);
 	}
+	null_all_plane(plane);
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;

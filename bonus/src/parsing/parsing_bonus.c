@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 09:37:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:55:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 {
 	char	*line;
 
-		line = get_next_line(fd);
+	line = get_next_line(fd);
 	while (line)
 	{
 		if (!line)
