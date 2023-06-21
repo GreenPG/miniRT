@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:49:23 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 10:03:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:44:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int	get_bonus_data(t_obj_list **obj_ptr, char *line)
 		return (1);
 	obj = *obj_ptr;
 	i = 2;
-	obj->has_bump = 0;
-	obj->pattern = plain;
 	while (line[i] && ft_isalpha(line[i]) == 0)
 		i++;
 	if (!ft_strncmp("./", &line[i - 2], ft_strlen("./")))

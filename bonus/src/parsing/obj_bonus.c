@@ -6,11 +6,21 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 07:49:20 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:47:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	null_all_obj(t_obj_list *obj, t_type type)
+{
+	obj->type = type;
+	obj->has_bump = 0;
+	obj->pattern = plain;
+	obj->ks = 0;
+	obj->sp_e = 0;
+	obj->hitted = 0;
+}
 
 static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 		t_obj_list **list_ptr)
@@ -51,8 +61,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 		*list_ptr = NULL;
 		return (1);
 	}
-	obj->type = type;
-	obj->hitted = 0;
+	null_all_obj(obj, type);
 	if (type == sphere)
 	{
 		if (sphere_obj(obj, line) == 1)

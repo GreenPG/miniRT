@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:02:30 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 07:43:18 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:36:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	clamp_rgb(int *rgb)
 {
 	int	color;
 
+	if (!rgb)
+		return (0);
 	if (rgb[0] > 255)
 		rgb[0] = 255;
 	if (rgb[1] > 255)
