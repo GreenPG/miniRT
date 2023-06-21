@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   vector_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:03:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:03:59 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:14:45 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+int	is_aligned(t_vector u, t_vector v)
+{
+	if (u.x == v.x && u.y == v.y && u.z == v.z)
+		return (1);
+	return (0);
+}
 
 static void	get_vector(t_vector **vector_ptr, double x, double y, double z)
 {
