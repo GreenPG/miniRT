@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:03:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 10:14:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:15:56 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	is_aligned(t_vector u, t_vector v)
 {
-	if (u.x == v.x && u.y == v.y && u.z == v.z)
+	u.x -= v.x;
+	u.y -= v.y;
+	u.z -= v.z;
+	if (fabs(u.x) <= 1e-6 && fabs(u.y) <= 1e-6 && fabs(u.z) <= 1e-6)
 		return (1);
 	return (0);
 }

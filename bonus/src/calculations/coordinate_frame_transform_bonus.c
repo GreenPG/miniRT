@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:37:46 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/21 10:15:42 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:11:59 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_vector	camera_to_object_space(	t_vector vec,
 
 	obj_up = camera_to_object_space_sym(obj_up, obj_dir);
 	vec = camera_to_object_space_sym(vec, obj_dir);
-	data.front.x = 1e-6;
-	data.front.y = 1e-6;
+	data.front.x = 0;
+	data.front.y = 0;
 	data.front.z = 1;
 	if (is_aligned(data.front, obj_up))
 		return (vec);
