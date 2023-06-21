@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   specular_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:26:56 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/16 15:32:42 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 07:43:47 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal,
 		}
 		light_list = light_list->next;
 	}
-	clamp_rgb(rgb);
-	return (get_rgba(rgb[0], rgb[1], rgb[2], 255));
+	return (clamp_rgb(rgb));
 }
