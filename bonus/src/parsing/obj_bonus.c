@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 10:47:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:56:39 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,9 @@ static void	null_all_obj(t_obj_list *obj, t_type type)
 	obj->hitted = 0;
 }
 
-static int	init_obj2(t_obj_list *obj, char *line, t_type type,
+static int	init_obj3(t_obj_list *obj, char *line, t_type type,
 		t_obj_list **list_ptr)
 {
-	if (type == cylinder)
-	{
-		if (cylinder_obj(obj, line) == 1)
-			return (1);
-	}
-	if (type == ellipsoid)
-	{
-		if (ellipsoid_obj(obj, line) == 1)
-			return (1);
-	}
 	if (type == triangle)
 	{
 		if (triangle_obj(obj, line) == 1)
@@ -47,6 +37,27 @@ static int	init_obj2(t_obj_list *obj, char *line, t_type type,
 	obj->next = NULL;
 	add_obj(list_ptr, obj);
 	return (0);
+}
+
+static int	init_obj2(t_obj_list *obj, char *line, t_type type,
+		t_obj_list **list_ptr)
+{
+	if (type == plane)
+	{
+		if (plane_obj(obj, line) == 1)
+			return (1);
+	}
+	if (type == cylinder)
+	{
+		if (cylinder_obj(obj, line) == 1)
+			return (1);
+	}
+	if (type == ellipsoid)
+	{
+		if (ellipsoid_obj(obj, line) == 1)
+			return (1);
+	}
+	return (init_obj3(obj, line, type, list_ptr));
 }
 
 int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
@@ -65,12 +76,15 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	if (type == sphere)
 	{
 		if (sphere_obj(obj, line) == 1)
+		{
+			free(obj);
 			return (1);
+		}
 	}
-	if (type == plane)
+	if (init_obj2(obj, line, type, list_ptr) == 1)
 	{
-		if (plane_obj(obj, line) == 1)
-			return (1);
+		free(obj);
+		return (1);
 	}
-	return (init_obj2(obj, line, type, list_ptr));
+	return (0);
 }		

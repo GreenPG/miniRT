@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/21 10:10:44 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:02:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ int				get_obj_color(t_obj_list *nearest, t_vector ray, t_scene *scene,
 /*	utils.c	*/
 
 double			ft_atof(char *str);
+
 /*	parsing.c	*/
 
 int				check_path(char *path);
 t_scene			*parsing(char *path);
+
+/*	scene_bonus.c	*/
+t_scene			*init_scene(void);
 
 /*	choose_component.c	*/
 
@@ -101,6 +105,10 @@ int				check_triple_float(char *str, int *i);
 int				check_bonus_var(char *str);
 int				check_triangle(char *input);
 int				check_cylinder(char *str);
+
+/*	check_input3.c	*/
+
+int				check_ellipsoid(char *str);
 
 /*	ambiant_light.c	*/
 
@@ -279,13 +287,13 @@ t_normal		orient_normal(t_scene *scene, t_normal normal,
 t_normal		get_normal(t_obj_list *nearest, t_vector ray, double distance);
 
 /*	light_calculations.c	*/
-t_vector		get_light_dir(t_light *light, t_normal normal);
-int				light_intersect(t_scene *scene, t_vector light_dir,
+t_vector		get_light_dir(t_vector *light_o, t_normal normal);
+int				light_intersect(t_obj_list **obj_ptr, t_light *light,
 					t_normal normal, t_vector ray);
+
+/*	diffuse_light_bonus.c	*/
 int				get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
 					t_obj_list *nearest);
-int				get_specular_color(t_scene *scene, t_vector ray,
-					t_normal normal, t_obj_list *nearest);
 
 /*	specular_bonus.c	*/
 int				get_specular_color(t_scene *scene, t_vector ray,
@@ -403,5 +411,5 @@ t_normal		get_bump(t_obj_list *near, t_normal normal);
 t_vector		camera_to_object_space(t_vector vec, t_vector obj_dir,
 					t_vector obj_up);
 t_vector		camera_to_object_space_sym(t_vector vec, t_vector obj_dir);
-
+int				is_rcolinear(t_vector u, t_vector v);
 #endif

@@ -84,6 +84,7 @@ t_sphere	*init_sphere(char *input)
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		return (NULL);
+	sphere->up = NULL;
 	i = 2;
 	while (ft_isspace(input[i]) == 1)
 		i++;

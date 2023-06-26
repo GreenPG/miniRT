@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/02 14:10:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 09:03:07 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error
 			("Error: expected usage is ./miniRT <path to.rt file>\n"));
-	(void)argv;
 	scene = parsing(argv[1]);
 	if (!scene)
 	{

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:24 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 15:00:09 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:59:25 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_ambiant_l	*init_ambiant_l(char *input)
 		return (NULL);
 	}
 	i = 1;
-	while (ft_isspace(input[i == 1]))
+	while (ft_isspace(input[i]) == 1)
 		i++;
 	ambiant_l->light_ratio = ft_atof(input + i);
 	if (ambiant_l->light_ratio < 0 || ambiant_l->light_ratio > 1)

@@ -2,7 +2,7 @@ A 0.3 255,255,250
 C 0,0,0 0,1,0 180 
 L -10,4.6645645,20 1 255,255,255
 
-sp 0,0,0 20000 255,123,23 ./bonus/src/textures/sky5.png
+sp 0,0,0 20000 255,123,23 ./bonus/src/textures/sky3.png
 
 sp 0,5,1 1 255,123,23 bump ./bonus/src/textures/earth_bump.png ./bonus/src/textures/earth_day.png 
 # sp 0,5,0 1 255,123,23 checkerboard

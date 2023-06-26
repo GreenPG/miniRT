@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 07:33:38 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:54:21 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,28 @@ void	free_obj_list(t_obj_list **list)
 			free_ellipsoid(&(*list)->ellipsoid);
 		if ((*list)->type == triangle)
 			free_triangle(&(*list)->triangle);
-		free_tex(*list);
+		if ((*list)->tex)
+			free_tex(*list);
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp);
 		tmp = NULL;
 	}
+	return ;
+}
+
+void	free_camera(t_camera **camera)
+{
+	if (!camera || !*camera)
+		return ;
+	if ((*camera)->origin)
+		free((*camera)->origin);
+	if ((*camera)->direction)
+		free((*camera)->direction);
+	if ((*camera)->rays)
+		free_rays((*camera)->rays);
+	free(*camera);
+	*camera = (NULL);
 	return ;
 }
 

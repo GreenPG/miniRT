@@ -6,26 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 09:54:12 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:38:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-void	free_camera(t_camera **camera)
-{
-	if (!camera || !*camera)
-		return ;
-	if ((*camera)->origin)
-		free((*camera)->origin);
-	if ((*camera)->direction)
-		free((*camera)->direction);
-	if ((*camera)->rays)
-		free_rays((*camera)->rays);
-	free(*camera);
-	*camera = (NULL);
-	return ;
-}
 
 static void	null_all_camera(t_camera *camera)
 {

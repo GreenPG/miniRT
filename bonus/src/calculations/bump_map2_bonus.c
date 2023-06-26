@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:18:50 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:22:03 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:05:35 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_normal	bump_cylinder(t_cylinder *cylinder, t_vector vec,
 	vec.z -= cylinder->origin->z;
 	vec = camera_to_object_space(vec, *cylinder->direction, *cylinder->up);
 	alpha = atan2(vec.z, vec.x);
-	beta = acos(vec.y);
+	beta = 0;
 	x = (beta) / M_PI * tex->width;
 	y = (alpha + M_PI) / (M_PI * 2.) * tex->height;
 	normal.dir = normal_perturbation(normal.dir, x, y, tex);

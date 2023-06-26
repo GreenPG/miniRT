@@ -6,52 +6,17 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:28:09 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:42:14 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static int	check_ellipsoid2(char *str, int i)
+static void	null_all_el(t_ellipsoid *ellipsoid)
 {
-	if (check_triple_int(str, &i) == 1)
-		return (1);
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	if (check_bonus_var(str) == 1)
-		return (1);
-	return (0);
-}
-
-static int	check_ellipsoid(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (1);
-	i = 2;
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	if (check_triple_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_triple_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_float(str, &i) == 1)
-		return (1);
-	pass_to_next_element(str, &i);
-	if (check_ellipsoid2(str, i) == 1)
-		return (1);
-	return (0);
+	ellipsoid->origin = NULL;
+	ellipsoid->direction = NULL;
+	ellipsoid->up = NULL;
 }
 
 static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
@@ -74,6 +39,17 @@ static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 	return (ellipsoid);
 }
 
+static int	calcul_el_ratio(t_ellipsoid *ellipsoid, float a, float b, float c)
+{
+	if (a == 0 || b == 0 || c == 0)
+		return (1);
+	ellipsoid->a = 1. / (a * a);
+	ellipsoid->b = 1. / (b * b);
+	ellipsoid->c_std = c;
+	ellipsoid->c = 1. / (c * c);
+	return (0);
+}
+
 static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 		char *str, int i)
 {
@@ -81,20 +57,25 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 	float		b;
 	float		c;
 
+	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
+		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
+		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
+		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
+	{
+		free_ellipsoid(&ellipsoid);
+		return (NULL);
+	}
 	pass_to_next_element(str, &i);
 	a = ft_atof(str + i);
 	pass_to_next_element(str, &i);
 	b = ft_atof(str + i);
 	pass_to_next_element(str, &i);
 	c = ft_atof(str + i);
-	if (a == 0 || b == 0 || c == 0)
+	if (calcul_el_ratio(ellipsoid, a, b, c) == 1)
 	{
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
 	}
-	ellipsoid->a = 1. / (a * a);
-	ellipsoid->b = 1. / (b * b);
-	ellipsoid->c = 1. / (c * c);
 	ellipsoid = init_ellipsoid_part3(ellipsoid, str, i);
 	return (ellipsoid);
 }
@@ -109,6 +90,7 @@ t_ellipsoid	*init_ellipsoid(char *str)
 	ellipsoid = malloc(sizeof(t_ellipsoid));
 	if (!ellipsoid)
 		return (NULL);
+	null_all_el(ellipsoid);
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
@@ -116,14 +98,6 @@ t_ellipsoid	*init_ellipsoid(char *str)
 	pass_to_next_element(str, &i);
 	ellipsoid->direction = init_vector(str + i);
 	*ellipsoid->direction = vector_norm(*ellipsoid->direction);
-	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
-		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
-		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
-		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
-	{
-		free_ellipsoid(&ellipsoid);
-		return (NULL);
-	}
 	ellipsoid = init_ellipsoid_part2(ellipsoid, str, i);
 	return (ellipsoid);
 }

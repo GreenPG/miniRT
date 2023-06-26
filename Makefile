@@ -75,7 +75,7 @@ $(NAME): $(OBJS)
 
 $(DIR_OBJ)/%.o: %.c 
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@   
+	@$(CC) $(DFLAGS) $(HEADERS) -c $< -o $@   
 
 $(LIBMLX): 
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
@@ -97,5 +97,4 @@ re: clean all
 .PHONY: all, clean, fclean, re, libmlx
 
 -include bonus.mk
--include test.mk
 -include header.mk

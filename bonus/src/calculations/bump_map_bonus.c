@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:20:59 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:37:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ static t_normal	bump_ellipsoid(t_ellipsoid *ellipsoid, t_vector vec,
 	int		x;
 	int		y;
 	double	alpha;
-	double	beta;
 
 	vec.x -= ellipsoid->origin->x;
 	vec.y -= ellipsoid->origin->y;
 	vec.z -= ellipsoid->origin->z;
 	vec = camera_to_object_space(vec, *ellipsoid->direction, *ellipsoid->up);
 	alpha = atan2(vec.y, vec.x);
-	beta = acos(vec.z);
+	y = ((vec.z + (1. / ellipsoid->c)) / ((1. / ellipsoid->c) * 2))
+		* tex->height;
+	if (ellipsoid->c > 1)
+		y = acos(vec.z) / M_PI * tex->height;
 	x = (alpha + M_PI) / (M_PI * 2.) * tex->width;
-	y = (beta) / M_PI * tex->height;
 	normal.dir = normal_perturbation(normal.dir, x, y, tex);
 	return (normal);
 }

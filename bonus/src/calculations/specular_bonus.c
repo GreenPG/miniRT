@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:26:56 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 07:43:47 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:38:31 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static t_vector	get_reflect_vector(t_normal normal, t_vector light_dir)
 int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal,
 		t_obj_list *nearest)
 {
-	t_vector			light_dir;
 	t_vector			reflect;
 	t_light_list		*light_list;
 	double				specular_ratio;
@@ -54,10 +53,12 @@ int	get_specular_color(t_scene *scene, t_vector ray, t_normal normal,
 	light_list = scene->light_list;
 	while (light_list)
 	{
-		light_dir = get_light_dir(light_list->light, normal);
-		if (light_intersect(scene, light_dir, normal, ray) == 0)
+		light_list->light->direction = get_light_dir(light_list->light->origin,
+				normal);
+		if (light_intersect(&scene->obj_list, light_list->light, normal, ray)
+			== 0)
 		{
-			reflect = get_reflect_vector(normal, light_dir);
+			reflect = get_reflect_vector(normal, light_list->light->direction);
 			specular_ratio = get_specular_ratio(reflect, ray, nearest,
 					light_list->light);
 			increment_color(rgb, light_list->light->colors, specular_ratio,

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/21 11:00:21 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/23 09:44:23 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder,
 	vec.y -= cylinder->origin->y;
 	vec.z -= cylinder->origin->z;
 	vec = camera_to_object_space(vec, *cylinder->direction, *cylinder->up);
-	x = acos(vec.y) / M_PI * tex->width;
+	x = ((vec.y + cylinder->height / 2) / cylinder->height) * tex->width;
 	y = (atan2(vec.z, vec.x) + M_PI) / (M_PI * 2.) * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
@@ -82,7 +82,10 @@ static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid,
 	vec.z -= ellipsoid->origin->z;
 	vec = camera_to_object_space(vec, *ellipsoid->direction, *ellipsoid->up);
 	x = (atan2(vec.y, -vec.x) + M_PI) / (M_PI * 2.) * tex->width;
-	y = acos(vec.z) / M_PI * tex->height;
+	y = (1 - ((vec.z + (1. / ellipsoid->c)) / ((1. / ellipsoid->c) * 2)))
+		* tex->height;
+	if (ellipsoid->c > 1)
+		y = (1 - acos(vec.z) / M_PI) * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],

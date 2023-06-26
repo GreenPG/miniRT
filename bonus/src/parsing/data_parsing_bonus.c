@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:49:23 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 10:44:33 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:06:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,23 @@ static int	get_bump_data(t_obj_list *obj, char *line, int *i)
 	return (0);
 }
 
-static void	get_specular_const(t_obj_list *obj, char *line, int *i)
+static int	get_specular_const(t_obj_list *obj, char *line, int *i)
 {
 	if (!obj || !line)
-		return ;
+		return (0);
 	while (ft_isalpha(line[*i]) == 1)
 		(*i)++;
 	while (ft_isspace(line[*i]) == 1)
 		(*i)++;
 	obj->sp_e = ft_atof(&line[*i]);
+	if (obj->sp_e < 0 || obj->sp_e > 1250)
+		return (1);
 	pass_to_next_element(line, i);
 	obj->ks = ft_atof(&line[*i]);
+	if (obj->ks < 0.f || obj->ks > 1.f)
+		return (1);
 	pass_to_next_element(line, i);
+	return (0);
 }
 
 static int	get_tex(t_obj_list *obj, char *line)
@@ -92,7 +97,8 @@ int	get_bonus_data(t_obj_list **obj_ptr, char *line)
 	if (!ft_strncmp("./", &line[i - 2], ft_strlen("./")))
 		i -= 2;
 	if (!ft_strncmp("specular", &line[i], ft_strlen("specular")))
-		get_specular_const(obj, line, &i);
+		if (get_specular_const(obj, line, &i) == 1)
+			return (1);
 	if (!ft_strncmp("bump", &line[i], ft_strlen("bump")))
 		if (get_bump_data(obj, line, &i) == 1)
 			return (1);

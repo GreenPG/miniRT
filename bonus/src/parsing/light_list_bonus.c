@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:31:34 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 16:53:22 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:25:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	free_light_list(t_light_list *light_list)
 {
 	t_light_list	*tmp;
 
-	tmp = light_list;
-	while (tmp)
+	tmp = NULL;
+	while (light_list)
 	{
-		free_light(&tmp->light);
-		tmp = tmp->next;
+		tmp = light_list->next;
+		free_light(&light_list->light);
+		free(light_list);
+		light_list = tmp;
 	}
+	free(tmp);
 	free(light_list);
 }
 

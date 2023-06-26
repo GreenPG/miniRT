@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:14:07 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 09:59:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:04:38 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ struct	s_ellipsoid {
 	double		a;
 	double		b;
 	double		c;
+	double		c_std;
 	int			color;
 };
 

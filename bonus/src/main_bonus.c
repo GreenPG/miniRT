@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/16 09:40:30 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 09:03:20 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static mlx_t	*ft_mlx_create(void)
 	mlx_texture_t	*icon;
 
 	mlx_set_setting(0, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "MiniRT - Gillian le bg", true);
 	if (!mlx)
 		exit(ft_error("MLX: ERROR\n"));
 	icon = mlx_load_png("./bonus/src/textures/gpasquet.png");
@@ -68,7 +68,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error
 			("Error: expected usage is ./miniRT <path to.rt file>\n"));
-	(void)argv;
 	scene = parsing(argv[1]);
 	if (!scene)
 	{

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:48:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 07:30:33 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:35:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ static int	wich_side(t_vector ray, t_vector light_dir,	t_normal normal)
 	return (0);
 }
 
-int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
+int	light_intersect(t_obj_list **obj_ptr, t_light *light, t_normal normal,
 		t_vector ray)
 {
 	t_obj_list	*cursor;
 	double		distance;
 	double		light_source_d;
 
-	light_source_d = get_light_distance(scene->light_list->light, normal);
-	cursor = scene->obj_list;
+	light_source_d = get_light_distance(light, normal);
+	cursor = *obj_ptr;
 	distance = INFINITY;
 	while (cursor)
 	{
 		if (cursor->hitted == 0)
-			distance = get_shadow_distance(cursor, normal, light_dir);
+			distance = get_shadow_distance(cursor, normal, light->direction);
 		if (cursor->hitted == 1)
-			if (wich_side(ray, light_dir, normal) == 0)
+			if (wich_side(ray, light->direction, normal) == 0)
 				return (1);
 		if (distance > 0 && distance < light_source_d)
 			return (1);
@@ -63,46 +63,17 @@ int	light_intersect(t_scene *scene, t_vector light_dir, t_normal normal,
 	return (0);
 }
 
-t_vector	get_light_dir(t_light *light, t_normal normal)
+t_vector	get_light_dir(t_vector *light_o, t_normal normal)
 {
 	double		light_dir_len;
 	t_vector	light_dir;
 
-	light_dir.x = light->origin->x - normal.origin.x;
-	light_dir.y = light->origin->y - normal.origin.y;
-	light_dir.z = light->origin->z - normal.origin.z;
+	light_dir.x = light_o->x - normal.origin.x;
+	light_dir.y = light_o->y - normal.origin.y;
+	light_dir.z = light_o->z - normal.origin.z;
 	light_dir_len = sqrt(dot_product(light_dir, light_dir));
 	light_dir.x /= light_dir_len;
 	light_dir.y /= light_dir_len;
 	light_dir.z /= light_dir_len;
 	return (light_dir);
-}
-
-int	get_diffuse_color(t_scene *scene, t_vector ray, t_normal normal,
-		t_obj_list *nearest)
-{
-	t_vector		light_dir;
-	int				*rgb;
-	t_light_list	*light_list;
-	double			diffuse_ratio;
-
-	rgb = NULL;
-	rgb = init_rgb_tab();
-	if (!rgb)
-		return (0);
-	light_list = scene->light_list;
-	while (light_list)
-	{
-		light_dir = get_light_dir(light_list->light, normal);
-		if (light_intersect(scene, light_dir, normal, ray) == 0)
-		{
-			diffuse_ratio = fabs(dot_product(normal.dir, light_dir));
-			diffuse_ratio = fmax(0.0, diffuse_ratio);
-			diffuse_ratio *= light_list->light->brightness;
-			increment_color(rgb, light_list->light->colors, diffuse_ratio,
-				1 - nearest->ks);
-		}
-		light_list = light_list->next;
-	}
-	return (clamp_rgb(rgb));
 }

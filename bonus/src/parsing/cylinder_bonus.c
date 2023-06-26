@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:29:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:58:25 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	return (cylinder);
 }
 
+static int	verif_direction(t_cylinder *cylinder)
+{
+	if (!cylinder->origin || cylinder->direction->x < -1.0
+		|| cylinder->direction->x > 1.0 || cylinder->direction->y
+		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
+		< -1.0 || cylinder->direction->z > 1.0 || !cylinder->origin)
+		return (1);
+	return (0);
+}
+
 t_cylinder	*init_cylinder(char *str)
 {
 	t_cylinder	*cylinder;
@@ -58,6 +68,7 @@ t_cylinder	*init_cylinder(char *str)
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
 		return (NULL);
+	cylinder->up = NULL;
 	i = 2;
 	while (ft_isspace(str[i]))
 		i++;
@@ -65,10 +76,7 @@ t_cylinder	*init_cylinder(char *str)
 	pass_to_next_element(str, &i);
 	cylinder->direction = init_vector(str + i);
 	*cylinder->direction = vector_norm(*cylinder->direction);
-	if (!cylinder->origin || cylinder->direction->x < -1.0
-		|| cylinder->direction->x > 1.0 || cylinder->direction->y
-		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
-		< -1.0 || cylinder->direction->z > 1.0 || !cylinder->origin)
+	if (verif_direction(cylinder))
 	{
 		free_cylinder(&cylinder);
 		return (NULL);

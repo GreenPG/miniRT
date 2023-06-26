@@ -6,12 +6,20 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/20 09:23:46 by gpasquet         ###   ########.fr       */
-/*   Updated: 2023/06/19 10:42:35 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:59:34 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	null_all_triangle(t_triangle *triangle)
+{
+	triangle->a = NULL;
+	triangle->b = NULL;
+	triangle->c = NULL;
+	triangle->normal = NULL;
+	triangle->up = NULL;
+}
 
 t_vector	*get_triangle_normal(t_vector *a, t_vector *b, t_vector *c)
 {
@@ -85,6 +93,8 @@ t_triangle	*init_triangle(char	*input)
 	triangle = malloc(sizeof(t_triangle));
 	if (!triangle)
 		return (NULL);
+	triangle->up = NULL;
+	null_all_triangle(triangle);
 	i = 2;
 	while (ft_isspace(input[i]) == 1)
 		i++;

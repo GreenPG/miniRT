@@ -1,0 +1,9 @@
+A 0.4 255,250,250
+C 0,0,0 0,1,0 100 
+
+L 200,1,1 1 255,255,100
+L 0,0,0 1 55,40,255
+
+pl -20,-1,-2 1,0,0 10,210,100  checkerboard
+pl -22,30,0 0,1,0 210,210,100 ./bonus/src/textures/moon.png
+pl -22,-1,-1 0,0,1 210,210,100 bump ./bonus/src/textures/moon_bump.png ./bonus/src/textures/moon.png

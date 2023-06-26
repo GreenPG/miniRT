@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 09:29:17 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/03 16:51:00 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:58:54 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct	s_light_list {
 
 struct	s_light	{
 	t_vector	*origin;
+	t_vector	direction;
 	float		brightness;
 	int			colors;
 };

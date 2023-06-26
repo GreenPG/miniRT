@@ -15,10 +15,12 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/parsing/obj_utils_bonus.c \
 				src/parsing/data_parsing_bonus.c \
 				src/parsing/parsing_bonus.c \
+				src/parsing/scene_bonus.c \
 				src/parsing/direction_init_bonus.c \
 				src/parsing/parsing_utils_bonus.c \
 				src/parsing/check_input_bonus.c \
 				src/parsing/check_input2_bonus.c \
+				src/parsing/check_input3_bonus.c \
 				src/parsing/plane_bonus.c	\
 				src/parsing/sphere_bonus.c 	\
 				src/parsing/ellipsoid_bonus.c 	\
@@ -26,6 +28,7 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/parsing/triangle_bonus.c 	\
 				src/calculations/light_calculations_bonus.c \
 				src/calculations/light_rgb_bonus.c \
+				src/calculations/diffuse_light_bonus.c \
 				src/calculations/specular_bonus.c \
 				src/calculations/sphere_calculations_bonus.c 	\
 				src/calculations/cylinder_calculations_bonus.c 	\

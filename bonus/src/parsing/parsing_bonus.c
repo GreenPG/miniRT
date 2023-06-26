@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 09:55:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:01:24 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,6 @@ int	check_path(char *path)
 	}
 	free(extension);
 	return (0);
-}
-
-static t_scene	*init_scene(void)
-{
-	t_scene	*scene;
-
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-	{
-		ft_error("Error\n");
-		return (NULL);
-	}
-	scene->camera = NULL;
-	scene->ambiant_l = NULL;
-	scene->light_list = NULL;
-	scene->obj_list = NULL;
-	scene->up = malloc(sizeof(t_vector));
-	scene->up->x = 0;
-	scene->up->y = 0;
-	scene->up->z = 1;
-	scene->direction = malloc(sizeof(t_vector));
-	scene->direction->x = 0;
-	scene->direction->y = 1;
-	scene->direction->z = 0;
-	return (scene);
 }
 
 static void	finish_gnl(int fd)
