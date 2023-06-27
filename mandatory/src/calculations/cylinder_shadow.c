@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:44:29 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/09 15:26:27 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:28:58 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static t_vector	get_normal_dir(t_cylinder *cylinder, t_vector normal_o)
 	double		quotient;
 	double		vector_len;	
 
-	axis.x = 0;
+	axis.x = 1e-6;
 	axis.y = cylinder->height / 2;
-	axis.z = 0;
+	axis.z = 1e-6;
 	quotient = dot_product(normal_o, axis) / dot_product(axis, axis);
 	normal_dir.x = normal_o.x - quotient * (axis.x);
 	normal_dir.y = normal_o.y - quotient * (axis.y);
@@ -37,9 +37,9 @@ static t_normal	normal_body(t_cylinder *cylinder, t_vector ray, double distance)
 {
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 1e-6;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 1e-6;
 	data.cross = vector_cross(*cylinder->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*cylinder->direction, data.front)

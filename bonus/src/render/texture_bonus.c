@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:59 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/23 09:44:23 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:53:27 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 {
-	int	x;
-	int	y;
-	int	pixel_index;
+	int				x;
+	int				y;
+	unsigned int	pixel_index;
 
 	vec = camera_to_object_space(vec, *sphere->direction, *sphere->up);
 	x = (atan2(vec.y, vec.x) + M_PI) / (M_PI * 2.) * tex->width;
 	y = acos(vec.z) / M_PI * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+	if (pixel_index > tex->width * tex->height * tex->bytes_per_pixel)
+		pixel_index = (tex->width * tex->height - 1) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],
 			tex->pixels[pixel_index + 2], 255));
@@ -29,9 +31,9 @@ static int	texture_sphere(t_vector vec, t_sphere *sphere, mlx_texture_t *tex)
 
 static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 {
-	int	x;
-	int	y;
-	int	pixel_index;
+	int				x;
+	int				y;
+	unsigned int	pixel_index;
 
 	vec.x -= plane->origin->x;
 	vec.y -= plane->origin->y;
@@ -46,6 +48,8 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 	x = vec.z * tex->width;
 	y = vec.x * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+	if (pixel_index > tex->width * tex->height * tex->bytes_per_pixel)
+		pixel_index = (tex->width * tex->height - 1) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],
 			tex->pixels[pixel_index + 2], 255));
@@ -54,9 +58,9 @@ static int	texture_plane(t_vector vec, t_plane *plane, mlx_texture_t *tex)
 static int	texture_cylinder(t_vector vec, t_cylinder *cylinder,
 	mlx_texture_t *tex)
 {
-	int	x;
-	int	y;
-	int	pixel_index;
+	int				x;
+	int				y;
+	unsigned int	pixel_index;
 
 	vec.x -= cylinder->origin->x;
 	vec.y -= cylinder->origin->y;
@@ -65,6 +69,8 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder,
 	x = ((vec.y + cylinder->height / 2) / cylinder->height) * tex->width;
 	y = (atan2(vec.z, vec.x) + M_PI) / (M_PI * 2.) * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+	if (pixel_index > tex->width * tex->height * tex->bytes_per_pixel)
+		pixel_index = (tex->width * tex->height - 1) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],
 			tex->pixels[pixel_index + 2], 255));
@@ -73,9 +79,9 @@ static int	texture_cylinder(t_vector vec, t_cylinder *cylinder,
 static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid,
 	mlx_texture_t *tex)
 {		
-	int	x;
-	int	y;
-	int	pixel_index;
+	int				x;
+	int				y;
+	unsigned int	pixel_index;
 
 	vec.x -= ellipsoid->origin->x;
 	vec.y -= ellipsoid->origin->y;
@@ -87,6 +93,8 @@ static int	texture_ellipsoid(t_vector vec, t_ellipsoid *ellipsoid,
 	if (ellipsoid->c > 1)
 		y = (1 - acos(vec.z) / M_PI) * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+	if (pixel_index > tex->width * tex->height * tex->bytes_per_pixel)
+		pixel_index = (tex->width * tex->height - 1) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],
 			tex->pixels[pixel_index + 2], 255));
