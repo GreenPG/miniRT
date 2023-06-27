@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:43:10 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 16:49:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:06:06 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ double	cylinder_hit(t_cylinder *cylinder, t_vector ray)
 {
 	t_cyl_calc	data;
 
-	data.front.x = 0;
+	data.front.x = 1e-6;
 	data.front.y = 1;
-	data.front.z = 0;
+	data.front.z = 1e-6;
 	data.cross = vector_cross(*cylinder->direction, data.front);
 	vector_norm(&data.cross);
 	data.angle = acos(dot_product(*cylinder->direction, data.front)

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:12:36 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/20 16:16:04 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:53:34 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	texture_triangle(t_vector vec, t_triangle *triangle,
 	mlx_texture_t *tex)
 {
-	int	x;
-	int	y;
-	int	pixel_index;
+	int				x;
+	int				y;
+	unsigned int	pixel_index;
 
 	vec.x -= triangle->a->x;
 	vec.y -= triangle->a->y;
@@ -32,6 +32,8 @@ int	texture_triangle(t_vector vec, t_triangle *triangle,
 	x = vec.z * tex->width;
 	y = fmodf(fabs(vec.x), 1) * tex->height;
 	pixel_index = (y * tex->width + x) * tex->bytes_per_pixel;
+	if (pixel_index > tex->width * tex->height * tex->bytes_per_pixel)
+		pixel_index = (tex->width * tex->height - 1) * tex->bytes_per_pixel;
 	return (get_rgba(tex->pixels[pixel_index],
 			tex->pixels[pixel_index + 1],
 			tex->pixels[pixel_index + 2], 255));
