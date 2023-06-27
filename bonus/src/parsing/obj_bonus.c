@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 09:03:45 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:14:26 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	}
 	if (init_obj2(obj, line, type, list_ptr) == 1)
 	{
-		free(obj);
+		obj->next = NULL;
+		free_obj_list(&obj);
 		return (1);
 	}
 	return (0);
