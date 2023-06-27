@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 09:14:26 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:20:33 by gtouzali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	null_all_obj(t_obj_list *obj, t_type type)
 {
 	obj->type = type;
+	obj->next = NULL;
 	obj->has_bump = 0;
 	obj->pattern = plain;
 	obj->ks = 0;
@@ -40,7 +41,6 @@ static int	init_obj3(t_obj_list *obj, char *line, t_type type,
 			mlx_delete_texture(obj->bump_map);
 		return (1);
 	}
-	obj->next = NULL;
 	add_obj(list_ptr, obj);
 	return (0);
 }
@@ -89,7 +89,6 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	}
 	if (init_obj2(obj, line, type, list_ptr) == 1)
 	{
-		obj->next = NULL;
 		free_obj_list(&obj);
 		return (1);
 	}
