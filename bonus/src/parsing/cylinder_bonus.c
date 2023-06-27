@@ -6,48 +6,11 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:32:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:14:15 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder)
-{
-	cylinder->hit_body = false;
-	cylinder->up = get_up(cylinder->direction);
-	return (cylinder);
-}
-
-static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
-{
-	int			*rgb;
-
-	pass_to_next_element(str, &i);
-	cylinder->diameter = ft_atof(str + i);
-	pass_to_next_element(str, &i);
-	cylinder->height = ft_atof(str + i);
-	if (cylinder->height <= 0 || cylinder->diameter <= 0)
-	{
-		ft_error("Error\nCylinder diameter and height must be superior to 0\n");
-		free_cylinder(&cylinder);
-		return (NULL);
-	}
-	pass_to_next_element(str, &i);
-	rgb = get_color_values(str + i);
-	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
-		|| rgb[2] > 255)
-	{
-		ft_error("Error\nWrong color\n");
-		free(rgb);
-		free_cylinder(&cylinder);
-		return (NULL);
-	}
-	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
-	free(rgb);
-	cylinder = init_cylinder_part3(cylinder);
-	return (cylinder);
-}
 
 static int	verif_direction(t_cylinder *cylinder)
 {
@@ -60,6 +23,50 @@ static int	verif_direction(t_cylinder *cylinder)
 		return (1);
 	}
 	return (0);
+}
+
+static	t_cylinder	*init_cylinder_part3(t_cylinder *cylinder, char *str, int i)
+{
+	int			*rgb;
+
+	cylinder->hit_body = false;
+	cylinder->up = get_up(cylinder->direction);
+	rgb = get_color_values(str + i);
+	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
+		|| rgb[2] > 255)
+	{
+		ft_error("Error\nWrong color\n");
+		free(rgb);
+		free_cylinder(&cylinder);
+		return (NULL);
+	}
+	cylinder->color = get_rgba(rgb[0], rgb[1], rgb[2], 255);
+	free(rgb);
+	return (cylinder);
+}
+
+static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
+{
+	cylinder->direction = init_vector(str + i);
+	*cylinder->direction = vector_norm(*cylinder->direction);
+	if (verif_direction(cylinder))
+	{
+		free_cylinder(&cylinder);
+		return (NULL);
+	}
+	pass_to_next_element(str, &i);
+	cylinder->diameter = ft_atof(str + i);
+	pass_to_next_element(str, &i);
+	cylinder->height = ft_atof(str + i);
+	if (cylinder->height <= 0 || cylinder->diameter <= 0)
+	{
+		ft_error("Error\nCylinder diameter and height must be superior to 0\n");
+		free_cylinder(&cylinder);
+		return (NULL);
+	}
+	pass_to_next_element(str, &i);
+	cylinder = init_cylinder_part3(cylinder, str, i);
+	return (cylinder);
 }
 
 t_cylinder	*init_cylinder(char *str)
@@ -81,13 +88,6 @@ t_cylinder	*init_cylinder(char *str)
 		i++;
 	cylinder->origin = init_vector(str + i);
 	pass_to_next_element(str, &i);
-	cylinder->direction = init_vector(str + i);
-	*cylinder->direction = vector_norm(*cylinder->direction);
-	if (verif_direction(cylinder))
-	{
-		free_cylinder(&cylinder);
-		return (NULL);
-	}
 	cylinder = init_cylinder_part2(cylinder, str, i);
 	return (cylinder);
 }

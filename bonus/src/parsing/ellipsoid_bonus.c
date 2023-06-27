@@ -6,25 +6,17 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 08:54:13 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:20:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static void	null_all_el(t_ellipsoid *ellipsoid)
-{
-	ellipsoid->origin = NULL;
-	ellipsoid->direction = NULL;
-	ellipsoid->up = NULL;
-}
-
-static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
+static t_ellipsoid	*init_ellipsoid_part4(t_ellipsoid *ellipsoid,
 		char *str, int i)
 {
 	int			*rgb;
 
-	pass_to_next_element(str, &i);
 	rgb = get_color_values(str + i);
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
@@ -40,37 +32,13 @@ static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 	return (ellipsoid);
 }
 
-static int	calcul_el_ratio(t_ellipsoid *ellipsoid, float a, float b, float c)
-{
-	if (a == 0 || b == 0 || c == 0)
-	{
-		ft_error("Error\nEllipsoid ratio must be different to 0\n");
-		return (1);
-	}
-	ellipsoid->a = 1. / (a * a);
-	ellipsoid->b = 1. / (b * b);
-	ellipsoid->c_std = c;
-	ellipsoid->c = 1. / (c * c);
-	return (0);
-}
-
-static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
+static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 		char *str, int i)
 {
 	float		a;
 	float		b;
 	float		c;
 
-	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
-		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
-		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
-		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
-	{
-		ft_error("Error\nDirection values must be between -1 and 1");
-		free_ellipsoid(&ellipsoid);
-		return (NULL);
-	}
-	pass_to_next_element(str, &i);
 	a = ft_atof(str + i);
 	pass_to_next_element(str, &i);
 	b = ft_atof(str + i);
@@ -81,6 +49,24 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
 	}
+	pass_to_next_element(str, &i);
+	ellipsoid = init_ellipsoid_part4(ellipsoid, str, i);
+	return (ellipsoid);
+}
+
+static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
+		char *str, int i)
+{
+	if (!ellipsoid->origin || ellipsoid->direction->x < -1.0
+		|| ellipsoid->direction->x > 1.0 || ellipsoid->direction->y
+		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
+		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
+	{
+		ft_error("Error\nDirection values must be between -1 and 1");
+		free_ellipsoid(&ellipsoid);
+		return (NULL);
+	}
+	pass_to_next_element(str, &i);
 	ellipsoid = init_ellipsoid_part3(ellipsoid, str, i);
 	return (ellipsoid);
 }

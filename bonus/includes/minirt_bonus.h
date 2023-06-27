@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/26 11:02:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:22:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,15 @@ t_plane			*init_plane(char *str);
 
 t_cylinder		*init_cylinder(char *str);
 
-/*	ellipsoid.c	*/
+/*	ellipsoid_bonus.c	*/
 
 t_ellipsoid		*init_ellipsoid(char *str);
+
+/*	ellipsoid_utils_bonus.c	*/
+
+void			null_all_el(t_ellipsoid *ellipsoid);
+int				calcul_el_ratio(t_ellipsoid *ellipsoid, float a, float b,
+					float c);
 
 /*	ellipsoid_normal.c*/
 

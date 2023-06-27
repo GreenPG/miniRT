@@ -24,6 +24,7 @@ SRCS_BONUS	=	src/main_bonus.c	\
 				src/parsing/plane_bonus.c	\
 				src/parsing/sphere_bonus.c 	\
 				src/parsing/ellipsoid_bonus.c 	\
+				src/parsing/ellipsoid_utils_bonus.c 	\
 				src/calculations/coordinate_frame_transform_bonus.c 	\
 				src/parsing/triangle_bonus.c 	\
 				src/calculations/light_calculations_bonus.c \
