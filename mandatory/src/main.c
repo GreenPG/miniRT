@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/13 07:45:59 by gtouzali		  #+#	#+#			 */
-/*   Updated: 2023/06/23 09:03:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:19:25 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ int	main(int argc, char **argv)
 	scene = parsing(argv[1]);
 	if (!scene)
 	{
-		ft_error("ERROR\n");
-		return (0);
+		return (1);
 	}
 	mlx = ft_mlx_create();
 	data = init_image(mlx, scene);

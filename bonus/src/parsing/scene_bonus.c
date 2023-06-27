@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:00:15 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:01:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:59:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ t_scene	*init_scene(void)
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 	{
-		ft_error("Error\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	scene->up = malloc(sizeof(t_vector));
 	scene->direction = malloc(sizeof(t_vector));
 	if (!scene->up || !scene->direction)
 	{
-		ft_error("Error\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	return (init_scene2(scene));

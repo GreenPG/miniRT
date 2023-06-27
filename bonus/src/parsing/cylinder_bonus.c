@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:58:25 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:32:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	cylinder->height = ft_atof(str + i);
 	if (cylinder->height <= 0 || cylinder->diameter <= 0)
 	{
-		ft_error("Cylinder diameter and height must be superior to 0\n");
+		ft_error("Error\nCylinder diameter and height must be superior to 0\n");
 		free_cylinder(&cylinder);
 		return (NULL);
 	}
@@ -38,6 +38,7 @@ static t_cylinder	*init_cylinder_part2(t_cylinder *cylinder, char *str, int i)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color\n");
 		free(rgb);
 		free_cylinder(&cylinder);
 		return (NULL);
@@ -54,7 +55,10 @@ static int	verif_direction(t_cylinder *cylinder)
 		|| cylinder->direction->x > 1.0 || cylinder->direction->y
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
 		< -1.0 || cylinder->direction->z > 1.0 || !cylinder->origin)
+	{
+		ft_error("Error\nDirection values must be between -1 and 1");
 		return (1);
+	}
 	return (0);
 }
 
@@ -67,7 +71,10 @@ t_cylinder	*init_cylinder(char *str)
 		return (NULL);
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	cylinder->up = NULL;
 	i = 2;
 	while (ft_isspace(str[i]))

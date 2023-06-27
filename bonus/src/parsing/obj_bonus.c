@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:56:39 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:55:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	obj = malloc(sizeof(t_obj_list));
 	if (!obj)
 	{
-		*list_ptr = NULL;
+		ft_error("Error\nMalloc error\n");
 		return (1);
 	}
 	null_all_obj(obj, type);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/05 13:20:01 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:09:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_scene	*init_scene(void)
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 	{
-		ft_error("Error\n");
+		ft_error("Error\nScene malloc failed\n");
 		return (NULL);
 	}
 	scene->camera = NULL;
@@ -66,7 +66,7 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 	{
 		if (!line)
 		{
-			ft_error("Error\n");
+			ft_error("Error\nError while parsing the scene file\n");
 			return (NULL);
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -93,7 +93,7 @@ t_scene	*parsing(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_error("Error\n");
+		ft_error("Error\nError when opening the scene file\n");
 		return (NULL);
 	}
 	scene = init_scene();
@@ -105,7 +105,7 @@ t_scene	*parsing(char *path)
 	close(fd);
 	if (!scene->camera || !scene->ambiant_l || !scene->light)
 	{
-		ft_error("Scene must have one camera, one ambiant light \
+		ft_error("Error\nScene must have one camera, one ambiant light \
 				and one light\n");
 		free_scene(&scene);
 		return (NULL);

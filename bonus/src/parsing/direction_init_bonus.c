@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:12:28 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/23 10:45:57 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:34:06 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_vector	*direction_default(void)
 
 	direction = malloc(sizeof(t_vector));
 	if (!direction)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	direction->x = 0;
 	direction->y = 1;
 	direction->z = 0;
@@ -31,7 +34,10 @@ t_vector	*up_default(void)
 
 	up = malloc(sizeof(t_vector));
 	if (!up)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	up->x = 0;
 	up->y = 0;
 	up->z = 1;
@@ -45,7 +51,10 @@ t_vector	*get_up(t_vector *direction)
 
 	up = malloc(sizeof(t_vector));
 	if (!up)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	up->x = 0;
 	up->y = 0;
 	up->z = 1;

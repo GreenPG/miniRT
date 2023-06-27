@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/01 15:00:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:17:36 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	obj = malloc(sizeof(t_obj_list));
 	if (!obj)
 	{
+		ft_error("Error\nMalloc error");
 		*list_ptr = NULL;
 		return (1);
 	}

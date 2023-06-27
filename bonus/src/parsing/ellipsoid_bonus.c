@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:42:14 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:54:13 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color\n");
 		free(rgb);
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
@@ -42,7 +43,10 @@ static t_ellipsoid	*init_ellipsoid_part3(t_ellipsoid *ellipsoid,
 static int	calcul_el_ratio(t_ellipsoid *ellipsoid, float a, float b, float c)
 {
 	if (a == 0 || b == 0 || c == 0)
+	{
+		ft_error("Error\nEllipsoid ratio must be different to 0\n");
 		return (1);
+	}
 	ellipsoid->a = 1. / (a * a);
 	ellipsoid->b = 1. / (b * b);
 	ellipsoid->c_std = c;
@@ -62,6 +66,7 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
 		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
 	{
+		ft_error("Error\nDirection values must be between -1 and 1");
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
 	}
@@ -89,7 +94,10 @@ t_ellipsoid	*init_ellipsoid(char *str)
 		return (NULL);
 	ellipsoid = malloc(sizeof(t_ellipsoid));
 	if (!ellipsoid)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	null_all_el(ellipsoid);
 	i = 2;
 	while (ft_isspace(str[i]))

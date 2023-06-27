@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:24 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 10:57:43 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:09:29 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ambiant_l	*init_ambiant_l(char *input)
 	ambiant_l = malloc(sizeof(t_ambiant_l));
 	if (!ambiant_l)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	i = 1;
@@ -65,7 +65,7 @@ t_ambiant_l	*init_ambiant_l(char *input)
 	ambiant_l->light_ratio = ft_atof(input + i);
 	if (ambiant_l->light_ratio < 0 || ambiant_l->light_ratio > 1)
 	{
-		ft_error("Light ratio should be within the range of 0 to 1\n");
+		ft_error("Error\nLight ratio should be within the range of 0 to 1\n");
 		free(ambiant_l);
 		return (NULL);
 	}

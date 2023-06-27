@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/05/18 15:24:02 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:18:15 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_sphere	*init_sphere_part2(t_sphere *sphere, char *input, int i)
 	sphere->diameter = ft_atof(input + i);
 	if (sphere->diameter <= 0)
 	{
+		ft_error("Error\nNon positive diameter");
 		free_sphere(&sphere);
 		return (NULL);
 	}
@@ -79,7 +80,10 @@ t_sphere	*init_sphere(char *input)
 		return (NULL);
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	i = 2;
 	while (ft_isspace(input[i]) == 1)
 		i++;

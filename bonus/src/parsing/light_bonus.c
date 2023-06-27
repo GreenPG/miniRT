@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/22 15:59:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:54:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_light	*init_light_part2(t_light *light, char *str, int i)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color\n");
 		free(rgb);
 		free_light(&light);
 		return (NULL);
@@ -81,7 +82,7 @@ t_light	*init_light(char *str)
 	light = malloc(sizeof(t_light));
 	if (!light)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	i = 1;

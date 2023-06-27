@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/22 16:38:12 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:30:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static int	check_camera_dir(t_vector *direction)
 		|| direction->z < -1.0 || direction->z > 1.0
 		|| (direction->x == 0 && direction->y == 0
 			&& direction->z == 0))
+	{
+		ft_error("Error\nDirection values must be between -1 and 1");
 		return (1);
+	}
 	return (0);
 }
 
@@ -58,7 +61,7 @@ static t_camera	*init_camera2(t_camera *camera)
 		||check_camera_dir(camera->direction) == 1
 		|| camera->fov < 0 || camera->fov > 180)
 	{
-		ft_error("Error:camera init\n");
+		ft_error("Error\ncamera init\n");
 		free_camera(&camera);
 		return (NULL);
 	}
@@ -78,7 +81,10 @@ t_camera	*init_camera(char *input)
 		return (NULL);
 	camera = malloc(sizeof(t_camera));
 	if (!camera)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	null_all_camera(camera);
 	i = 1;
 	while (ft_isspace(input[i]))

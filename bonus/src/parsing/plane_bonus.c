@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/21 09:28:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 08:57:36 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static int	check_plane_direction(t_vector *direction)
 		|| direction->y < -1.0 || direction->y > 1.0
 		|| direction->z < -1.0 || direction->z > 1.0
 		|| (direction->x == 0 && direction->y == 0 && direction->z == 0))
+	{
+		ft_error("Error\nDirection values must be between -1 and 1");
 		return (1);
+	}
 	return (0);
 }
 
@@ -65,6 +68,7 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color\n");
 		free(rgb);
 		free_plane(&plane);
 		return (NULL);

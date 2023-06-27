@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:28 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 10:59:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:00:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_triangle	*init_triangle3(t_triangle *triangle, char *input, int i)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color\n");
 		free(rgb);
 		free_triangle(&triangle);
 		return (NULL);
@@ -92,7 +93,10 @@ t_triangle	*init_triangle(char	*input)
 		return (NULL);
 	triangle = malloc(sizeof(t_triangle));
 	if (!triangle)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	triangle->up = NULL;
 	null_all_triangle(triangle);
 	i = 2;

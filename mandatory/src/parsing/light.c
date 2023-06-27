@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/18 15:30:05 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:11:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_light	*init_light_part2(t_light *light, char *str, int i)
 	light->brightness = ft_atof(str + i);
 	if (light->brightness < 0 || light->brightness > 1)
 	{
-		ft_error("Light brightness must be within the range of 0 to 1\n");
+		ft_error("Error\nLight brightness must be within the range of 0 to 1\n");
 		free_light(&light);
 		return (NULL);
 	}
@@ -81,7 +81,7 @@ t_light	*init_light(char *str)
 	light = malloc(sizeof(t_light));
 	if (!light)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	i = 1;

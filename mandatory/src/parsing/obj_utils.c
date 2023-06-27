@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:31:14 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 16:44:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:12:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_obj_error(t_scene **scene)
 {
-	ft_error("Error when adding an object\n");
+	ft_error("Error\nError when adding an object\n");
 	free_scene(scene);
 	return ;
 }

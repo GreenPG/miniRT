@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 14:01:02 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 10:58:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:10:20 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	choose_component_part2(t_scene **scene, char *line)
 	{	
 		if ((*scene)->camera)
 		{
-			ft_error("Scene must have only one camera\n");
+			ft_error("Error\nScene must have only one camera\n");
 			free_scene(scene);
 			return ;
 		}
@@ -57,7 +57,7 @@ static void	choose_component_part2(t_scene **scene, char *line)
 	{
 		if ((*scene)->light)
 		{
-			ft_error("Scene must have only one light\n");
+			ft_error("Error\nScene must have only one light\n");
 			free_scene(scene);
 			return ;
 		}
@@ -81,7 +81,7 @@ void	choose_component(char *line, t_scene **scene)
 	{
 		if ((*scene)->ambiant_l)
 		{
-			ft_error("Scene must have only one ambiant light\n");
+			ft_error("Error\nScene must have only one ambiant light\n");
 			free_scene(scene);
 			return ;
 		}

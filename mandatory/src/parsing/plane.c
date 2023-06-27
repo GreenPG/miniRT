@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/05/17 15:12:55 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:17:57 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_plane	*init_plane_part2(t_plane *plane, char *str, int i)
 	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[2] < 0
 		|| rgb[2] > 255)
 	{
+		ft_error("Error\nWrong color");
 		free(rgb);
 		free_plane(&plane);
 		return (NULL);
@@ -90,7 +91,7 @@ t_plane	*init_plane(char *str)
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	i = 2;

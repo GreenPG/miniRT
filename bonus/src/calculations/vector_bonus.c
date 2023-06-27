@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:03:03 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 09:09:43 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:01:21 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_vector	*init_vector(char *str)
 	vector = malloc(sizeof(t_vector));
 	if (!vector)
 	{
-		ft_error("Error: fatal\n");
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
 	}
 	get_xyz(str, &x, &y, &z);

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:03:48 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:15:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_camera	*init_camera2(t_camera *camera)
 		||check_camera_dir(camera->direction) == 1
 		|| camera->fov < 0 || camera->fov > 180)
 	{
-		ft_error("Error:camera init\n");
+		ft_error("Error\nCamera init\n");
 		free_camera(&camera);
 		return (NULL);
 	}
@@ -85,7 +85,10 @@ t_camera	*init_camera(char *input)
 		return (NULL);
 	camera = malloc(sizeof(t_camera));
 	if (!camera)
+	{
+		ft_error("Error\nMalloc error\n");
 		return (NULL);
+	}
 	i = 1;
 	while (ft_isspace(input[i]))
 		i++;

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:47:32 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:01:24 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:28:31 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_scene	*fill_scene(t_scene *scene, int fd)
 	{
 		if (!line)
 		{
-			ft_error("Error\n");
+			ft_error("Error\nError when reading scene file\n");
 			return (NULL);
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -76,7 +76,7 @@ t_scene	*parsing(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_error("Error\n");
+		ft_error("Error\nFailed to open scene file\n");
 		return (NULL);
 	}
 	scene = init_scene();
@@ -88,7 +88,7 @@ t_scene	*parsing(char *path)
 	close(fd);
 	if (!scene->camera || !scene->ambiant_l || !scene->light_list)
 	{
-		ft_error("Scene must have one camera, one ambiant light \
+		ft_error("Error\nScene must have one camera, one ambiant light \
 				and one light\n");
 		free_scene(&scene);
 		return (NULL);
