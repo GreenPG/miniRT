@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:59:12 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 09:23:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:03:32 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	init_obj(char *line, t_obj_list **list_ptr, t_type type)
 	{
 		if (sphere_obj(obj, line) == 1)
 		{
-			free(obj);
+			free_obj_list(&obj);
 			return (1);
 		}
 	}

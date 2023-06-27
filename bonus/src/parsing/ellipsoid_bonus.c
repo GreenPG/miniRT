@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 09:20:44 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:55:12 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_ellipsoid	*init_ellipsoid_part2(t_ellipsoid *ellipsoid,
 		< -1.0 || ellipsoid->direction->y > 1.0 || ellipsoid->direction->z
 		< -1.0 || ellipsoid->direction->z > 1.0 || !ellipsoid->origin)
 	{
-		ft_error("Error\nDirection values must be between -1 and 1");
+		ft_error("Error\nDirection values must be between -1 and 1\n");
 		free_ellipsoid(&ellipsoid);
 		return (NULL);
 	}

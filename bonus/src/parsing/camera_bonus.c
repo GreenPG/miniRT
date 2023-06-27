@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:30:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:54:10 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_camera_dir(t_vector *direction)
 		|| (direction->x == 0 && direction->y == 0
 			&& direction->z == 0))
 	{
-		ft_error("Error\nDirection values must be between -1 and 1");
+		ft_error("Error\nDirection values must be between -1 and 1\n");
 		return (1);
 	}
 	return (0);

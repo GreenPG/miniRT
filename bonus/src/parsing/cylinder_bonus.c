@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/27 09:14:15 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:55:30 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	verif_direction(t_cylinder *cylinder)
 		< -1.0 || cylinder->direction->y > 1.0 || cylinder->direction->z
 		< -1.0 || cylinder->direction->z > 1.0 || !cylinder->origin)
 	{
-		ft_error("Error\nDirection values must be between -1 and 1");
+		ft_error("Error\nDirection values must be between -1 and 1\n");
 		return (1);
 	}
 	return (0);

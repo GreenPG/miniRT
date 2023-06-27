@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 09:05:27 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:40:20 by gtouzali         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:01:02 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	sphere_obj(t_obj_list *obj, char *line)
 	obj->tex = NULL;
 	obj->bump_map = NULL;
 	if (!obj->sphere)
-		free(obj);
+		return (1);
 	return (0);
 }
 
