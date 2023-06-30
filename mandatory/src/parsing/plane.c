@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:15:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:17:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:02:41 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ static int	check_plane(char *str)
 		return (1);
 	pass_to_next_element(str, &i);
 	if (check_triple_int(str, &i) == 1)
+		return (1);
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i])
 		return (1);
 	return (0);
 }

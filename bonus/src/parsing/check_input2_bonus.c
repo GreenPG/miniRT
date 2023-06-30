@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:14:21 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:36:20 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:58:58 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	check_bonus_var(char *str)
 		pass_to_next_element(str, &i);
 	}
 	if (ft_strncmp("checkerboard", str, ft_strlen("checkerboard"))
-		== 0 || ft_strncmp("./", str, ft_strlen("./")) == 0)
+		== 0 || ft_strncmp("./", &str[i], ft_strlen("./")) == 0)
 		pass_to_next_element(str, &i);
+	while (ft_isspace(str[i]) == 1)
+		i++;
+	if (str[i])
+		return (1);
 	return (0);
 }
 
@@ -40,7 +44,7 @@ static int	check_triangle2(char *input)
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	if (check_bonus_var(input) == 1)
+	if (check_bonus_var(&input[i]) == 1)
 		return (1);
 	return (0);
 }
@@ -81,7 +85,7 @@ static int	check_cylinder2(char *str, int i)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (check_bonus_var(str) == 1)
+	if (check_bonus_var(&str[i]) == 1)
 		return (1);
 	return (0);
 }

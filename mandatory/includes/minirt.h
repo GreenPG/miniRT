@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 07:46:56 by gtouzali          #+#    #+#             */
-/*   Updated: 2023/06/15 16:52:07 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:08:46 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void		free_plane(t_plane **plane);
 /*	cylinder.c */
 
 t_cylinder	*init_cylinder(char *str);
-void		free_cylinder(t_cylinder **cylinder);
 
 /*	structs_utils.c	*/
 
@@ -177,6 +176,7 @@ void		world_translate(t_scene *scene, double x, double y, double z);
 
 	/*	free_functions.c	*/
 void		free_cyl_roots(double *root, double *caps);
+void		free_cylinder(t_cylinder **cylinder);
 void		free_all(t_data *data, t_scene *scene);
 void		free_scene(t_scene **scene);
 

@@ -6,23 +6,22 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 09:35:45 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:26:17 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:10:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	free_cylinder(t_cylinder **cylinder)
-{
-	if (!cylinder || !*cylinder)
-		return ;
-	if ((*cylinder)->origin)
-		free((*cylinder)->origin);
-	if ((*cylinder)->direction)
-		free((*cylinder)->direction);
-	free(*cylinder);
-	*cylinder = NULL;
-	return ;
+static int	check_cylinder_part_2(char *str)
+{	
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i])
+		return (1);
+	return (0);
 }
 
 static int	check_cylinder(char *str)
@@ -47,6 +46,8 @@ static int	check_cylinder(char *str)
 		return (1);
 	pass_to_next_element(str, &i);
 	if (check_triple_int(str, &i) == 1)
+		return (1);
+	if (check_cylinder_part_2(&str[i]))
 		return (1);
 	return (0);
 }

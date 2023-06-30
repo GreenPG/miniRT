@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:12:24 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:09:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:02:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static int	check_ambiant_l_def(char *str)
 	while (ft_isspace(str[i]) == 1)
 		i++;
 	if (check_triple_int(str, &i) == 1)
+		return (1);
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i])
 		return (1);
 	return (0);
 }

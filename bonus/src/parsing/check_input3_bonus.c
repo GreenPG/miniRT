@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:30:25 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:31:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:55:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_ellipsoid2(char *str, int i)
 		i++;
 	if (str[i] == '\0')
 		return (0);
-	if (check_bonus_var(str) == 1)
+	if (check_bonus_var(&str[i]) == 1)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:51:01 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/26 11:11:28 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:02:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static int	check_light(char *str)
 	while (ft_isspace(str[i]) == 1)
 		i++;
 	if (check_triple_int(str, &i) == 1)
+		return (1);
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i])
 		return (1);
 	return (0);
 }

@@ -6,11 +6,24 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:42:16 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/06/15 16:49:10 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:07:59 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	free_cylinder(t_cylinder **cylinder)
+{
+	if (!cylinder || !*cylinder)
+		return ;
+	if ((*cylinder)->origin)
+		free((*cylinder)->origin);
+	if ((*cylinder)->direction)
+		free((*cylinder)->direction);
+	free(*cylinder);
+	*cylinder = NULL;
+	return ;
+}
 
 void	free_cyl_roots(double *root, double *caps)
 {

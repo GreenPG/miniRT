@@ -6,7 +6,7 @@
 /*   By: gtouzali <gtouzali@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2023/04/18 13:11:47 by gpasquet		  #+#	#+#			 */
-/*   Updated: 2023/06/26 11:18:15 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/06/30 09:03:16 by gpasquet         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static int	check_sphere(char *input)
 	while (ft_isspace(input[i]) == 1)
 		i++;
 	if (check_triple_int(input, &i) == 1)
+		return (1);
+	while (input[i] && ft_isspace(input[i]))
+		i++;
+	if (input[i])
 		return (1);
 	return (0);
 }
