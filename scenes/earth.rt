@@ -1,0 +1,22 @@
+A 0.3 244,233,155
+C 0,0,0 0,1,0 100 
+L -100,0,0 1 244,233,155
+
+sp 0,0,-1000000 1 255,123,23
+
+sp -90,100,15 12.5 255,123,23 bump ./srcs/textures/moon_bump.png ./srcs/textures/moon.png
+sp 0,60,0 50 255,123,23 bump ./srcs/textures/earth_bump.png ./srcs/textures/earth_day.png
+#skybox
+sp 0,0,0 200000 255,123,23 ./srcs/textures/space.png
+#ovni
+el -5,18,-3 0,1,0	 2 2 0.3 55,55,55 ./srcs/textures/galette.png
+sp -5,18,-3 1 20,200,23 ./srcs/textures/green_ovni.png
+
+el -9,14.324,-6 0,1,0	 2 2 0.3 55,55,55 ./srcs/textures/galette.png
+sp -9,14.324,-6 1 20,200,23 ./srcs/textures/green_ovni.png
+
+el -11,17,-4 0,1,0	 2 2 0.3 55,55,55 ./srcs/textures/galette.png
+sp -11,17,-4 1 20,200,23 ./srcs/textures/green_ovni.png
+
+el -3,16.324,-10 0,1,0	 2 2 0.3 55,55,55 ./srcs/textures/galette.png
+sp -3,16.324,-10 1 20,200,23 ./srcs/textures/green_ovni.png

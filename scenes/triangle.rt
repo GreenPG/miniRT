@@ -1,7 +1,10 @@
-A 0.3 255,255,255
-C 0,0,0 0,1,0 100
-L -3,0,0 0.7 255,255,255
+A 0.4 255,250,250
+C -5,-3,1 1,1,0 100 
 
-tr -10,5,3 -1,-5,30 -0,5,-2 100,100,100 bump ./bonus/src/textures/earth_bump.png ./bonus/src/textures/earth_day.png
-pl 0,20,0 0,-1,0 255,10,10
+L -2,-4,3 1 255,255,100
+L 10,-2,10 1 55,40,255
 
+pl 0,0,-1 0,0,1 250,250,250
+tr 2,0,0 10,-10,10 -3,0,-2 210,210,100 checkerboard
+tr -2,0,0 10,10,10 3,0,2 210,210,100 ./srcs/textures/moon.png
+tr -2,0,-1 -3,0,-2 -10,10,10 210,210,100 bump ./srcs/textures/moon_bump.png ./srcs/textures/moon.png
