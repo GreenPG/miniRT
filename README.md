@@ -29,15 +29,15 @@ Large resolution can be long to load
 # Commands
 
 You can move the camera using the following keys (QWERTY):
-    *- Forward: W
-    *- Backward: S
-    *- Left: A
-    *- Right: D
-    *- Up: spacebar
-    *- Down: Shift
-    *- Rotation on vertical axis: Up key - Down key
-    *- Rotation on horizontal rule axis: Left key - Right key
-    *- Rotation on frontal axis: Q - E
+*     Forward: W
+*     Backward: S
+*     Left: A
+*     Right: D
+*     Up: spacebar
+*     Down: Shift
+*     Rotation on vertical axis: Up key - Down key
+*     Rotation on horizontal rule axis: Left key - Right key
+*     Rotation on frontal axis: Q - E
 
 You can also select an object by clicking on it and move it with the numeric keypad
 
